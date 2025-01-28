@@ -4,6 +4,8 @@ namespace MyAPI.Models
 {
     public class WeatherForecast
     {
+        public int Id { get; set; } // Adicione uma chave primária
+
         public DateOnly Date { get; set; }
 
         public int TemperatureC { get; set; }
@@ -14,7 +16,6 @@ namespace MyAPI.Models
         {
             get
             {
-
                 switch (this.TemperatureC)
                 {
                     case < 5:
@@ -29,13 +30,7 @@ namespace MyAPI.Models
                         return null;
                 }
             }
-            set
-            {
-                Summary = value;
-            }
+            set { /* No-op setter */ }
         }
-
-
-
     }
 }

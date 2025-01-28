@@ -1,37 +1,46 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyAPI.Data;
 using MyAPI.Models;
 
 namespace MyAPI.Controllers
 {
     [ApiController]
-    [Route("/api")]
+    [Route("/api/weather")]
     public class WeatherForecastController : ControllerBase
     {
-
+        private readonly AppDbContext _context;
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(AppDbContext context, ILogger<WeatherForecastController> logger)
         {
+            _context = context;
             _logger = logger;
         }
 
-        [HttpGet("GetWeatherForecast")]
+        // Endpoint para listar todas as entidades
+        [HttpGet]
         [Authorize]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<ActionResult<IEnumerable<WeatherForecast>>> GetWeatherForecasts()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            try
             {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-            })
-            .ToArray();
+                // Obtém todos os registros da tabela WeatherForecasts
+                var forecasts = await _context.WeatherForecasts.ToListAsync();
+                return Ok(forecasts);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao buscar os registros");
+                return StatusCode(500, "Erro interno do servidor");
+            }
         }
 
+        // Endpoint para verificar a conectividade
         [HttpGet("ping")]
         public async Task<string?> Ping()
         {
-
             HttpClient httpClient = new();
 
             HttpResponseMessage httpResponseMessage = await httpClient.GetAsync("https://example.com");
