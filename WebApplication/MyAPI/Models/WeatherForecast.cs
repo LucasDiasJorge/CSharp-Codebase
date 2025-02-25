@@ -1,10 +1,10 @@
 using System.Linq.Expressions;
 
-namespace MyAPI.Models
+namespace Models
 {
     public class WeatherForecast
     {
-        public int Id { get; set; } // Adicione uma chave primária
+        public int Id { get; set; } // Adicione uma chave primï¿½ria
 
         public DateOnly Date { get; set; }
 
@@ -23,7 +23,7 @@ namespace MyAPI.Models
                     case < 15:
                         return "Sehr gut";
                     case < 25:
-                        return "Klung Sheißer";
+                        return "Klung Sheiï¿½er";
                     case < 35:
                         return "das brot";
                     default:

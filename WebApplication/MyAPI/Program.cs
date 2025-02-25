@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using MyAPI.Data;
+using Data;
 using System.Text;
 
 namespace MyAPI
@@ -12,7 +12,7 @@ namespace MyAPI
         {
             var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
 
-            // Configurar a string de conexão do PostgreSQL no appsettings.json
+            // Configurar a string de conexï¿½o do PostgreSQL no appsettings.json
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             // Adicionar o DbContext com o Entity Framework Core
@@ -20,7 +20,7 @@ namespace MyAPI
                 options.UseNpgsql(connectionString));
 
 
-            // Configurar serviços
+            // Configurar serviï¿½os
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

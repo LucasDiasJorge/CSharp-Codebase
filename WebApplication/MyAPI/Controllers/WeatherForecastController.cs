@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MyAPI.Data;
-using MyAPI.Models;
+using Data;
+using Models;
 
-namespace MyAPI.Controllers
+namespace Controllers
 {
     [ApiController]
     [Route("/api/weather")]
@@ -26,7 +26,7 @@ namespace MyAPI.Controllers
         {
             try
             {
-                // Obtém todos os registros da tabela WeatherForecasts
+                // Obtï¿½m todos os registros da tabela WeatherForecasts
                 var forecasts = await _context.WeatherForecasts.ToListAsync();
                 return Ok(forecasts);
             }
