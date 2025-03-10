@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement", "TaskManag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuthApplication", "OAuthApplication\OAuthApplication.csproj", "{849DBC42-3EE0-4A6E-B970-B56FAEDBA272}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threads", "Threads\Threads.csproj", "{2D16B23C-7047-4BA1-A9C7-35C68A08C75A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketIOServer", "SocketIOServer\SocketIOServer.csproj", "{DBC90C1B-CD13-405D-AAEA-FAB0FA0E4811}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,14 @@ Global
 		{849DBC42-3EE0-4A6E-B970-B56FAEDBA272}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{849DBC42-3EE0-4A6E-B970-B56FAEDBA272}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{849DBC42-3EE0-4A6E-B970-B56FAEDBA272}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D16B23C-7047-4BA1-A9C7-35C68A08C75A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D16B23C-7047-4BA1-A9C7-35C68A08C75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D16B23C-7047-4BA1-A9C7-35C68A08C75A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D16B23C-7047-4BA1-A9C7-35C68A08C75A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBC90C1B-CD13-405D-AAEA-FAB0FA0E4811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBC90C1B-CD13-405D-AAEA-FAB0FA0E4811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBC90C1B-CD13-405D-AAEA-FAB0FA0E4811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBC90C1B-CD13-405D-AAEA-FAB0FA0E4811}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

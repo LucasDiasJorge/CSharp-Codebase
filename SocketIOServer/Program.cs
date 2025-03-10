@@ -31,8 +31,10 @@ class Program
                 // Responder como um servidor Socket.IO
                 foreach (var client in clients)
                 {
-                    client.Send($"\{\"message\",\"Server: {message}\"}\");
+                    string json = "{ \"message\": \"" + message + "\" }";
+                    client.Send(json);
                 }
+
             };
         });
 
