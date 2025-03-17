@@ -3,11 +3,11 @@ O comando `dotnet new` é usado para criar novos projetos, soluções e arquivos
 
 ### **✅ Criar um Novo Projeto**
 ```sh
-dotnet new <TEMPLATE> -n <NOME_DO_PROJETO>
+dotnet new <TEMPLATE> -n <NOME_DO_PROJETO> --use-program-main
 ```
 🔹 **Exemplo:** Criar um projeto **Console** chamado `MinhaApp`  
 ```sh
-dotnet new console -n MinhaApp
+dotnet new console -n MinhaApp --use-program-main
 ```
 
 ### **✅ Templates Disponíveis**
