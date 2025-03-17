@@ -1,24 +1,26 @@
-﻿namespace Course;
-
-// https://www.coursera.org/learn/foundations-of-coding-back-end/assignment-submission/eURIS/activity-algorithm-structures/attempt
+﻿using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
+        Console.WriteLine("Enter the student's score: ");
+        int score = Convert.ToInt32(Console.ReadLine());
 
-        Console.WriteLine("Enter your age: ");
-        int age = Convert.ToInt32(Console.ReadLine());
-
-        if (age >= 18)
+        switch (score)
         {
-            Console.WriteLine("You are able to vote");
+            case int s when s >= 90:
+                Console.WriteLine("Grade A");
+                break;
+            case int s when s >= 80:
+                Console.WriteLine("Grade B");
+                break;
+            case int s when s >= 70:
+                Console.WriteLine("Grade C");
+                break;
+            default:
+                Console.WriteLine("Grade F");
+                break;
         }
-        else
-        {
-            Console.WriteLine("You are not abel to vote");
-        }
-
-        return;
     }
 }
