@@ -1,4 +1,4 @@
-namespace OAuthApplication;
+namespace OAuthApplication.Services;
 
 using System.Threading.Tasks;
 

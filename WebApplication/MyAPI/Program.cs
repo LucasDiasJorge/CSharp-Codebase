@@ -12,7 +12,7 @@ namespace MyAPI
         {
             var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
 
-            // Configurar a string de conex�o do PostgreSQL no appsettings.json
+            // Configurar a string de conexão do PostgreSQL no appsettings.json
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             // Adicionar o DbContext com o Entity Framework Core

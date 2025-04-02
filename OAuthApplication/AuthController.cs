@@ -1,3 +1,5 @@
+using OAuthApplication.Services;
+
 namespace OAuthApplication;
 
 using Microsoft.AspNetCore.Mvc;

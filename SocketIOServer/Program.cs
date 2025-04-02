@@ -1,44 +1,68 @@
 using System;
 using System.Collections.Generic;
-using Fleck;
+using SocketIO.Server;
+using SocketIOSharp.Common.Abstract.Connection;
+using SocketIOSharp.Server;
 
 class Program
 {
     static void Main(string[] args)
     {
-        var server = new WebSocketServer("ws://0.0.0.0:5000");
+        // Criação do servidor Socket.IO
+        var server = new SocketIOServer("http://0.0.0.0:5000");
 
-        var clients = new List<IWebSocketConnection>();
+        var clients = new Dictionary<string, SocketIOConnection<>>();
 
-        server.Start(socket =>
+        server.OnConnection((socket) =>
         {
-            socket.OnOpen = () =>
-            {
-                Console.WriteLine("Client connected!");
-                clients.Add(socket);
-            };
+            var path = socket.Request.Path;
 
-            socket.OnClose = () =>
+            // Verifica se o path contém um "mac" (exemplo: /{mac})
+            if (!string.IsNullOrEmpty(path) && path.StartsWith("/"))
             {
-                Console.WriteLine("Client disconnected!");
-                clients.Remove(socket);
-            };
+                var macAddress = path.Substring(1);  // Remove a barra "/"
+                Console.WriteLine($"Client with MAC {macAddress} connected!");
+                clients[macAddress] = socket;  // Armazenar a conexão
+            }
+            else
+            {
+                Console.WriteLine("Client connected with an invalid path.");
+                socket.Close();  // Fecha a conexão caso o path não seja válido
+            }
 
-            socket.OnMessage = message =>
+            // Evento de desconexão
+            socket.OnDisconnect(() =>
+            {
+                if (!string.IsNullOrEmpty(path) && path.StartsWith("/"))
+                {
+                    var macAddress = path.Substring(1);
+                    Console.WriteLine($"Client with MAC {macAddress} disconnected!");
+                    clients.Remove(macAddress);  // Remove o cliente da lista
+                }
+            });
+
+            // Evento de recebimento de mensagens
+            socket.On("message", (message, ack) =>
             {
                 Console.WriteLine("Received: " + message);
 
-                // Responder como um servidor Socket.IO
-                foreach (var client in clients)
+                // Enviar a mensagem para todos os clientes conectados
+                foreach (var client in clients.Values)
                 {
-                    string json = "{ \"message\": \"" + message + "\" }";
-                    client.Send(json);
+                    var data = new Dictionary<string, string>
+                    {
+                        { "message", message.ToString() }
+                    };
+
+                    client.Emit("message", data);  // Enviar a mensagem com a chave "message"
                 }
 
-            };
+                // Enviar um ACK (acknowledgment) para o cliente após o envio
+                ack("Message delivered successfully!");
+            });
         });
 
-        Console.WriteLine("Socket.IO-like WebSocket server running on ws://localhost:5000");
+        Console.WriteLine("Socket.IO server running on http://localhost:5000");
         Console.ReadLine();
     }
 }
