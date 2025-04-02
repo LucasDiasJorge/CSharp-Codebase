@@ -145,5 +145,6 @@ For additional help, visit the following resources:
 
 - [GitHub Discussions](https://github.com/rabbitmq/rabbitmq-server/discussions)
 - [RabbitMQ Community Discord](https://www.rabbitmq.com/community.html)
+- [RabbitMQ tutorial](https://www.rabbitmq.com/tutorials/tutorial-one-dotnet)
 
 ---
