@@ -12,6 +12,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threads", "Threads\Threads.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketIOServer", "SocketIOServer\SocketIOServer.csproj", "{DBC90C1B-CD13-405D-AAEA-FAB0FA0E4811}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "Events\Events.csproj", "{EC9BC6C6-47A5-4E61-9172-384785E2E662}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Course", "Course\Course.csproj", "{48D81073-6ACB-4F23-9E9C-FAA71DBC9D47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +42,14 @@ Global
 		{DBC90C1B-CD13-405D-AAEA-FAB0FA0E4811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBC90C1B-CD13-405D-AAEA-FAB0FA0E4811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBC90C1B-CD13-405D-AAEA-FAB0FA0E4811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC9BC6C6-47A5-4E61-9172-384785E2E662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC9BC6C6-47A5-4E61-9172-384785E2E662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC9BC6C6-47A5-4E61-9172-384785E2E662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC9BC6C6-47A5-4E61-9172-384785E2E662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48D81073-6ACB-4F23-9E9C-FAA71DBC9D47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48D81073-6ACB-4F23-9E9C-FAA71DBC9D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48D81073-6ACB-4F23-9E9C-FAA71DBC9D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48D81073-6ACB-4F23-9E9C-FAA71DBC9D47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
