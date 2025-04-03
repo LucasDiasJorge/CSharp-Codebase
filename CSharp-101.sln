@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Send", "Kafka\Send\Send.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receive", "Kafka\Receive\Receive.csproj", "{31ECB52E-8B39-4DF0-9F4E-AD174EB3FFA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asynchronous", "Asynchronous\Asynchronous.csproj", "{1588BB7F-10FA-4D13-878D-0DC8178283F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{31ECB52E-8B39-4DF0-9F4E-AD174EB3FFA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31ECB52E-8B39-4DF0-9F4E-AD174EB3FFA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31ECB52E-8B39-4DF0-9F4E-AD174EB3FFA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1588BB7F-10FA-4D13-878D-0DC8178283F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1588BB7F-10FA-4D13-878D-0DC8178283F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1588BB7F-10FA-4D13-878D-0DC8178283F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1588BB7F-10FA-4D13-878D-0DC8178283F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
