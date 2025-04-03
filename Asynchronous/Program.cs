@@ -7,7 +7,15 @@ class Program
 {
     static async Task Main(string[] args)
     {
+
         Console.WriteLine(await GetDataAsync());
+        
+        Task<string> data1 = GetDataAsync();
+        Task<string> data2 = GetDataAsync();
+        await Task.WhenAll(data1, data2);
+        Console.WriteLine(data1.Result);
+        Console.WriteLine(data2.Result);
+        
         await Task.Run(() => PerformRequestWithHandling());
     }
 
