@@ -17,6 +17,8 @@ class Program
     
     public static async Task<string> GetDataAsync()
     {
-        return await Task.Run(() => $"Data from Asynchronous API: {GetDataFromApi()}");
+        Console.WriteLine("Data from Asynchronous API: ");
+        await Task.Delay(5000);
+        return await Task.Run(() => $"{GetDataFromApi()}");
     }
 }
