@@ -12,6 +12,13 @@ namespace Postgres
         {
             optionsBuilder.UseNpgsql("Host=localhost;Database=csharp_db;Username=postgres;Password=postgres");
         }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Users>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+        }
     }
     
 }

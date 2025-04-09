@@ -12,7 +12,7 @@ using Postgres;
 namespace Postgres.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250409142413_InitialCreate")]
+    [Migration("20250409184037_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -43,7 +43,13 @@ namespace Postgres.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });

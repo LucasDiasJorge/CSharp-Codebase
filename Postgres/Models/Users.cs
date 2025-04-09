@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Postgres.Models;
 
 public class Users
