@@ -1,39 +1,70 @@
 using KafkaStreamApi.Services;
+using Microsoft.Extensions.Configuration;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+// Configure Serilog for better logging
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .CreateLogger();
 
-// Configurar o serviço Kafka com validação
-var kafkaConfig = builder.Configuration.GetSection("Kafka");
-var bootstrapServers = kafkaConfig["BootstrapServers"] ?? throw new InvalidOperationException("Kafka BootstrapServers not configured");
-var groupId = kafkaConfig["GroupId"] ?? throw new InvalidOperationException("Kafka GroupId not configured");
-
-builder.Services.AddSingleton<KafkaConsumerService>(new KafkaConsumerService(
-    bootstrapServers,
-    groupId
-));
-
-builder.Services.AddCors(options =>
+try
 {
-    options.AddPolicy("AllowSelected", policy =>
+    Log.Information("Starting web application");
+    
+    // Add services to the container.
+    builder.Services.AddControllers();
+    builder.Services.AddEndpointsApiExplorer();
+
+    // Add Serilog
+
+    // Configure Kafka service with validation
+    var kafkaConfig = builder.Configuration.GetSection("Kafka");
+    var bootstrapServers = kafkaConfig["BootstrapServers"] ?? 
+        throw new InvalidOperationException("Kafka BootstrapServers not configured");
+    var groupId = kafkaConfig["GroupId"] ?? 
+        throw new InvalidOperationException("Kafka GroupId not configured");
+
+    builder.Services.AddSingleton<KafkaConsumerService>(provider => 
+        new KafkaConsumerService(
+            bootstrapServers,
+            groupId,
+            provider.GetRequiredService<ILogger<KafkaConsumerService>>()));
+
+    // Configure CORS
+    builder.Services.AddCors(options =>
     {
-        policy.WithOrigins("*")
-            .WithMethods("GET", "POST", "PUT", "DELETE")
-            .AllowAnyHeader();
+        options.AddPolicy("AllowAll", policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
     });
-});
 
-var app = builder.Build();
+    var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.UseCors("AllowAll");
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
+    // Configure the HTTP request pipeline.
+    app.UseCors("AllowAll");
+    app.UseHttpsRedirection();
+    app.UseAuthorization();
+    app.MapControllers();
 
-app.Urls.Add("http://0.0.0.0:5000");
-
-app.Run();
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+    app.Urls.Add($"http://0.0.0.0:{port}");
+    
+    Log.Information("Application running on port {Port}", port);
+    app.Run();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
