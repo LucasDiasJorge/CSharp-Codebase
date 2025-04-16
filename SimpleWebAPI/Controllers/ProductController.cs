@@ -51,4 +51,12 @@ public class ProductController : ControllerBase
             new { id = product.Id }, 
             product);
     }
+
+    [HttpGet("{id}")]
+    public IActionResult GetProduct(long id)
+    {
+        return Ok(_products.FirstOrDefault(p => p.Id == id));
+    }
+    
+    
 }
