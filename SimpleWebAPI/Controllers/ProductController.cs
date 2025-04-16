@@ -8,18 +8,15 @@ namespace SimpleWebAPI.Controllers;
 public class ProductController : ControllerBase
 {
     // Temporary in-memory list for demonstration
-    private static List<ProductModel> _products = new List<ProductModel>();
+    private static List<ProductModel> _products = new List<ProductModel>
+    {
+        new ProductModel(1L, "Product 1", "Description 1", 1499.90m),
+        new ProductModel(2L, "Product 2", "Description 2", 2499.90m)    
+    };
 
     [HttpGet]
     public IActionResult GetProducts()
     {
-        // Create sample products if the list is empty (for demonstration)
-        if (!_products.Any())
-        {
-            _products.Add(new ProductModel(1L, "Product 1", "Description 1", 1499.90m));
-            _products.Add(new ProductModel(2L, "Product 2", "Description 2", 2499.90m));
-        }
-
         // Return the list of products with 200 OK status
         return Ok(_products);
     }
@@ -57,6 +54,32 @@ public class ProductController : ControllerBase
     {
         return Ok(_products.FirstOrDefault(p => p.Id == id));
     }
-    
+
+    [HttpPut("{id}")]
+    public IActionResult UpdateProduct(long id, [FromBody] ProductModel product)
+    {
+        ProductModel productToUpdate = _products.FirstOrDefault(p => p.Id == id);
+        
+        if (productToUpdate == null)
+        {
+            return BadRequest("Product data is null");
+        }
+
+        try
+        {
+            productToUpdate.Name = product.Name;
+            productToUpdate.Description = product.Description;
+            productToUpdate.Price = product.Price;
+
+            return CreatedAtAction(
+                nameof(GetProducts),
+                productToUpdate);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+    }
     
 }
