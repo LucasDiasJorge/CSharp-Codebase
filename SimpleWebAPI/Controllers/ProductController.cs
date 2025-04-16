@@ -68,7 +68,7 @@ public class ProductController : ControllerBase
         
         if (productToUpdate == null)
         {
-            return BadRequest("Product data is null");
+            return NotFound("Product data is null");
         }
 
         try
