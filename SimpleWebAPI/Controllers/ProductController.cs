@@ -81,5 +81,19 @@ public class ProductController : ControllerBase
         }
 
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteProduct(long id)
+    {
+        try
+        {
+            _products.Remove(_products.FirstOrDefault(p => p.Id == id));
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
     
 }
