@@ -13,17 +13,18 @@ public class Program
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
         
-        
         builder.Services.AddControllers();
 
         var app = builder.Build();
 
+        app.Use(async (ContextCallback, next) => { Console.WriteLine("Before request"); await next(); Console.WriteLine("After request"); });
+        
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
         }
-
+        
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
