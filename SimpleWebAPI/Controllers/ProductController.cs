@@ -14,13 +14,20 @@ public class ProductController : ControllerBase
         new ProductModel(2L, "Product 2", "Description 2", 2499.90m)    
     };
 
-    [HttpGet]
-    public IActionResult GetProducts()
+    [HttpGet("{id?}")]
+    public IActionResult GetProducts(int ?id)
     {
+        
+        // Get by Id
+        if (id.HasValue)
+        {
+            return Ok(_products.FirstOrDefault(p => p.Id == id));
+        }
+
         // Return the list of products with 200 OK status
         return Ok(_products);
     }
-
+    
     [HttpPost]
     public IActionResult CreateProduct([FromBody] ProductModel product)
     {
@@ -47,12 +54,6 @@ public class ProductController : ControllerBase
             nameof(GetProducts), 
             new { id = product.Id }, 
             product);
-    }
-
-    [HttpGet("{id}")]
-    public IActionResult GetProduct(long id)
-    {
-        return Ok(_products.FirstOrDefault(p => p.Id == id));
     }
 
     [HttpPut("{id}")]
