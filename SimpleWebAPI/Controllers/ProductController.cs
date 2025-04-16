@@ -18,12 +18,17 @@ public class ProductController : ControllerBase
     public IActionResult GetProducts(int ?id)
     {
         
+        if (_products.Count == 0)
+        {
+            return NoContent();
+        }
+        
         // Get by Id
         if (id.HasValue)
         {
             return Ok(_products.FirstOrDefault(p => p.Id == id));
         }
-
+        
         // Return the list of products with 200 OK status
         return Ok(_products);
     }
