@@ -32,7 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaStreamApi", "KafkaStre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Auth\Auth.csproj", "{454FE3B4-408A-4A10-9DAF-E289AD767908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DIProject", "DIProject\DIProject.csproj", "{66E4298B-E38E-4324-B6DB-1718F371F916}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceRegistration", "ServiceRegistration\ServiceRegistration.csproj", "{66E4298B-E38E-4324-B6DB-1718F371F916}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebAPI", "SimpleWebAPI\SimpleWebAPI.csproj", "{1C7F8BEC-D778-4647-B9D0-37D2A49BBC67}"
 EndProject
 Global
