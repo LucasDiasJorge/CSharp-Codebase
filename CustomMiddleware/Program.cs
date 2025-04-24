@@ -1,4 +1,6 @@
 
+using CustomMiddleware.Middlewares.Extensions;
+
 namespace CustomMiddleware;
 
 public class Program
@@ -24,6 +26,8 @@ public class Program
 
         app.UseMiddleware<RequestTimingMiddleware>();
         app.UseMiddleware<CustomHeaderMiddleware>();
+        
+        app.UseCorrelationId();
         
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
