@@ -23,11 +23,8 @@ public class Program
         });
 
         var app = builder.Build();
-
-        app.UseMiddleware<RequestTimingMiddleware>();
-        app.UseMiddleware<CustomHeaderMiddleware>();
         
-        app.UseCorrelationId();
+        app.UseCustomMiddlewares();
         
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
