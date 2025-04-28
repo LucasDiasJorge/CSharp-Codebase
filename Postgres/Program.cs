@@ -23,7 +23,7 @@ class Program
         }
 
         var usersWithA = db.Users
-            .Where(u => u.Name.StartsWith("A"))
+            .Where(u => u.Name.StartsWith('A'))
             .ToList();
 
         Console.WriteLine("Usuários cujo nome começa com 'A':");

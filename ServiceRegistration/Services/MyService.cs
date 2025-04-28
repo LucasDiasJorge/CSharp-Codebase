@@ -1,7 +1,4 @@
 ﻿using System;
-using DIProject;
-
-namespace DIProject;
 
 //  The MyService class generates a unique ID for each instance and logs messages with the service ID, helping us track the service lifecycle.
 public class MyService : IMyService
