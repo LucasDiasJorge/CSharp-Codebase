@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
+using System.Xml.Serialization;
 using MessagePack;
 
 namespace Serialization;
@@ -69,5 +70,15 @@ class Program
             Prefira System.Text.Json para salvar como texto (talvez usando Base64 para converter objetos complexos).
             Ou use MessagePack, Protobuf para serialização binária segura e eficiente.
         */
+        
+        Pessoa samplePerson = new Pessoa { Nome = "Alice", Idade = 30 };
+        XmlSerializer xmlSerializer = new XmlSerializer(typeof(Pessoa));
+
+        using (StreamWriter writer = new StreamWriter("pessoa.xml"))
+        {
+            xmlSerializer.Serialize(writer, samplePerson);
+        }
+
+        Console.WriteLine("XML serialization complete.");
     }
 }
