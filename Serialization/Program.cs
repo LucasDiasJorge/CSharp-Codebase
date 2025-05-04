@@ -80,5 +80,14 @@ class Program
         }
 
         Console.WriteLine("XML serialization complete.");
+        
+        var xmlData = "<Pessoa><Nome>Bob</Nome><Idade>30</Idade></Pessoa>";
+        var serializer = new XmlSerializer(typeof(Pessoa));
+
+        using (var reader = new StringReader(xmlData))
+        {
+            var deserializedPerson = (Pessoa)serializer.Deserialize(reader);
+            Console.WriteLine($"XML Deserialization - Nome: {deserializedPerson.Nome}, Idade: {deserializedPerson.Idade}");
+        }
     }
 }
