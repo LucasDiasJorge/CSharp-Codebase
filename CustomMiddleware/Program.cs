@@ -25,6 +25,7 @@ public class Program
         var app = builder.Build();
         
         app.UseCustomMiddlewares();
+        app.UseDefaultMiddlewares();
         
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -35,6 +36,7 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
+
 
         var summaries = new[]
         {
