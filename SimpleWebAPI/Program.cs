@@ -3,6 +3,7 @@ using Serilog.Events;
 using Serilog.Formatting.Compact;
 using Serilog.Formatting.Json;
 using System;
+using Microsoft.OpenApi.Models;
 
 namespace SimpleWebAPI;
 
@@ -43,7 +44,25 @@ public class Program
 
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            // Configuração do Swagger/OpenAPI
             
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Title = "SimpleWebAPI",
+                        Version = "v1",
+                        Description = "Uma API simples com Swagger",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Seu Nome",
+                            Email = "seu.email@example.com"
+                        }
+                    }
+                );
+            });
+                    
             builder.Services.AddControllers();
 
             var app = builder.Build();
@@ -65,8 +84,14 @@ public class Program
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
-                Log.Information("OpenAPI/Swagger enabled for development environment");
+                app.UseSwagger();
+                app.UseSwaggerUI(c => 
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SimpleWebAPI v1");
+                    // Para acessar na raiz (opcional): c.RoutePrefix = string.Empty;
+                });
+                
+                Log.Information("Swagger UI enabled for development environment");                Log.Information("OpenAPI/Swagger enabled for development environment");
             }
             
             app.UseHttpsRedirection();
