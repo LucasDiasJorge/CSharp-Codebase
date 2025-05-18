@@ -1,0 +1,32 @@
+# Base URL
+@baseUrl = http://localhost:5000
+
+### Get all products
+GET {{baseUrl}}/products
+Accept: application/json
+
+### Get a product by ID
+GET {{baseUrl}}/products/1
+Accept: application/json
+
+### Create a new product
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+    "name": "Laptop",
+    "price": 1200.50
+}
+
+### Update a product
+PUT {{baseUrl}}/products/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "name": "Updated Laptop",
+    "price": 1100.00
+}
+
+### Delete a product
+DELETE {{baseUrl}}/products/1
