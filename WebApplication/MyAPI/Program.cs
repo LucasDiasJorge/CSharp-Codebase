@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Data;
 using System.Text;
+using MyAPI.Middleware;
 
 namespace MyAPI
 {
@@ -42,6 +43,8 @@ namespace MyAPI
 
             var app = builder.Build();
 
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
+            
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
