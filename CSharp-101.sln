@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwaggerClientCode", "Swagge
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueueExample", "QueueExample\QueueExample.csproj", "{E0D3900A-A382-4A00-BFEC-824B8C919939}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassToDTO", "ClassToDTO\ClassToDTO.csproj", "{D527D687-848B-4CAD-9E3C-861DA31179FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -309,6 +311,18 @@ Global
 		{E0D3900A-A382-4A00-BFEC-824B8C919939}.Release|x64.Build.0 = Release|Any CPU
 		{E0D3900A-A382-4A00-BFEC-824B8C919939}.Release|x86.ActiveCfg = Release|Any CPU
 		{E0D3900A-A382-4A00-BFEC-824B8C919939}.Release|x86.Build.0 = Release|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Debug|x64.Build.0 = Debug|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Debug|x86.Build.0 = Debug|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Release|x64.ActiveCfg = Release|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Release|x64.Build.0 = Release|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Release|x86.ActiveCfg = Release|Any CPU
+		{D527D687-848B-4CAD-9E3C-861DA31179FA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
