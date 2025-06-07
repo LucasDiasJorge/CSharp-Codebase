@@ -13,10 +13,19 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder); // Boa prática chamar o método base
+
+        // Configuração da relação Customer-Order
         modelBuilder.Entity<Customer>()
             .HasMany(c => c.Orders)
             .WithOne(o => o.Customer)
-            .HasForeignKey(o => o.CustomerId);
+            .HasForeignKey(o => o.CustomerId)
+            .OnDelete(DeleteBehavior.Cascade); // Adicionando política de deleção
+
+        // Configurações adicionais recomendadas:
+        modelBuilder.Entity<Order>()
+            .Property(o => o.TotalAmount)
+            .HasColumnType("decimal(18,2)"); // Precisão para valores monetários
 
     }
     
