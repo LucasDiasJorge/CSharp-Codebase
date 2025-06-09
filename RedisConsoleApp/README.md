@@ -1,0 +1,1 @@
+Redis installation (https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-windows/)
