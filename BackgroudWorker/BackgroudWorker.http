@@ -1,0 +1,6 @@
+@BackgroudWorker_HostAddress = http://localhost:5002
+
+GET {{BackgroudWorker_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
