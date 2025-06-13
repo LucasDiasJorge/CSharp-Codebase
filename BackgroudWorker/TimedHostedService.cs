@@ -22,7 +22,7 @@
         }
 
         private void DoWork(object? state)
-        {
+        
             var count = Interlocked.Increment(ref executionCount);
 
             _logger.LogInformation(
