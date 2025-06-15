@@ -11,6 +11,10 @@ public class ProductModel
     [Price]
     public decimal Price { get; set; }
 
+    public int Discount { get; set; }
+
+    public decimal FinalPrice { get; set; }
+
     public ProductModel(long id, string name, string description, decimal price)
     {
         Id = id;
