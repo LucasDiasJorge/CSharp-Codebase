@@ -15,6 +15,8 @@ public class Program
 
         var app = builder.Build();
 
+        app.UseCors("_myAllowAllOrigins"); 
+
         ConfigureEndpoints(app);
 
         app.Run();
@@ -22,6 +24,16 @@ public class Program
 
     public static void ConfigureServices(IServiceCollection services)
     {
+        services.AddCors(options =>
+        {
+            options.AddPolicy(name: "_myAllowAllOrigins",
+                policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+        });
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseInMemoryDatabase("ProductsDB"));
