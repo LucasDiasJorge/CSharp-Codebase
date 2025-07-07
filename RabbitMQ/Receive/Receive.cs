@@ -2,9 +2,10 @@
 using RabbitMQ.Client.Events;
 using System.Text;
 
-var factory = new ConnectionFactory { HostName = "localhost" };
-factory.UserName = "usuario";
-factory.Password = "senha";
+var factory = new ConnectionFactory { HostName = "192.168.64.133" };
+factory.UserName = "guest";
+factory.Password = "guest";
+factory.VirtualHost = "/"; 
 
 using var connection = await factory.CreateConnectionAsync();
 using var channel = await connection.CreateChannelAsync();
@@ -15,6 +16,7 @@ await channel.QueueDeclareAsync(queue: "hello", durable: false, exclusive: false
 Console.WriteLine(" [*] Waiting for messages.");
 
 var consumer = new AsyncEventingBasicConsumer(channel);
+
 consumer.ReceivedAsync += (model, ea) =>
 {
     var body = ea.Body.ToArray();

@@ -1,9 +1,9 @@
 ﻿using RabbitMQ.Client;
 using System.Text;
 
-var factory = new ConnectionFactory { HostName = "localhost" };
-factory.UserName = "usuario";
-factory.Password = "senha";
+var factory = new ConnectionFactory { HostName = "192.168.64.133" };
+factory.UserName = "guest";
+factory.Password = "guest";
 
 using var connection = await factory.CreateConnectionAsync();
 using var channel = await connection.CreateChannelAsync();

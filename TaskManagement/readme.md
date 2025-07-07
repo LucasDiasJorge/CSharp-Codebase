@@ -1,10 +1,122 @@
+# Sistema de Gerenciamento de Tarefas
+
+## 📚 Conceitos Abordados
+
+Este projeto demonstra um sistema completo de gerenciamento de tarefas usando .NET:
+
+- **Entity Framework Core**: ORM para persistência de dados
+- **Enums**: Tipagem forte para status e prioridades
+- **Code First**: Modelagem de dados via código
+- **CRUD Operations**: Operações básicas de banco de dados
+- **Data Annotations**: Validação e configuração de modelos
+- **LINQ**: Consultas e filtros de dados
+- **Repository Pattern**: Padrão de acesso a dados
+
+## 🎯 Objetivos de Aprendizado
+
+- Modelar entidades de negócio complexas
+- Implementar operações CRUD completas
+- Usar enums para tipagem forte
+- Aplicar filtros e ordenação de dados
+- Gerenciar relacionamentos entre entidades
+- Implementar validações de negócio
+
+## 💡 Conceitos Importantes
+
+### Modelo de Tarefa
+```csharp
+public class TaskModel
+{
+    [Key]
+    public int Id { get; set; }
+    
+    [Required]
+    [MaxLength(200)]
+    public string Title { get; set; }
+    
+    public string Category { get; set; }
+    public TaskStatus Status { get; set; }
+    public TaskPriority Priority { get; set; }
+    public DateTime DueDate { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime? CompletedAt { get; set; }
+}
+```
+
+### Enums para Tipagem Forte
+```csharp
+public enum TaskStatus
+{
+    Pending = 0,
+    InProgress = 1,
+    Completed = 2,
+    Cancelled = 3
+}
+
+public enum TaskPriority
+{
+    Low = 0,
+    Medium = 1,
+    High = 2,
+    Critical = 3
+}
+```
+
+### DbContext Configuration
+```csharp
+public class AppDbContext : DbContext
+{
+    public DbSet<TaskModel> Tasks { get; set; }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlite("Data Source=tasks.db");
+    }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<TaskModel>(entity =>
+        {
+            entity.Property(e => e.Status)
+                  .HasConversion<int>();
+                  
+            entity.Property(e => e.Priority)
+                  .HasConversion<int>();
+        });
+    }
+}
+```
+
+## 🚀 Como Executar
+
+```bash
+cd TaskManagement
+dotnet ef database update  # Criar/atualizar banco
+dotnet run
+```
+
+## 📋 Funcionalidades
+
+### Operações CRUD Completas
+- ✅ Criar novas tarefas
+- ✅ Listar tarefas com filtros
+- ✅ Atualizar status e prioridades
+- ✅ Remover tarefas concluídas
+- ✅ Relatórios por categoria
+- ✅ Métricas de produtividade
+
+### Filtros Avançados
+- Status (Pendente, Em Progresso, Concluída)
+- Prioridade (Baixa, Média, Alta, Crítica)
+- Categoria de trabalho
+- Intervalo de datas de vencimento
+- Tarefas em atraso
+
+## 📖 Setup com PostgreSQL
+
 Para integrar o **Entity Framework Core** com o PostgreSQL, você precisará seguir algumas etapas, incluindo a instalação de pacotes necessários, a configuração da conexão com o banco de dados e a criação de migrações.
 
-Aqui estão os passos completos:
-
-### 1. **Instalar os Pacotes Necessários**
-
-Você precisa instalar o provedor do Entity Framework Core para o PostgreSQL. Execute o seguinte comando para instalar o pacote NuGet:
+### 1. Instalar os Pacotes Necessários
 
 ```bash
 dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
