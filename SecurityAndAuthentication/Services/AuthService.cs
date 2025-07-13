@@ -20,7 +20,7 @@ namespace SecurityAndAuthentication.Services
             _audience = _configuration["Jwt:Audience"] ?? "myfront.service.com";
         }
 
-        public string GenerateJwtToken(string username, int userId)
+        public string GenerateJwtToken(string username, int userId, string role = "User")
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -31,7 +31,8 @@ namespace SecurityAndAuthentication.Services
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("userId", userId.ToString()),
                 new Claim("username", username),
-                new Claim(ClaimTypes.Name, username)
+                new Claim(ClaimTypes.Name, username),
+                new Claim(ClaimTypes.Role, role)
             };
 
             var token = new JwtSecurityToken(
@@ -88,6 +89,15 @@ namespace SecurityAndAuthentication.Services
             if (ValidateToken(token, out ClaimsPrincipal? principal))
             {
                 return principal?.FindFirst("username")?.Value;
+            }
+            return null;
+        }
+
+        public string? GetRoleFromToken(string token)
+        {
+            if (ValidateToken(token, out ClaimsPrincipal? principal))
+            {
+                return principal?.FindFirst(ClaimTypes.Role)?.Value;
             }
             return null;
         }

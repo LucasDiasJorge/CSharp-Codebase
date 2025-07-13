@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecurityAndAuthentication.Data;
@@ -94,10 +95,11 @@ public class AuthController : ControllerBase
             username = user.Username,
             email = user.Email,
             role = user.Role,
-            token = _authService.GenerateJwtToken(user.Username, user.Id)
+            token = _authService.GenerateJwtToken(user.Username, user.Id, user.Role)
         });
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet("users")]
     public async Task<IActionResult> GetAllUsers()
     {
@@ -116,6 +118,7 @@ public class AuthController : ControllerBase
         return Ok(users);
     }
 
+    [Authorize]
     [HttpGet("users/{id}")]
     public async Task<IActionResult> GetUser(int id)
     {
@@ -208,7 +211,7 @@ public class AuthController : ControllerBase
         }
 
         // Gerar novo token
-        var newToken = _authService.GenerateJwtToken(user.Username, user.Id);
+        var newToken = _authService.GenerateJwtToken(user.Username, user.Id, user.Role);
 
         return Ok(new
         {
@@ -220,6 +223,7 @@ public class AuthController : ControllerBase
         });
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost("assign-role")]
     public async Task<IActionResult> AssignRole([FromBody] AssignRoleDto assignRoleDto)
     {
@@ -253,6 +257,7 @@ public class AuthController : ControllerBase
         });
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet("roles")]
     public IActionResult GetAvailableRoles()
     {
