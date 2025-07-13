@@ -89,6 +89,7 @@
                 <p id="welcomeMessage">Loading...</p>
             </div>
             <div>
+                <button id="btnChangePassword" class="logout-btn" style="background: #ff9800; margin-right: 10px;">Change Password</button>
                 <button id="btnAdminPanel" class="logout-btn" style="background: #4caf50; margin-right: 10px; display: none;">Admin Panel</button>
                 <button id="btnLogout" class="logout-btn">Logout</button>
             </div>
@@ -137,6 +138,11 @@
                 if (confirm('Are you sure you want to logout?')) {
                     authManager.logout();
                 }
+            });
+
+            // Configurar change password button
+            document.getElementById('btnChangePassword').addEventListener('click', function() {
+                window.location.href = 'change-password.html';
             });
 
             // Configurar admin panel button

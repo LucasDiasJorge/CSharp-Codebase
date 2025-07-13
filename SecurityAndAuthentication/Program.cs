@@ -93,9 +93,57 @@ public class Program
             endpoints.MapControllers();
         });
         
-        // Garantir que o banco seja criado
+        // Garantir que o banco seja criado e criar usuário master
         using var scope = app.ApplicationServices.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         context.Database.EnsureCreated();
+        
+        // Criar usuário master se não existir
+        CreateMasterUserAsync(context).Wait();
+    }
+    
+    private static async Task CreateMasterUserAsync(ApplicationDbContext context)
+    {
+        // Verificar se já existe um usuário admin
+        var existingAdmin = await context.Users.AnyAsync(u => u.Role == "Admin");
+        
+        if (!existingAdmin)
+        {
+            // Permitir configuração via environment variables ou usar padrões
+            var masterEmail = Environment.GetEnvironmentVariable("MASTER_USER_EMAIL") ?? "admin@system.com";
+            var masterUsername = Environment.GetEnvironmentVariable("MASTER_USER_USERNAME") ?? "admin";
+            var masterPassword = Environment.GetEnvironmentVariable("MASTER_USER_PASSWORD") ?? "Admin123!";
+            
+            var masterUser = new SecurityAndAuthentication.Models.User
+            {
+                Email = masterEmail,
+                Username = masterUsername,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(masterPassword),
+                Role = "Admin",
+                IsSubscribed = false,
+                CreatedAt = DateTime.UtcNow
+            };
+            
+            context.Users.Add(masterUser);
+            await context.SaveChangesAsync();
+            
+            Console.WriteLine("=================================");
+            Console.WriteLine("👤 USUÁRIO MASTER CRIADO:");
+            Console.WriteLine($"📧 Email: {masterUser.Email}");
+            Console.WriteLine($"👤 Username: {masterUser.Username}");
+            Console.WriteLine($"🔑 Password: {masterPassword}");
+            Console.WriteLine($"🛡️ Role: {masterUser.Role}");
+            Console.WriteLine($"📅 Created: {masterUser.CreatedAt:yyyy-MM-dd HH:mm:ss}");
+            Console.WriteLine("=================================");
+            Console.WriteLine("⚠️ RECOMENDAÇÕES DE SEGURANÇA:");
+            Console.WriteLine("1. Altere a senha após o primeiro login");
+            Console.WriteLine("2. Use o endpoint POST /api/auth/change-password");
+            Console.WriteLine("3. Configure MASTER_USER_* environment variables");
+            Console.WriteLine("=================================");
+        }
+        else
+        {
+            Console.WriteLine("✅ Usuário administrador já existe - não criando master user");
+        }
     }
 }

@@ -264,4 +264,39 @@ public class AuthController : ControllerBase
         var roles = new[] { "User", "Admin", "Moderator" };
         return Ok(new { roles });
     }
+
+    [Authorize]
+    [HttpPost("change-password")]
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto changePasswordDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        // Extrair informações do token
+        var userIdClaim = User.FindFirst("userId")?.Value;
+        if (userIdClaim == null || !int.TryParse(userIdClaim, out int userId))
+        {
+            return BadRequest(new { message = "Invalid token" });
+        }
+
+        var user = await _context.Users.FindAsync(userId);
+        if (user == null)
+        {
+            return NotFound(new { message = "User not found" });
+        }
+
+        // Verificar senha atual
+        if (!BCrypt.Net.BCrypt.Verify(changePasswordDto.CurrentPassword, user.PasswordHash))
+        {
+            return BadRequest(new { message = "Current password is incorrect" });
+        }
+
+        // Atualizar senha
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(changePasswordDto.NewPassword);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Password changed successfully" });
+    }
 }
