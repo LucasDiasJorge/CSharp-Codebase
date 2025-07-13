@@ -53,3 +53,9 @@ public class UserLoginDto
     [Required]
     public string Password { get; set; } = string.Empty;
 }
+
+public class TokenValidationDto
+{
+    [Required]
+    public string Token { get; set; } = string.Empty;
+}

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecurityAndAuthentication.Data;
 using SecurityAndAuthentication.Models;
+using SecurityAndAuthentication.Services;
 
 namespace SecurityAndAuthentication.Controllers;
 
@@ -10,9 +11,11 @@ namespace SecurityAndAuthentication.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly AuthService _authService;
 
-    public AuthController(ApplicationDbContext context)
+    public AuthController(ApplicationDbContext context, AuthService authService)
     {
+        _authService = authService;
         _context = context;
     }
 
@@ -87,7 +90,8 @@ public class AuthController : ControllerBase
             message = "Login successful",
             userId = user.Id,
             username = user.Username,
-            email = user.Email
+            email = user.Email,
+            token = _authService.GenerateJwtToken(user.Username, user.Id)
         });
     }
 
@@ -129,5 +133,83 @@ public class AuthController : ControllerBase
         }
 
         return Ok(user);
+    }
+
+    [HttpPost("validate-token")]
+    public async Task<IActionResult> ValidateToken([FromBody] TokenValidationDto tokenDto)
+    {
+        if (string.IsNullOrEmpty(tokenDto.Token))
+        {
+            return BadRequest(new { message = "Token is required" });
+        }
+
+        if (!_authService.ValidateToken(tokenDto.Token, out var principal))
+        {
+            return BadRequest(new { message = "Invalid or expired token" });
+        }
+
+        var userIdClaim = _authService.GetUserIdFromToken(tokenDto.Token);
+        if (userIdClaim == null || !int.TryParse(userIdClaim, out int userId))
+        {
+            return BadRequest(new { message = "Invalid token claims" });
+        }
+
+        var user = await _context.Users
+            .Where(u => u.Id == userId)
+            .Select(u => new 
+            {
+                u.Id,
+                u.Username,
+                u.Email,
+                u.CreatedAt,
+                u.IsSubscribed
+            })
+            .FirstOrDefaultAsync();
+
+        if (user == null)
+        {
+            return BadRequest(new { message = "User not found" });
+        }
+
+        return Ok(new 
+        { 
+            valid = true,
+            user = user,
+            expiresAt = _authService.IsTokenExpired(tokenDto.Token) ? "Expired" : "Valid"
+        });
+    }
+
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> RefreshToken([FromBody] TokenValidationDto tokenDto)
+    {
+        if (string.IsNullOrEmpty(tokenDto.Token))
+        {
+            return BadRequest(new { message = "Token is required" });
+        }
+
+        var userIdClaim = _authService.GetUserIdFromToken(tokenDto.Token);
+        var usernameClaim = _authService.GetUsernameFromToken(tokenDto.Token);
+
+        if (userIdClaim == null || usernameClaim == null || !int.TryParse(userIdClaim, out int userId))
+        {
+            return BadRequest(new { message = "Invalid token" });
+        }
+
+        var user = await _context.Users.FindAsync(userId);
+        if (user == null)
+        {
+            return BadRequest(new { message = "User not found" });
+        }
+
+        // Gerar novo token
+        var newToken = _authService.GenerateJwtToken(user.Username, user.Id);
+        
+        return Ok(new 
+        { 
+            token = newToken,
+            userId = user.Id,
+            username = user.Username,
+            email = user.Email
+        });
     }
 }
