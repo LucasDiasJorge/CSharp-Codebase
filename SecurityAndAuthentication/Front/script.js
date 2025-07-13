@@ -83,10 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert(`Welcome, ${result.data.username}! Your account has been created successfully.`);
                 
                 setTimeout(() => {
-                    button.textContent = originalText;
-                    button.disabled = false;
-                    button.style.background = '#1976d2';
-                    this.reset();
+                    // Redirecionar para login após criar conta
+                    window.location.href = 'login.html';
                 }, 2000);
             } else {
                 button.textContent = 'Error occurred';
