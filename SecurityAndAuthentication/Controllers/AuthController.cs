@@ -46,6 +46,7 @@ public class AuthController : ControllerBase
             Username = registrationDto.Username,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(registrationDto.Password),
             IsSubscribed = registrationDto.Subscribe,
+            Role = "User", // Default role for new users
             CreatedAt = DateTime.UtcNow
         };
 
@@ -57,7 +58,8 @@ public class AuthController : ControllerBase
             message = "User registered successfully",
             userId = user.Id,
             username = user.Username,
-            email = user.Email
+            email = user.Email,
+            role = user.Role
         });
     }
 
@@ -91,6 +93,7 @@ public class AuthController : ControllerBase
             userId = user.Id,
             username = user.Username,
             email = user.Email,
+            role = user.Role,
             token = _authService.GenerateJwtToken(user.Username, user.Id)
         });
     }
@@ -104,6 +107,7 @@ public class AuthController : ControllerBase
                 u.Id,
                 u.Username,
                 u.Email,
+                u.Role,
                 u.CreatedAt,
                 u.IsSubscribed
             })
@@ -122,6 +126,7 @@ public class AuthController : ControllerBase
                 u.Id,
                 u.Username,
                 u.Email,
+                u.Role,
                 u.CreatedAt,
                 u.IsSubscribed
             })
@@ -161,6 +166,7 @@ public class AuthController : ControllerBase
                 u.Id,
                 u.Username,
                 u.Email,
+                u.Role,
                 u.CreatedAt,
                 u.IsSubscribed
             })
@@ -203,13 +209,54 @@ public class AuthController : ControllerBase
 
         // Gerar novo token
         var newToken = _authService.GenerateJwtToken(user.Username, user.Id);
-        
-        return Ok(new 
-        { 
+
+        return Ok(new
+        {
             token = newToken,
             userId = user.Id,
             username = user.Username,
-            email = user.Email
+            email = user.Email,
+            role = user.Role
         });
+    }
+
+    [HttpPost("assign-role")]
+    public async Task<IActionResult> AssignRole([FromBody] AssignRoleDto assignRoleDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var user = await _context.Users.FindAsync(assignRoleDto.UserId);
+        if (user == null)
+        {
+            return NotFound(new { message = "User not found" });
+        }
+
+        // Validate role
+        var validRoles = new[] { "User", "Admin", "Moderator" };
+        if (!validRoles.Contains(assignRoleDto.Role))
+        {
+            return BadRequest(new { message = "Invalid role. Valid roles are: User, Admin, Moderator" });
+        }
+
+        user.Role = assignRoleDto.Role;
+        await _context.SaveChangesAsync();
+
+        return Ok(new 
+        { 
+            message = $"Role '{assignRoleDto.Role}' assigned to user '{user.Username}' successfully",
+            userId = user.Id,
+            username = user.Username,
+            newRole = user.Role
+        });
+    }
+
+    [HttpGet("roles")]
+    public IActionResult GetAvailableRoles()
+    {
+        var roles = new[] { "User", "Admin", "Moderator" };
+        return Ok(new { roles });
     }
 }

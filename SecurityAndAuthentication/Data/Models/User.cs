@@ -18,6 +18,10 @@ public class User
     [Required]
     public string PasswordHash { get; set; } = string.Empty;
 
+    [Required]
+    [MaxLength(50)]
+    public string Role { get; set; } = "User"; // Default role
+
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public bool IsSubscribed { get; set; } = false;
@@ -58,4 +62,14 @@ public class TokenValidationDto
 {
     [Required]
     public string Token { get; set; } = string.Empty;
+}
+
+public class AssignRoleDto
+{
+    [Required]
+    public int UserId { get; set; }
+
+    [Required]
+    [MaxLength(50)]
+    public string Role { get; set; } = string.Empty;
 }

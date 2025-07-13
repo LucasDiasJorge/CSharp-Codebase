@@ -23,6 +23,7 @@ namespace SecurityAndAuthentication.Data
                 entity.Property(e => e.Email).IsRequired().HasMaxLength(255);
                 entity.Property(e => e.Username).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.PasswordHash).IsRequired();
+                entity.Property(e => e.Role).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.CreatedAt).IsRequired();
                 
                 // Índice único para email e username

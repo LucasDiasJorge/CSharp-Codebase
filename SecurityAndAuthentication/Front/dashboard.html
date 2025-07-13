@@ -88,7 +88,10 @@
                 <h1>Welcome to Dashboard</h1>
                 <p id="welcomeMessage">Loading...</p>
             </div>
-            <button id="btnLogout" class="logout-btn">Logout</button>
+            <div>
+                <button id="btnAdminPanel" class="logout-btn" style="background: #4caf50; margin-right: 10px; display: none;">Admin Panel</button>
+                <button id="btnLogout" class="logout-btn">Logout</button>
+            </div>
         </div>
 
         <div class="user-profile">
@@ -135,6 +138,11 @@
                     authManager.logout();
                 }
             });
+
+            // Configurar admin panel button
+            document.getElementById('btnAdminPanel').addEventListener('click', function() {
+                window.location.href = 'admin.html';
+            });
         });
 
         // Carregar dados do perfil
@@ -161,6 +169,10 @@
                             <span>${userData.email}</span>
                         </div>
                         <div class="profile-item">
+                            <strong>Role:</strong>
+                            <span style="color: #1976d2; font-weight: bold;">${userData.role}</span>
+                        </div>
+                        <div class="profile-item">
                             <strong>Account Created:</strong>
                             <span>${new Date(userData.createdAt).toLocaleDateString()}</span>
                         </div>
@@ -169,6 +181,11 @@
                             <span>${userData.isSubscribed ? 'Yes' : 'No'}</span>
                         </div>
                     `;
+                    
+                    // Show admin panel button for admin users
+                    if (userData.role === 'Admin') {
+                        document.getElementById('btnAdminPanel').style.display = 'inline-block';
+                    }
                 } else {
                     // Usar dados básicos do login
                     profileDiv.innerHTML = `
@@ -183,6 +200,10 @@
                         <div class="profile-item">
                             <strong>Email:</strong>
                             <span>${user.email}</span>
+                        </div>
+                        <div class="profile-item">
+                            <strong>Role:</strong>
+                            <span style="color: #1976d2; font-weight: bold;">${user.role || 'User'}</span>
                         </div>
                     `;
                 }
@@ -209,7 +230,7 @@
                         usersDiv.innerHTML = users.map(user => `
                             <div class="user-card">
                                 <div>
-                                    <strong>${user.username}</strong><br>
+                                    <strong>${user.username}</strong> <span style="color: #1976d2; font-size: 12px;">[${user.role}]</span><br>
                                     <small>${user.email}</small>
                                 </div>
                                 <div>
