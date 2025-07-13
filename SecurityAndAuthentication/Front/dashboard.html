@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SecurityAndAuthentication</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .dashboard-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .dashboard-header {
+            background: #1976d2;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-profile {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .profile-section {
+            margin-bottom: 20px;
+        }
+
+        .profile-section h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .profile-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-item:last-child {
+            border-bottom: none;
+        }
+
+        .users-list {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-card {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-card:hover {
+            background: #f8f9fa;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div>
+                <h1>Welcome to Dashboard</h1>
+                <p id="welcomeMessage">Loading...</p>
+            </div>
+            <button id="btnLogout" class="logout-btn">Logout</button>
+        </div>
+
+        <div class="user-profile">
+            <div class="profile-section">
+                <h3>Your Profile</h3>
+                <div id="profileData">
+                    <div class="loading-spinner">Loading profile...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="users-list">
+            <h3>All Users</h3>
+            <div id="usersList">
+                <div class="loading-spinner">Loading users...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incluir o gerenciador de autenticação -->
+    <script src="login.js"></script>
+    <script>
+        // Verificar autenticação ao carregar a página
+        document.addEventListener('DOMContentLoaded', async function() {
+            const isAuthenticated = await requireAuth();
+            if (!isAuthenticated) {
+                return;
+            }
+
+            const user = authManager.getUser();
+            
+            // Atualizar mensagem de boas-vindas
+            document.getElementById('welcomeMessage').textContent = `Hello, ${user.username}!`;
+
+            // Carregar dados do perfil
+            loadProfile();
+            
+            // Carregar lista de usuários
+            loadAllUsers();
+
+            // Configurar logout
+            document.getElementById('btnLogout').addEventListener('click', function() {
+                if (confirm('Are you sure you want to logout?')) {
+                    authManager.logout();
+                }
+            });
+        });
+
+        // Carregar dados do perfil
+        async function loadProfile() {
+            const user = authManager.getUser();
+            const profileDiv = document.getElementById('profileData');
+
+            try {
+                // Buscar dados atualizados do usuário
+                const userData = await authManager.fetchUserData(user.userId);
+                
+                if (userData) {
+                    profileDiv.innerHTML = `
+                        <div class="profile-item">
+                            <strong>User ID:</strong>
+                            <span>${userData.id}</span>
+                        </div>
+                        <div class="profile-item">
+                            <strong>Username:</strong>
+                            <span>${userData.username}</span>
+                        </div>
+                        <div class="profile-item">
+                            <strong>Email:</strong>
+                            <span>${userData.email}</span>
+                        </div>
+                        <div class="profile-item">
+                            <strong>Account Created:</strong>
+                            <span>${new Date(userData.createdAt).toLocaleDateString()}</span>
+                        </div>
+                        <div class="profile-item">
+                            <strong>Newsletter Subscription:</strong>
+                            <span>${userData.isSubscribed ? 'Yes' : 'No'}</span>
+                        </div>
+                    `;
+                } else {
+                    // Usar dados básicos do login
+                    profileDiv.innerHTML = `
+                        <div class="profile-item">
+                            <strong>User ID:</strong>
+                            <span>${user.userId}</span>
+                        </div>
+                        <div class="profile-item">
+                            <strong>Username:</strong>
+                            <span>${user.username}</span>
+                        </div>
+                        <div class="profile-item">
+                            <strong>Email:</strong>
+                            <span>${user.email}</span>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                profileDiv.innerHTML = '<p class="error">Error loading profile data.</p>';
+            }
+        }
+
+        // Carregar lista de todos os usuários
+        async function loadAllUsers() {
+            const usersDiv = document.getElementById('usersList');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/users`, {
+                    headers: {
+                        'Authorization': `Bearer ${authManager.token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const users = await response.json();
+                    
+                    if (users.length > 0) {
+                        usersDiv.innerHTML = users.map(user => `
+                            <div class="user-card">
+                                <div>
+                                    <strong>${user.username}</strong><br>
+                                    <small>${user.email}</small>
+                                </div>
+                                <div>
+                                    <small>Joined: ${new Date(user.createdAt).toLocaleDateString()}</small><br>
+                                    <small>Subscribed: ${user.isSubscribed ? 'Yes' : 'No'}</small>
+                                </div>
+                            </div>
+                        `).join('');
+                    } else {
+                        usersDiv.innerHTML = '<p>No users found.</p>';
+                    }
+                } else {
+                    usersDiv.innerHTML = '<p class="error">Error loading users.</p>';
+                }
+            } catch (error) {
+                usersDiv.innerHTML = '<p class="error">Network error loading users.</p>';
+            }
+        }
+    </script>
+</body>
+
+</html>
