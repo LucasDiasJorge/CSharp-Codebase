@@ -1,5 +1,9 @@
 using SecurityAndAuthentication.Data;
+using SecurityAndAuthentication.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace SecurityAndAuthentication;
 
@@ -22,6 +26,26 @@ public class Program
         // Add services to the container.
         services.AddControllers();
         services.AddEndpointsApiExplorer();
+        
+        // Registrar AuthService
+        services.AddScoped<AuthService>();
+        
+        // Configurar JWT
+        var jwtKey = "f7181daf86a42135a80611aee6b016fc1234567890abcdefghijklmnopqrstuvwxyz"; // 256-bit key
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "localhost:5150",
+                    ValidAudience = "myfront.service.com",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+                };
+            });
         
         // Configurar CORS
         services.AddCors(options =>
@@ -61,6 +85,8 @@ public class Program
         // Usar CORS
         app.UseCors("AllowFrontend");
         
+        // Usar autenticação e autorização
+        app.UseAuthentication();
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
