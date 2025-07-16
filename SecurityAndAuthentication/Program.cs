@@ -1,7 +1,9 @@
 using SecurityAndAuthentication.Data;
 using SecurityAndAuthentication.Services;
+using SecurityAndAuthentication.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -64,6 +66,15 @@ public class Program
         {
             options.UseInMemoryDatabase("UserAuthDatabase");
         });
+
+        // Configurar autorização
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("SameUserOrAdmin", policy =>
+                policy.Requirements.Add(new SameUserOrAdminRequirement()));
+        });
+
+        services.AddSingleton<IAuthorizationHandler, SameUserOrAdminHandler>();
     }
 
     public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -118,7 +118,7 @@ public class AuthController : ControllerBase
         return Ok(users);
     }
 
-    [Authorize]
+    [Authorize(Policy = "SameUserOrAdmin")]
     [HttpGet("users/{id}")]
     public async Task<IActionResult> GetUser(int id)
     {
