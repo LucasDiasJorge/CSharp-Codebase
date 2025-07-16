@@ -1,62 +1,59 @@
+
 # Design Patterns em C#
 
-Este repositório contém implementações de diversos Design Patterns em C# usando projetos de console. Cada projeto demonstra um padrão específico com exemplos práticos e bem documentados.
+## 📚 Visão Geral
 
-## 📁 Estrutura do Projeto
+Este repositório reúne implementações didáticas dos principais **Design Patterns** (Padrões de Projeto) em C#, cada um em seu próprio subdiretório, com exemplos práticos, código comentado e README explicativo.
 
-```
-DesignPattern/
-├── Builder/          # Padrão Builder
-├── Strategy/         # Padrão Strategy  
-├── Factory/          # Padrão Factory
-└── DesignPattern.sln # Solution principal
-```
+## 🎯 Objetivo
+- Demonstrar padrões clássicos de design
+- Fornecer exemplos reais e didáticos
+- Servir como referência para estudo e consulta
 
 ## 🏗️ Padrões Implementados
 
-### 1. Builder Pattern
-**Localização:** `Builder/`
+| Padrão                  | Descrição breve                                 | Caminho                     |
+|-------------------------|-------------------------------------------------|-----------------------------|
+| **Builder**             | Criação fluente de objetos complexos            | `Builder/`                  |
+| **Chain of Responsibility** | Encadeamento de handlers para decisões         | `ChainOfResponsability/`    |
+| **Factory**             | Criação flexível de objetos                     | `Factory/`                  |
+| **Strategy**            | Algoritmos intercambiáveis                      | `Strategy/`                 |
+| **Unit of Work**        | Transação atômica de múltiplos repositórios     | `UnitOfWork/`               |
 
-O padrão Builder é usado para construir objetos complexos passo a passo. Permite criar diferentes representações de um objeto usando o mesmo processo de construção.
+## � Estrutura
 
-#### 📋 Características:
-- ✅ Construção fluente de objetos
-- ✅ Validação de dados obrigatórios
-- ✅ Interface clara e legível
-- ✅ Separação entre construção e representação
-
-#### 🔧 Implementação:
-```csharp
-var pedido = new Pedido.Builder()
-    .ComCliente("Lucas Jorge")
-    .ComProduto("Notebook")
-    .ComQuantidade(1)
-    .ComObservacoes("Entregar após às 18h")
-    .ComEntregaExpressa()
-    .Build();
+```
+DesignPattern/
+├── Builder/                # Builder Pattern
+├── ChainOfResponsability/  # Chain of Responsibility Pattern
+├── Factory/                # Factory Pattern
+├── Strategy/               # Strategy Pattern
+├── UnitOfWork/             # Unit of Work Pattern
+└── README.md               # Documentação principal
 ```
 
-#### 📁 Arquivos:
-- `Pedido.cs` - Classe principal com Builder interno
-- `Program.cs` - Demonstração de uso
+## � Como Executar Exemplos
+
+Cada padrão é um projeto independente. Para rodar um exemplo:
+
+```bash
+cd <NomeDoPadrao>
+dotnet run
+```
+
+Exemplo:
+```bash
+cd Factory
+dotnet run
+```
+
+## 🔗 Recursos Adicionais
+- [Refactoring Guru - Design Patterns](https://refactoring.guru/design-patterns)
+- [Microsoft Docs - Padrões de Projeto](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#design-patterns)
 
 ---
 
-### 2. Strategy Pattern
-**Localização:** `Strategy/`
-
-O padrão Strategy define uma família de algoritmos, encapsula cada um deles e os torna intercambiáveis. Permite que o algoritmo varie independentemente dos clientes que o utilizam.
-
-#### 📋 Características:
-- ✅ Algoritmos intercambiáveis em tempo de execução
-- ✅ Elimina condicionais complexas
-- ✅ Facilita adição de novos algoritmos
-- ✅ Seguimento do princípio Aberto/Fechado
-
-#### 🔧 Implementação:
-```csharp
-var processador = new ProcessadorPagamento(new CartaoCreditoStrategy());
-processador.ProcessarPagamento(150.00m);
+💡 **Dica:** Explore cada subdiretório para exemplos, explicações e dicas de uso prático!
 
 // Troca estratégia em runtime
 processador.SetEstrategia(new PixStrategy());
