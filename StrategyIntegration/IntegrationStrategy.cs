@@ -26,9 +26,9 @@ namespace StrategyIntegration
             return _strategy;
         }
 
-        public void ExecuteIntegration(Dictionary<string,object> source, string destination)
+        public Response ExecuteIntegration(Dictionary<string,object> source, string destination)
         {
-            _strategy.IntegrateData(source, destination);
+            return _strategy.IntegrateData(source, destination);
         }
     }
 }

@@ -9,12 +9,16 @@ namespace StrategyIntegration.IntegrationClasses
 {
     public class FirstIntegration : IIntegrationStrategy
     {
-        public void IntegrateData(Dictionary<string, object> source, string destination)
+        public Response IntegrateData(Dictionary<string, object> source, string destination)
         {
             Console.WriteLine("FirstIntegration: Processing data integration...");
 
             string formattedSource = string.Join(", ", source.Select(kvp => $"{kvp.Key}: {kvp.Value}"));
             Console.WriteLine($"Integrating data from source: {{ {formattedSource} }} to destination: {destination}");
+            
+            Response response = new Response(1, "Data integration successful.");
+
+            return response;
         }
     }
 }

@@ -8,6 +8,6 @@ namespace StrategyIntegration.Interfaces
 {
     public interface IIntegrationStrategy
     {
-        void IntegrateData(Dictionary<string, object> source, string destination);
+        Response IntegrateData(Dictionary<string, object> source, string destination);
     }
 }
