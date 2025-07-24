@@ -57,7 +57,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var processador = new ProcessadorPagamento(new CartaoCreditoStrategy());
+        ProcessadorPagamento processador = new ProcessadorPagamento(new CartaoCreditoStrategy());
         processador.ProcessarPagamento(150.00m);
 
         // Troca a estratégia em tempo de execução
