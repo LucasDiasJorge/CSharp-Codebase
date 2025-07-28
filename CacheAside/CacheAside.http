@@ -1,0 +1,73 @@
+### Cache Aside API Endpoints
+
+# Get all products (first request will cache the result)
+GET https://localhost:5001/api/products
+Accept: application/json
+
+###
+
+# Get a specific product by ID (demonstrates cache miss -> cache hit)
+GET https://localhost:5001/api/products/1
+Accept: application/json
+
+###
+
+# Get the same product again (should be a cache hit)
+GET https://localhost:5001/api/products/1
+Accept: application/json
+
+###
+
+# Get products by category
+GET https://localhost:5001/api/products/category/Electronics
+Accept: application/json
+
+###
+
+# Create a new product (will invalidate related cache entries)
+POST https://localhost:5001/api/products
+Content-Type: application/json
+
+{
+  "name": "Gaming Chair",
+  "description": "Ergonomic gaming chair with RGB lighting",
+  "price": 299.99,
+  "category": "Furniture"
+}
+
+###
+
+# Update an existing product (will update cache and invalidate related entries)
+PUT https://localhost:5001/api/products/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updated Laptop Pro",
+  "description": "High-performance laptop with latest specs",
+  "price": 1199.99,
+  "category": "Electronics"
+}
+
+###
+
+# Delete a product (will remove from cache)
+DELETE https://localhost:5001/api/products/2
+
+###
+
+# Cache management endpoints
+
+# Clear specific cache entry
+DELETE https://localhost:5001/api/cache/product:1
+
+###
+
+# Clear cache entries by pattern
+DELETE https://localhost:5001/api/cache/pattern/products
+
+###
+
+# Get cache statistics
+GET https://localhost:5001/api/cache/stats
+Accept: application/json
