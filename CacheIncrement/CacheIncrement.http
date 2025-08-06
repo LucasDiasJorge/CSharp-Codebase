@@ -1,0 +1,97 @@
+### Cache Increment API Tests
+### Base URL: http://localhost:5000
+
+### Health Check
+GET {{host}}/api/counter/health
+
+###
+
+### Increment Counter - Simple
+POST {{host}}/api/counter/page_views/increment
+
+###
+
+### Increment Counter - With Custom Amount
+POST {{host}}/api/counter/page_views/increment?incrementBy=5
+
+###
+
+### Get Counter Value from Redis
+GET {{host}}/api/counter/page_views
+
+###
+
+### Get Counter Value from MySQL (Force Database)
+GET {{host}}/api/counter/page_views?forceFromDatabase=true
+
+###
+
+### Set Counter to Specific Value
+PUT {{host}}/api/counter/page_views
+Content-Type: application/json
+
+{
+  "value": 1000
+}
+
+###
+
+### Check Sync Status
+GET {{host}}/api/counter/page_views/sync-status
+
+###
+
+### Manual Sync to MySQL
+POST {{host}}/api/counter/page_views/sync
+
+###
+
+### Get All Counters from MySQL
+GET {{host}}/api/counter/mysql/all
+
+###
+
+### Test Multiple Counters
+POST {{host}}/api/counter/user_logins/increment
+
+###
+
+POST {{host}}/api/counter/api_calls/increment?incrementBy=3
+
+###
+
+POST {{host}}/api/counter/downloads/increment?incrementBy=10
+
+###
+
+### Rapid Fire Test (increment same counter multiple times)
+POST {{host}}/api/counter/rapid_test/increment
+
+###
+
+POST {{host}}/api/counter/rapid_test/increment
+
+###
+
+POST {{host}}/api/counter/rapid_test/increment
+
+###
+
+POST {{host}}/api/counter/rapid_test/increment
+
+###
+
+POST {{host}}/api/counter/rapid_test/increment
+
+###
+
+### Check rapid test results
+GET {{host}}/api/counter/rapid_test
+
+###
+
+GET {{host}}/api/counter/rapid_test/sync-status
+
+###
+
+@host = http://localhost:5000
