@@ -9,47 +9,85 @@ class Program
 {
     static void Main(string[] args)
     {
-        TestsRethrow testRethrow = new TestsRethrow();
-        testRethrow.CatchException();
-    }
-}
+        var pessoaSerialize = new Pessoa { Nome = "Lucas", Idade = 22 };
+        string jsonStringSerialize = JsonSerializer.Serialize(pessoaSerialize);
 
-class TestsRethrow
-{
+        Console.WriteLine(jsonStringSerialize);
+        // Saída: {"Nome":"Lucas","Idade":22}
 
-    public bool CatchException()
-    {
+        string jsonStringDeserialize = "{\"Nome\":\"Maria\",\"Idade\":25}";
+
+        Pessoa pessoaDeserialize = JsonSerializer.Deserialize<Pessoa>(jsonStringDeserialize);
+
+        Console.WriteLine(pessoaDeserialize.Nome);  // Maria
+        Console.WriteLine(pessoaDeserialize.Idade); // 25
+
+        var lucas = new Pessoa { Nome = "Lucas", Idade = 22 };
+
+        // Serializar para binário
+        byte[] binario = MessagePackSerializer.Serialize(lucas);
+
+        // Gravar no arquivo
+        File.WriteAllBytes("pessoa.msgpack", binario);
+
+        // Ler do arquivo
+        byte[] binarioLido = File.ReadAllBytes("pessoa.msgpack");
+
+        // Desserializar
+        Pessoa pessoaDesserializada = MessagePackSerializer.Deserialize<Pessoa>(binarioLido);
+
+        Console.WriteLine(pessoaDesserializada.Nome); // Lucas
+        Console.WriteLine(pessoaDesserializada.Idade); // 22
+
+        /*
+        // --- Binary Serialization ---
+        var pessoaBinary = new Pessoa { Nome = "Ana", Idade = 25 };
+
         try
         {
-            return method();
+            var formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            using (var stream = new FileStream("pessoa.bin", FileMode.Create, FileAccess.Write))
+            {
+                formatter.Serialize(stream, pessoaBinary);
+            }
+
+            Pessoa deserializedFromBinary;
+            using (var stream = new FileStream("pessoa.bin", FileMode.Open, FileAccess.Read))
+            {
+                deserializedFromBinary = (Pessoa)formatter.Deserialize(stream);
+            }
+
+            Console.WriteLine(deserializedFromBinary.Nome); // Ana
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Method Exception called");
-            throw new Exception(ex.Message);
+            Console.WriteLine($"Erro de IO: {ex.Message}");
+        }
+
+        */
+        /*
+            OBS: BinaryFormatter é obsoleto!
+            Prefira System.Text.Json para salvar como texto (talvez usando Base64 para converter objetos complexos).
+            Ou use MessagePack, Protobuf para serialização binária segura e eficiente.
+        */
+
+        Pessoa samplePerson = new Pessoa { Nome = "Alice", Idade = 30 };
+        XmlSerializer xmlSerializer = new XmlSerializer(typeof(Pessoa));
+
+        using (StreamWriter writer = new StreamWriter("pessoa.xml"))
+        {
+            xmlSerializer.Serialize(writer, samplePerson);
+        }
+
+        Console.WriteLine("XML serialization complete.");
+
+        var xmlData = "<Pessoa><Nome>Bob</Nome><Idade>30</Idade></Pessoa>";
+        var serializer = new XmlSerializer(typeof(Pessoa));
+
+        using (var reader = new StringReader(xmlData))
+        {
+            var deserializedPerson = (Pessoa)serializer.Deserialize(reader);
+            Console.WriteLine($"XML Deserialization - Nome: {deserializedPerson.Nome}, Idade: {deserializedPerson.Idade}");
         }
     }
-
-    public bool method()
-    {
-        try
-        {
-            int i = 0;
-            int j = 1;
-
-            if (j > i)
-            {
-                throw new ArithmeticException("illegal expression baby");
-            }
-
-            Console.WriteLine("CUDI CUDI ?");
-            return false;
-        }
-        catch (ArithmeticException ex)
-        {
-            Console.WriteLine("Arithmetic Exception");
-            throw new ArithmeticException(ex.Message);
-        }
-    }
-
 }
