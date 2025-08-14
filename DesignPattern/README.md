@@ -17,6 +17,7 @@ Este repositório reúne implementações didáticas dos principais **Design Pat
 | **Builder**             | Criação fluente de objetos complexos            | `Builder/`                  |
 | **Chain of Responsibility** | Encadeamento de handlers para decisões         | `ChainOfResponsability/`    |
 | **Factory**             | Criação flexível de objetos                     | `Factory/`                  |
+| **Mediator**            | Centraliza comunicação entre objetos            | `MediatoR/`                 |
 | **Strategy**            | Algoritmos intercambiáveis                      | `Strategy/`                 |
 | **Unit of Work**        | Transação atômica de múltiplos repositórios     | `UnitOfWork/`               |
 
@@ -26,6 +27,7 @@ Este repositório reúne implementações didáticas dos principais **Design Pat
 DesignPattern/
 ├── Builder/                # Builder Pattern
 ├── ChainOfResponsability/  # Chain of Responsibility Pattern
+├── MediatoR/              # Mediator Pattern (sala de chat)
 ├── Factory/                # Factory Pattern
 ├── Strategy/               # Strategy Pattern
 ├── UnitOfWork/             # Unit of Work Pattern
@@ -102,6 +104,35 @@ carroEletrico.ExibirInfo();
 - `Veiculos.cs` - Implementações concretas (Carro, Moto, Bicicleta, CarroEletrico)
 - `VeiculoFactory.cs` - Factories para criação de veículos
 - `Program.cs` - Demonstração de uso
+
+---
+
+### 4. Mediator Pattern
+**Localização:** `MediatoR/`
+
+O padrão Mediator reduz o acoplamento direto entre múltiplos objetos ao **centralizar a comunicação** em um componente mediador. No exemplo, uma sala de chat (`ChatRoomMediator`) gerencia usuários (`User`) e repassa mensagens, evitando que cada usuário conheça os demais diretamente.
+
+#### 📋 Características:
+- ✅ Comunicação desacoplada (participantes ignoram uns aos outros)
+- ✅ Regras de orquestração centralizadas
+- ✅ Facilita extensão (ex: filtros, logs, permissões)
+- ⚠️ Risco de um "mediador deus" se crescer demais
+
+#### 🔧 Implementação (trecho):
+```csharp
+ChatRoomMediator chatRoom = new ChatRoomMediator();
+var alice = new User("Alice");
+var bob = new User("Bob");
+chatRoom.AddUser(alice);
+chatRoom.AddUser(bob);
+alice.SendMessage("Olá Bob!");
+```
+
+#### 📁 Arquivos Principais:
+- `IMediator.cs` / `IUser.cs` – Abstrações
+- `ChatRoomMediator.cs` – Mediador concreto
+- `User.cs` – Participante concreto
+- `Program.cs` – Demonstração completa
 
 ---
 
