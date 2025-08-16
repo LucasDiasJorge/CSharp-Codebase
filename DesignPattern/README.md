@@ -14,6 +14,7 @@ Este repositório reúne implementações didáticas dos principais **Design Pat
 
 | Padrão                  | Descrição breve                                 | Caminho                     |
 |-------------------------|-------------------------------------------------|-----------------------------|
+| **Adapter**             | Integra interfaces incompatíveis               | `Adapter/`                  |
 | **Builder**             | Criação fluente de objetos complexos            | `Builder/`                  |
 | **Chain of Responsibility** | Encadeamento de handlers para decisões         | `ChainOfResponsability/`    |
 | **Factory**             | Criação flexível de objetos                     | `Factory/`                  |
@@ -25,6 +26,7 @@ Este repositório reúne implementações didáticas dos principais **Design Pat
 
 ```
 DesignPattern/
+├── Adapter/               # Adapter Pattern (integração legado)
 ├── Builder/                # Builder Pattern
 ├── ChainOfResponsability/  # Chain of Responsibility Pattern
 ├── MediatoR/              # Mediator Pattern (sala de chat)
@@ -136,6 +138,35 @@ alice.SendMessage("Olá Bob!");
 
 ---
 
+### 5. Adapter Pattern
+**Localização:** `Adapter/`
+
+O padrão Adapter permite que **interfaces incompatíveis trabalhem juntas** ao atuar como tradutor entre o código moderno e sistemas legados. No exemplo, integra um repositório moderno (`IClientRepository`) com um banco de dados legado (`LegacyDatabase`) que usa dicionários.
+
+#### 📋 Características:
+- ✅ Integra sistemas com interfaces incompatíveis
+- ✅ Reutiliza código legado sem modificá-lo
+- ✅ Isola conversões de dados em local centralizado
+- ✅ Facilita testes através de interfaces limpas
+
+#### 🔧 Implementação (trecho):
+```csharp
+IClientRepository repository = new ClientRepositoryAdapter();
+repository.AddClient(new Client { Name = "Lucas", Age = 22 });
+
+// Internamente converte Client → Dictionary<string, object>
+// e chama sistema legado: _legacyDb.Insert(record)
+```
+
+#### 📁 Organização:
+- `Interfaces/IClientRepository.cs` – Interface target moderna
+- `Models/Client.cs` – Modelo de domínio
+- `Legacy/LegacyDatabase.cs` – Sistema legado (adaptee)
+- `Adapters/ClientRepositoryAdapter.cs` – Adapter principal
+- `Program.cs` – Demonstração completa
+
+---
+
 ## 🚀 Como Executar
 
 ### Pré-requisitos
@@ -144,19 +175,25 @@ alice.SendMessage("Olá Bob!");
 
 ### Executando um projeto específico
 
-1. **Builder Pattern:**
+1. **Adapter Pattern:**
+```bash
+cd Adapter
+dotnet run
+```
+
+2. **Builder Pattern:**
 ```bash
 cd Builder
 dotnet run
 ```
 
-2. **Strategy Pattern:**
+3. **Strategy Pattern:**
 ```bash
 cd Strategy
 dotnet run
 ```
 
-3. **Factory Pattern:**
+4. **Factory Pattern:**
 ```bash
 cd Factory
 dotnet run
