@@ -17,6 +17,7 @@ Este repositório reúne implementações didáticas dos principais **Design Pat
 | **Adapter**             | Integra interfaces incompatíveis               | `Adapter/`                  |
 | **Builder**             | Criação fluente de objetos complexos            | `Builder/`                  |
 | **Chain of Responsibility** | Encadeamento de handlers para decisões         | `ChainOfResponsability/`    |
+| **Composite**           | Estruturas hierárquicas (folha/composto)       | `Composite/`                |
 | **Factory**             | Criação flexível de objetos                     | `Factory/`                  |
 | **Mediator**            | Centraliza comunicação entre objetos            | `MediatoR/`                 |
 | **Strategy**            | Algoritmos intercambiáveis                      | `Strategy/`                 |
@@ -29,6 +30,7 @@ DesignPattern/
 ├── Adapter/               # Adapter Pattern (integração legado)
 ├── Builder/                # Builder Pattern
 ├── ChainOfResponsability/  # Chain of Responsibility Pattern
+├── Composite/             # Composite Pattern (árvores folha/composto)
 ├── MediatoR/              # Mediator Pattern (sala de chat)
 ├── Factory/                # Factory Pattern
 ├── Strategy/               # Strategy Pattern
@@ -164,6 +166,31 @@ repository.AddClient(new Client { Name = "Lucas", Age = 22 });
 - `Legacy/LegacyDatabase.cs` – Sistema legado (adaptee)
 - `Adapters/ClientRepositoryAdapter.cs` – Adapter principal
 - `Program.cs` – Demonstração completa
+
+---
+
+### 6. Composite Pattern
+**Localização:** `Composite/`
+
+O padrão Composite permite que objetos individuais (folhas) e composições (pastas) sejam tratados de forma uniforme através de uma interface comum. No exemplo, `File` e `Folder` implementam `IComponent` e a chamada `Display` na raiz exibe recursivamente a árvore.
+
+#### 📋 Características:
+- ✅ Tratamento uniforme de folhas e compostos
+- ✅ Operações recursivas simplificadas
+- ✅ Boa representação para árvores de arquivos, menus e DOMs
+
+#### 🔧 Implementação (trecho):
+```csharp
+Folder root = new Folder("Root");
+root.Add(new File("File A"));
+Folder folder1 = new Folder("Folder 1");
+folder1.Add(new File("File C"));
+root.Add(folder1);
+root.Display(1);
+```
+
+#### 📁 Arquivos Principais:
+- `Program.cs` – Contém `IComponent`, `File`, `Folder` e a demonstração
 
 ---
 
