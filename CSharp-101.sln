@@ -107,6 +107,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatoR", "DesignPattern\M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlBasics", "XmlBasics\XmlBasics.csproj", "{2BF69F33-774E-49CD-87A8-1D0032C8B088}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderRuleConsole", "OrderRuleConsole\OrderRuleConsole.csproj", "{11B49D2E-360E-4E24-BD35-B49FD93318C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -705,6 +707,18 @@ Global
 		{2BF69F33-774E-49CD-87A8-1D0032C8B088}.Release|x64.Build.0 = Release|Any CPU
 		{2BF69F33-774E-49CD-87A8-1D0032C8B088}.Release|x86.ActiveCfg = Release|Any CPU
 		{2BF69F33-774E-49CD-87A8-1D0032C8B088}.Release|x86.Build.0 = Release|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Debug|x64.Build.0 = Debug|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Debug|x86.Build.0 = Debug|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Release|x64.ActiveCfg = Release|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Release|x64.Build.0 = Release|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Release|x86.ActiveCfg = Release|Any CPU
+		{11B49D2E-360E-4E24-BD35-B49FD93318C9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
