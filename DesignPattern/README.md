@@ -24,7 +24,7 @@ Este repositório reúne implementações didáticas dos principais **Design Pat
 | **Strategy**            | Algoritmos intercambiáveis                      | `Strategy/`                 |
 | **Unit of Work**        | Transação atômica de múltiplos repositórios     | `UnitOfWork/`               |
 
-## � Estrutura
+## Estrutura
 
 ```
 DesignPattern/
