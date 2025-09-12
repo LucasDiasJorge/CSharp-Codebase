@@ -18,6 +18,7 @@ Este repositório reúne implementações didáticas dos principais **Design Pat
 | **Builder**             | Criação fluente de objetos complexos            | `Builder/`                  |
 | **Chain of Responsibility** | Encadeamento de handlers para decisões         | `ChainOfResponsability/`    |
 | **Composite**           | Estruturas hierárquicas (folha/composto)       | `Composite/`                |
+| **Visitor**             | Separa operações de uma estrutura de objetos   | `Visitor/`                  |
 | **Factory**             | Criação flexível de objetos                     | `Factory/`                  |
 | **Mediator**            | Centraliza comunicação entre objetos            | `MediatoR/`                 |
 | **Strategy**            | Algoritmos intercambiáveis                      | `Strategy/`                 |
@@ -31,6 +32,7 @@ DesignPattern/
 ├── Builder/                # Builder Pattern
 ├── ChainOfResponsability/  # Chain of Responsibility Pattern
 ├── Composite/             # Composite Pattern (árvores folha/composto)
+├── Visitor/               # Visitor Pattern (separa operações da estrutura)
 ├── MediatoR/              # Mediator Pattern (sala de chat)
 ├── Factory/                # Factory Pattern
 ├── Strategy/               # Strategy Pattern
@@ -171,6 +173,61 @@ repository.AddClient(new Client { Name = "Lucas", Age = 22 });
 
 ### 6. Composite Pattern
 **Localização:** `Composite/`
+
+---
+
+### Visitor Pattern
+**Localização:** `Visitor/`
+
+O padrão Visitor permite que você adicione operações a objetos de uma estrutura sem modificar as classes desses objetos. Em vez de embutir lógica nas classes de domínio, cria-se um visitante que percorre a estrutura e executa operações específicas.
+
+#### 📋 Características:
+- ✅ Separa algoritmos da estrutura de objetos
+- ✅ Facilita adição de novas operações sem tocar nas classes de elementos
+- ✅ Útil para estruturas heterogêneas (ex: AST, coleções de objetos distintos)
+- ⚠️ Requer atualizações nos visitantes quando novas classes de elementos são adicionadas
+
+#### 🔧 Implementação (exemplo incluído):
+- `IElement` — interface dos elementos que aceitam visitantes (`Accept(IVisitor)`).
+- `IVisitor` — interface do visitante com `Visit` para cada elemento concreto.
+- `Book`, `Dvd` — elementos concretos que implementam `IElement`.
+- `PriceVisitor`, `ShippingVisitor` — visitantes concretos que realizam operações distintas (cálculo de preço, frete).
+
+Exemplo de uso (demonstrado em `Visitor/Program.cs`):
+```csharp
+List<IElement> items = new List<IElement>
+{
+  new Book("C# In Depth", 49.90m),
+  new Dvd("Inception", 29.90m, 0.15),
+};
+
+PriceVisitor priceVisitor = new PriceVisitor();
+ShippingVisitor shippingVisitor = new ShippingVisitor();
+
+foreach (IElement item in items)
+{
+  item.Accept(priceVisitor);
+  item.Accept(shippingVisitor);
+}
+
+Console.WriteLine(priceVisitor);
+Console.WriteLine(shippingVisitor);
+```
+
+#### 📁 Arquivos Principais:
+- `IElement.cs` — Interface para elementos
+- `IVisitor.cs` — Interface para visitantes
+- `Book.cs`, `Dvd.cs` — Elementos concretos
+- `PriceVisitor.cs`, `ShippingVisitor.cs` — Visitantes concretos
+- `Program.cs` — Demonstração de execução
+
+#### Como executar
+```powershell
+cd DesignPattern/Visitor
+dotnet run
+```
+
+---
 
 O padrão Composite permite que objetos individuais (folhas) e composições (pastas) sejam tratados de forma uniforme através de uma interface comum. No exemplo, `File` e `Folder` implementam `IComponent` e a chamada `Display` na raiz exibe recursivamente a árvore.
 
