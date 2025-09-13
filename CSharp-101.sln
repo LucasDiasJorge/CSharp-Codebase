@@ -111,6 +111,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderRuleConsole", "OrderRu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBalancingAlgorithms", "LoadBalancingAlgorithms\LoadBalancingAlgorithms.csproj", "{F4BB4343-3546-4754-AB24-44D29729601B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncTasksDemo", "AsyncTasksDemo\AsyncTasksDemo.csproj", "{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -733,6 +735,18 @@ Global
 		{F4BB4343-3546-4754-AB24-44D29729601B}.Release|x64.Build.0 = Release|Any CPU
 		{F4BB4343-3546-4754-AB24-44D29729601B}.Release|x86.ActiveCfg = Release|Any CPU
 		{F4BB4343-3546-4754-AB24-44D29729601B}.Release|x86.Build.0 = Release|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Debug|x64.Build.0 = Debug|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Debug|x86.Build.0 = Debug|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Release|x64.ActiveCfg = Release|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Release|x64.Build.0 = Release|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Release|x86.ActiveCfg = Release|Any CPU
+		{6C11C025-DF20-4FE0-81CC-9F88C5D5C185}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
