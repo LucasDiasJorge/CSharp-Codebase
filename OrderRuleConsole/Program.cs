@@ -11,6 +11,7 @@ var argsList = args.ToList();
 bool readFromStdIn = argsList.Contains("--stdin");
 string? orderJson = null;
 int opIndex = argsList.IndexOf("--order");
+
 if (opIndex >= 0 && opIndex + 1 < argsList.Count)
 {
 	orderJson = argsList[opIndex + 1];
@@ -27,7 +28,7 @@ else
 {
 	// Default sample from instructions
     var sample = """
-    {"parameterKey":"OrderTypeCode","parameterValue":12,"operation":8,"ruleException":""}
+    {"parameterKey":"OrderName","parameterValue":"Angra","operation":8,"ruleException":""}
     """;
 	input = JsonSerializer.Deserialize<RuleInput>(sample, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
 }
@@ -48,10 +49,11 @@ else
 	};
 }
 
-var preOutput = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
+string preOutput = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
+Console.WriteLine("Pre rules application:");
 Console.WriteLine(preOutput);
 
 OrderRuleEngine.Apply(input, order);
-
-var output = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
+string output = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
+Console.WriteLine("Post rules application:");
 Console.WriteLine(output);
