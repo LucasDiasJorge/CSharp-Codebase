@@ -2,58 +2,35 @@
 using OrderRuleConsole.Services;
 using OrderRuleConsole.Models;
 
-// Contract:
-// - Input: JSON matching RuleInput
-// - Behavior: Applies rule to an example Order (or provided via --order)
-// - Output: Resulting Order as JSON
+namespace OrderRuleConsole;
 
-var argsList = args.ToList();
-bool readFromStdIn = argsList.Contains("--stdin");
-string? orderJson = null;
-int opIndex = argsList.IndexOf("--order");
-
-if (opIndex >= 0 && opIndex + 1 < argsList.Count)
+internal static class Program
 {
-	orderJson = argsList[opIndex + 1];
-}
+    public static int Main(string[] args)
+    {
+        RuleInput input = new RuleInput(
+            // For operation 8 (set OrderName to "Lucas" if field == "Name")
+            operation: 8,
+            field: "OrderName",
+            value: "Lucas",
+            //if
+            conditionField: "OrderTypeCode",
+            comparison: "==",
+            targetField: "1"
+        );
 
-RuleInput input;
-if (readFromStdIn)
-{
-	var raw = Console.In.ReadToEnd();
-	input = JsonSerializer.Deserialize<RuleInput>(raw, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
-			?? throw new InvalidOperationException("Invalid JSON for RuleInput");
-}
-else
-{
-	// Default sample from instructions
-    var sample = """
-    {"parameterKey":"OrderName","parameterValue":"Angra","operation":8,"ruleException":""}
-    """;
-	input = JsonSerializer.Deserialize<RuleInput>(sample, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
-}
+        Order order = new Order { Operation = 8, OrderTypeCode = 1, OrderName = "Name" };
 
-Order order;
-if (!string.IsNullOrWhiteSpace(orderJson))
-{
-	order = JsonSerializer.Deserialize<Order>(orderJson!, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
-			  ?? new Order { Operation = 8, OrderTypeCode = 1 };
-}
-else
-{
-	// Example order
-	order = new Order
-	{
-		Operation = 8,
-		OrderTypeCode = 1
-	};
-}
+        string preOutput = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
+        Console.WriteLine("Pre rules application:");
+        Console.WriteLine(preOutput);
 
-string preOutput = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
-Console.WriteLine("Pre rules application:");
-Console.WriteLine(preOutput);
+        OrderRuleEngine.Apply(input, order);
+        string output = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
+        Console.WriteLine("Post rules application:");
+        Console.WriteLine(output);
 
-OrderRuleEngine.Apply(input, order);
-string output = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
-Console.WriteLine("Post rules application:");
-Console.WriteLine(output);
+        return 0;
+    }
+
+}
