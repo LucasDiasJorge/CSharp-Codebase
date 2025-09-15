@@ -91,15 +91,3 @@ Se `Order.OrderName` for igual a `"Name"`, a condição `==` faz com que a alter
 **Contribuindo**
 - Abra uma issue descrevendo a proposta ou bug.
 - Envie PRs pequenos e focados.
-
-**Licença**
-- Projeto sem licença especificada — defina uma `LICENSE` se desejar tornar o projeto público.
-
----
-
-Se quiser, eu posso:
-- Ajustar este README para incluir exemplos reais do `Program.cs` atual.
-- Gerar testes unitários para `OrderRuleEngine`.
-- Reverter o construtor adicionado em `RuleInput` para um factory se preferir.
-
-Diga qual opção prefere que eu execute a seguir.
