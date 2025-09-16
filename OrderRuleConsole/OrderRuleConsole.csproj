@@ -7,4 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <!-- Excluir projeto de testes do build deste projeto para evitar duplicação de assembly attributes e referências ausentes -->
+  <ItemGroup>
+    <Compile Remove="OrderRuleConsole.Tests\**\*.cs" />
+    <EmbeddedResource Remove="OrderRuleConsole.Tests\**\*" />
+    <None Remove="OrderRuleConsole.Tests\**\*" />
+  </ItemGroup>
+
 </Project>
