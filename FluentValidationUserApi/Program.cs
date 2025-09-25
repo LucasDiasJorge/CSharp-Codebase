@@ -6,44 +6,50 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using FluentValidationUserApi.Extensions;
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddFluentValidationClientsideAdapters();
-builder.Services.AddValidatorsFromAssemblyContaining<UserValidator>();
-
-builder.Services.Configure<ApiBehaviorOptions>(options =>
+internal class Program
 {
-    options.InvalidModelStateResponseFactory = context =>
+    private static void Main(string[] args)
     {
-        ValidationProblemDetails problemDetails = new ValidationProblemDetails(context.ModelState)
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddControllers();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+
+        // Register application validation in a centralized extension method to keep Program.cs clean.
+        builder.Services.AddApplicationValidation();
+
+        builder.Services.Configure<ApiBehaviorOptions>(options =>
         {
-            Status = StatusCodes.Status400BadRequest,
-            Title = "One or more validation errors occurred.",
-            Detail = "Review the errors for additional details on how to fix them."
-        };
+            options.InvalidModelStateResponseFactory = context =>
+            {
+                ValidationProblemDetails problemDetails = new ValidationProblemDetails(context.ModelState)
+                {
+                    Status = StatusCodes.Status400BadRequest,
+                    Title = "One or more validation errors occurred.",
+                    Detail = "Review the errors for additional details on how to fix them."
+                };
 
-        return new BadRequestObjectResult(problemDetails);
-    };
-});
+                return new BadRequestObjectResult(problemDetails);
+            };
+        });
 
-WebApplication app = builder.Build();
+        WebApplication app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.UseHttpsRedirection();
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
