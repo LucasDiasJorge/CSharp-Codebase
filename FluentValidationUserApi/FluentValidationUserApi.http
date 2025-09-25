@@ -1,0 +1,28 @@
+@FluentValidationUserApi_HostAddress = https://localhost:5001
+
+### Criar um usuário válido
+POST {{FluentValidationUserApi_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+	"name": "Lucas Jorge",
+	"email": "lucas.jorge@example.com",
+	"age": 34,
+	"dateOfBirth": "1991-02-18"
+}
+
+### Criar um usuário inválido (demonstração de erros de validação)
+POST {{FluentValidationUserApi_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+	"name": "L",
+	"email": "email-invalido",
+	"age": 10,
+	"dateOfBirth": "2050-01-01"
+}
+
+### Consultar usuário de exemplo
+GET {{FluentValidationUserApi_HostAddress}}/api/users/lucas.jorge@example.com
+Accept: application/json
+
