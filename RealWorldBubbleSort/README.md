@@ -1,61 +1,36 @@
-# RealWorldBubbleSort
+<!-- README padronizado (versão condensada) -->
+# RealWorldBubbleSort (Na verdade: Ordenação + Busca Binária)
 
-Um exemplo simples que demonstra um fluxo prático: buscar dados de uma API pública, ordenar por um campo (username) e executar uma busca binária sobre os resultados.
+Exemplo prático: consumir usuários de API pública (`randomuser.me`), ordenar por `Username` e executar busca binária interativa. Nome histórico mantido, mas não há Bubble Sort (usa sort nativo eficiente do .NET).
 
-## O que o projeto faz
-1. Consulta a API pública https://randomuser.me para obter uma lista de usuários.
-2. Mapeia e constrói objetos `User` com `Username` e `Name`.
-3. Ordena a lista de usuários usando `List<T>.Sort` e uma comparação por `Username` (case-insensitive).
-4. Executa uma busca binária para localizar um username informado pelo usuário.
+## 1. Fluxo
+| Etapa | Ação |
+|-------|------|
+| 1 | Requisição HTTP para API pública |
+| 2 | Mapear JSON -> objetos `User` |
+| 3 | Ordenar lista por Username (case-insensitive) |
+| 4 | Solicitar input e realizar busca binária |
 
-> Observação: apesar do nome, este projeto não implementa um "Bubble Sort" — utiliza o sort embutido do .NET e demonstra busca binária aplicada ao mundo real.
-
-## Arquivos principais
-- `Program.cs` - Lógica principal: fetch da API, ordenação e busca binária.
-
-## Requisitos
-- .NET 6.0+ (o projeto foi criado com .NET 9 mas é compatível com versões recentes do .NET)
-- Conexão com a internet para consultar https://randomuser.me
-
-## Como executar
-Abra um terminal na pasta do projeto e rode:
-
+## 2. Execução
 ```powershell
 cd "c:\Users\Lucas Jorge\Documents\Default Projects\Back\CSharp-101\RealWorldBubbleSort"
 dotnet run
 ```
 
-O programa irá listar os usuários buscados, mostrar a lista ordenada por username e pedir que você informe um username para busca. Digite o username e pressione Enter.
+## 3. Considerações
+- Resultados aleatórios: usuários mudam a cada execução.
+- Ordenação antes da busca é obrigatória (pré-condição da busca binária).
+- `HttpClient` direto: em cenário real usar `IHttpClientFactory`.
+- Falhas de rede não tratadas extensivamente (exercício para expansão).
 
-## Exemplo de execução
-```
-Fetched Users:
-jsmith - John Smith
-...
+## 4. Possíveis Extensões
+- Retry + timeout + circuit breaker.
+- Testes unitários (ordenação, busca encontrada / não encontrada).
+- Argumentos CLI: quantidade de usuários, filtro inicial.
+- Paginação e streaming para grandes volumes.
 
-Sorted Users:
-ajones
-jsmith
-...
-
-Enter a username to search: jsmith
-User Found: jsmith - John Smith
-```
-
-## Considerações e pontos de atenção
-- A API `randomuser.me` retorna resultados aleatórios; usernames mudam a cada chamada.
-- A implementação usa `HttpClient` sem injeção de dependência. Para produção, prefira injetar/compartilhar `HttpClient`.
-- A desserialização assume que os campos `login.username`, `name.first` e `name.last` existem — validar a resposta evita exceções.
-- Busca binária requer lista ordenada; o projeto garante isso antes de pesquisar.
-
-## Melhorias sugeridas
-- Tornar a chamada HTTP resiliente (retry/circuit-breaker) e adicionar timeout configurável.
-- Introduzir testes automatizados para: desserialização, ordenação e busca binária (happy path + not found).
-- Suportar argumentos de linha de comando para número de resultados e username inicial de busca.
-- Implementar versão assíncrona/streaming com paginação caso queira trabalhar com milhares de registros.
-
-## Licença
-Use livremente para estudo e referência.
+## 5. Aprendizado Chave
+Combinação de: acesso HTTP → transformação → ordenação → algoritmo de busca → interação usuário.
 
 ---
-Se quiser, eu adiciono este projeto ao `DesignPattern/README.md` com uma referência rápida.
+Versão condensada substitui descrição longa original.

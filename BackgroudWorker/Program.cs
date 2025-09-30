@@ -5,36 +5,45 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        // Cria builder (config, logging, DI container). Tipagem explícita para reforçar didática.
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-        IServiceCollection serviceCollection = builder.Services;
+        IServiceCollection services = builder.Services;
 
-        // Add services to the container.
-        serviceCollection.AddAuthorization();
+        // ------------------------------------------------------------
+        // REGISTRO DE SERVIÇOS
+        // ------------------------------------------------------------
+        // Autorização (mesmo que não haja políticas agora, preserva padrão de pipeline).
+        services.AddAuthorization();
+        // OpenAPI (descrição de endpoints). Em produção normalmente condicionamos exposição.
+        services.AddOpenApi();
+        // Hosted Service baseado em timer: executa trabalho periódico em background enquanto o host estiver ativo.
+        services.AddHostedService<TimedHostedService>();
 
-        // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-        serviceCollection.AddOpenApi();
+        // Constrói a aplicação (após Build, serviços não devem mais ser modificados).
+        WebApplication app = builder.Build();
 
-        // Hosted service that runs on a timer https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-9.0&tabs=visual-studio
-        serviceCollection.AddHostedService<TimedHostedService>();
-
-        var app = builder.Build();
-
-        // Configure the HTTP request pipeline.
+        // ------------------------------------------------------------
+        // PIPELINE HTTP
+        // ------------------------------------------------------------
         if (app.Environment.IsDevelopment())
         {
+            // Exposição de descrição OpenAPI somente em ambiente de desenvolvimento.
             app.MapOpenApi();
         }
 
-        app.UseHttpsRedirection();
+        app.UseHttpsRedirection(); // Garante HTTPS (redireciona requisições HTTP).
+        app.UseAuthorization();    // Coloca middleware de autorização (mesmo sem políticas custom agora).
 
-        app.UseAuthorization();
-
-        app.MapGet("/stoptask", (HttpContext httpContext) =>
+        // Endpoint utilitário para sinalizar parada da tarefa (exemplo de interação com hosted service).
+        app.MapGet("/stoptask", (HttpContext _) =>
         {
-            app.Services.GetRequiredService<TimedHostedService>().StopAsync(new CancellationToken());
+            // IMPORTANTE: StopAsync normalmente é chamado pelo host no shutdown; aqui é demonstrativo.
+            TimedHostedService hosted = app.Services.GetRequiredService<TimedHostedService>();
+            hosted.StopAsync(new CancellationToken());
         });
 
+        // Inicia a aplicação web + hosted services.
         app.Run();
     }
 }

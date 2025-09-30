@@ -1,3 +1,60 @@
+# Auth
+
+## Visão Geral
+Este projeto demonstra autenticação via JWT em uma API ASP.NET Core minimal, incluindo emissão de tokens e validação de credenciais. Serve como base para outros exemplos de segurança.
+
+## Objetivos Didáticos
+- Gerar e assinar JWTs.
+- Configurar autenticação e autorização.
+- Aplicar melhores práticas básicas de segurança.
+
+## Estrutura do Projeto
+```
+Auth/
+   Program.cs
+   Controllers/
+   Services/
+   Middlewares/ (se aplicável)
+   appsettings.json
+```
+
+## Tecnologias e Pacotes
+| Categoria | Pacote | Observação |
+|-----------|--------|-----------|
+| Framework | ASP.NET Core 9 | API e middleware |
+| Auth | Microsoft.AspNetCore.Authentication.JwtBearer | Validação do token |
+| JWT | System.IdentityModel.Tokens.Jwt | Criação/validação de tokens |
+
+## Como Executar
+```powershell
+dotnet restore
+dotnet run --project ./Auth/Auth.csproj
+```
+A API subirá (porta definida pelo Kestrel/launchSettings). Verifique o endpoint de documentação (Swagger/OpenAPI) se configurado.
+
+## Fluxo Principal
+1. Usuário envia credenciais para endpoint de login.
+2. Serviço de autenticação valida dados.
+3. Token JWT é emitido com claims essenciais.
+4. Endpoints protegidos exigem header `Authorization: Bearer <token>`.
+
+## Boas Práticas Demonstradas
+- Injeção de dependência para serviços de autenticação.
+- Configuração explícita de JwtBearerOptions.
+- Uso de tipos explícitos (sem `var`).
+- Separação de responsabilidades (controller vs serviço).
+
+## Pontos de Atenção
+- Este exemplo não cobre refresh tokens.
+- Armazenamento de usuários simplificado (não usar em produção sem reforço de segurança).
+
+## Próximos Passos Sugeridos
+- Adicionar refresh token.
+- Integrar IdentityServer ou OpenIddict.
+- Adicionar roles/policies avançadas.
+
+---
+README gerado a partir do template comum em `docs/README-TEMPLATE.md`.
 # Autenticação JWT em ASP.NET Core
 
 ## 📚 Conceitos Abordados

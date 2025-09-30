@@ -5,19 +5,12 @@ Analise o meu repositorio atual para entender o contexto do meu projeto, e me aj
 
 # Objetivos
 
-- Me de um projeto de API com o uso de Fluent Validation, com somente uma entidade sendo validada, keep it simple:
-    - Uma entidade "User" com propriedades como "Name", "Email", "Age", e "DateOfBirth".
-    - Crie um projeto de API RESTful em C# usando ASP.NET Core.
-    - Implemente validação de entrada usando Fluent Validation.
-    - Inclua exemplos de validação para diferentes tipos de dados (strings, números, datas).
-    - Forneça exemplos de mensagens de erro personalizadas para falhas de validação.
-    - Documente o processo de configuração e uso do Fluent Validation no projeto.
-
-# Requisitos
-- O projeto deve ser estruturado de forma clara e organizada, seguindo as melhores práticas de desenvolvimento.
-- O código deve ser bem comentado para facilitar o entendimento.
-- Forneça um README detalhado com instruções de configuração, execução e exemplos de uso da API.
-- Use somente tipagem explicita, evitando o uso de 'var' para garantir clareza no código.
-
-# Entrega
-- Apos a criação do projeto, compile e rode o projeto localmente para garantir que tudo esteja funcionando corretamente.
+- Organize todos os projetos em uma única solução.
+- Verifique se todos os projetos estão utilizando a mesma versão do .NET (9.0).
+- Reescreva o README.md de cada projeto para refletir a estrutura e funcionalidades atuais.
+- Crie pastas para guardar cada projeto por assuntos específicos, como "Validações", "Autenticação", "Banco de Dados", "API RESTful", etc.
+- De uma atenção especial para projetos "simples" ou "de exemplo", garantindo que eles sejam fáceis de entender e utilizar.
+- Adicione comentários explicativos no código onde for necessário para melhorar a compreensão.
+- Nunca use var, sempre utilize tipagem explícita.
+- Garanta que todos os projetos estejam bem documentados, com instruções claras sobre como configurar, executar e testar cada um deles.
+- Certifique-se de que todos os projetos estejam utilizando boas práticas de desenvolvimento, como injeção de dependência, tratamento de erros e logging.

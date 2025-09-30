@@ -70,7 +70,7 @@ namespace CacheIncrement.Services
                     return new CounterResponse
                     {
                         CounterId = counterId,
-                        Count = redisValue,
+                        Count = (long)redisValue,
                         Source = "Redis"
                     };
                 }
@@ -139,7 +139,7 @@ namespace CacheIncrement.Services
                 return new CounterSyncStatus
                 {
                     CounterId = counterId,
-                    RedisValue = redisValue.HasValue ? redisValue : 0,
+                    RedisValue = redisValue.HasValue ? (long)redisValue : 0,
                     MySqlValue = dbCounter?.Value ?? 0,
                     LastSyncTime = dbCounter?.LastUpdated ?? DateTime.MinValue
                 };
@@ -170,7 +170,7 @@ namespace CacheIncrement.Services
                     counter = new Counter
                     {
                         Id = counterId,
-                        Value = redisValue,
+                        Value = (long)redisValue,
                         CreatedAt = DateTime.UtcNow,
                         LastUpdated = DateTime.UtcNow
                     };
@@ -178,7 +178,7 @@ namespace CacheIncrement.Services
                 }
                 else
                 {
-                    counter.Value = redisValue;
+                    counter.Value = (long)redisValue;
                     counter.LastUpdated = DateTime.UtcNow;
                     _dbContext.Counters.Update(counter);
                 }

@@ -86,7 +86,7 @@ namespace CacheIncrement.Services
                             counter = new Counter
                             {
                                 Id = counterId,
-                                Value = redisValue,
+                                Value = (long)redisValue,
                                 CreatedAt = DateTime.UtcNow,
                                 LastUpdated = DateTime.UtcNow
                             };
@@ -95,9 +95,9 @@ namespace CacheIncrement.Services
                         else
                         {
                             // Only update if Redis value is different (to avoid unnecessary writes)
-                            if (counter.Value != redisValue)
+                            if (counter.Value != (long)redisValue)
                             {
-                                counter.Value = redisValue;
+                                counter.Value = (long)redisValue;
                                 counter.LastUpdated = DateTime.UtcNow;
                                 dbContext.Counters.Update(counter);
                             }

@@ -7,7 +7,51 @@ Demonstrates fundamental `async/await` patterns in .NET:
 3. Background logging task with interval + graceful completion.
 4. Student tasks (parallel API + timed logging) for practice.
 
-## Why Asynchronous Processing?
+## Visão Geral
+Exemplo focado em criação e coordenação de `Task` assíncronas: execução paralela, espera combinada e tratamento de exceções agregadas.
+
+## Objetivos Didáticos
+- Mostrar diferença entre iniciar e aguardar tarefas.
+- Demonstrar `Task.WhenAll` e `Task.WhenAny`.
+- Evidenciar captura de exceções (`AggregateException`).
+
+## Estrutura
+```
+AsyncTasksDemo/
+	Program.cs
+```
+
+## Conceitos Chave
+- Task vs Thread.
+- Await não bloqueante.
+- Execução em paralelo controlada.
+
+## Como Executar
+```powershell
+dotnet run --project ./AsyncTasksDemo/AsyncTasksDemo.csproj
+```
+
+## Fluxo Principal
+1. Criação explícita de várias `Task`.
+2. Aguardar todas (`WhenAll`) ou a primeira (`WhenAny`).
+3. Tratamento de exceções se alguma falhar.
+
+## Boas Práticas Demonstradas
+- Tipagem explícita (sem `var`).
+- Uso adequado de `await`.
+- Organização do fluxo assíncrono em métodos separados (se aplicável).
+
+## Pontos de Atenção
+- Exemplo não inclui cancelamento (`CancellationToken`) – pode ser adicionado.
+- Não usar `.Result` em cenários reais para evitar deadlocks.
+
+## Próximos Passos
+- Adicionar cancelamento.
+- Comparar com `Parallel.ForEachAsync`.
+- Medir tempo de execução com Stopwatch.
+
+---
+README gerado a partir do template comum.
 Allows responsiveness while waiting on I/O (HTTP calls, DB, timers). Frees threads → better scalability.
 
 ## Run

@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <!-- Centraliza versão do .NET para todos os projetos -->
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Opcional: pode ser elevado depois para forçar qualidade -->
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <!-- Ajustar conforme necessidade -->
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+</Project>
