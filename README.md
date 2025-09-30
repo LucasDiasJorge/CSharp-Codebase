@@ -8,6 +8,164 @@
 
 ## 📋 Índice
 
+- [Introdução](#introdução)
+- [Projetos](#projetos)
+- [Categorias](#categorias)
+  - [Caching](#caching)
+  - [Authentication](#authentication)
+  - [Data](#data)
+  - [DesignPattern](#designpattern)
+  - [Kafka](#kafka)
+  - [RabbitMQ](#rabbitmq)
+  - [Security](#security)
+  - [Web](#web)
+- [Como Usar](#como-usar)
+- [Dependências](#dependências)
+- [Atualizações Recentes](#atualizações-recentes)
+
+## Introdução
+
+Este repositório contém diversos projetos de estudo em C# e .NET, organizados em categorias temáticas para facilitar o aprendizado e a consulta de diferentes conceitos e técnicas de programação.
+
+## Projetos
+
+O repositório foi reorganizado para agrupar projetos relacionados em diretórios temáticos:
+
+## Categorias
+
+### Caching
+
+Projetos demonstrando diferentes padrões e implementações de cache:
+
+- **CacheAside**: Implementação do padrão Cache-Aside
+- **CacheIncrement**: Exemplo de incremento atômico em cache
+- **CachePatterns**: Vários padrões de cache (Write-Through, Write-Behind, Near Cache, Tiered Cache)
+- **RedisConsoleApp**: Exemplo de uso do Redis em console
+- **RedisMySQLIntegration**: Integração entre Redis e MySQL
+
+### Authentication
+
+Projetos relacionados a autenticação e autorização:
+
+- **Auth**: Implementação básica de autenticação com JWT
+- **OAuthApplication**: Exemplo de aplicação OAuth com fluxo completo
+
+### Kafka
+
+Exemplos de produtores e consumidores Apache Kafka:
+
+- **Send**: Produtor Kafka
+- **Receive**: Consumidor Kafka
+- **KafkaStreamApi**: API de streams Kafka
+
+### RabbitMQ
+
+Exemplos de produtores e consumidores RabbitMQ:
+
+- **Send**: Produtor RabbitMQ
+- **Receive**: Consumidor RabbitMQ
+
+### Security
+
+Exemplos de segurança e criptografia:
+
+- **EncryptDecrypt**: Demonstração de criptografia e descriptografia
+
+### Data
+
+Projetos relacionados a banco de dados e ORM:
+
+- **Dapper**: Uso do Dapper como micro-ORM
+- **DapperExample**: Exemplos práticos com Dapper
+- **MysqlExample**: Conexão com MySQL
+- **MongoUserApi**: API com MongoDB
+- **Postgres**: Conexão com PostgreSQL
+- **ProcedureExample**: Uso de procedimentos armazenados
+
+### DesignPattern
+
+Exemplos de padrões de projeto:
+
+- **Behavioral**:
+  - **ChainOfResponsibility**: Padrão Cadeia de Responsabilidade
+  - **Mediator**: Padrão Mediador
+  - **State**: Padrão Estado
+  - **Strategy**: Padrão Estratégia
+  - **UnitOfWork**: Padrão Unidade de Trabalho
+  - **Visitor**: Padrão Visitante
+- **Creational**:
+  - **Builder**: Padrão Construtor
+  - **Factory**: Padrão Fábrica
+- **Structural**:
+  - **Adapter**: Padrão Adaptador
+  - **Composite**: Padrão Composto
+
+### Web
+
+APIs Web e serviços:
+
+- **MyAPI**: Exemplo de API web
+- **SimpleWebAPI**: API Web simples
+- **MinimalApiDemo**: API mínima
+- **CustomMiddleware**: Implementação de middleware personalizado
+- **FluentValidationUserApi**: Validações com FluentValidation
+- **SwaggerClientCode**: Geração de cliente a partir de Swagger
+- **GrpcSample**: Exemplo de aplicação gRPC (Server, Client, Contracts)
+
+## Outros Projetos
+
+O repositório também contém diversos outros projetos demonstrando conceitos específicos:
+
+- **AsyncTasksDemo**: Uso de tarefas assíncronas
+- **Asynchronous**: Programação assíncrona
+- **AtomicOperationsDemo**: Operações atômicas
+- **BackgroudWorker**: Trabalhadores em segundo plano
+- **ClassToDTO**: Mapeamento de classes para DTOs
+- **ClassToXml**: Mapeamento de classes para XML
+- **CompressDecompress**: Compressão de dados
+- **Events**: Uso de eventos em C#
+- **Linq**: Exemplos de LINQ
+- **LogicalOperatorsDemo**: Operadores lógicos
+- **QueueExample**: Implementação de filas
+- **RealWorldBubbleSort**: Algoritmo de ordenação
+- **Reflection**: Uso de reflexão
+- **ServiceRegistration**: Registro de serviços em DI
+- **SlidingWindows**: Algoritmo de janela deslizante
+- **StrategyIntegration**: Padrão de projeto Strategy
+- **TaskManagement**: Gerenciamento de tarefas
+- **Threads**: Programação multithread
+- **UnifiedCacheSdk**: SDK unificado para cache
+- **XmlBasics**: Manipulação básica de XML
+
+## Como Usar
+
+Para executar qualquer um dos projetos:
+
+```bash
+# Restaurar dependências e compilar
+dotnet build CSharp-101.sln
+
+# Executar um projeto específico
+cd [NomeDoProjeto]
+dotnet run
+```
+
+## Dependências
+
+A maioria dos projetos usa .NET 9.0. Alguns pacotes podem ter avisos de compatibilidade ou vulnerabilidades conhecidas em versões específicas.
+
+## Atualizações Recentes
+
+- **Reorganização de Projetos**: 
+  - Projetos de cache movidos para o diretório `Caching`
+  - Projetos de autenticação movidos para o diretório `Authentication`
+  - Projetos de banco de dados movidos para o diretório `Data`
+  - Projetos de padrões de design movidos para o diretório `DesignPattern`
+  - Projetos de segurança movidos para o diretório `Security`
+- **Correção de Conversões**: Corrigido problema de conversões de RedisValue para long no projeto CacheIncrement
+- **Atualização da Solução**: Recriada a solução para resolver referências quebradas
+- **Projetos Removidos da Solução**: Removidos projetos com problemas de compilação (SOLIDExamples, SecurityAndAuthentication, SafeVault)
+
 - [🎯 C# 101 - Guia Completo de Desenvolvimento .NET](#-c-101---guia-completo-de-desenvolvimento-net)
   - [📋 Índice](#-índice)
   - [📖 Sobre o Projeto](#-sobre-o-projeto)
