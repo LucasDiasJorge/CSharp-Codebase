@@ -1,0 +1,64 @@
+@CustomFilterApi_HostAddress = http://localhost:5276
+
+# ====================================
+# USERS CONTROLLER
+# ====================================
+
+### 1. Criar Usuário (POST)
+POST {{CustomFilterApi_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "john@example.com",
+  "password": "senha123",
+  "phoneNumber": "11999999999",
+  "age": 30
+}
+
+### 2. Atualizar Usuário (PUT)
+PUT {{CustomFilterApi_HostAddress}}/api/users/1
+Content-Type: application/json
+
+{
+  "username": "johndoe_updated",
+  "email": "john.updated@example.com",
+  "password": "novasenha456",
+  "phoneNumber": "11988888888",
+  "age": 31
+}
+
+### 3. Obter Usuário (GET)
+GET {{CustomFilterApi_HostAddress}}/api/users/1
+
+# ====================================
+# PRODUCTS CONTROLLER
+# ====================================
+
+### 4. Criar Produto (POST)
+POST {{CustomFilterApi_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Notebook Dell",
+  "price": 3499.99,
+  "category": "Eletrônicos",
+  "description": "Notebook Dell Inspiron 15 com 16GB RAM",
+  "stock": 10
+}
+
+### 5. Atualizar Produto (PUT)
+PUT {{CustomFilterApi_HostAddress}}/api/products/1
+Content-Type: application/json
+
+{
+  "name": "Notebook Dell XPS",
+  "price": 5499.99,
+  "category": "Eletrônicos Premium",
+  "description": "Notebook Dell XPS 13 com 32GB RAM",
+  "stock": 5
+}
+
+### 6. Listar Produtos (GET) - NÃO usa filtro
+GET {{CustomFilterApi_HostAddress}}/api/products
+

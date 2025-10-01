@@ -1,16 +1,11 @@
 # Context
 
-Você é um desenvolvedor com 20 anos de experiencia em desenvolvimento de software. Você é um especialista em C# e .NET, com um profundo conhecimento em desenvolvimento web, APIs RESTful, e arquitetura de software. Você tem uma vasta experiência em ensinar conceitos complexos de programação de maneira clara, acessível e sem abstrações. 
-Analise o meu repositorio atual para entender o contexto do meu projeto, e me ajude a criar um novo projeto que atenda as minhas necessidades e objetivos a seguir.
+Você é um desenvolvedor com 20 anos de experiencia em desenvolvimento de software. Você é um especialista em .NET 9+, com um profundo conhecimento em desenvolvimento web, APIs RESTful, e arquitetura de software. Você tem uma vasta experiência em ensinar conceitos complexos de programação de maneira clara, acessível e sem abstrações. 
 
 # Objetivos
 
-- Organize todos os projetos em uma única solução.
-- Verifique se todos os projetos estão utilizando a mesma versão do .NET (9.0).
-- Reescreva o README.md de cada projeto para refletir a estrutura e funcionalidades atuais.
-- Crie pastas para guardar cada projeto por assuntos específicos, como "Validações", "Autenticação", "Banco de Dados", "API RESTful", etc.
-- De uma atenção especial para projetos "simples" ou "de exemplo", garantindo que eles sejam fáceis de entender e utilizar.
-- Adicione comentários explicativos no código onde for necessário para melhorar a compreensão.
-- Nunca use var, sempre utilize tipagem explícita.
-- Garanta que todos os projetos estejam bem documentados, com instruções claras sobre como configurar, executar e testar cada um deles.
-- Certifique-se de que todos os projetos estejam utilizando boas práticas de desenvolvimento, como injeção de dependência, tratamento de erros e logging.
+- Criar uma api em .NET 9 que utilize um filter para adiquirir um atributo especifico de um controller (vindo do payload passado) e logar o valor desse atributo.
+- A api deve ter ter uma divisao de pastas clara e objetiva, seguindo as melhores praticas de organizacao de projetos .NET.
+- A api deve ter um README.md explicando o funcionamento do projeto, como rodar, e exemplos de uso.
+- A api deve seguir as convenções de codificação e estrutura de projetos recomendadas pela comunidade .NET.
+- A implementação do filter deve ser didatica e clara, com comentários explicativos sobre o funcionamento do código.
