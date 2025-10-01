@@ -1,6 +1,7 @@
 using CustomFilterApi.Attributes;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Reflection;
+using CustomFilterApi.Services;
 
 namespace CustomFilterApi.Filters;
 
@@ -36,6 +37,42 @@ public class LogPropertyFilter : IActionFilter
         _logger.LogInformation("=== Iniciando interceptação da requisição ===");
         _logger.LogInformation("Controller: {Controller}", context.Controller.GetType().Name);
         _logger.LogInformation("Action: {Action}", context.ActionDescriptor.DisplayName);
+
+        // Lógica de decisão: procuramos no ActionArguments um payload com propriedade int Age
+        var accessor = context.HttpContext.RequestServices.GetRequiredService<ISelectedServiceAccessor>();
+
+        int? ageValue = null;
+        object? payloadObject = null;
+
+        foreach (var arg in context.ActionArguments)
+        {
+            if (arg.Value == null) continue;
+
+            var argType = arg.Value.GetType();
+            var ageProp = argType.GetProperty("Age", BindingFlags.Public | BindingFlags.Instance);
+            if (ageProp != null && ageProp.PropertyType == typeof(int))
+            {
+                var val = ageProp.GetValue(arg.Value);
+                if (val is int i)
+                {
+                    ageValue = i;
+                    payloadObject = arg.Value;
+                    break;
+                }
+            }
+        }
+
+        // Decide service com base na idade encontrada (exemplo)
+        if (ageValue.HasValue && ageValue.Value < 30)
+        {
+            accessor.Selected = context.HttpContext.RequestServices.GetRequiredService<BusinessServiceA>();
+            _logger.LogInformation("Selecionado BusinessServiceA com base em Age={Age}", ageValue.Value);
+        }
+        else
+        {
+            accessor.Selected = context.HttpContext.RequestServices.GetRequiredService<BusinessServiceB>();
+            _logger.LogInformation("Selecionado BusinessServiceB (Age={Age})", ageValue.HasValue ? ageValue.Value.ToString() : "null");
+        }
 
         // Itera sobre todos os argumentos passados para a action
         foreach (var argument in context.ActionArguments)

@@ -1,5 +1,6 @@
 using CustomFilterApi.Filters;
 using CustomFilterApi.Models;
+using CustomFilterApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomFilterApi.Controllers;
@@ -18,10 +19,12 @@ namespace CustomFilterApi.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly ILogger<UsersController> _logger;
+    private readonly ISelectedServiceAccessor _accessor;
 
-    public UsersController(ILogger<UsersController> logger)
+    public UsersController(ILogger<UsersController> logger, ISelectedServiceAccessor accessor)
     {
         _logger = logger;
+        _accessor = accessor;
     }
 
     /// <summary>
@@ -33,8 +36,7 @@ public class UsersController : ControllerBase
     [HttpPost]
     public IActionResult CreateUser([FromBody] UserDto user)
     {
-        // O filtro já capturou e logou as propriedades marcadas com [LogProperty]
-        // antes de chegar aqui
+        var result = _accessor.Selected?.Execute(user) ?? "No service selected";
 
         _logger.LogInformation("Processando criação do usuário no controller");
 
@@ -44,7 +46,8 @@ public class UsersController : ControllerBase
             Message = "Usuário criado com sucesso",
             Username = user.Username,
             Email = user.Email,
-            Timestamp = DateTime.UtcNow
+            Timestamp = DateTime.UtcNow,
+            ServiceResult = result
         });
     }
 

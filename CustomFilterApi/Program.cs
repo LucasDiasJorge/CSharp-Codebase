@@ -9,6 +9,12 @@ builder.Services.AddControllers();
 // Isso é necessário porque o filtro usa ILogger injetado
 builder.Services.AddScoped<LogPropertyFilter>();
 
+// Registra as implementações de serviços de negócio e o accessor que será usado
+// para armazenar a instância selecionada por requisição.
+builder.Services.AddScoped<CustomFilterApi.Services.BusinessServiceA>();
+builder.Services.AddScoped<CustomFilterApi.Services.BusinessServiceB>();
+builder.Services.AddScoped<CustomFilterApi.Services.ISelectedServiceAccessor, CustomFilterApi.Services.SelectedServiceAccessor>();
+
 // Configuração do Swagger/OpenAPI para documentação da API
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
