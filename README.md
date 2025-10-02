@@ -54,18 +54,13 @@ Projetos relacionados a autenticação e autorização:
 
 Exemplos de produtores e consumidores Apache Kafka:
 
-- **Send**: Produtor Kafka
-- **Receive**: Consumidor Kafka
-- **KafkaStreamApi**: API de streams Kafka
-
-### RabbitMQ
-
-Exemplos de produtores e consumidores RabbitMQ:
+ - **CustomFilterApi**: Demonstra filtros e atributos personalizados para logging e seleção de serviços.
 
 - **Send**: Produtor RabbitMQ
-- **Receive**: Consumidor RabbitMQ
 
-### Security
+## Referências
+
+- `CustomFilterApi/` — Projeto demonstrando filtros/atributos personalizados, exemplos de controllers, DTOs e estratégias de seleção de serviço. Veja a pasta `CustomFilterApi` no repositório para o código e instruções detalhadas.
 
 Exemplos de segurança e criptografia:
 
@@ -121,6 +116,8 @@ O repositório também contém diversos outros projetos demonstrando conceitos e
 - **AtomicOperationsDemo**: Operações atômicas
 - **BackgroudWorker**: Trabalhadores em segundo plano
 - **ClassToDTO**: Mapeamento de classes para DTOs
+- **ClassToJson**: Mapeamento de classes para JSON
+- **CustomFilterApi**: Filtros (interceptor do Java) e atributos personalizados
 - **ClassToXml**: Mapeamento de classes para XML
 - **CompressDecompress**: Compressão de dados
 - **Events**: Uso de eventos em C#
@@ -209,6 +206,7 @@ CSharp-101/
 ├── 📋 ClassToDTO/             # Mapeamento de objetos
 ├── 🗜️  CompressDecompress/     # Compressão de dados
 ├── 📚 Course/                 # Exemplos básicos
+├── 🐳 CustomFilterApi/        # Filtros/Interceptor
 ├── 🔗 CustomMiddleware/       # Middlewares personalizados
 ├── 💾 Dapper/                 # Micro ORM Dapper
 ├── 🏗️  DesignPattern/          # Padrões de design
@@ -232,29 +230,11 @@ CSharp-101/
 
 ### 📋 Pré-requisitos
 
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/download) ou superior
+- [.NET 9.0 SDK](https://dotnet.microsoft.com/download) ou superior
 - [Visual Studio Code](https://code.visualstudio.com/) ou [Visual Studio](https://visualstudio.microsoft.com/)
 - [Git](https://git-scm.com/)
 
-### ⚡ Instalação e Configuração
-
-1. **Clone o repositório:**
-```bash
-git clone https://github.com/LucasDiasJorge/CSharp-101.git
-cd CSharp-101
-```
-
-2. **Restaure as dependências:**
-```bash
-dotnet restore
-```
-
-3. **Compile o projeto:**
-```bash
-dotnet build
-```
-
-## �️ Comandos Essenciais do .NET CLI
+## ⚡ Comandos Essenciais do .NET CLI
 
 ### 📌 Criando Projetos e Arquivos
 
@@ -371,7 +351,7 @@ dotnet build <NOME_DA_SOLUCAO>.sln
 
 ## 💾 Entity Framework Core
 
-### � Instalação
+### ⚡ Instalação
 ```bash
 # Pacotes essenciais
 dotnet add package Microsoft.EntityFrameworkCore
@@ -384,7 +364,7 @@ dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL      # PostgreSQL
 dotnet add package Pomelo.EntityFrameworkCore.MySql           # MySQL
 ```
 
-### � Migrations
+### ⚡ Migrations
 ```bash
 # Criar uma migration
 dotnet ef migrations add <NomeDaMigration>
