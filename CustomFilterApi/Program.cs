@@ -1,4 +1,3 @@
-using CustomFilterApi.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
