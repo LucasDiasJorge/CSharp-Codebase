@@ -33,6 +33,17 @@ public class LogPropertyFilter : IActionFilter
     /// </summary>
     public void OnActionExecuting(ActionExecutingContext context)
     {
+        // Check for DisableLogPropertyAttribute on the endpoint metadata and skip if requested
+        var disableAttr = context.ActionDescriptor.EndpointMetadata?
+            .OfType<DisableLogPropertyAttribute>()
+            .FirstOrDefault();
+
+        if (disableAttr != null && disableAttr.Ignore)
+        {
+            _logger.LogInformation("LogPropertyFilter skipped by DisableLogPropertyAttribute.");
+            return;
+        }
+
         // Log do início da execução
         _logger.LogInformation("=== Iniciando interceptação da requisição ===");
         _logger.LogInformation("Controller: {Controller}", context.Controller.GetType().Name);
@@ -123,6 +134,16 @@ public class LogPropertyFilter : IActionFilter
     /// </summary>
     public void OnActionExecuted(ActionExecutedContext context)
     {
+        var disableAttr = context.ActionDescriptor.EndpointMetadata?
+            .OfType<CustomFilterApi.Attributes.DisableLogPropertyAttribute>()
+            .FirstOrDefault();
+
+        if (disableAttr != null && disableAttr.Ignore)
+        {
+            _logger.LogInformation("LogPropertyFilter.OnActionExecuted skipped by DisableLogPropertyAttribute.");
+            return;
+        }
+
         _logger.LogInformation("Action executada. Status: {Status}", 
             context.HttpContext.Response.StatusCode);
     }
