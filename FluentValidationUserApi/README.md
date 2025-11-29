@@ -8,63 +8,84 @@ Uma API RESTful minimalista construída com ASP.NET Core 9 e FluentValidation pa
 - Utilizar mensagens de erro personalizadas para facilitar a correção do input.
 - Manter o código com tipagem explícita, evitando o uso de `var` para reforçar clareza.
 
-## 🧱 Estrutura principal
-
-```
-FluentValidationUserApi/
-├── Controllers/
-│   └── UsersController.cs      # Endpoints REST para criar e consultar usuários
-├── Models/
-<!-- README padronizado (versão condensada) -->
 # FluentValidationUserApi
 
-API REST mínima (.NET 9) demonstrando validação declarativa com FluentValidation sobre a entidade `User`. Código utiliza tipos explícitos (sem `var`) para fins didáticos e respostas de erro padronizadas.
+API REST mínima em ASP.NET Core 9 que demonstra validação declarativa com FluentValidation aplicada a uma entidade `User`.
 
-## 1. Visão Geral
-Exibe regras de validação de campos simples (string, int, DateTime) com mensagens claras. Estrutura separa modelo, DTO de resposta, validator e controller. Retornos inválidos produzem `ValidationProblemDetails` customizado.
+Este README foi reorganizado para ser prático: visão geral, como rodar, endpoints, exemplos de validator e dicas para personalizar respostas de erro.
 
-## 2. Objetivos Didáticos
-- Mostrar configuração enxuta do FluentValidation.
-- Demonstrar mensagens personalizadas e coerência `Age` x `DateOfBirth`.
-- Ensinar registro automático de validators via assembly scanning.
-- Reforçar clareza com tipos explícitos.
+## Visão Geral
 
-## 3. Estrutura
+- Projeto didático: foco em validators claros, mensagens úteis e separação de responsabilidades.
+- Código usa tipagem explícita onde apropriado para melhorar legibilidade (ex.: evitar `var` em declarações complexas).
+
+## Estrutura do Projeto
+
 ```
 FluentValidationUserApi/
-  Controllers/ (UsersController)
-  Models/ (User, UserResponse)
-  Validators/ (UserValidator)
-  Program.cs
+  Controllers/        # Controllers (UsersController)
+  Models/             # Entidades/DTOs (User, UserResponse)
+  Validators/         # Validators (UserValidator)
+  Program.cs          # Bootstrap da aplicação
+  FluentValidationUserApi.csproj
 ```
 
-## 4. Configuração Essencial
-`FluentValidation.AspNetCore` já referenciada. Em `Program.cs`:
-```csharp
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddFluentValidationClientsideAdapters();
-builder.Services.AddValidatorsFromAssemblyContaining<UserValidator>();
-```
-Para personalizar resposta de erro: configurar `InvalidModelStateResponseFactory` nos `ApiBehaviorOptions` (retornando mensagens agregadas).
+## Como Rodar (PowerShell)
 
-Validator típico (exemplo abreviado):
+```powershell
+cd "c:\Users\Lucas Jorge\Documents\Default Projects\Back\CSharp-101\FluentValidationUserApi"
+dotnet restore
+dotnet run
+```
+
+Abra o Swagger em `https://localhost:5001/swagger` (modo Development).
+
+## Endpoints Principais
+
+| Método | Rota | Descrição |
+|---|---:|---|
+| POST | `/api/users` | Cria um usuário; validação completa do payload |
+| GET  | `/api/users/{email}` | Recupera um usuário (demo de CreatedAt/lookup) |
+
+Exemplo de body (POST /api/users):
+
+```json
+{
+  "name": "Ana Silva",
+  "email": "ana.silva@example.com",
+  "age": 28,
+  "dateOfBirth": "1997-03-14"
+}
+```
+
+## Exemplo de `UserValidator`
+
+Exemplo reduzido para ilustrar regras e validação cruzada (Age x DateOfBirth):
+
 ```csharp
 public class UserValidator : AbstractValidator<User>
 {
     public UserValidator()
     {
         RuleFor(u => u.Name)
-            .NotEmpty().MinimumLength(2).MaximumLength(100);
+            .NotEmpty().WithMessage("Nome é obrigatório")
+            .MinimumLength(2).WithMessage("Nome deve ter ao menos 2 caracteres")
+            .MaximumLength(100);
+
         RuleFor(u => u.Email)
-            .NotEmpty().EmailAddress();
+            .NotEmpty().WithMessage("E-mail é obrigatório")
+            .EmailAddress().WithMessage("Formato de e-mail inválido");
+
         RuleFor(u => u.DateOfBirth)
-            .LessThan(DateTime.UtcNow).WithMessage("Date of Birth must be in the past.");
+            .LessThan(DateTime.UtcNow).WithMessage("Data de nascimento deve ser no passado");
+
         RuleFor(u => u.Age)
-            .InclusiveBetween(18, 120)
-            .Must((user, age) => age == CalcularIdade(user.DateOfBirth))
-            .WithMessage("Age must match the calculated value based on Date of Birth.");
+            .InclusiveBetween(18, 120).WithMessage("Idade deve estar entre 18 e 120 anos")
+            .Must((user, age) => age == CalculateAge(user.DateOfBirth))
+            .WithMessage("Idade não corresponde à data de nascimento");
     }
-    private static int CalcularIdade(DateTime dob)
+
+    private static int CalculateAge(DateTime dob)
     {
         int years = DateTime.UtcNow.Year - dob.Year;
         if (dob.Date > DateTime.UtcNow.Date.AddYears(-years)) years--;
@@ -73,48 +94,54 @@ public class UserValidator : AbstractValidator<User>
 }
 ```
 
-## 5. Execução
-```powershell
-cd "c:\Users\Lucas Jorge\Documents\Default Projects\Back\CSharp-101\FluentValidationUserApi"
-dotnet restore
-dotnet run
+## Personalizando a resposta de erro (model state)
+
+Por padrão o ASP.NET retorna `ValidationProblemDetails`. Para devolver um formato próprio, configure o `InvalidModelStateResponseFactory` em `Program.cs`:
+
+```csharp
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var errors = context.ModelState
+            .Where(e => e.Value.Errors.Count > 0)
+            .ToDictionary(
+                kvp => kvp.Key,
+                kvp => kvp.Value.Errors.Select(err => err.ErrorMessage).ToArray()
+            );
+
+        var result = new BadRequestObjectResult(new { Message = "Validation failed", Errors = errors });
+        return result;
+    };
+});
 ```
-Swagger: `https://localhost:5001`.
 
-## 6. Endpoints
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| POST | /api/users | Cria usuário (validação completa) |
-| GET | /api/users/{email} | Retorna usuário de exemplo (demo para CreatedAt) |
+Isso retorna um JSON simples com os campos e mensagens associadas.
 
-Exemplo POST:
-```json
-{ "name": "Ana Silva", "email": "ana.silva@example.com", "age": 28, "dateOfBirth": "1997-03-14" }
-```
+## Boas Práticas aplicadas
 
-## 7. Regras (Resumo)
-| Campo | Regras |
-|-------|--------|
-| Name | Obrigatório; 2–100 chars |
-| Email | Obrigatório; formato válido |
-| Age | 18–120; coerente com DateOfBirth |
-| DateOfBirth | Passado; <= 120 anos |
+- Valide dados no nível do request — antes de tocar serviços/DB.
+- Mantenha `Validator` em classes separadas; controllers apenas delegam.
+- Prefira mensagens de erro específicas e localizadas (úteis para APIs públicas).
+- Use `AddValidatorsFromAssemblyContaining<T>()` para registrar validators automaticamente.
 
-## 8. Boas Práticas Aplicadas
-- Tipos explícitos para didática.
-- Mensagens de erro específicas (evitam ambiguidades).
-- Validação coesa entre campos relacionados (consistência lógica).
-- Separação clara: Controller fino, Validator focado em regras, Model simples.
+## Testes recomendados
 
-## 9. Extensões Futuras
-- Validações assíncronas (e-mail único em repositório).
-- Regras condicionais (`When`, `DependentRules`).
-- Pipelines de validação por contexto (ex.: criação vs atualização).
-- Testes unitários dos validators (ex.: FluentValidation.TestHelper).
+- Unit tests para `UserValidator` (ex.: FluentValidation.TestHelper).
+- Testes de integração para verificar o pipeline (requests inválidos → 400 com payload esperado).
 
-## 10. Aprendizados Esperados
-Como estruturar validators declarativos, produzir mensagens úteis e manter consistência de dados sem acoplar lógica de negócio à camada de API.
+## Extensões futuras
+
+- Validações assíncronas (ex.: verificação de e-mail único no banco).
+- Cenários de atualização (validações condicionais com `When`).
+- Internationalização das mensagens de validação.
 
 ---
-Versão original detalhada substituída por formato padronizado condensado.
+
+Se quiser, eu posso:
+
+- 1) ajustar o `Program.cs` do projeto para incluir o `InvalidModelStateResponseFactory` automaticamente; ou
+- 2) adicionar exemplos de testes unitários para o `UserValidator`.
+
+Diga qual opção prefere e eu implemento.
 
