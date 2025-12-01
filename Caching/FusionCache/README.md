@@ -1,70 +1,153 @@
-# Por que usar (e não usar) o FusionCache em comparação a outros serviços de cache
+<!-- README padronizado (versÃ£o condensada) -->
+# FusionCache (Cache com ResiliÃªncia AvanÃ§ada)
 
-Este documento resume os principais motivos para adotar ou evitar o uso do [FusionCache](https://github.com/ZiggyCreatures/FusionCache) em aplicações .NET, comparando-o rapidamente com alternativas comuns (IMemoryCache, Redis puro, LazyCache, EasyCaching, etc.).
+Projeto demonstrativo do [FusionCache](https://github.com/ZiggyCreatures/FusionCache), biblioteca de cache de alto nÃ­vel para .NET que combina proteÃ§Ã£o contra cache stampede, fail-safe, background refresh e suporte multicamadas (memÃ³ria + distribuÃ­do).
 
-## O que é o FusionCache
-Uma biblioteca de cache de alto nível para .NET que combina:
-- Prevenção de cache stampede (single-flight).
-- Fail-safe (entrega de valores “stale” quando a fonte está indisponível).
-- Atualização em segundo plano (background refresh).
-- Multicamadas (memória + distribuído) com backplane.
-- API simples (`GetOrSet`/`GetOrSetAsync`) e opções avançadas (timeouts, jitter, etc.).
+## 1. VisÃ£o Geral
+FusionCache oferece API simplificada (`GetOrSet`/`GetOrSetAsync`) com recursos avanÃ§ados integrados:
+- **Anti-stampede**: apenas uma execuÃ§Ã£o da factory por chave (previne thundering herd)
+- **Fail-safe**: serve valores stale quando fonte primÃ¡ria falha
+- **Background refresh**: renova itens proativamente antes da expiraÃ§Ã£o
+- **Multicamadas**: combina cache local (memÃ³ria) com distribuÃ­do (Redis) + backplane para invalidaÃ§Ã£o
+- **Timeouts e jitter**: controle fino de resiliÃªncia sem depender de Polly
 
-No projeto, veja `Caching/FusionCache/Program.cs` para exemplos de:
-- `GetOrSet`/`GetOrSetAsync` com options builder.
-- `TryGet<T>` retornando `MaybeValue<T>`.
-- Fail-safe + timeouts de fábrica.
+## 2. Objetivos DidÃ¡ticos
+- Demonstrar uso de `GetOrSet` com options builder
+- Ilustrar `TryGet<T>` com `MaybeValue<T>`
+- Mostrar fail-safe e timeout de factory
+- Comparar com alternativas (`IMemoryCache`, Redis puro, LazyCache, EasyCaching)
+- Evidenciar quando usar e quando evitar FusionCache
 
-## Principais benefícios (por que usar)
-- Previne thundering herd/cache stampede: garante apenas uma execução da factory por chave, reduzindo carga em bases/APIs.
-- Fail-safe integrado: em falhas temporárias, pode servir valor antigo (stale) para preservar a experiência do usuário.
-- Atualização proativa: renova o item em background antes de expirar, reduzindo latência em acessos subsequentes.
-- Multicamadas fácil: combina cache em memória com um distribuído (ex.: Redis via `IDistributedCache`) e usa backplane para invalidação entre instâncias.
-- API produtiva: `GetOrSet` centraliza busca + cache + políticas (duração, timeouts), reduzindo boilerplate e erros.
-- Opções de resiliência: timeouts de factory, cancelamento, jitter e políticas por item, sem precisar compor manualmente com Polly.
+## 3. Estrutura Principal
+```
+FusionCache/
+  Program.cs (exemplos de uso)
+  README.md (comparativo e decisÃ£o)
+```
 
-## Possíveis desvantagens (quando não usar)
-- Dependência adicional: se você só precisa de um cache extremamente simples e local, `IMemoryCache` pode ser suficiente.
-- Curva de aprendizado e configuração: recursos como fail-safe, background refresh e multicamadas exigem entendimento e parametrização correta.
-- Overhead: há custo para coordenação/locks e telemetria; para cenários “micro” pode ser desnecessário.
-- Controle de baixo nível: se você precisa de recursos específicos do Redis (scripts Lua, streams, pub/sub personalizado, structures avançadas), usar o cliente Redis diretamente pode ser melhor.
-- Compatibilidade de API entre versões: atualizações podem introduzir mudanças de assinatura (ex.: factories `(ctx, ct)` e `TryGet` retornando `MaybeValue<T>`).
+## 4. InstalaÃ§Ã£o
+```powershell
+dotnet add package ZiggyCreatures.FusionCache
+# Para suporte distribuÃ­do (opcional):
+dotnet add package ZiggyCreatures.FusionCache.Serialization.SystemTextJson
+dotnet add package Microsoft.Extensions.Caching.StackExchangeRedis
+```
 
-## Comparação rápida com alternativas
-- IMemoryCache (Microsoft.Extensions.Caching.Memory)
-  - Prós: built-in, leve, simples.
-  - Contras: não traz nativamente anti-stampede, fail-safe ou background refresh; você precisa compor manualmente padrões de resiliência.
-- Redis puro / IDistributedCache
-  - Prós: compartilhado entre instâncias, TTL distribuído, escalável.
-  - Contras: sem anti-stampede/fail-safe por padrão; maior latência; precisa implementar políticas e coordenação.
-- LazyCache
-  - Prós: API simples baseda em `IMemoryCache`, com lazy initialization que ajuda a reduzir duplicidade de factory.
-  - Contras: recursos de resiliência e multicamadas são mais limitados comparados ao FusionCache.
-- EasyCaching / CacheManager (com múltiplos provedores)
-  - Prós: abstrações sobre vários backends, integração com Redis/Memcached/etc.
-  - Contras: geralmente não oferecem o mesmo pacote integrado de anti-stampede + fail-safe + background refresh do FusionCache.
+## 5. Exemplos de Uso
 
-## Quando o FusionCache é uma ótima escolha
-- Alto tráfego sobre dados caros de obter (APIs externas, queries complexas) e risco de cache stampede.
-- Precisa de experiência resiliente: servir dados stale durante falhas temporárias e retentar em background.
-- Aplicações distribuídas que precisam de cache em memória + distribuído com invalidação coordenada.
-- Quer centralizar políticas de resiliência/timeout em um ponto (a própria chamada ao cache).
+### GetOrSet BÃ¡sico
+```csharp
+IFusionCache cache = services.GetRequiredService<IFusionCache>();
+Product? product = await cache.GetOrSetAsync<Product>(
+    "product:123",
+    async (ctx, ct) => await _repository.GetByIdAsync(123, ct),
+    options => options.SetDuration(TimeSpan.FromMinutes(10))
+);
+```
 
-## Quando considerar outras opções
-- Cenários simples e locais, onde `IMemoryCache` atende 100% sem requisitos de resiliência.
-- Requisitos altamente específicos de Redis (streaming, estruturas customizadas, scripts Lua e afinados de latência).
-- Quando o custo operacional de mais uma dependência não compensa os benefícios.
+### TryGet com MaybeValue
+```csharp
+MaybeValue<Product> maybe = await cache.TryGetAsync<Product>("product:123");
+if (maybe.HasValue)
+{
+    Product product = maybe.Value;
+    // usar produto
+}
+```
 
-## Boas práticas com FusionCache
-- Defina TTLs e jitter realistas por cenário; não use durações excessivas sem necessidade.
-- Use factories assíncronas sempre que possível; ajuste `SetFactoryTimeouts`.
-- Ative `SetFailSafe(true)` onde a experiência do usuário é crítica e a fonte pode falhar.
-- Evite payloads muito grandes; escolha uma boa estratégia de serialização para a camada distribuída.
-- Em múltiplas instâncias, configure backplane para propagar invalidações.
-- Monitore métricas (hit/miss, tempo de factory, eventos de fail-safe) para calibrar políticas.
+### Fail-Safe e Timeout
+```csharp
+Product? product = await cache.GetOrSetAsync<Product>(
+    "product:123",
+    async (ctx, ct) => await _externalApi.GetProductAsync(123, ct),
+    options => options
+        .SetDuration(TimeSpan.FromMinutes(10))
+        .SetFailSafe(true)                              // Serve stale em falha
+        .SetFactoryTimeouts(TimeSpan.FromSeconds(5))    // Timeout da factory
+);
+```
 
-## Como isso se reflete no código deste projeto
-O arquivo `Program.cs` demonstra:
-- `GetOrSet`/`GetOrSetAsync` com options builder (`options.SetDuration(...)`).
-- `TryGet<T>` usando `MaybeValue<T>` (`HasValue/Value`).
-- Fail-safe com `SetFailSafe(true)` e timeouts de factory.
+## 6. ConfiguraÃ§Ã£o no Program.cs
+```csharp
+builder.Services.AddFusionCache()
+    .WithDefaultEntryOptions(options => options
+        .SetDuration(TimeSpan.FromMinutes(5))
+        .SetFailSafe(true)
+    );
+
+// Opcional: adicionar camada distribuÃ­da
+builder.Services.AddStackExchangeRedisCache(options => 
+{
+    options.Configuration = "localhost:6379";
+});
+```
+
+## 7. Quando Usar FusionCache
+
+### âœ… Casos Ideais
+- Alto trÃ¡fego sobre dados caros (APIs externas, queries complexas)
+- Risco de cache stampede (muitos clientes solicitando mesma chave expirada)
+- Necessidade de experiÃªncia resiliente durante falhas temporÃ¡rias
+- AplicaÃ§Ãµes distribuÃ­das com invalidaÃ§Ã£o coordenada entre instÃ¢ncias
+- Centralizar polÃ­ticas de timeout e resiliÃªncia no prÃ³prio cache
+
+### âŒ Quando Evitar
+- Cache simples e local onde `IMemoryCache` atende 100%
+- Necessidade de controle fino de estruturas Redis (Lua scripts, streams, Pub/Sub customizado)
+- Overhead de dependÃªncia adicional nÃ£o compensa benefÃ­cios
+- Equipe nÃ£o familiarizada e complexidade nÃ£o justifica ganhos
+
+## 8. ComparaÃ§Ã£o com Alternativas
+
+| SoluÃ§Ã£o | Anti-Stampede | Fail-Safe | Background Refresh | Multicamadas | Complexidade |
+|---------|---------------|-----------|--------------------|--------------|--------------| 
+| **FusionCache** | âœ… | âœ… | âœ… | âœ… | MÃ©dia |
+| IMemoryCache | âŒ | âŒ | âŒ | âŒ | Baixa |
+| Redis puro | âŒ* | âŒ | âŒ | âœ… | MÃ©dia |
+| LazyCache | âœ… | âŒ | âŒ | âŒ | Baixa |
+| EasyCaching | Parcial | âŒ | âŒ | âœ… | MÃ©dia |
+
+*Requer implementaÃ§Ã£o manual com locks distribuÃ­dos
+
+### IMemoryCache
+- **PrÃ³s**: Built-in, leve, simples
+- **Contras**: Sem recursos avanÃ§ados; composiÃ§Ã£o manual necessÃ¡ria
+
+### Redis Puro / IDistributedCache
+- **PrÃ³s**: Compartilhado entre instÃ¢ncias, escalÃ¡vel
+- **Contras**: Sem anti-stampede nativo; maior latÃªncia; precisa orquestrar polÃ­ticas
+
+### LazyCache
+- **PrÃ³s**: API simples sobre `IMemoryCache` com lazy initialization
+- **Contras**: Recursos de resiliÃªncia limitados; sem multicamadas
+
+### EasyCaching
+- **PrÃ³s**: MÃºltiplos backends (Redis, Memcached)
+- **Contras**: NÃ£o oferece pacote integrado de anti-stampede + fail-safe + background refresh
+
+## 9. Boas PrÃ¡ticas
+- Defina TTLs realistas; evite duraÃ§Ãµes excessivas sem necessidade
+- Use factories assÃ­ncronas sempre que possÃ­vel
+- Ative `SetFailSafe(true)` onde experiÃªncia do usuÃ¡rio Ã© crÃ­tica
+- Configure `SetFactoryTimeouts` para evitar esperas indefinidas
+- Evite payloads grandes; escolha serializaÃ§Ã£o eficiente (System.Text.Json ou MessagePack)
+- Em mÃºltiplas instÃ¢ncias, configure backplane para invalidaÃ§Ã£o coordenada
+- Monitore mÃ©tricas (hit/miss, tempo de factory, eventos fail-safe)
+
+## 10. ExtensÃµes Futuras
+- Integrar telemetria OpenTelemetry
+- MÃ©tricas customizadas (hit ratio, factory duration)
+- Cache warming seletivo de chaves crÃ­ticas
+- PolÃ­ticas de jitter para evitar picos de refresh simultÃ¢neo
+
+## 11. ReferÃªncias
+- [FusionCache GitHub](https://github.com/ZiggyCreatures/FusionCache)
+- [DocumentaÃ§Ã£o Oficial](https://github.com/ZiggyCreatures/FusionCache/blob/main/docs/README.md)
+- Cache Stampede (Wikipedia)
+- PadrÃ£o Fail-Safe (resiliÃªncia)
+
+## 12. Aprendizados Esperados
+ApÃ³s estudar: entender proteÃ§Ã£o anti-stampede, fail-safe pattern, background refresh, comparar trade-offs com outras soluÃ§Ãµes, decidir quando FusionCache agrega valor real.
+
+---
+Material versÃ£o condensada padronizada com demais projetos do repositÃ³rio.

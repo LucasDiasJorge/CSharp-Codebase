@@ -1,255 +1,190 @@
-# Cache Increment Project
+<!-- README padronizado (versão condensada) -->
+# CacheIncrement (Contadores de Alta Performance)
 
-This project demonstrates a high-performance caching pattern using **Redis for fast atomic increments** combined with **periodic persistence to MySQL** for durability. This is a common pattern used by large-scale systems like Facebook, YouTube, and Twitter.
+API ASP.NET Core (.NET 9) demonstrando padrão de contadores de alta escala: incrementos atômicos ultra-rápidos no Redis com sincronização periódica para MySQL, garantindo performance e durabilidade. Padrão usado por sistemas como Facebook, YouTube e Twitter.
 
-## 🏗️ Architecture Overview
+## 1. Visão Geral
+Arquitetura em duas camadas:
+- **Redis** (camada rápida): operações `INCR` atômicas com latência sub-milissegundo
+- **MySQL** (camada durável): persistência periódica via background service
+- **API REST**: endpoints para incremento, consulta, sincronização manual e monitoramento
 
+Benefícios: throughput massivo (100k+ ops/s no Redis), garantia de durabilidade, recuperação após restart, histórico com timestamps.
+
+## 2. Objetivos Didáticos
+- Demonstrar separação entre camada de velocidade e camada de persistência
+- Ilustrar operações atômicas do Redis (`INCR`)
+- Mostrar background service para sync automático
+- Evidenciar monitoramento de status (Redis vs MySQL)
+- Preparar para cenários de contadores, rate limiting, analytics em tempo real
+
+## 3. Estrutura Principal
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Client API    │───▶│      Redis      │    │      MySQL      │
-│   Requests      │    │  (Fast Counter) │◀──▶│  (Persistence)  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                              │                         ▲
-                              │                         │
-                              └─── Background Service ──┘
-                                   (Periodic Sync)
-```
-
-### Key Components:
-
-1. **Redis**: Handles fast atomic increments (`INCR` operations)
-2. **MySQL**: Provides durable storage and historical data
-3. **Background Service**: Automatically syncs Redis counters to MySQL every N minutes
-4. **REST API**: Provides endpoints for counter operations
-
-## 🚀 Features
-
-- ✅ **Ultra-fast increments** using Redis atomic operations
-- ✅ **Automatic periodic sync** to MySQL for durability
-- ✅ **Manual sync triggers** for immediate persistence
-- ✅ **Sync status monitoring** to check Redis vs MySQL state
-- ✅ **RESTful API** with comprehensive endpoints
-- ✅ **Swagger documentation** for easy testing
-- ✅ **Configurable sync intervals**
-- ✅ **Error handling and logging**
-- ✅ **Health check endpoint**
-
-## 📋 Prerequisites
-
-1. **.NET 8.0** or later
-2. **MySQL Server** (running on localhost:3306)
-3. **Redis Server** (running on localhost:6379)
-
-### Installing Dependencies
-
-**MySQL:**
-```bash
-# Windows (using Chocolatey)
-choco install mysql
-
-# Or download from: https://dev.mysql.com/downloads/mysql/
+CacheIncrement/
+  Controllers/ (CounterController)
+  Data/ (ApplicationDbContext, migrations)
+  Interfaces/ (ICounterService)
+  Models/ (Counter, DTOs)
+  Services/ (CounterService, CounterSyncBackgroundService)
+  Program.cs
+  docker-compose.yml (setup de infra)
 ```
 
-**Redis:**
-```bash
-# Windows (using Chocolatey)
-choco install redis-64
+## 4. Pré-requisitos
+- **.NET 9 SDK** (via props global)
+- **MySQL** (localhost:3306 ou Docker)
+- **Redis** (localhost:6379 ou Docker)
 
-# Or download from: https://github.com/MicrosoftArchive/redis/releases
+### Subir Infraestrutura (Docker)
+```powershell
+docker run -d --name redis -p 6379:6379 redis
+docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=senha123 -p 3306:3306 mysql:8
 ```
 
-## 🛠️ Setup Instructions
+Ou usar `docker-compose.yml` do projeto:
+```powershell
+docker-compose up -d
+```
 
-### 1. Configure Database Connection
+## 5. Configuração
 
-Update `appsettings.json` with your MySQL credentials:
-
+Editar `appsettings.json`:
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=CacheIncrementDb;User=root;Password=your_password;",
+    "DefaultConnection": "Server=localhost;Database=CacheIncrementDb;User=root;Password=senha123;",
     "Redis": "localhost:6379"
-  }
-}
-```
-
-### 2. Create MySQL Database
-
-```sql
-CREATE DATABASE CacheIncrementDb;
-```
-
-### 3. Install NuGet Packages
-
-```bash
-dotnet restore
-```
-
-### 4. Run the Application
-
-```bash
-dotnet run
-```
-
-The API will be available at:
-- **HTTP**: `http://localhost:5000`
-- **HTTPS**: `https://localhost:5001`
-- **Swagger UI**: `http://localhost:5000` (in development)
-
-## 📚 API Endpoints
-
-### Counter Operations
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/counter/{counterId}/increment?incrementBy=1` | Increment counter |
-| `GET` | `/api/counter/{counterId}?forceFromDatabase=false` | Get counter value |
-| `PUT` | `/api/counter/{counterId}` | Set counter to specific value |
-| `GET` | `/api/counter/{counterId}/sync-status` | Check sync status |
-| `POST` | `/api/counter/{counterId}/sync` | Manual sync to MySQL |
-| `GET` | `/api/counter/mysql/all` | Get all counters from MySQL |
-| `GET` | `/api/counter/health` | Health check |
-
-### Example Usage
-
-**Increment a counter:**
-```bash
-curl -X POST "http://localhost:5000/api/counter/page_views/increment"
-```
-
-**Get counter value:**
-```bash
-curl -X GET "http://localhost:5000/api/counter/page_views"
-```
-
-**Set counter value:**
-```bash
-curl -X PUT "http://localhost:5000/api/counter/page_views" \
-     -H "Content-Type: application/json" \
-     -d '{"value": 1000}'
-```
-
-**Check sync status:**
-```bash
-curl -X GET "http://localhost:5000/api/counter/page_views/sync-status"
-```
-
-## ⚙️ Configuration
-
-### Sync Interval
-
-Modify sync frequency in `appsettings.json`:
-
-```json
-{
+  },
   "CounterSync": {
     "IntervalMinutes": 1
   }
 }
 ```
 
-### Redis Connection
+Criar banco de dados:
+```sql
+CREATE DATABASE CacheIncrementDb;
+```
 
-Configure Redis connection:
+## 6. Execução Rápida
+```powershell
+cd "C:\Users\Lucas Jorge\Documents\Default Projects\Back\CSharp-101\Caching\CacheIncrement"
+dotnet restore
+dotnet run
+```
+Swagger: `https://localhost:5001` (ou porta atribuída).
 
-```json
+## 7. Endpoints Principais
+
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| POST | `/api/counter/{id}/increment?incrementBy=1` | Incrementa contador no Redis |
+| GET | `/api/counter/{id}?forceFromDatabase=false` | Obtém valor (padrão: Redis) |
+| PUT | `/api/counter/{id}` | Define valor específico |
+| GET | `/api/counter/{id}/sync-status` | Compara Redis vs MySQL |
+| POST | `/api/counter/{id}/sync` | Força sincronização imediata |
+| GET | `/api/counter/mysql/all` | Lista todos os contadores persistidos |
+| GET | `/api/counter/health` | Health check |
+
+### Exemplos de Uso
+```powershell
+# Incrementar contador
+curl -X POST "http://localhost:5000/api/counter/page_views/increment"
+
+# Consultar valor
+curl "http://localhost:5000/api/counter/page_views"
+
+# Definir valor inicial
+curl -X PUT "http://localhost:5000/api/counter/page_views" -H "Content-Type: application/json" -d '{"value": 1000}'
+
+# Verificar sincronização
+curl "http://localhost:5000/api/counter/page_views/sync-status"
+
+# Sincronizar manualmente
+curl -X POST "http://localhost:5000/api/counter/page_views/sync"
+```
+
+## 8. Fluxo de Operação
+
+### Incremento (Pseudo)
+```csharp
+public async Task<long> IncrementAsync(string counterId, long incrementBy)
 {
-  "ConnectionStrings": {
-    "Redis": "localhost:6379"
-  }
+    long newValue = await _redis.StringIncrementAsync(counterId, incrementBy);
+    _logger.LogInformation("Contador {Id} incrementado: {Value}", counterId, newValue);
+    return newValue;
 }
 ```
 
-## 🏃‍♂️ Testing the System
-
-### 1. Start the Application
-```bash
-dotnet run
+### Background Sync (Periódico)
+```csharp
+protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+{
+    while (!stoppingToken.IsCancellationRequested)
+    {
+        await SyncAllCountersAsync();
+        await Task.Delay(TimeSpan.FromMinutes(_intervalMinutes), stoppingToken);
+    }
+}
 ```
 
-### 2. Test Fast Increments
-```bash
-# Increment multiple times rapidly
-for /L %i in (1,1,100) do curl -X POST "http://localhost:5000/api/counter/test_counter/increment"
+## 9. Boas Práticas Aplicadas
+- Operações atômicas do Redis (thread-safe por design)
+- Background service registrado como `IHostedService`
+- Logging estruturado de sync e incrementos
+- Health check para monitoramento
+- Separação clara entre camadas rápida e durável
+- Configuração externalizada (appsettings)
+
+## 10. Casos de Uso
+- Contadores de visualizações de página
+- Sistemas de likes/upvotes
+- Rate limiting (contagem de requisições)
+- Analytics em tempo real
+- Tracking de atividade de usuário
+- Leaderboards de jogos
+
+## 11. Performance
+| Camada | Latência | Throughput | Durabilidade |
+|--------|----------|------------|--------------|
+| Redis | < 1ms | 100k+ ops/s | Volátil (configurável) |
+| MySQL | ~10ms | 1k-10k ops/s | Persistente (ACID) |
+
+Estratégia: aceitar latência eventual (1-5min) entre Redis e MySQL em troca de performance massiva.
+
+## 12. Pontos de Atenção
+- Falha antes do sync = perda de contagem (mitigar com Redis persistence `RDB`/`AOF`)
+- Múltiplas instâncias da API devem compartilhar mesmo Redis
+- Intervalo de sync muito curto = pressão em MySQL; muito longo = risco de perda
+- Monitorar diferença Redis vs MySQL para detectar problemas de sync
+
+## 13. Extensões Futuras
+- Redis Cluster para alta disponibilidade
+- MySQL read replicas para consultas históricas
+- Métricas Prometheus (hit rate, sync lag, latência)
+- Circuit breaker para falhas de MySQL
+- Implementar compaction (merge de contadores antigos)
+
+## 14. Troubleshooting
+```powershell
+# Verificar Redis
+redis-cli ping  # Deve retornar PONG
+
+# Verificar MySQL
+mysql -u root -p -e "SHOW DATABASES;"
+
+# Logs da aplicação
+# Console exibe status de conexão e sincronizações
 ```
 
-### 3. Check Values
-```bash
-# Get from Redis (fast)
-curl "http://localhost:5000/api/counter/test_counter"
+## 15. Referências
+- Redis INCR command (redis.io)
+- Background services (.NET IHostedService)
+- StackExchange.Redis docs
+- High-performance counters patterns
 
-# Get from MySQL (durable)
-curl "http://localhost:5000/api/counter/test_counter?forceFromDatabase=true"
-
-# Check sync status
-curl "http://localhost:5000/api/counter/test_counter/sync-status"
-```
-
-### 4. Manual Sync
-```bash
-curl -X POST "http://localhost:5000/api/counter/test_counter/sync"
-```
-
-## 📊 Performance Benefits
-
-**Redis Increments:**
-- ⚡ **Sub-millisecond** response times
-- 🔄 **Atomic operations** (thread-safe)
-- 📈 **High throughput** (100k+ ops/sec)
-
-**MySQL Persistence:**
-- 💾 **Durable storage** (survives restarts)
-- 📜 **Historical data** (with timestamps)
-- 🔄 **ACID compliance** (backup/restore)
-
-## 🔧 Troubleshooting
-
-### MySQL Connection Issues
-```bash
-# Check if MySQL is running
-net start mysql80
-
-# Test connection
-mysql -u root -p
-```
-
-### Redis Connection Issues
-```bash
-# Check if Redis is running
-redis-cli ping
-# Should return: PONG
-```
-
-### Application Logs
-Check console output for connection status and sync logs.
-
-## 🎯 Use Cases
-
-This pattern is ideal for:
-
-- **Page view counters**
-- **Like/upvote systems**
-- **API rate limiting**
-- **Real-time analytics**
-- **User activity tracking**
-- **Gaming leaderboards**
-
-## 📈 Scaling Considerations
-
-- **Redis Clustering**: For multi-node Redis setup
-- **MySQL Read Replicas**: For read-heavy workloads
-- **Horizontal Scaling**: Multiple app instances with shared Redis/MySQL
-- **Monitoring**: Add metrics collection (Prometheus, etc.)
-
-## 🔒 Production Recommendations
-
-1. **Connection Pooling**: Configure Redis and MySQL connection pools
-2. **Error Handling**: Implement circuit breakers and retry policies
-3. **Monitoring**: Add health checks and alerting
-4. **Security**: Use authentication and SSL/TLS
-5. **Backup Strategy**: Regular MySQL backups and Redis persistence
-6. **Load Testing**: Validate performance under expected load
+## 16. Aprendizados Esperados
+Após estudar: compreender trade-offs entre velocidade e durabilidade, implementar contadores de alta escala, configurar sync periódico, monitorar consistência entre camadas.
 
 ---
-
-This implementation provides a solid foundation for high-performance counting systems with the reliability of persistent storage! 🚀
+Material versão condensada padronizada com demais projetos do repositório.
