@@ -1,0 +1,209 @@
+### Advanced Auth System - API Tests
+
+@baseUrl = http://localhost:5000
+@token = 
+@refreshToken = 
+@tempToken = 
+
+### 1. Registro de Novo Usuário
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "john@example.com",
+  "password": "SecurePass123!",
+  "firstName": "John",
+  "lastName": "Doe",
+  "department": "IT",
+  "dateOfBirth": "1990-05-15"
+}
+
+### 2. Login - Admin
+# @name loginAdmin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "Admin123!"
+}
+
+### 3. Login - Manager
+# @name loginManager
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "manager",
+  "password": "Manager123!"
+}
+
+### 4. Login - User
+# @name loginUser
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "User123!"
+}
+
+### 5. Obter Dados do Usuário Atual
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{token}}
+
+### 6. Habilitar 2FA
+POST {{baseUrl}}/api/auth/enable-2fa
+Authorization: Bearer {{token}}
+
+### 7. Verificar Código 2FA
+POST {{baseUrl}}/api/auth/verify-2fa
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "code": "123456",
+  "tempToken": "{{tempToken}}"
+}
+
+### 8. Desabilitar 2FA
+POST {{baseUrl}}/api/auth/disable-2fa
+Authorization: Bearer {{token}}
+
+### 9. Refresh Token
+POST {{baseUrl}}/api/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+### 10. Logout
+POST {{baseUrl}}/api/auth/logout
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+### ========== RESOURCES ==========
+
+### 11. Listar Recursos Públicos (sem auth)
+GET {{baseUrl}}/api/resource
+
+### 12. Listar Meus Recursos
+GET {{baseUrl}}/api/resource/my-resources
+Authorization: Bearer {{token}}
+
+### 13. Criar Recurso (requer idade >= 18)
+POST {{baseUrl}}/api/resource
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Meu Recurso",
+  "description": "Descrição do recurso",
+  "department": "IT",
+  "isPublic": false
+}
+
+### 14. Obter Recurso por ID
+GET {{baseUrl}}/api/resource/1
+Authorization: Bearer {{token}}
+
+### 15. Atualizar Recurso (apenas owner)
+PUT {{baseUrl}}/api/resource/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Recurso Atualizado",
+  "description": "Nova descrição",
+  "isPublic": true
+}
+
+### 16. Deletar Recurso (apenas Admin)
+DELETE {{baseUrl}}/api/resource/1
+Authorization: Bearer {{token}}
+
+### 17. Recursos de IT (apenas departamento IT)
+GET {{baseUrl}}/api/resource/it-resources
+Authorization: Bearer {{token}}
+
+### 18. Operação Sensível (apenas horário comercial 9h-17h)
+POST {{baseUrl}}/api/resource/sensitive-operation
+Authorization: Bearer {{token}}
+
+### 19. Conteúdo Restrito (idade >= 21)
+GET {{baseUrl}}/api/resource/restricted-content
+Authorization: Bearer {{token}}
+
+### ========== TESTES DE AUTORIZAÇÃO ==========
+
+### 20. Teste RBAC - Admin Delete (deve funcionar)
+# Login como admin primeiro
+DELETE {{baseUrl}}/api/resource/1
+Authorization: Bearer {{token}}
+
+### 21. Teste RBAC - User Delete (deve falhar - 403)
+# Login como user primeiro
+DELETE {{baseUrl}}/api/resource/1
+Authorization: Bearer {{token}}
+
+### 22. Teste ABAC - Departamento IT (deve funcionar para IT)
+# Login como manager (departamento IT) primeiro
+GET {{baseUrl}}/api/resource/it-resources
+Authorization: Bearer {{token}}
+
+### 23. Teste ABAC - Departamento IT (deve falhar para Sales)
+# Login como user (departamento Sales) primeiro
+GET {{baseUrl}}/api/resource/it-resources
+Authorization: Bearer {{token}}
+
+### 24. Criar Usuário Menor de Idade
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "younguser",
+  "email": "young@example.com",
+  "password": "SecurePass123!",
+  "firstName": "Young",
+  "lastName": "User",
+  "department": "Sales",
+  "dateOfBirth": "2010-01-01"
+}
+
+### 25. Teste ABAC - Criar Recurso com Menor de Idade (deve falhar - 403)
+# Login como younguser primeiro
+POST {{baseUrl}}/api/resource
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Recurso de Menor",
+  "description": "Teste",
+  "department": "Sales",
+  "isPublic": false
+}
+
+### 26. Criar Usuário Maior de 21 Anos
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "adultuser",
+  "email": "adult@example.com",
+  "password": "SecurePass123!",
+  "firstName": "Adult",
+  "lastName": "User",
+  "department": "IT",
+  "dateOfBirth": "1995-01-01"
+}
+
+### 27. Teste ABAC - Conteúdo Restrito 21+ (deve funcionar)
+# Login como adultuser primeiro
+GET {{baseUrl}}/api/resource/restricted-content
+Authorization: Bearer {{token}}
