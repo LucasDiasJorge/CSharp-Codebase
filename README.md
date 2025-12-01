@@ -8,28 +8,22 @@
 
 ## 📋 Índice
 
-- [Introdução](#introdução)
-- [Projetos](#projetos)
-- [Categorias](#categorias)
-  - [Caching](#caching)
-  - [Authentication](#authentication)
-  - [Data](#data)
-  - [DesignPattern](#designpattern)
-  - [Kafka](#kafka)
-  - [RabbitMQ](#rabbitmq)
-  - [Security](#security)
-  - [Web](#web)
-- [Como Usar](#como-usar)
-- [Dependências](#dependências)
-- [Atualizações Recentes](#atualizações-recentes)
+- [📖 Sobre o Projeto](#-sobre-o-projeto)
+- [🗂️ Estrutura do Projeto](#️-estrutura-do-projeto)
+- [🚀 Como Usar](#-como-usar)
+- [🛠️ Comandos Essenciais do .NET CLI](#️-comandos-essenciais-do-net-cli)
+- [🏗️ Princípios SOLID](#️-princípios-solid)
+- [🤝 Como Contribuir](#-como-contribuir)
 
-## Introdução
+## 📖 Sobre o Projeto
 
-Este repositório contém diversos projetos de estudo em C# e .NET, organizados em categorias temáticas para facilitar o aprendizado e a consulta de diferentes conceitos e técnicas de programação.
+Este repositório contém uma coleção abrangente de exemplos práticos em **C#** e **.NET 9**, organizados em categorias temáticas para facilitar o aprendizado e consulta de diferentes conceitos, padrões de design e técnicas de programação.
 
-## Projetos
-
-O repositório foi reorganizado para agrupar projetos relacionados em diretórios temáticos:
+### 🎯 Objetivos
+- Fornecer exemplos práticos de conceitos C#/.NET
+- Demonstrar implementações de padrões de design
+- Apresentar boas práticas de desenvolvimento
+- Servir como referência rápida para comandos e configurações
 
 ## Categorias
 
@@ -198,33 +192,81 @@ Este repositório contém uma coleção abrangente de exemplos práticos, padrõ
 
 ## 🗂️ Estrutura do Projeto
 
-```
-CSharp-101/
-├── 🔄 Asynchronous/           # Programação assíncrona
-├── 🔐 Auth/                   # Autenticação e autorização
-├── ⚙️  BackgroundWorker/       # Workers em background
-├── 📋 ClassToDTO/             # Mapeamento de objetos
-├── 🗜️  CompressDecompress/     # Compressão de dados
-├── 📚 Course/                 # Exemplos básicos
-├── 🐳 CustomFilterApi/        # Filtros/Interceptor
-├── 🔗 CustomMiddleware/       # Middlewares personalizados
-├── 💾 Dapper/                 # Micro ORM Dapper
-├── 🏗️  DesignPattern/          # Padrões de design
-├── 📊 EF/                     # Entity Framework
-├── 🔒 EncryptDecrypt/         # Criptografia
-├── 📡 Events/                 # Sistema de eventos
-├── 🔄 Kafka/                  # Apache Kafka
-├── 🔍 Linq/                   # Language Integrated Query
-├── 🌐 MinimalApiDemo/         # APIs mínimas
-├── 🗄️  Postgres/               # PostgreSQL
-├── 📬 QueueExample/           # Filas de mensagem
-├── 🐰 RabbitMQ/               # Message broker
-├── ⚡ Redis/                  # Cache Redis
-├── 🔍 Reflection/             # Reflexão em C#
-├── 🔐 SafeVault/              # Armazenamento seguro
-├── 🧪 Tests/                  # Testes unitários
-└── 🌐 WebApplication/         # Aplicações web
-```
+### 📁 Organização por Tópicos
+
+#### 🔄 **Assincronia e Concorrência**
+- `Asynchronous/` - Programação assíncrona com async/await
+- `AsyncTasksDemo/` - Demonstrações práticas de Tasks
+- `Threads/` - Programação multithread e paralelismo
+- `BackgroudWorker/` - Workers em background
+- `AtomicOperationsDemo/` - Operações atômicas e thread-safe
+
+#### 🌐 **APIs e Web**
+- `SimpleWebAPI/` - API Web básica
+- `MinimalApiDemo/` - APIs mínimas .NET 9
+- `WebApplication/` - Aplicação web completa
+- `CustomFilterApi/` - Filtros personalizados (interceptors)
+- `CustomMiddleware/` - Middlewares customizados
+- `FluentValidationUserApi/` - Validação com FluentValidation
+- `SwaggerClientCode/` - Geração de código cliente via Swagger
+- `GrpcSample/` - Comunicação gRPC (Server, Client, Contracts)
+
+#### 🔐 **Autenticação e Segurança**
+- `Authentication/` - Exemplos de autenticação (JWT, OAuth)
+- `Security/` - Criptografia e segurança de dados
+
+#### 💾 **Banco de Dados e ORM**
+- `Data/` - Diversos exemplos de acesso a dados (Dapper, MySQL, PostgreSQL, MongoDB)
+
+#### 💨 **Cache**
+- `Caching/` - Padrões de cache (Cache-Aside, Write-Through, Redis)
+- `UnifiedCacheSdk/` - SDK unificado para cache
+
+#### 📬 **Mensageria**
+- `Kafka/` - Apache Kafka (Producer, Consumer)
+- `KafkaStreamApi/` - Stream processing com Kafka
+- `RabbitMQ/` - Message broker RabbitMQ
+- `QueueExample/` - Implementação de filas
+
+#### 🏗️ **Padrões de Design**
+- `DesignPattern/` - Padrões GoF (Strategy, Factory, Builder, Chain of Responsibility, etc.)
+- `SOLIDExamples/` - Exemplos dos princípios SOLID
+- `StrategyIntegration/` - Integração do padrão Strategy
+
+#### 🛠️ **Utilitários e Ferramentas**
+- `ClassToDTO/` - Mapeamento de classes para DTOs
+- `ClassToXml/` - Serialização para XML
+- `XmlBasics/` - Manipulação básica de XML
+- `Serialization/` - Exemplos de serialização
+- `CompressDecompress/` - Compressão de dados
+- `Reflection/` - Reflexão em C#
+- `Events/` - Sistema de eventos
+
+#### 📊 **Algoritmos e Estruturas de Dados**
+- `Linq/` - Language Integrated Query
+- `SlidingWindows/` - Algoritmo de janela deslizante
+- `RealWorldBubbleSort/` - Algoritmo de ordenação
+- `LogicalOperatorsDemo/` - Operadores lógicos
+- `LoadBalancingAlgorithms/` - Algoritmos de balanceamento de carga
+
+#### ⚙️ **Serviços e Injeção de Dependência**
+- `ServiceRegistration/` - Registro de serviços em DI
+- `TaskManagement/` - Gerenciamento de tarefas
+- `JobQueueDemo/` - Sistema de filas de trabalho
+
+#### 📦 **SDKs e Bibliotecas**
+- `MySimpleSdk/` - Exemplo de SDK customizado
+- `UnifiedCacheSdk/` - SDK de cache unificado
+- `ShareableUser/` - Biblioteca compartilhável
+
+#### 🧪 **Testes e Regras de Negócio**
+- `OrderRuleConsole/` - Console de regras de pedido
+- `OrderRuleConsole.Tests/` - Testes unitários
+- `TransactionalOrderApi/` - API com controle transacional
+
+#### 🎓 **Aprendizado**
+- `Course/` - Exemplos básicos e tutoriais
+- `BlockchainDemo/` - Demo de blockchain
 
 ## 🚀 Começando
 
