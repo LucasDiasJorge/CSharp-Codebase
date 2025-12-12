@@ -150,4 +150,3 @@ builder.Services.AddStackExchangeRedisCache(options =>
 Após estudar: entender proteção anti-stampede, fail-safe pattern, background refresh, comparar trade-offs com outras soluções, decidir quando FusionCache agrega valor real.
 
 ---
-Material versão condensada padronizada com demais projetos do repositório.
