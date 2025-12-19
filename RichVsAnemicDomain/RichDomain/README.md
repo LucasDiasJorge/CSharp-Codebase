@@ -192,3 +192,8 @@ Domínio Rico **resolve** isso mantendo dados e processos juntos!
 ## 🔄 Comparação com Anêmico
 
 Veja o arquivo [COMPARISON.md](../COMPARISON.md) para comparação lado a lado!
+
+## 📚 Referências
+
+- Fowler, Martin. [Anemic Domain Model](https://martinfowler.com/bliki/AnemicDomainModel.html)
+- Vernon, Vaughn. *Implementing Domain-Driven Design*. Addison-Wesley, 2013.
