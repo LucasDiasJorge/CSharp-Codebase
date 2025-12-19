@@ -106,3 +106,9 @@ public class OrderService
 ## ➡️ Solução
 
 Veja o projeto **RichDomain** para a abordagem correta!
+
+
+## 📚 Referências
+
+- [Anemic Domain Model - Martin Fowler](https://martinfowler.com/bliki/AnemicDomainModel.html)
+- [Domain-Driven Design - Eric Evans](https://www.domainlanguage.com/ddd/)
