@@ -1,4 +1,4 @@
-# 🎯 C# Code Notes - Guia Completo de Desenvolvimento .NET
+# 🎯 C# 101 - Guia Completo de Desenvolvimento .NET
 
 ![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
@@ -6,133 +6,421 @@
 
 > 📚 **Repositório educacional** com exemplos práticos, conceitos fundamentais e guias completos para desenvolvimento C# e .NET
 
+---
+
 ## 📋 Índice
 
 - [📖 Sobre o Projeto](#-sobre-o-projeto)
-- [🗂️ Estrutura do Projeto](#️-estrutura-do-projeto)
+- [🗂️ Estrutura Completa do Projeto](#️-estrutura-completa-do-projeto)
 - [🚀 Como Usar](#-como-usar)
 - [🛠️ Comandos Essenciais do .NET CLI](#️-comandos-essenciais-do-net-cli)
 - [🏗️ Princípios SOLID](#️-princípios-solid)
 - [🤝 Como Contribuir](#-como-contribuir)
+
+---
 
 ## 📖 Sobre o Projeto
 
 Este repositório contém uma coleção abrangente de exemplos práticos em **C#** e **.NET 9**, organizados em categorias temáticas para facilitar o aprendizado e consulta de diferentes conceitos, padrões de design e técnicas de programação.
 
 ### 🎯 Objetivos
-- Fornecer exemplos práticos de conceitos C#/.NET
-- Demonstrar implementações de padrões de design
-- Apresentar boas práticas de desenvolvimento
-- Servir como referência rápida para comandos e configurações
+- ✅ Fornecer exemplos práticos de conceitos C#/.NET
+- ✅ Demonstrar implementações de padrões de design
+- ✅ Apresentar boas práticas de desenvolvimento
+- ✅ Servir como referência rápida para comandos e configurações
 
-## Categorias
+---
 
-### Caching
+## 🗂️ Estrutura Completa do Projeto
 
-Projetos demonstrando diferentes padrões e implementações de cache:
+### 🔐 Autenticação e Segurança
 
-- **CacheAside**: Implementação do padrão Cache-Aside
-- **CacheIncrement**: Exemplo de incremento atômico em cache
-- **CachePatterns**: Vários padrões de cache (Write-Through, Write-Behind, Near Cache, Tiered Cache)
-- **RedisConsoleApp**: Exemplo de uso do Redis em console
-- **RedisMySQLIntegration**: Integração entre Redis e MySQL
+#### `AdvancedAuthSystem/`
+Sistema avançado de autenticação com JWT, incluindo:
+- Controllers de autenticação e recursos
+- Serviços de token e hash de senha
+- Handlers de autorização customizados
+- Políticas e requisitos de segurança
+- DbContext com Entity Framework
 
-### Authentication
+#### `Authentication/`
+| Projeto | Descrição |
+|---------|-----------|
+| `Auth/` | Implementação básica de autenticação JWT |
+| `OAuthApplication/` | Aplicação OAuth com fluxo completo de autorização |
 
-Projetos relacionados a autenticação e autorização:
+#### `Security/`
+| Projeto | Descrição |
+|---------|-----------|
+| `EncryptDecrypt/` | Demonstração de criptografia e descriptografia |
+| `SafeVault/` | Cofre seguro para armazenamento de dados sensíveis |
+| `SecurityAndAuthentication/` | Exemplos integrados de segurança |
 
-- **Auth**: Implementação básica de autenticação com JWT
-- **OAuthApplication**: Exemplo de aplicação OAuth com fluxo completo
+---
 
-### Kafka
+### 💾 Banco de Dados e ORM
 
-Exemplos de produtores e consumidores Apache Kafka:
+#### `Data/`
+| Projeto | Descrição |
+|---------|-----------|
+| `Dapper/` | Uso do Dapper como micro-ORM |
+| `DapperExample/` | Exemplos práticos avançados com Dapper |
+| `MoneyStorageApi/` | API de armazenamento financeiro |
+| `MongoUserApi/` | API REST com MongoDB |
+| `MysqlExample/` | Conexão e operações com MySQL |
+| `Postgres/` | Conexão e operações com PostgreSQL |
+| `ProcedureExample/` | Uso de stored procedures |
 
- - **CustomFilterApi**: Demonstra filtros e atributos personalizados para logging e seleção de serviços.
+---
 
-- **Send**: Produtor RabbitMQ
+### 💨 Cache e Performance
 
-## Referências
+#### `Caching/`
+| Projeto | Descrição |
+|---------|-----------|
+| `CacheAside/` | Implementação do padrão Cache-Aside |
+| `CacheIncrement/` | Incremento atômico em cache |
+| `CachePatterns/` | Padrões de cache (Write-Through, Write-Behind, Near Cache, Tiered Cache) |
+| `FusionCache/` | Cache híbrido com FusionCache |
+| `RedisConsoleApp/` | Exemplo de uso do Redis em console |
+| `RedisMySQLIntegration/` | Integração Redis + MySQL |
 
-- `CustomFilterApi/` — Projeto demonstrando filtros/atributos personalizados, exemplos de controllers, DTOs e estratégias de seleção de serviço. Veja a pasta `CustomFilterApi` no repositório para o código e instruções detalhadas.
+#### `UnifiedCacheSdk/`
+SDK unificado para múltiplas estratégias de cache com abstração de providers.
 
-Exemplos de segurança e criptografia:
+---
 
-- **EncryptDecrypt**: Demonstração de criptografia e descriptografia
+### 📬 Mensageria e Streaming
 
-### Data
+#### `Kafka/`
+| Projeto | Descrição |
+|---------|-----------|
+| `Send/` | Producer Kafka para envio de mensagens |
+| `Receive/` | Consumer Kafka para recebimento de mensagens |
+| `docker-compose.yml` | Configuração Docker para ambiente Kafka |
 
-Projetos relacionados a banco de dados e ORM:
+#### `KafkaStreamApi/`
+API de stream processing com Apache Kafka, incluindo controllers e services dedicados.
 
-- **Dapper**: Uso do Dapper como micro-ORM
-- **DapperExample**: Exemplos práticos com Dapper
-- **MysqlExample**: Conexão com MySQL
-- **MongoUserApi**: API com MongoDB
-- **Postgres**: Conexão com PostgreSQL
-- **ProcedureExample**: Uso de procedimentos armazenados
+#### `RabbitMQ/`
+| Projeto | Descrição |
+|---------|-----------|
+| `Send/` | Producer RabbitMQ |
+| `Receive/` | Consumer RabbitMQ |
 
-### DesignPattern
+#### `QueueExample/`
+Implementação de filas personalizadas em C#.
 
-Exemplos de padrões de projeto:
+---
 
-- **Behavioral**:
-  - **ChainOfResponsibility**: Padrão Cadeia de Responsabilidade
-  - **Mediator**: Padrão Mediador
-  - **State**: Padrão Estado
-  - **Strategy**: Padrão Estratégia
-  - **UnitOfWork**: Padrão Unidade de Trabalho
-  - **Visitor**: Padrão Visitante
-- **Creational**:
-  - **Builder**: Padrão Construtor
-  - **Factory**: Padrão Fábrica
-- **Structural**:
-  - **Adapter**: Padrão Adaptador
-  - **Composite**: Padrão Composto
+### 🌐 APIs Web e Serviços
 
-### Web
+#### `SimpleWebAPI/`
+API Web básica demonstrando estrutura fundamental de uma Web API.
 
-APIs Web e serviços:
+#### `MinimalApiDemo/`
+APIs mínimas do .NET 6+ com endpoints simplificados.
 
-- **MyAPI**: Exemplo de API web
-- **SimpleWebAPI**: API Web simples
-- **MinimalApiDemo**: API mínima
-- **CustomMiddleware**: Implementação de middleware personalizado
-- **FluentValidationUserApi**: Validações com FluentValidation
-- **SwaggerClientCode**: Geração de cliente a partir de Swagger
-- **GrpcSample**: Exemplo de aplicação gRPC (Server, Client, Contracts)
+#### `WebApplication/`
+Aplicação web completa com MVC/Razor.
 
-## Outros Projetos
+#### `CustomFilterApi/`
+Filtros personalizados (equivalente a interceptors do Java):
+- Action Filters
+- Result Filters
+- Exception Filters
+- Atributos customizados
 
-O repositório também contém diversos outros projetos demonstrando conceitos específicos:
+#### `CustomMiddleware/`
+Implementação de middlewares customizados no pipeline ASP.NET Core.
 
-- **AsyncTasksDemo**: Uso de tarefas assíncronas
-- **Asynchronous**: Programação assíncrona
-- **AtomicOperationsDemo**: Operações atômicas
-- **BackgroudWorker**: Trabalhadores em segundo plano
-- **ClassToDTO**: Mapeamento de classes para DTOs
-- **ClassToJson**: Mapeamento de classes para JSON
-- **CustomFilterApi**: Filtros (interceptor do Java) e atributos personalizados
-- **ClassToXml**: Mapeamento de classes para XML
-- **CompressDecompress**: Compressão de dados
-- **Events**: Uso de eventos em C#
-- **Linq**: Exemplos de LINQ
-- **LogicalOperatorsDemo**: Operadores lógicos
-- **QueueExample**: Implementação de filas
-- **RealWorldBubbleSort**: Algoritmo de ordenação
-- **Reflection**: Uso de reflexão
-- **ServiceRegistration**: Registro de serviços em DI
-- **SlidingWindows**: Algoritmo de janela deslizante
-- **StrategyIntegration**: Padrão de projeto Strategy
-- **TaskManagement**: Gerenciamento de tarefas
-- **Threads**: Programação multithread
-- **UnifiedCacheSdk**: SDK unificado para cache
-- **XmlBasics**: Manipulação básica de XML
+#### `FluentValidationUserApi/`
+Validação de modelos com FluentValidation:
+- Validadores customizados
+- Regras de validação complexas
+- Integração com ASP.NET Core
 
-## Como Usar
+#### `SwaggerClientCode/`
+Geração automática de código cliente a partir de especificações Swagger/OpenAPI.
 
-Para executar qualquer um dos projetos:
+#### `GrpcSample/`
+| Projeto | Descrição |
+|---------|-----------|
+| `src/GrpcSample.Server/` | Servidor gRPC |
+| `src/GrpcSample.Client/` | Cliente gRPC |
+| `src/GrpcSample.Contracts/` | Contratos .proto compartilhados |
+
+#### `InvoiceThrottlingApi/`
+API com rate limiting e throttling para geração de invoices:
+- Controle de taxa de requisições
+- Geração e processamento de notas fiscais
+
+#### `TransactionalOrderApi/`
+API com controle transacional completo:
+- Domain Layer
+- Application Layer
+- Infrastructure Layer
+- Templates de documentos
+
+#### `ShareableUser/`
+Biblioteca compartilhável de usuários com middleware customizado.
+
+---
+
+### 🏗️ Padrões de Design (Design Patterns)
+
+#### `DesignPattern/`
+
+##### Behavioral (Comportamentais)
+| Padrão | Descrição |
+|--------|-----------|
+| `ChainOfResponsibility/` | Cadeia de responsabilidade para processamento em pipeline |
+| `Mediator/` | Mediador para comunicação desacoplada |
+| `State/` | Máquina de estados para comportamento contextual |
+| `Strategy/` | Estratégia para algoritmos intercambiáveis |
+| `UnitOfWork/` | Unidade de trabalho para transações |
+| `Visitor/` | Visitante para operações em estruturas |
+
+##### Creational (Criacionais)
+| Padrão | Descrição |
+|--------|-----------|
+| `Builder/` | Construtor para objetos complexos |
+| `Factory/` | Fábrica para criação de objetos |
+
+##### Structural (Estruturais)
+| Padrão | Descrição |
+|--------|-----------|
+| `Adapter/` | Adaptador para interfaces incompatíveis |
+| `Composite/` | Composição para estruturas hierárquicas |
+
+#### `SOLIDExamples/`
+Exemplos práticos dos 5 princípios SOLID:
+| Princípio | Pasta | Descrição |
+|-----------|-------|-----------|
+| SRP | `SRP/` | Single Responsibility Principle |
+| OCP | `OCP/` | Open/Closed Principle |
+| LSP | `LSP/` | Liskov Substitution Principle |
+| ISP | `ISP/` | Interface Segregation Principle |
+| DIP | `DIP/` | Dependency Inversion Principle |
+
+#### `StrategyIntegration/`
+Integração prática do padrão Strategy com múltiplas classes de integração.
+
+#### `CodeSmells/`
+| Projeto | Descrição |
+|---------|-----------|
+| `PoisonLooping/` | Exemplos de loops problemáticos e soluções |
+
+#### `RichVsAnemicDomain/`
+Comparação entre modelos de domínio:
+| Projeto | Descrição |
+|---------|-----------|
+| `RichDomain/` | Modelo de domínio rico (DDD) |
+| `AnemicDomain/` | Modelo de domínio anêmico |
+| `COMPARISON.md` | Comparativo detalhado |
+| `QUICK_GUIDE.md` | Guia rápido de referência |
+
+---
+
+### 🔄 Assincronia e Concorrência
+
+#### `Asynchronous/`
+Programação assíncrona com `async`/`await`:
+- Task-based Asynchronous Pattern (TAP)
+- Operações I/O não-bloqueantes
+
+#### `AsyncTasksDemo/`
+Demonstrações práticas de Tasks:
+- Task.Run
+- Task.WhenAll / Task.WhenAny
+- Continuations
+
+#### `Threads/`
+Programação multithread:
+- Thread Pool
+- Sincronização
+- Locks e Semaphores
+
+#### `AtomicOperationsDemo/`
+Operações atômicas e thread-safe:
+- Interlocked operations
+- Concurrent collections
+
+#### `BackgroudWorker/`
+Workers em background com `IHostedService`:
+- `TimedHostedService` para tarefas agendadas
+- Configuração via appsettings
+
+#### `JobQueueDemo/`
+Sistema de filas de trabalho background:
+- Processamento assíncrono de jobs
+- Gerenciamento de filas
+
+---
+
+### 📊 Algoritmos e Estruturas de Dados
+
+#### `Linq/`
+Language Integrated Query:
+- Query Syntax vs Method Syntax
+- Operadores de projeção, filtro, agregação
+- LINQ to Objects
+
+#### `SlidingWindows/`
+Algoritmo de janela deslizante:
+- Problemas de substring
+- Rate limiting
+- Análise de sequências
+
+#### `RealWorldBubbleSort/`
+Algoritmo de ordenação Bubble Sort com aplicações práticas.
+
+#### `GraphTraversalDemo/`
+Algoritmos de travessia de grafos:
+- BFS (Breadth-First Search)
+- DFS (Depth-First Search)
+- Estrutura de grafo genérica
+
+#### `LoadBalancingAlgorithms/`
+Algoritmos de balanceamento de carga:
+| Algoritmo | Descrição |
+|-----------|-----------|
+| Round Robin | Distribuição circular |
+| Weighted Round Robin | Round Robin com pesos |
+| Least Connections | Menor número de conexões |
+| Random | Seleção aleatória |
+
+#### `LogicalOperatorsDemo/`
+Demonstração de operadores lógicos em C#.
+
+#### `DictionaryMerge/`
+Merge de dicionários com sincronização de notas fiscais.
+
+---
+
+### 🛠️ Utilitários e Transformação de Dados
+
+#### `ClassToDTO/`
+Mapeamento de classes para DTOs:
+- Manual mapping
+- AutoMapper
+- Expression-based mapping
+
+#### `ClassToXml/`
+Serialização de objetos para XML.
+
+#### `XmlBasics/`
+Manipulação básica de XML:
+- XmlDocument
+- XDocument (LINQ to XML)
+- XmlSerializer
+
+#### `Serialization/`
+Exemplos de serialização:
+- JSON (System.Text.Json / Newtonsoft)
+- XML
+- Binary
+
+#### `CompressDecompress/`
+Compressão e descompressão de dados:
+- GZip
+- Deflate
+- Brotli
+
+#### `Reflection/`
+Reflexão em C#:
+- Type inspection
+- Dynamic invocation
+- Attribute reading
+
+#### `Events/`
+Sistema de eventos em C#:
+- EventHandler pattern
+- Custom events
+- Event aggregation
+
+---
+
+### ⚙️ Serviços e Infraestrutura
+
+#### `ServiceRegistration/`
+Registro de serviços em Dependency Injection:
+- Transient, Scoped, Singleton
+- Factory pattern
+- Keyed services
+
+#### `TaskManagement/`
+Gerenciamento de tarefas e scheduling.
+
+#### `SerilogExample/`
+Logging estruturado com Serilog:
+- Sinks (Console, File, Seq)
+- Enrichers
+- Structured logging
+
+---
+
+### 📦 SDKs e Bibliotecas
+
+#### `MySimpleSdk/`
+Exemplo de SDK customizado:
+- Estrutura de projeto SDK
+- Extensibility patterns
+- Configuration
+
+#### `UnifiedCacheSdk/`
+SDK unificado para cache:
+- Multiple provider support
+- Abstraction layer
+- Easy configuration
+
+#### `ShareableUser/`
+Biblioteca compartilhável:
+- Middleware personalizado
+- Services compartilhados
+
+---
+
+### 🎓 Aprendizado e Exemplos Básicos
+
+#### `Course/`
+Exemplos básicos de C# para iniciantes.
+
+#### `BlockchainDemo/`
+Demonstração de conceitos blockchain:
+| Pasta | Descrição |
+|-------|-----------|
+| `Core/` | Lógica central do blockchain |
+| `Models/` | Modelos de dados (Block, Transaction) |
+
+---
+
+### 🧪 Testes
+
+#### `OrderRuleConsole/`
+Console de regras de pedido para testes de lógica de negócio.
+
+#### `OrderRuleConsole.Tests/`
+Testes unitários com xUnit para regras de pedido.
+
+---
+
+## 🚀 Como Usar
+
+### 📋 Pré-requisitos
+
+- [.NET 9.0 SDK](https://dotnet.microsoft.com/download) ou superior
+- [Visual Studio Code](https://code.visualstudio.com/) ou [Visual Studio](https://visualstudio.microsoft.com/)
+- [Git](https://git-scm.com/)
+- [Docker](https://www.docker.com/) (para projetos com Kafka/RabbitMQ/Redis)
+
+### ⚡ Instalação e Execução
 
 ```bash
+# Clonar o repositório
+git clone https://github.com/LucasDiasJorge/CSharp-101.git
+cd CSharp-101
+
 # Restaurar dependências e compilar
 dotnet build CSharp-101.sln
 
@@ -141,617 +429,199 @@ cd [NomeDoProjeto]
 dotnet run
 ```
 
-## Dependências
+### 🐳 Projetos com Docker
 
-A maioria dos projetos usa .NET 9.0. Alguns pacotes podem ter avisos de compatibilidade ou vulnerabilidades conhecidas em versões específicas.
-
-## Atualizações Recentes
-
-- **Reorganização de Projetos**: 
-  - Projetos de cache movidos para o diretório `Caching`
-  - Projetos de autenticação movidos para o diretório `Authentication`
-  - Projetos de banco de dados movidos para o diretório `Data`
-  - Projetos de padrões de design movidos para o diretório `DesignPattern`
-  - Projetos de segurança movidos para o diretório `Security`
-- **Correção de Conversões**: Corrigido problema de conversões de RedisValue para long no projeto CacheIncrement
-- **Atualização da Solução**: Recriada a solução para resolver referências quebradas
-- **Projetos Removidos da Solução**: Removidos projetos com problemas de compilação (SOLIDExamples, SecurityAndAuthentication, SafeVault)
-
-- [🎯 C# 101 - Guia Completo de Desenvolvimento .NET](#-c-101---guia-completo-de-desenvolvimento-net)
-  - [📋 Índice](#-índice)
-  - [📖 Sobre o Projeto](#-sobre-o-projeto)
-  - [�️ Estrutura do Projeto](#️-estrutura-do-projeto)
-  - [🚀 Começando](#-começando)
-    - [📋 Pré-requisitos](#-pré-requisitos)
-    - [⚡ Instalação e Configuração](#-instalação-e-configuração)
-  - [🛠️ Comandos Essenciais do .NET CLI](#️-comandos-essenciais-do-net-cli)
-    - [📌 Criando Projetos e Arquivos](#-criando-projetos-e-arquivos)
-    - [✅ Templates Disponíveis](#-templates-disponíveis)
-    - [📁 Criar Arquivos Individuais](#-criar-arquivos-individuais)
-    - [🔧 Manipulação de Projetos](#-manipulação-de-projetos)
-  - [📦 Gerenciamento de Dependências](#-gerenciamento-de-dependências)
-  - [🏗️ Gerenciar Soluções e Projetos](#️-gerenciar-soluções-e-projetos)
-  - [💾 Entity Framework Core](#-entity-framework-core)
-  - [🧪 Testes Unitários](#-testes-unitários)
-  - [🚀 Publicação e Deploy](#-publicação-e-deploy)
-  - [ℹ️ Informações do Sistema](#ℹ️-informações-do-sistema)
-  - [🧹 Limpeza e Manutenção](#-limpeza-e-manutenção)
-  - [🏗️ Princípios SOLID](#️-princípios-solid)
-  - [🤝 Como Contribuir](#-como-contribuir)
-  - [📄 Licença](#-licença)
-
-## 📖 Sobre o Projeto
-
-Este repositório contém uma coleção abrangente de exemplos práticos, padrões de design e conceitos fundamentais para desenvolvimento em **C#** e **.NET**. Ideal para desenvolvedores iniciantes e intermediários que desejam aprimorar suas habilidades.
-
-### 🎯 Objetivos
-- Fornecer exemplos práticos de conceitos C#/.NET
-- Demonstrar implementações de padrões de design
-- Apresentar boas práticas de desenvolvimento
-- Servir como referência rápida para comandos e configurações
-
-## 🗂️ Estrutura do Projeto
-
-### 📁 Organização por Tópicos
-
-#### 🔄 **Assincronia e Concorrência**
-- `Asynchronous/` - Programação assíncrona com async/await
-- `AsyncTasksDemo/` - Demonstrações práticas de Tasks
-- `Threads/` - Programação multithread e paralelismo
-- `BackgroudWorker/` - Workers em background
-- `AtomicOperationsDemo/` - Operações atômicas e thread-safe
-
-#### 🌐 **APIs e Web**
-- `SimpleWebAPI/` - API Web básica
-- `MinimalApiDemo/` - APIs mínimas .NET 9
-- `WebApplication/` - Aplicação web completa
-- `CustomFilterApi/` - Filtros personalizados (interceptors)
-- `CustomMiddleware/` - Middlewares customizados
-- `FluentValidationUserApi/` - Validação com FluentValidation
-- `SwaggerClientCode/` - Geração de código cliente via Swagger
-- `GrpcSample/` - Comunicação gRPC (Server, Client, Contracts)
-
-#### 🔐 **Autenticação e Segurança**
-- `Authentication/` - Exemplos de autenticação (JWT, OAuth)
-- `Security/` - Criptografia e segurança de dados
-
-#### 💾 **Banco de Dados e ORM**
-- `Data/` - Diversos exemplos de acesso a dados (Dapper, MySQL, PostgreSQL, MongoDB)
-
-#### 💨 **Cache**
-- `Caching/` - Padrões de cache (Cache-Aside, Write-Through, Redis)
-- `UnifiedCacheSdk/` - SDK unificado para cache
-
-#### 📬 **Mensageria**
-- `Kafka/` - Apache Kafka (Producer, Consumer)
-- `KafkaStreamApi/` - Stream processing com Kafka
-- `RabbitMQ/` - Message broker RabbitMQ
-- `QueueExample/` - Implementação de filas
-
-#### 🏗️ **Padrões de Design**
-- `DesignPattern/` - Padrões GoF (Strategy, Factory, Builder, Chain of Responsibility, etc.)
-- `SOLIDExamples/` - Exemplos dos princípios SOLID
-- `StrategyIntegration/` - Integração do padrão Strategy
-
-#### 🛠️ **Utilitários e Ferramentas**
-- `ClassToDTO/` - Mapeamento de classes para DTOs
-- `ClassToXml/` - Serialização para XML
-- `XmlBasics/` - Manipulação básica de XML
-- `Serialization/` - Exemplos de serialização
-- `CompressDecompress/` - Compressão de dados
-- `Reflection/` - Reflexão em C#
-- `Events/` - Sistema de eventos
-
-#### 📊 **Algoritmos e Estruturas de Dados**
-- `Linq/` - Language Integrated Query
-- `SlidingWindows/` - Algoritmo de janela deslizante
-- `RealWorldBubbleSort/` - Algoritmo de ordenação
-- `LogicalOperatorsDemo/` - Operadores lógicos
-- `LoadBalancingAlgorithms/` - Algoritmos de balanceamento de carga
-
-#### ⚙️ **Serviços e Injeção de Dependência**
-- `ServiceRegistration/` - Registro de serviços em DI
-- `TaskManagement/` - Gerenciamento de tarefas
-- `JobQueueDemo/` - Sistema de filas de trabalho
-
-#### 📦 **SDKs e Bibliotecas**
-- `MySimpleSdk/` - Exemplo de SDK customizado
-- `UnifiedCacheSdk/` - SDK de cache unificado
-- `ShareableUser/` - Biblioteca compartilhável
-
-#### 🧪 **Testes e Regras de Negócio**
-- `OrderRuleConsole/` - Console de regras de pedido
-- `OrderRuleConsole.Tests/` - Testes unitários
-- `TransactionalOrderApi/` - API com controle transacional
-
-#### 🎓 **Aprendizado**
-- `Course/` - Exemplos básicos e tutoriais
-- `BlockchainDemo/` - Demo de blockchain
-
-## 🚀 Começando
-
-### 📋 Pré-requisitos
-
-- [.NET 9.0 SDK](https://dotnet.microsoft.com/download) ou superior
-- [Visual Studio Code](https://code.visualstudio.com/) ou [Visual Studio](https://visualstudio.microsoft.com/)
-- [Git](https://git-scm.com/)
-
-## ⚡ Comandos Essenciais do .NET CLI
-
-### 📌 Criando Projetos e Arquivos
-
-**Sintaxe básica:**
 ```bash
-dotnet new <TEMPLATE> -n <NOME_DO_PROJETO> --use-program-main
+# Kafka
+cd Kafka
+docker-compose up -d
+
+# Rodar producer
+cd Send
+dotnet run
+
+# Rodar consumer
+cd ../Receive
+dotnet run
 ```
 
-**Exemplo prático:**
+---
+
+## 🛠️ Comandos Essenciais do .NET CLI
+
+### 📌 Criando Projetos
+
 ```bash
+# Console Application
 dotnet new console -n MinhaApp --use-program-main
+
+# Web API
+dotnet new webapi -n MinhaApi
+
+# Class Library
+dotnet new classlib -n MinhaLib
+
+# Worker Service
+dotnet new worker -n MeuWorker
+
+# xUnit Tests
+dotnet new xunit -n MeusTests
 ```
 
 ### ✅ Templates Disponíveis
-| **Template** | **Comando** | **Descrição** |
-|--------------|-------------|---------------|
-| Console | `dotnet new console` | �️ Aplicação console básica |
-| Web API | `dotnet new webapi` | 🌐 API REST ASP.NET Core |
-| MVC | `dotnet new mvc` | 🏗️ Aplicação MVC completa |
-| Blazor Server | `dotnet new blazorserver` | ⚡ App Blazor server-side |
-| Blazor WASM | `dotnet new blazorwasm` | 🌐 App Blazor client-side |
-| Class Library | `dotnet new classlib` | 📚 Biblioteca de classes (.dll) |
+
+| Template | Comando | Descrição |
+|----------|---------|-----------|
+| Console | `dotnet new console` | 🖥️ Aplicação console |
+| Web API | `dotnet new webapi` | 🌐 API REST |
+| MVC | `dotnet new mvc` | 🏗️ Aplicação MVC |
+| Blazor Server | `dotnet new blazorserver` | ⚡ Blazor server-side |
+| Blazor WASM | `dotnet new blazorwasm` | 🌐 Blazor WebAssembly |
+| Class Library | `dotnet new classlib` | 📚 Biblioteca de classes |
 | Worker Service | `dotnet new worker` | ⚙️ Serviço background |
 | gRPC | `dotnet new grpc` | 🔄 Serviço gRPC |
-| xUnit Test | `dotnet new xunit` | 🧪 Projeto de testes xUnit |
-| Razor Pages | `dotnet new razor` | 📄 Aplicação Razor Pages |
-
-### 📁 Criar Arquivos Individuais
-
-| **Tipo** | **Comando** | **Exemplo** |
-|----------|-------------|-------------|
-| Solução | `dotnet new sln` | `dotnet new sln -n MinhaSolucao` |
-| Classe | `dotnet new class` | `dotnet new class -n MinhaClasse` |
-| Interface | `dotnet new interface` | `dotnet new interface -n IServico` |
-| Enum | `dotnet new enum` | `dotnet new enum -n StatusEnum` |
-| Record | `dotnet new record` | `dotnet new record -n Pessoa` |
+| xUnit | `dotnet new xunit` | 🧪 Testes xUnit |
 
 ### 🔧 Manipulação de Projetos
 
-**Criar solução e adicionar projetos:**
 ```bash
-# Criar uma solução
+# Criar solução
 dotnet new sln -n MinhaSolucao
-
-# Criar projeto console
-dotnet new console -n MinhaApp
 
 # Adicionar projeto à solução
 dotnet sln add MinhaApp/MinhaApp.csproj
-```
 
-**Comandos básicos:**
-```bash
-# Restaurar dependências
-dotnet restore
-
-# Compilar projeto
-dotnet build
-
-# Executar projeto
-dotnet run
-
-# Executar com configuração específica
-dotnet run --configuration Release
-```
-
-## 📦 Gerenciamento de Dependências
-
-### ➕ Adicionar Pacotes NuGet
-```bash
-# Sintaxe básica
-dotnet add package <NOME_DO_PACOTE>
-
-# Versão específica
-dotnet add package <PACOTE> --version <VERSAO>
-
-# Exemplos comuns
-dotnet add package Microsoft.EntityFrameworkCore
-dotnet add package Newtonsoft.Json
-dotnet add package AutoMapper
-dotnet add package Serilog
-```
-
-### ➖ Remover e Gerenciar Pacotes
-```bash
-# Remover pacote
-dotnet remove package <NOME_DO_PACOTE>
-
-# Listar pacotes instalados
-dotnet list package
-
-# Listar pacotes desatualizados
-dotnet list package --outdated
-
-# Atualizar pacotes
-dotnet add package <PACOTE> --version <NOVA_VERSAO>
-```
-
-## 🏗️ Gerenciar Soluções e Projetos
-
-```bash
-# Adicionar projeto à solução
-dotnet sln add <CAMINHO_DO_PROJETO>
-
-# Remover projeto da solução
-dotnet sln remove <CAMINHO_DO_PROJETO>
-
-# Listar projetos na solução
+# Listar projetos
 dotnet sln list
 
-# Compilar solução inteira
-dotnet build <NOME_DA_SOLUCAO>.sln
+# Restaurar, compilar e executar
+dotnet restore
+dotnet build
+dotnet run
 ```
 
-## 💾 Entity Framework Core
+### 📦 Gerenciamento de Pacotes
 
-### ⚡ Instalação
 ```bash
-# Pacotes essenciais
+# Adicionar pacote
+dotnet add package Newtonsoft.Json
+
+# Remover pacote
+dotnet remove package Newtonsoft.Json
+
+# Listar pacotes
+dotnet list package
+
+# Listar desatualizados
+dotnet list package --outdated
+```
+
+### 💾 Entity Framework Core
+
+```bash
+# Instalar pacotes
 dotnet add package Microsoft.EntityFrameworkCore
 dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
-# Provedores de banco de dados
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer    # SQL Server
-dotnet add package Microsoft.EntityFrameworkCore.Sqlite       # SQLite
-dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL      # PostgreSQL
-dotnet add package Pomelo.EntityFrameworkCore.MySql           # MySQL
-```
-
-### ⚡ Migrations
-```bash
-# Criar uma migration
-dotnet ef migrations add <NomeDaMigration>
-
-# Aplicar migrations
+# Migrations
+dotnet ef migrations add InitialCreate
 dotnet ef database update
-
-# Reverter para migration específica
-dotnet ef database update <NomeDaMigration>
-
-# Remover última migration
 dotnet ef migrations remove
-
-# Listar migrations
 dotnet ef migrations list
-
-# Script SQL da migration
-dotnet ef migrations script
 ```
 
-### 🗄️ Banco de Dados
-```bash
-# Criar banco de dados
-dotnet ef database update
+### 🧪 Testes
 
-# Remover banco de dados
-dotnet ef database drop
-
-# Informações do banco
-dotnet ef dbcontext info
-
-# Scaffold de banco existente
-dotnet ef dbcontext scaffold "ConnectionString" Microsoft.EntityFrameworkCore.SqlServer
-```
-
-## 🧪 Testes Unitários
-
-### � Criar Projetos de Teste
-```bash
-# xUnit (recomendado)
-dotnet new xunit -n Testes.MinhaApp
-
-# MSTest
-dotnet new mstest -n Testes.MinhaApp
-
-# NUnit
-dotnet new nunit -n Testes.MinhaApp
-```
-
-### ▶️ Executar Testes
 ```bash
 # Executar todos os testes
 dotnet test
 
-# Executar com relatório detalhado
+# Com verbosidade
 dotnet test --verbosity normal
 
-# Executar testes específicos
-dotnet test --filter "TestCategory=Unit"
-
-# Executar com cobertura de código
+# Com cobertura
 dotnet test --collect:"XPlat Code Coverage"
 ```
 
-## 🚀 Publicação e Deploy
+### 🚀 Publicação
 
-### � Publicação Básica
 ```bash
-# Publicação simples
-dotnet publish -c Release -o ./publicado
+# Publicação básica
+dotnet publish -c Release -o ./publish
 
-# Publicação com runtime específico
+# Self-contained para Windows
 dotnet publish -c Release -r win-x64 --self-contained true
-
-# Publicação para Linux
-dotnet publish -c Release -r linux-x64 --self-contained true
 
 # Arquivo único
 dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true
-```
-
-### 🐳 Docker
-```bash
-# Publicação para container
-dotnet publish -c Release --runtime linux-x64 --self-contained true -o ./publicado
-
-# Criar imagem Docker (requer Dockerfile)
-docker build -t minha-app .
-```
-
-## ℹ️ Informações do Sistema
-
-```bash
-# Versão do .NET
-dotnet --version
-
-# Informações detalhadas
-dotnet --info
-
-# Listar SDKs instalados
-dotnet --list-sdks
-
-# Listar runtimes instalados
-dotnet --list-runtimes
-
-# Verificar templates disponíveis
-dotnet new --list
-```
-
-## 🧹 Limpeza e Manutenção
-
-```bash
-# Limpar build temporário
-dotnet clean
-
-# Limpar cache NuGet
-dotnet nuget locals all --clear
-
-# Limpar cache específico
-dotnet nuget locals global-packages --clear
-
-# Verificar e restaurar projetos
-dotnet restore --force
 ```
 
 ---
 
 ## 🏗️ Princípios SOLID
 
-Os princípios **SOLID** são diretrizes fundamentais para escrever código limpo, manutenível e extensível:
-
 ### 🔸 S — Single Responsibility Principle (SRP)
 
 > **"Uma classe deve ter apenas uma razão para mudar"**
 
-❌ **Violando o SRP:**
 ```csharp
-public class UserManager
-{
-    public void CreateUser(User user) { /* lógica de criação */ }
-    public void SendEmailNotification(User user) { /* lógica de email */ }
-    public void LogActivity(string message) { /* lógica de log */ }
-}
-```
-
-✅ **Aplicando o SRP:**
-```csharp
-public class UserService
-{
-    public void CreateUser(User user) { /* lógica de criação */ }
-}
-
-public class EmailService
-{
-    public void SendNotification(User user) { /* lógica de email */ }
-}
-
-public class LoggingService
-{
-    public void LogActivity(string message) { /* lógica de log */ }
-}
+// ✅ Cada classe com responsabilidade única
+public class UserService { public void CreateUser(User user) { } }
+public class EmailService { public void SendNotification(User user) { } }
+public class LoggingService { public void LogActivity(string message) { } }
 ```
 
 ### 🔸 O — Open/Closed Principle (OCP)
 
 > **"Aberto para extensão, fechado para modificação"**
 
-❌ **Violando o OCP:**
 ```csharp
-public class PaymentProcessor
-{
-    public void ProcessPayment(string paymentType, decimal amount)
-    {
-        if (paymentType == "CreditCard")
-            ProcessCreditCard(amount);
-        else if (paymentType == "PayPal")
-            ProcessPayPal(amount);
-        // Adicionar novo tipo requer modificar esta classe
-    }
-}
-```
-
-✅ **Aplicando o OCP:**
-```csharp
-public interface IPaymentMethod
-{
-    void ProcessPayment(decimal amount);
-}
-
-public class CreditCardPayment : IPaymentMethod
-{
-    public void ProcessPayment(decimal amount) { /* implementação */ }
-}
-
-public class PayPalPayment : IPaymentMethod
-{
-    public void ProcessPayment(decimal amount) { /* implementação */ }
-}
-
-public class PaymentProcessor
-{
-    public void ProcessPayment(IPaymentMethod paymentMethod, decimal amount)
-    {
-        paymentMethod.ProcessPayment(amount);
-    }
-}
+// ✅ Extensível via interface
+public interface IPaymentMethod { void ProcessPayment(decimal amount); }
+public class CreditCardPayment : IPaymentMethod { /* ... */ }
+public class PayPalPayment : IPaymentMethod { /* ... */ }
 ```
 
 ### 🔸 L — Liskov Substitution Principle (LSP)
 
 > **"Subclasses devem ser substituíveis por suas superclasses"**
 
-❌ **Violando o LSP:**
 ```csharp
-public abstract class Bird
-{
-    public abstract void Fly();
-}
-
-public class Eagle : Bird
-{
-    public override void Fly() => Console.WriteLine("Flying high!");
-}
-
-public class Penguin : Bird
-{
-    public override void Fly() => throw new NotSupportedException();
-}
-```
-
-✅ **Aplicando o LSP:**
-```csharp
-public abstract class Bird
-{
-    public abstract void Move();
-}
-
-public interface IFlyingBird
-{
-    void Fly();
-}
-
-public class Eagle : Bird, IFlyingBird
-{
-    public override void Move() => Fly();
-    public void Fly() => Console.WriteLine("Flying high!");
-}
-
-public class Penguin : Bird
-{
-    public override void Move() => Console.WriteLine("Swimming!");
-}
+// ✅ Segregação correta de comportamentos
+public abstract class Bird { public abstract void Move(); }
+public interface IFlyingBird { void Fly(); }
+public class Eagle : Bird, IFlyingBird { /* pode voar */ }
+public class Penguin : Bird { /* não pode voar, mas se move */ }
 ```
 
 ### 🔸 I — Interface Segregation Principle (ISP)
 
 > **"Clientes não devem depender de interfaces que não utilizam"**
 
-❌ **Violando o ISP:**
 ```csharp
-public interface IWorker
-{
-    void Work();
-    void Eat();
-    void Sleep();
-}
-
-public class Robot : IWorker
-{
-    public void Work() { /* implementa */ }
-    public void Eat() { throw new NotImplementedException(); }
-    public void Sleep() { throw new NotImplementedException(); }
-}
-```
-
-✅ **Aplicando o ISP:**
-```csharp
-public interface IWorkable
-{
-    void Work();
-}
-
-public interface IEatable
-{
-    void Eat();
-}
-
-public interface ISleepable
-{
-    void Sleep();
-}
-
-public class Human : IWorkable, IEatable, ISleepable
-{
-    public void Work() { /* implementa */ }
-    public void Eat() { /* implementa */ }
-    public void Sleep() { /* implementa */ }
-}
-
-public class Robot : IWorkable
-{
-    public void Work() { /* implementa */ }
-}
+// ✅ Interfaces específicas
+public interface IWorkable { void Work(); }
+public interface IEatable { void Eat(); }
+public class Robot : IWorkable { /* só trabalha */ }
+public class Human : IWorkable, IEatable { /* trabalha e come */ }
 ```
 
 ### 🔸 D — Dependency Inversion Principle (DIP)
 
 > **"Dependa de abstrações, não de implementações concretas"**
 
-❌ **Violando o DIP:**
 ```csharp
+// ✅ Injeção de dependência via interface
 public class OrderService
 {
-    private readonly SqlServerRepository repository;
-    private readonly EmailService emailService;
-
-    public OrderService()
-    {
-        repository = new SqlServerRepository();
-        emailService = new EmailService();
-    }
-}
-```
-
-✅ **Aplicando o DIP:**
-```csharp
-public interface IRepository
-{
-    void Save(Order order);
-}
-
-public interface INotificationService
-{
-    void SendNotification(string message);
-}
-
-public class OrderService
-{
-    private readonly IRepository repository;
-    private readonly INotificationService notificationService;
+    private readonly IRepository _repository;
+    private readonly INotificationService _notificationService;
 
     public OrderService(IRepository repository, INotificationService notificationService)
     {
-        this.repository = repository;
-        this.notificationService = notificationService;
+        _repository = repository;
+        _notificationService = notificationService;
     }
 }
 ```
@@ -768,10 +638,17 @@ public class OrderService
 
 ### 📝 Diretrizes de Contribuição
 
-- Siga as convenções de código C#
-- Adicione documentação adequada
-- Inclua testes para novas funcionalidades
-- Mantenha o README atualizado
+- ✅ Siga as convenções de código C#
+- ✅ Adicione documentação adequada
+- ✅ Inclua testes para novas funcionalidades
+- ✅ Mantenha o README atualizado
+- ✅ Use commits semânticos
+
+---
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
