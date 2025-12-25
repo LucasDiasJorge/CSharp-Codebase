@@ -192,6 +192,7 @@ Biblioteca compartilhável de usuários com middleware customizado.
 |--------|-----------|
 | `Adapter/` | Adaptador para interfaces incompatíveis |
 | `Composite/` | Composição para estruturas hierárquicas |
+| `Decorator/` | Adiciona comportamentos a objetos dinamicamente |
 
 #### `SOLIDExamples/`
 Exemplos práticos dos 5 princípios SOLID:
