@@ -1,253 +1,299 @@
+# 🏗️ Design Patterns em C#
 
-# Design Patterns em C#
+## 📚 Referência ao Gang of Four (GoF)
 
-## 📚 Visão Geral
+Este repositório é baseado no livro clássico **"Design Patterns: Elements of Reusable Object-Oriented Software"** (1994), escrito por:
 
-Este repositório reúne implementações didáticas dos principais **Design Patterns** (Padrões de Projeto) em C#, cada um em seu próprio subdiretório, com exemplos práticos, código comentado e README explicativo.
+- **Erich Gamma**
+- **Richard Helm**
+- **Ralph Johnson**
+- **John Vlissides**
+
+Conhecido como **GoF (Gang of Four)**, este livro catalogou **23 padrões de projeto** divididos em três categorias fundamentais.
+
+---
 
 ## 🎯 Objetivo
-- Demonstrar padrões clássicos de design
-- Fornecer exemplos reais e didáticos
+
+- Demonstrar padrões clássicos de design baseados no GoF
+- Fornecer exemplos reais e didáticos em C#
 - Servir como referência para estudo e consulta
-
-## 🏗️ Padrões Implementados
-
-| Padrão                  | Descrição breve                                 | Caminho                     |
-|-------------------------|-------------------------------------------------|-----------------------------|
-| **Adapter**             | Integra interfaces incompatíveis               | `Adapter/`                  |
-| **Builder**             | Criação fluente de objetos complexos            | `Builder/`                  |
-| **Chain of Responsibility** | Encadeamento de handlers para decisões         | `ChainOfResponsability/`    |
-| **Composite**           | Estruturas hierárquicas (folha/composto)       | `Composite/`                |
-| **Visitor**             | Separa operações de uma estrutura de objetos   | `Visitor/`                  |
-| **Factory**             | Criação flexível de objetos                     | `Factory/`                  |
-| **Mediator**            | Centraliza comunicação entre objetos            | `MediatoR/`                 |
-| **Strategy**            | Algoritmos intercambiáveis                      | `Strategy/`                 |
-| **Unit of Work**        | Transação atômica de múltiplos repositórios     | `UnitOfWork/`               |
-
-## Estrutura
-
-```
-DesignPattern/
-├── Adapter/               # Adapter Pattern (integração legado)
-├── Builder/                # Builder Pattern
-├── ChainOfResponsability/  # Chain of Responsibility Pattern
-├── Composite/             # Composite Pattern (árvores folha/composto)
-├── Visitor/               # Visitor Pattern (separa operações da estrutura)
-├── MediatoR/              # Mediator Pattern (sala de chat)
-├── Factory/                # Factory Pattern
-├── Strategy/               # Strategy Pattern
-├── UnitOfWork/             # Unit of Work Pattern
-└── README.md               # Documentação principal
-```
-
-## � Como Executar Exemplos
-
-Cada padrão é um projeto independente. Para rodar um exemplo:
-
-```bash
-cd <NomeDoPadrao>
-dotnet run
-```
-
-Exemplo:
-```bash
-cd Factory
-dotnet run
-```
-
-## 🔗 Recursos Adicionais
-- [Refactoring Guru - Design Patterns](https://refactoring.guru/design-patterns)
-- [Microsoft Docs - Padrões de Projeto](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#design-patterns)
+- Aplicar os princípios SOLID junto com os padrões
 
 ---
 
-💡 **Dica:** Explore cada subdiretório para exemplos, explicações e dicas de uso prático!
+## 📖 Categorias de Padrões (GoF)
 
-// Troca estratégia em runtime
-processador.SetEstrategia(new PixStrategy());
-processador.ProcessarPagamento(75.00m);
-```
+O GoF classificou os 23 padrões em três categorias:
 
-#### 📁 Arquivos:
-- `Program.cs` - Todas as implementações em um arquivo
-  - `IPagamentoStrategy` - Interface da estratégia
-  - `CartaoCreditoStrategy` - Estratégia para cartão de crédito
-  - `PixStrategy` - Estratégia para Pix
-  - `BoletoStrategy` - Estratégia para boleto
-  - `ProcessadorPagamento` - Contexto que usa as estratégias
+| Categoria | Propósito | Quantidade |
+|-----------|-----------|------------|
+| **Creational** | Lidam com a criação de objetos | 5 padrões |
+| **Structural** | Lidam com a composição de classes e objetos | 7 padrões |
+| **Behavioral** | Lidam com a comunicação entre objetos | 11 padrões |
 
 ---
 
-### 3. Factory Pattern
-**Localização:** `Factory/`
+## 🔧 Padrões de Criação (Creational Patterns)
 
-O padrão Factory é usado para criar objetos sem especificar a classe exata do objeto que será criado. Promove o desacoplamento do código de criação do código que usa os objetos.
+> *"Creational patterns abstract the instantiation process."* — GoF
 
-#### 📋 Características:
-- ✅ Criação de objetos sem especificar suas classes concretas
-- ✅ Centralização da lógica de criação
-- ✅ Facilita manutenção e extensibilidade
-- ✅ Suporte a diferentes variações (Simple Factory, Factory Method)
+Padrões que abstraem o processo de instanciação, tornando o sistema independente de como os objetos são criados.
 
-#### 🔧 Implementação:
+| Padrão | GoF Page | Status | Descrição |
+|--------|----------|--------|-----------|
+| **Abstract Factory** | p. 87 | ⬜ | Fornece interface para criar famílias de objetos relacionados |
+| **Builder** | p. 97 | ✅ | Separa a construção de um objeto complexo da sua representação |
+| **Factory Method** | p. 107 | ✅ | Define interface para criar objeto, deixando subclasses decidirem |
+| **Prototype** | p. 117 | ⬜ | Cria objetos clonando uma instância protótipo |
+| **Singleton** | p. 127 | ⬜ | Garante que uma classe tenha apenas uma instância |
 
-**Simple Factory:**
+### 📂 Implementados
+
+#### Builder Pattern (`Creational/Builder/`)
+> *"Separate the construction of a complex object from its representation so that the same construction process can create different representations."* — GoF, p. 97
+
+**Problema que resolve:** Criação de objetos complexos com muitos parâmetros opcionais.
+
+```csharp
+var relatorio = new RelatorioBuilder()
+    .ComTitulo("Vendas 2025")
+    .ComAutor("Lucas Jorge")
+    .ComSecao("Introdução", "...")
+    .Build();
+```
+
+#### Factory Method Pattern (`Creational/Factory/`)
+> *"Define an interface for creating an object, but let subclasses decide which class to instantiate."* — GoF, p. 107
+
+**Problema que resolve:** Desacoplar o código de criação do código de uso.
+
 ```csharp
 IVeiculo carro = VeiculoFactory.CriarVeiculo(TipoVeiculo.Carro);
-carro.ExibirInfo();
 carro.Acelerar();
 ```
 
-**Factory Method:**
+---
+
+## 🏛️ Padrões Estruturais (Structural Patterns)
+
+> *"Structural patterns are concerned with how classes and objects are composed to form larger structures."* — GoF
+
+Padrões que lidam com a composição de classes e objetos para formar estruturas maiores.
+
+| Padrão | GoF Page | Status | Descrição |
+|--------|----------|--------|-----------|
+| **Adapter** | p. 139 | ✅ | Converte interface de uma classe em outra esperada pelo cliente |
+| **Bridge** | p. 151 | ⬜ | Desacopla abstração da implementação |
+| **Composite** | p. 163 | ✅ | Compõe objetos em estruturas de árvore |
+| **Decorator** | p. 175 | ✅ | Adiciona responsabilidades dinamicamente a um objeto |
+| **Facade** | p. 185 | ⬜ | Fornece interface unificada para um subsistema |
+| **Flyweight** | p. 195 | ⬜ | Usa compartilhamento para suportar muitos objetos granulares |
+| **Proxy** | p. 207 | ⬜ | Fornece substituto para controlar acesso a um objeto |
+
+### 📂 Implementados
+
+#### Adapter Pattern (`Structural/Adapter/`)
+> *"Convert the interface of a class into another interface clients expect. Adapter lets classes work together that couldn't otherwise because of incompatible interfaces."* — GoF, p. 139
+
+**Problema que resolve:** Integrar sistemas legados com código moderno.
+
 ```csharp
-var carroEletrico = CarroFactory.CriarCarroEletrico();
-carroEletrico.ExibirInfo();
+// Interface moderna
+IClientRepository repository = new ClientRepositoryAdapter();
+repository.AddClient(new Client { Name = "Lucas", Age = 22 });
+
+// Internamente adapta para sistema legado
 ```
 
-#### 📁 Arquivos:
-- `IVeiculo.cs` - Interface base para todos os veículos
-- `TipoVeiculo.cs` - Enum com tipos de veículos
-- `Veiculos.cs` - Implementações concretas (Carro, Moto, Bicicleta, CarroEletrico)
-- `VeiculoFactory.cs` - Factories para criação de veículos
-- `Program.cs` - Demonstração de uso
+**Participantes (GoF):**
+- **Target** (`IClientRepository`) - Interface que o cliente espera
+- **Adaptee** (`LegacyDatabase`) - Interface existente que precisa ser adaptada
+- **Adapter** (`ClientRepositoryAdapter`) - Adapta Adaptee para Target
+
+#### Composite Pattern (`Structural/Composite/`)
+> *"Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly."* — GoF, p. 163
+
+**Problema que resolve:** Tratar objetos individuais e composições uniformemente.
+
+```csharp
+Folder root = new Folder("Root");
+root.Add(new File("arquivo.txt"));
+root.Add(new Folder("SubPasta"));
+root.Display(1); // Exibe recursivamente
+```
+
+**Participantes (GoF):**
+- **Component** (`IComponent`) - Interface comum
+- **Leaf** (`File`) - Representa objetos folha
+- **Composite** (`Folder`) - Define comportamento para componentes com filhos
+
+#### Decorator Pattern (`Structural/Decorator/`)
+> *"Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality."* — GoF, p. 175
+
+**Problema que resolve:** Adicionar funcionalidades sem modificar classes existentes.
+
+```csharp
+INotificador notificador = new NotificadorEmail();
+notificador = new NotificadorSMS(notificador);
+notificador = new NotificadorSlack(notificador);
+notificador.Enviar("Mensagem"); // Envia por todos os canais
+```
 
 ---
 
-### 4. Mediator Pattern
-**Localização:** `MediatoR/`
+## 🔄 Padrões Comportamentais (Behavioral Patterns)
 
-O padrão Mediator reduz o acoplamento direto entre múltiplos objetos ao **centralizar a comunicação** em um componente mediador. No exemplo, uma sala de chat (`ChatRoomMediator`) gerencia usuários (`User`) e repassa mensagens, evitando que cada usuário conheça os demais diretamente.
+> *"Behavioral patterns are concerned with algorithms and the assignment of responsibilities between objects."* — GoF
 
-#### 📋 Características:
-- ✅ Comunicação desacoplada (participantes ignoram uns aos outros)
-- ✅ Regras de orquestração centralizadas
-- ✅ Facilita extensão (ex: filtros, logs, permissões)
-- ⚠️ Risco de um "mediador deus" se crescer demais
+Padrões que caracterizam o modo como classes e objetos interagem e distribuem responsabilidades.
 
-#### 🔧 Implementação (trecho):
+| Padrão | GoF Page | Status | Descrição |
+|--------|----------|--------|-----------|
+| **Chain of Responsibility** | p. 223 | ✅ | Passa requisição por uma cadeia de handlers |
+| **Command** | p. 233 | ⬜ | Encapsula requisição como objeto |
+| **Interpreter** | p. 243 | ⬜ | Define gramática e interpretador para linguagem |
+| **Iterator** | p. 257 | ⬜ | Acessa elementos sequencialmente sem expor representação |
+| **Mediator** | p. 273 | ✅ | Define objeto que encapsula interação entre objetos |
+| **Memento** | p. 283 | ⬜ | Captura e externaliza estado interno de objeto |
+| **Observer** | p. 293 | ⬜ | Define dependência um-para-muitos entre objetos |
+| **State** | p. 305 | ✅ | Permite objeto alterar comportamento quando estado muda |
+| **Strategy** | p. 315 | ✅ | Define família de algoritmos intercambiáveis |
+| **Template Method** | p. 325 | ⬜ | Define esqueleto de algoritmo, delegando passos |
+| **Visitor** | p. 331 | ✅ | Representa operação a ser executada em elementos |
+
+### 📂 Implementados
+
+#### Chain of Responsibility Pattern (`Behavioral/ChainOfResponsibility/`)
+> *"Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it."* — GoF, p. 223
+
+**Problema que resolve:** Desacoplar remetente de receptor, permitindo múltiplos handlers.
+
+```csharp
+var handler = new AutenticacaoHandler();
+handler.SetNext(new AutorizacaoHandler())
+       .SetNext(new ValidacaoHandler());
+
+handler.Handle(request);
+```
+
+**Participantes (GoF):**
+- **Handler** - Define interface para tratar requisições
+- **ConcreteHandler** - Trata requisições que é responsável
+- **Client** - Inicia requisição para um handler da cadeia
+
+#### Mediator Pattern (`Behavioral/Mediator/`)
+> *"Define an object that encapsulates how a set of objects interact. Mediator promotes loose coupling by keeping objects from referring to each other explicitly."* — GoF, p. 273
+
+**Problema que resolve:** Centralizar comunicação complexa entre objetos.
+
 ```csharp
 ChatRoomMediator chatRoom = new ChatRoomMediator();
 var alice = new User("Alice");
 var bob = new User("Bob");
 chatRoom.AddUser(alice);
 chatRoom.AddUser(bob);
-alice.SendMessage("Olá Bob!");
+alice.SendMessage("Olá Bob!"); // Mediador distribui mensagem
 ```
 
-#### 📁 Arquivos Principais:
-- `IMediator.cs` / `IUser.cs` – Abstrações
-- `ChatRoomMediator.cs` – Mediador concreto
-- `User.cs` – Participante concreto
-- `Program.cs` – Demonstração completa
+**Participantes (GoF):**
+- **Mediator** (`IMediator`) - Define interface para comunicação
+- **ConcreteMediator** (`ChatRoomMediator`) - Implementa comportamento cooperativo
+- **Colleague** (`User`) - Conhece apenas seu mediador
 
----
+#### State Pattern (`Behavioral/State/`)
+> *"Allow an object to alter its behavior when its internal state changes. The object will appear to change its class."* — GoF, p. 305
 
-### 5. Adapter Pattern
-**Localização:** `Adapter/`
+**Problema que resolve:** Eliminar condicionais complexos baseados em estado.
 
-O padrão Adapter permite que **interfaces incompatíveis trabalhem juntas** ao atuar como tradutor entre o código moderno e sistemas legados. No exemplo, integra um repositório moderno (`IClientRepository`) com um banco de dados legado (`LegacyDatabase`) que usa dicionários.
-
-#### 📋 Características:
-- ✅ Integra sistemas com interfaces incompatíveis
-- ✅ Reutiliza código legado sem modificá-lo
-- ✅ Isola conversões de dados em local centralizado
-- ✅ Facilita testes através de interfaces limpas
-
-#### 🔧 Implementação (trecho):
 ```csharp
-IClientRepository repository = new ClientRepositoryAdapter();
-repository.AddClient(new Client { Name = "Lucas", Age = 22 });
-
-// Internamente converte Client → Dictionary<string, object>
-// e chama sistema legado: _legacyDb.Insert(record)
+var pedido = new Pedido();
+pedido.Processar(); // Estado: Pendente → Processando
+pedido.Enviar();    // Estado: Processando → Enviado
+pedido.Entregar();  // Estado: Enviado → Entregue
 ```
 
-#### 📁 Organização:
-- `Interfaces/IClientRepository.cs` – Interface target moderna
-- `Models/Client.cs` – Modelo de domínio
-- `Legacy/LegacyDatabase.cs` – Sistema legado (adaptee)
-- `Adapters/ClientRepositoryAdapter.cs` – Adapter principal
-- `Program.cs` – Demonstração completa
+**Participantes (GoF):**
+- **Context** (`Pedido`) - Define interface de interesse e mantém estado atual
+- **State** (`IEstadoPedido`) - Define interface para encapsular comportamento
+- **ConcreteState** - Implementa comportamento associado ao estado
 
----
+#### Strategy Pattern (`Behavioral/Strategy/`)
+> *"Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it."* — GoF, p. 315
 
-### 6. Composite Pattern
-**Localização:** `Composite/`
+**Problema que resolve:** Eliminar condicionais para seleção de algoritmos.
 
----
-
-### Visitor Pattern
-**Localização:** `Visitor/`
-
-O padrão Visitor permite que você adicione operações a objetos de uma estrutura sem modificar as classes desses objetos. Em vez de embutir lógica nas classes de domínio, cria-se um visitante que percorre a estrutura e executa operações específicas.
-
-#### 📋 Características:
-- ✅ Separa algoritmos da estrutura de objetos
-- ✅ Facilita adição de novas operações sem tocar nas classes de elementos
-- ✅ Útil para estruturas heterogêneas (ex: AST, coleções de objetos distintos)
-- ⚠️ Requer atualizações nos visitantes quando novas classes de elementos são adicionadas
-
-#### 🔧 Implementação (exemplo incluído):
-- `IElement` — interface dos elementos que aceitam visitantes (`Accept(IVisitor)`).
-- `IVisitor` — interface do visitante com `Visit` para cada elemento concreto.
-- `Book`, `Dvd` — elementos concretos que implementam `IElement`.
-- `PriceVisitor`, `ShippingVisitor` — visitantes concretos que realizam operações distintas (cálculo de preço, frete).
-
-Exemplo de uso (demonstrado em `Visitor/Program.cs`):
 ```csharp
-List<IElement> items = new List<IElement>
-{
-  new Book("C# In Depth", 49.90m),
-  new Dvd("Inception", 29.90m, 0.15),
-};
+var processador = new ProcessadorPagamento(new CartaoCreditoStrategy());
+processador.ProcessarPagamento(100.00m);
 
-PriceVisitor priceVisitor = new PriceVisitor();
-ShippingVisitor shippingVisitor = new ShippingVisitor();
-
-foreach (IElement item in items)
-{
-  item.Accept(priceVisitor);
-  item.Accept(shippingVisitor);
-}
-
-Console.WriteLine(priceVisitor);
-Console.WriteLine(shippingVisitor);
+// Troca em runtime
+processador.SetEstrategia(new PixStrategy());
+processador.ProcessarPagamento(75.00m);
 ```
 
-#### 📁 Arquivos Principais:
-- `IElement.cs` — Interface para elementos
-- `IVisitor.cs` — Interface para visitantes
-- `Book.cs`, `Dvd.cs` — Elementos concretos
-- `PriceVisitor.cs`, `ShippingVisitor.cs` — Visitantes concretos
-- `Program.cs` — Demonstração de execução
+**Participantes (GoF):**
+- **Strategy** (`IPagamentoStrategy`) - Interface comum para algoritmos
+- **ConcreteStrategy** - Implementa algoritmo específico
+- **Context** (`ProcessadorPagamento`) - Usa Strategy para executar algoritmo
 
-#### Como executar
-```powershell
-cd DesignPattern/Visitor
-dotnet run
+#### Visitor Pattern (`Behavioral/Visitor/`)
+> *"Represent an operation to be performed on the elements of an object structure. Visitor lets you define a new operation without changing the classes of the elements on which it operates."* — GoF, p. 331
+
+**Problema que resolve:** Adicionar operações sem modificar classes de elementos.
+
+```csharp
+List<IElement> items = new() { new Book("C#", 49.90m), new Dvd("Inception", 29.90m) };
+
+var priceVisitor = new PriceVisitor();
+foreach (var item in items)
+    item.Accept(priceVisitor);
+```
+
+**Participantes (GoF):**
+- **Visitor** (`IVisitor`) - Declara operação Visit para cada ConcreteElement
+- **ConcreteVisitor** (`PriceVisitor`) - Implementa operações declaradas
+- **Element** (`IElement`) - Define operação Accept que recebe visitor
+- **ConcreteElement** (`Book`, `Dvd`) - Implementa Accept
+
+#### Unit of Work Pattern (`Behavioral/UnitOfWork/`)
+> Nota: Este padrão não é do GoF original, mas é um padrão empresarial catalogado por Martin Fowler em "Patterns of Enterprise Application Architecture" (2002).
+
+**Problema que resolve:** Manter lista de objetos afetados por uma transação de negócio.
+
+```csharp
+using var unitOfWork = new UnitOfWork(context);
+unitOfWork.Clientes.Add(novoCliente);
+unitOfWork.Pedidos.Add(novoPedido);
+await unitOfWork.CommitAsync(); // Transação atômica
 ```
 
 ---
 
-O padrão Composite permite que objetos individuais (folhas) e composições (pastas) sejam tratados de forma uniforme através de uma interface comum. No exemplo, `File` e `Folder` implementam `IComponent` e a chamada `Display` na raiz exibe recursivamente a árvore.
+## 📊 Estrutura do Projeto
 
-#### 📋 Características:
-- ✅ Tratamento uniforme de folhas e compostos
-- ✅ Operações recursivas simplificadas
-- ✅ Boa representação para árvores de arquivos, menus e DOMs
-
-#### 🔧 Implementação (trecho):
-```csharp
-Folder root = new Folder("Root");
-root.Add(new File("File A"));
-Folder folder1 = new Folder("Folder 1");
-folder1.Add(new File("File C"));
-root.Add(folder1);
-root.Display(1);
 ```
-
-#### 📁 Arquivos Principais:
-- `Program.cs` – Contém `IComponent`, `File`, `Folder` e a demonstração
+DesignPattern/
+├── 📁 Creational/              # Padrões de Criação
+│   ├── Builder/                # ✅ Builder Pattern
+│   └── Factory/                # ✅ Factory Method Pattern
+│
+├── 📁 Structural/              # Padrões Estruturais
+│   ├── Adapter/                # ✅ Adapter Pattern
+│   ├── Composite/              # ✅ Composite Pattern
+│   └── Decorator/              # ✅ Decorator Pattern
+│
+├── 📁 Behavioral/              # Padrões Comportamentais
+│   ├── ChainOfResponsibility/  # ✅ Chain of Responsibility Pattern
+│   ├── Mediator/               # ✅ Mediator Pattern
+│   ├── State/                  # ✅ State Pattern
+│   ├── Strategy/               # ✅ Strategy Pattern
+│   ├── UnitOfWork/             # ✅ Unit of Work Pattern
+│   └── Visitor/                # ✅ Visitor Pattern
+│
+├── DesignPattern.sln           # Solution File
+└── README.md                   # Esta documentação
+```
 
 ---
 
@@ -259,80 +305,143 @@ root.Display(1);
 
 ### Executando um projeto específico
 
-1. **Adapter Pattern:**
-```bash
-cd Adapter
+```powershell
+# Exemplo: Executar Strategy Pattern
+cd Behavioral/Strategy
+dotnet run
+
+# Exemplo: Executar Factory Pattern
+cd Creational/Factory
+dotnet run
+
+# Exemplo: Executar Adapter Pattern
+cd Structural/Adapter
 dotnet run
 ```
 
-2. **Builder Pattern:**
-```bash
-cd Builder
-dotnet run
-```
+### Compilando toda a solution
 
-3. **Strategy Pattern:**
-```bash
-cd Strategy
-dotnet run
-```
-
-4. **Factory Pattern:**
-```bash
-cd Factory
-dotnet run
-```
-
-### Executando toda a solution
-```bash
+```powershell
 dotnet build DesignPattern.sln
 ```
 
-## 📚 Conceitos Aplicados
+---
 
-### Design Principles
-- **Single Responsibility Principle (SRP)** - Cada classe tem uma única responsabilidade
-- **Open/Closed Principle (OCP)** - Aberto para extensão, fechado para modificação
-- **Dependency Inversion Principle (DIP)** - Dependência de abstrações, não de concretizações
+## 📚 Princípios SOLID e Padrões GoF
 
-### Clean Code
-- Nomes descritivos e significativos
-- Métodos pequenos e focados
-- Separação clara de responsabilidades
-- Comentários explicativos quando necessário
+Os padrões GoF aplicam naturalmente os princípios SOLID:
 
-### SOLID Principles
-Todos os padrões implementados seguem os princípios SOLID:
-- **S** - Single Responsibility
-- **O** - Open/Closed  
-- **L** - Liskov Substitution
-- **I** - Interface Segregation
-- **D** - Dependency Inversion
+| Princípio | Sigla | Padrões que Aplicam |
+|-----------|-------|---------------------|
+| **Single Responsibility** | S | Strategy, State, Visitor |
+| **Open/Closed** | O | Decorator, Strategy, Template Method |
+| **Liskov Substitution** | L | Factory Method, Strategy |
+| **Interface Segregation** | I | Adapter, Facade |
+| **Dependency Inversion** | D | Abstract Factory, Builder, Strategy |
 
-## 🎯 Benefícios dos Padrões
+---
 
-| Padrão | Problema que Resolve | Benefício Principal |
-|--------|---------------------|---------------------|
-| **Builder** | Construção complexa de objetos | Interface fluente e validação |
-| **Strategy** | Múltiplos algoritmos condicionais | Flexibilidade e extensibilidade |
-| **Factory** | Criação acoplada de objetos | Desacoplamento e centralização |
+## 📖 Citações Essenciais do GoF
 
-## 🔄 Próximos Padrões Planejados
+> *"Program to an interface, not an implementation."* — GoF, p. 18
 
-- [ ] **Observer** - Notificação de mudanças
-- [ ] **Decorator** - Adição dinâmica de funcionalidades
-- [ ] **Adapter** - Integração de interfaces incompatíveis
-- [ ] **Singleton** - Instância única global
-- [ ] **Command** - Encapsulamento de comandos
+> *"Favor object composition over class inheritance."* — GoF, p. 20
 
-## 📖 Referências
+> *"Encapsulate the concept that varies."* — GoF
 
-- [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns) - Gang of Four
-- [Microsoft Docs - Design Patterns](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/)
-- [Refactoring Guru - Design Patterns](https://refactoring.guru/design-patterns)
+> *"Design patterns should not be applied indiscriminately. Often they achieve flexibility and variability by introducing additional levels of indirection, and that can complicate a design and/or cost you some performance."* — GoF, p. 31
+
+---
+
+## 🔄 Padrões Planejados
+
+### Creational
+- [ ] **Abstract Factory** - Famílias de produtos relacionados
+- [ ] **Prototype** - Clonagem de objetos
+- [ ] **Singleton** - Instância única
+
+### Structural
+- [ ] **Bridge** - Separar abstração de implementação
+- [ ] **Facade** - Interface simplificada para subsistemas
+- [ ] **Flyweight** - Compartilhamento de objetos granulares
+- [ ] **Proxy** - Controle de acesso
+
+### Behavioral
+- [ ] **Command** - Encapsular requisições
+- [ ] **Interpreter** - Gramáticas e linguagens
+- [ ] **Iterator** - Navegação em coleções
+- [ ] **Memento** - Snapshot de estado
+- [ ] **Observer** - Publicação/Subscrição
+- [ ] **Template Method** - Esqueleto de algoritmo
+
+---
+
+## 📚 Referências Bibliográficas
+
+### Livro Original (GoF)
+```
+Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994).
+Design Patterns: Elements of Reusable Object-Oriented Software.
+Addison-Wesley Professional.
+ISBN: 978-0-201-63361-0
+```
+
+### Recursos Online
+- [Refactoring Guru - Design Patterns](https://refactoring.guru/design-patterns) - Explicações visuais e exemplos
+- [SourceMaking - Design Patterns](https://sourcemaking.com/design_patterns) - Referência completa
+- [Microsoft Docs - Design Patterns](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures) - Contexto .NET
+- [DoFactory - Design Patterns](https://www.dofactory.com/net/design-patterns) - Implementações em C#
+
+### Livros Complementares
+- **Head First Design Patterns** - Freeman & Robson (2004) - Abordagem didática
+- **Patterns of Enterprise Application Architecture** - Martin Fowler (2002) - Padrões empresariais
+- **Refactoring: Improving the Design of Existing Code** - Martin Fowler (2018) - Refatoração
+
+---
+
+## 🎯 Resumo dos 23 Padrões GoF
+
+### Criacionais (5)
+| # | Padrão | Intent (GoF) |
+|---|--------|--------------|
+| 1 | Abstract Factory | Provide an interface for creating families of related objects |
+| 2 | Builder | Separate the construction of a complex object from its representation |
+| 3 | Factory Method | Define an interface for creating an object |
+| 4 | Prototype | Specify the kinds of objects to create using a prototypical instance |
+| 5 | Singleton | Ensure a class only has one instance |
+
+### Estruturais (7)
+| # | Padrão | Intent (GoF) |
+|---|--------|--------------|
+| 6 | Adapter | Convert the interface of a class into another interface clients expect |
+| 7 | Bridge | Decouple an abstraction from its implementation |
+| 8 | Composite | Compose objects into tree structures |
+| 9 | Decorator | Attach additional responsibilities to an object dynamically |
+| 10 | Facade | Provide a unified interface to a set of interfaces |
+| 11 | Flyweight | Use sharing to support large numbers of fine-grained objects |
+| 12 | Proxy | Provide a surrogate for another object to control access |
+
+### Comportamentais (11)
+| # | Padrão | Intent (GoF) |
+|---|--------|--------------|
+| 13 | Chain of Responsibility | Give more than one object a chance to handle a request |
+| 14 | Command | Encapsulate a request as an object |
+| 15 | Interpreter | Define a representation for a language's grammar |
+| 16 | Iterator | Provide a way to access elements of an aggregate sequentially |
+| 17 | Mediator | Define an object that encapsulates how a set of objects interact |
+| 18 | Memento | Capture and externalize an object's internal state |
+| 19 | Observer | Define a one-to-many dependency between objects |
+| 20 | State | Allow an object to alter its behavior when its internal state changes |
+| 21 | Strategy | Define a family of algorithms, encapsulate each one |
+| 22 | Template Method | Define the skeleton of an algorithm |
+| 23 | Visitor | Represent an operation to be performed on elements |
 
 ---
 
 **Autor:** Lucas Jorge  
-**Data:** Julho 2025  
+**Última Atualização:** Dezembro 2025  
 **Tecnologia:** .NET 9.0 / C#
+
+---
+
+> *"The key to maximizing reuse lies in anticipating new requirements and changes to existing requirements, and in designing your systems so they can evolve accordingly."* — Gang of Four
