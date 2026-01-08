@@ -217,6 +217,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadOrderApi", "ObjectCalist
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodOrderApi", "ObjectCalisthenics\GoodOrderApi\GoodOrderApi.csproj", "{D36F89DF-0659-42A1-869D-E7F85521940D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorHelloWorld", "BlazorHelloWorld\BlazorHelloWorld.csproj", "{BB5952D0-211B-4B7C-B696-FFD7DF777313}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1295,6 +1297,18 @@ Global
 		{D36F89DF-0659-42A1-869D-E7F85521940D}.Release|x64.Build.0 = Release|Any CPU
 		{D36F89DF-0659-42A1-869D-E7F85521940D}.Release|x86.ActiveCfg = Release|Any CPU
 		{D36F89DF-0659-42A1-869D-E7F85521940D}.Release|x86.Build.0 = Release|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Debug|x64.Build.0 = Debug|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Debug|x86.Build.0 = Debug|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Release|x64.ActiveCfg = Release|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Release|x64.Build.0 = Release|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Release|x86.ActiveCfg = Release|Any CPU
+		{BB5952D0-211B-4B7C-B696-FFD7DF777313}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
