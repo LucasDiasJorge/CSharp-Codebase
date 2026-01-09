@@ -16,13 +16,14 @@ O **Saga Pattern** é um padrão para gerenciar transações distribuídas em ar
 ```
 SagaPattern/
 ├── Core/
-│   ├── ISaga.cs
 │   ├── ISagaStep.cs
+│   ├── ISagaOrchestrator.cs
+│   ├── SagaOrchestrator.cs
 │   ├── SagaState.cs
 │   └── SagaResult.cs
 ├── Examples/
-│   ├── OrderSaga/          # Orquestração
-│   └── PaymentSaga/        # Coreografia
+│   ├── OrderSaga/                # Orchestration (orquestrador central)
+│   └── OrderSagaChoreography/    # Choreography (event-driven)
 ├── Program.cs
 └── README.md
 ```
@@ -53,5 +54,13 @@ SagaPattern/
 
 ```bash
 cd SagaPattern
+
+# roda os dois exemplos (padrão)
 dotnet run
+
+# apenas o exemplo com orquestrador central
+dotnet run -- orchestration
+
+# apenas o exemplo event-driven (coreografia)
+dotnet run -- choreography
 ```

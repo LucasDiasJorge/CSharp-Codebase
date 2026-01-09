@@ -75,3 +75,12 @@ var orchestratorWithFailure = new OrderSagaOrchestrator(paymentShouldFail: true)
 var failResult = await orchestratorWithFailure.ExecuteAsync(context);
 // Saga será compensada automaticamente
 ```
+
+## Como executar
+
+```bash
+cd SagaPattern
+
+# Apenas orquestração
+dotnet run -- orchestration
+```

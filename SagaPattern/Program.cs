@@ -1,5 +1,6 @@
 using SagaPattern.Examples.OrderSaga;
 using SagaPattern.Examples.OrderSaga.Context;
+using SagaPattern.Examples.OrderSagaChoreography;
 
 namespace SagaPattern;
 
@@ -11,14 +12,41 @@ class Program
         Console.WriteLine("║              SAGA PATTERN EM C#                           ║");
         Console.WriteLine("╚═══════════════════════════════════════════════════════════╝");
 
-        await DemonstrateSagaSuccess();
-        await DemonstrateSagaWithPaymentFailure();
-        await DemonstrateSagaWithShipmentFailure();
+        var mode = ParseMode(args);
+
+        if (mode is DemoMode.All or DemoMode.Orchestration)
+        {
+            Console.WriteLine("\n================== ORCHESTRATION ==================");
+            await DemonstrateOrchestrationSagaSuccess();
+            await DemonstrateOrchestrationSagaWithPaymentFailure();
+            await DemonstrateOrchestrationSagaWithShipmentFailure();
+        }
+
+        if (mode is DemoMode.All or DemoMode.Choreography)
+        {
+            Console.WriteLine("\n================== CHOREOGRAPHY ===================");
+            await DemonstrateChoreographySagaSuccess();
+            await DemonstrateChoreographySagaWithPaymentFailure();
+            await DemonstrateChoreographySagaWithShipmentFailure();
+        }
 
         Console.WriteLine("\n✅ Demonstrações concluídas!");
     }
 
-    static async Task DemonstrateSagaSuccess()
+    static DemoMode ParseMode(string[] args)
+    {
+        if (args.Length == 0) return DemoMode.All;
+
+        return args[0].Trim().ToLowerInvariant() switch
+        {
+            "orchestration" or "orchestrator" or "orq" => DemoMode.Orchestration,
+            "choreography" or "choreograph" or "coreografia" or "choreo" => DemoMode.Choreography,
+            "all" => DemoMode.All,
+            _ => DemoMode.All
+        };
+    }
+
+    static async Task DemonstrateOrchestrationSagaSuccess()
     {
         Console.WriteLine("\n═══════════════════════════════════════════════════════════");
         Console.WriteLine("✅ CENÁRIO 1: Saga com Sucesso");
@@ -32,7 +60,7 @@ class Program
         PrintResult(result, context);
     }
 
-    static async Task DemonstrateSagaWithPaymentFailure()
+    static async Task DemonstrateOrchestrationSagaWithPaymentFailure()
     {
         Console.WriteLine("\n═══════════════════════════════════════════════════════════");
         Console.WriteLine("❌ CENÁRIO 2: Saga com Falha no Pagamento");
@@ -46,7 +74,7 @@ class Program
         PrintResult(result, context);
     }
 
-    static async Task DemonstrateSagaWithShipmentFailure()
+    static async Task DemonstrateOrchestrationSagaWithShipmentFailure()
     {
         Console.WriteLine("\n═══════════════════════════════════════════════════════════");
         Console.WriteLine("❌ CENÁRIO 3: Saga com Falha no Envio");
@@ -56,6 +84,48 @@ class Program
         var context = CreateSampleContext();
 
         var result = await orchestrator.ExecuteAsync(context);
+
+        PrintResult(result, context);
+    }
+
+    static async Task DemonstrateChoreographySagaSuccess()
+    {
+        Console.WriteLine("\n═══════════════════════════════════════════════════════════");
+        Console.WriteLine("✅ CENÁRIO 1: Saga com Sucesso");
+        Console.WriteLine("═══════════════════════════════════════════════════════════");
+
+        var runner = new OrderSagaChoreographyRunner();
+        var context = CreateSampleContext();
+
+        var result = await runner.ExecuteAsync(context);
+
+        PrintResult(result, context);
+    }
+
+    static async Task DemonstrateChoreographySagaWithPaymentFailure()
+    {
+        Console.WriteLine("\n═══════════════════════════════════════════════════════════");
+        Console.WriteLine("❌ CENÁRIO 2: Saga com Falha no Pagamento");
+        Console.WriteLine("═══════════════════════════════════════════════════════════");
+
+        var runner = new OrderSagaChoreographyRunner();
+        var context = CreateSampleContext();
+
+        var result = await runner.ExecuteAsync(context, paymentShouldFail: true);
+
+        PrintResult(result, context);
+    }
+
+    static async Task DemonstrateChoreographySagaWithShipmentFailure()
+    {
+        Console.WriteLine("\n═══════════════════════════════════════════════════════════");
+        Console.WriteLine("❌ CENÁRIO 3: Saga com Falha no Envio");
+        Console.WriteLine("═══════════════════════════════════════════════════════════");
+
+        var runner = new OrderSagaChoreographyRunner();
+        var context = CreateSampleContext();
+
+        var result = await runner.ExecuteAsync(context, shipmentShouldFail: true);
 
         PrintResult(result, context);
     }
@@ -112,5 +182,12 @@ class Program
             Console.WriteLine($"  💳 Transação: {context.PaymentTransactionId}");
             Console.WriteLine($"  🚚 Rastreio: {context.ShippingTrackingCode}");
         }
+    }
+
+    enum DemoMode
+    {
+        All,
+        Orchestration,
+        Choreography
     }
 }
