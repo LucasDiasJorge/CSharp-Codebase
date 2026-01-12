@@ -34,3 +34,7 @@ cd SagaPattern
 # Apenas coreografia
 dotnet run -- choreography
 ```
+
+### Referências
+
+- [Microservices Patterns: Saga Pattern](https://microservices.io/patterns/data/saga.html)
