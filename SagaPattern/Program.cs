@@ -12,7 +12,7 @@ class Program
         Console.WriteLine("║              SAGA PATTERN EM C#                           ║");
         Console.WriteLine("╚═══════════════════════════════════════════════════════════╝");
 
-        var mode = ParseMode(args);
+        DemoMode mode = ParseMode(args);
 
         if (mode is DemoMode.All or DemoMode.Orchestration)
         {
@@ -52,10 +52,10 @@ class Program
         Console.WriteLine("✅ CENÁRIO 1: Saga com Sucesso");
         Console.WriteLine("═══════════════════════════════════════════════════════════");
 
-        var orchestrator = new OrderSagaOrchestrator();
-        var context = CreateSampleContext();
+        OrderSagaOrchestrator orchestrator = new OrderSagaOrchestrator();
+        OrderSagaContext context = CreateSampleContext();
 
-        var result = await orchestrator.ExecuteAsync(context);
+        Core.SagaResult result = await orchestrator.ExecuteAsync(context);
 
         PrintResult(result, context);
     }
@@ -66,10 +66,10 @@ class Program
         Console.WriteLine("❌ CENÁRIO 2: Saga com Falha no Pagamento");
         Console.WriteLine("═══════════════════════════════════════════════════════════");
 
-        var orchestrator = new OrderSagaOrchestrator(paymentShouldFail: true);
-        var context = CreateSampleContext();
+        OrderSagaOrchestrator orchestrator = new OrderSagaOrchestrator(paymentShouldFail: true);
+        OrderSagaContext context = CreateSampleContext();
 
-        var result = await orchestrator.ExecuteAsync(context);
+        Core.SagaResult result = await orchestrator.ExecuteAsync(context);
 
         PrintResult(result, context);
     }
@@ -80,10 +80,10 @@ class Program
         Console.WriteLine("❌ CENÁRIO 3: Saga com Falha no Envio");
         Console.WriteLine("═══════════════════════════════════════════════════════════");
 
-        var orchestrator = new OrderSagaOrchestrator(shipmentShouldFail: true);
-        var context = CreateSampleContext();
+        OrderSagaOrchestrator orchestrator = new OrderSagaOrchestrator(shipmentShouldFail: true);
+        OrderSagaContext context = CreateSampleContext();
 
-        var result = await orchestrator.ExecuteAsync(context);
+        Core.SagaResult result = await orchestrator.ExecuteAsync(context);
 
         PrintResult(result, context);
     }
@@ -94,10 +94,10 @@ class Program
         Console.WriteLine("✅ CENÁRIO 1: Saga com Sucesso");
         Console.WriteLine("═══════════════════════════════════════════════════════════");
 
-        var runner = new OrderSagaChoreographyRunner();
-        var context = CreateSampleContext();
+        OrderSagaChoreographyRunner runner = new OrderSagaChoreographyRunner();
+        OrderSagaContext context = CreateSampleContext();
 
-        var result = await runner.ExecuteAsync(context);
+        Core.SagaResult result = await runner.ExecuteAsync(context);
 
         PrintResult(result, context);
     }
@@ -108,10 +108,10 @@ class Program
         Console.WriteLine("❌ CENÁRIO 2: Saga com Falha no Pagamento");
         Console.WriteLine("═══════════════════════════════════════════════════════════");
 
-        var runner = new OrderSagaChoreographyRunner();
-        var context = CreateSampleContext();
+        OrderSagaChoreographyRunner runner = new OrderSagaChoreographyRunner();
+        OrderSagaContext context = CreateSampleContext();
 
-        var result = await runner.ExecuteAsync(context, paymentShouldFail: true);
+        Core.SagaResult result = await runner.ExecuteAsync(context, paymentShouldFail: true);
 
         PrintResult(result, context);
     }
@@ -122,10 +122,10 @@ class Program
         Console.WriteLine("❌ CENÁRIO 3: Saga com Falha no Envio");
         Console.WriteLine("═══════════════════════════════════════════════════════════");
 
-        var runner = new OrderSagaChoreographyRunner();
-        var context = CreateSampleContext();
+        OrderSagaChoreographyRunner runner = new OrderSagaChoreographyRunner();
+        OrderSagaContext context = CreateSampleContext();
 
-        var result = await runner.ExecuteAsync(context, shipmentShouldFail: true);
+        Core.SagaResult result = await runner.ExecuteAsync(context, shipmentShouldFail: true);
 
         PrintResult(result, context);
     }

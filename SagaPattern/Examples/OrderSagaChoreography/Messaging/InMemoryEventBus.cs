@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Linq;
 
 namespace SagaPattern.Examples.OrderSagaChoreography.Messaging;
 
@@ -12,9 +13,9 @@ public sealed class InMemoryEventBus : IEventBus
 
     public void Subscribe<TEvent>(Func<TEvent, CancellationToken, Task> handler)
     {
-        var key = typeof(TEvent);
+        Type key = typeof(TEvent);
 
-        var list = _handlers.GetOrAdd(key, _ => []);
+        List<Func<object, CancellationToken, Task>> list = _handlers.GetOrAdd(key, _ => new List<Func<object, CancellationToken, Task>>());
 
         lock (list)
         {
@@ -26,7 +27,7 @@ public sealed class InMemoryEventBus : IEventBus
     {
         if (@event is null) throw new ArgumentNullException(nameof(@event));
 
-        if (!_handlers.TryGetValue(typeof(TEvent), out var list))
+        if (!_handlers.TryGetValue(typeof(TEvent), out List<Func<object, CancellationToken, Task>> list))
         {
             return;
         }
@@ -34,10 +35,10 @@ public sealed class InMemoryEventBus : IEventBus
         List<Func<object, CancellationToken, Task>> snapshot;
         lock (list)
         {
-            snapshot = [.. list];
+            snapshot = list.ToList();
         }
 
-        foreach (var handler in snapshot)
+        foreach (Func<object, CancellationToken, Task> handler in snapshot)
         {
             ct.ThrowIfCancellationRequested();
             await handler(@event, ct);

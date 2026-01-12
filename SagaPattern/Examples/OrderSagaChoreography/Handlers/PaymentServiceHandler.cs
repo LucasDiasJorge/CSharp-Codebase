@@ -28,7 +28,7 @@ public sealed class PaymentServiceHandler
 
     private async Task OnStockReservedAsync(StockReserved evt, CancellationToken ct)
     {
-        var context = evt.Context;
+        OrderSagaContext context = evt.Context;
 
         if (_shouldFail)
         {
@@ -47,7 +47,7 @@ public sealed class PaymentServiceHandler
 
     private Task OnSagaFailedAsync(SagaFailed evt, CancellationToken ct)
     {
-        var context = evt.Context;
+        OrderSagaContext context = evt.Context;
 
         if (!context.PaymentProcessed)
         {

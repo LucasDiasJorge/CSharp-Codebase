@@ -28,7 +28,7 @@ public sealed class InventoryServiceHandler
 
     private async Task OnOrderCreatedAsync(OrderCreated evt, CancellationToken ct)
     {
-        var context = evt.Context;
+        OrderSagaContext context = evt.Context;
 
         if (_shouldFail)
         {
@@ -46,7 +46,7 @@ public sealed class InventoryServiceHandler
 
     private Task OnSagaFailedAsync(SagaFailed evt, CancellationToken ct)
     {
-        var context = evt.Context;
+        OrderSagaContext context = evt.Context;
 
         if (!context.StockReserved)
         {

@@ -15,16 +15,16 @@ public sealed class OrderSagaChoreographyRunner
         bool shipmentShouldFail = false,
         CancellationToken ct = default)
     {
-        var bus = new InMemoryEventBus();
-        var executedSteps = new List<string>();
-        var compensatedSteps = new List<string>();
+        InMemoryEventBus bus = new InMemoryEventBus();
+        List<string> executedSteps = new List<string>();
+        List<string> compensatedSteps = new List<string>();
 
         _ = new OrderServiceHandler(bus, executedSteps, compensatedSteps);
         _ = new InventoryServiceHandler(bus, executedSteps, compensatedSteps, stockShouldFail);
         _ = new PaymentServiceHandler(bus, executedSteps, compensatedSteps, paymentShouldFail);
         _ = new ShippingServiceHandler(bus, executedSteps, compensatedSteps, shipmentShouldFail);
 
-        var tcs = new TaskCompletionSource<SagaResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+        TaskCompletionSource<SagaResult> tcs = new TaskCompletionSource<SagaResult>(TaskCreationOptions.RunContinuationsAsynchronously);
 
         // Finalizers: subscribe AFTER handlers so this runs after compensations.
         bus.Subscribe<SagaCompleted>((evt, _) =>

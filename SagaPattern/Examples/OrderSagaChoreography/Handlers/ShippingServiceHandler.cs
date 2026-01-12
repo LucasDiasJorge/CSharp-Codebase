@@ -28,7 +28,7 @@ public sealed class ShippingServiceHandler
 
     private async Task OnPaymentProcessedAsync(PaymentProcessed evt, CancellationToken ct)
     {
-        var context = evt.Context;
+        OrderSagaContext context = evt.Context;
 
         if (_shouldFail)
         {
@@ -46,7 +46,7 @@ public sealed class ShippingServiceHandler
 
     private Task OnSagaFailedAsync(SagaFailed evt, CancellationToken ct)
     {
-        var context = evt.Context;
+        OrderSagaContext context = evt.Context;
 
         if (string.IsNullOrWhiteSpace(context.ShippingTrackingCode))
         {

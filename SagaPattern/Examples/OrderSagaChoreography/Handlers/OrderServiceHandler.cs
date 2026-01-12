@@ -22,7 +22,7 @@ public sealed class OrderServiceHandler
 
     private async Task OnStartAsync(StartOrderSaga evt, CancellationToken ct)
     {
-        var context = evt.Context;
+        OrderSagaContext context = evt.Context;
 
         context.OrderId = Guid.NewGuid();
         context.OrderCreated = true;
@@ -35,7 +35,7 @@ public sealed class OrderServiceHandler
 
     private Task OnSagaFailedAsync(SagaFailed evt, CancellationToken ct)
     {
-        var context = evt.Context;
+        OrderSagaContext context = evt.Context;
 
         if (!context.OrderCreated)
         {

@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace SagaPattern.Core;
 
 /// <summary>
@@ -6,9 +8,9 @@ namespace SagaPattern.Core;
 /// </summary>
 public abstract class SagaOrchestrator<TContext> : ISagaOrchestrator<TContext>
 {
-    private readonly List<ISagaStep<TContext>> _steps = [];
-    private readonly List<string> _executedSteps = [];
-    private readonly List<string> _compensatedSteps = [];
+    private readonly List<ISagaStep<TContext>> _steps = new List<ISagaStep<TContext>>();
+    private readonly List<string> _executedSteps = new List<string>();
+    private readonly List<string> _compensatedSteps = new List<string>();
 
     protected void AddStep(ISagaStep<TContext> step)
     {
@@ -22,13 +24,13 @@ public abstract class SagaOrchestrator<TContext> : ISagaOrchestrator<TContext>
 
         Console.WriteLine($"\n  [Saga] Iniciando execução com {_steps.Count} passos");
 
-        foreach (var step in _steps)
+        foreach (ISagaStep<TContext> step in _steps)
         {
             Console.WriteLine($"  [Saga] Executando: {step.Name}");
 
             try
             {
-                var success = await step.ExecuteAsync(context, ct);
+                bool success = await step.ExecuteAsync(context, ct);
 
                 if (!success)
                 {
@@ -55,12 +57,12 @@ public abstract class SagaOrchestrator<TContext> : ISagaOrchestrator<TContext>
         Console.WriteLine("\n  [Saga] 🔄 Iniciando compensação...");
 
         // Compensar na ordem reversa
-        var stepsToCompensate = _steps
+        List<ISagaStep<TContext>> stepsToCompensate = _steps
             .Take(_executedSteps.Count)
             .Reverse()
             .ToList();
 
-        foreach (var step in stepsToCompensate)
+        foreach (ISagaStep<TContext> step in stepsToCompensate)
         {
             try
             {
