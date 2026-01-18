@@ -3,6 +3,8 @@ using CQRSDemo.Handlers;
 using CQRSDemo.Infrastructure;
 using CQRSDemo.Queries;
 
+using LucasSDK.Logging;
+
 namespace CQRSDemo;
 
 class Program
@@ -13,8 +15,12 @@ class Program
         Console.WriteLine("   CQRS Demo - Sistema de Produtos");
         Console.WriteLine("====================================\n");
 
+        ConsoleLogger consoleLogger = new ConsoleLogger("MySDKTest");
+
         // Setup - Criar database e handlers
         InMemoryDatabase database = new InMemoryDatabase();
+
+        consoleLogger.Info("InMemoryDatabase initialized.");
 
         // Command Handlers (Write Operations)
         CreateProductCommandHandler createProductHandler = new CreateProductCommandHandler(database);
