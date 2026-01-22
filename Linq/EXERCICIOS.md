@@ -1,5 +1,7 @@
 # 🎓 Exercícios Práticos de LINQ
 
+<!-- commit: micro tweak 3 -->
+
 ## 📝 Como Usar Este Guia
 
 Cada exercício possui:
