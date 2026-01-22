@@ -1,5 +1,7 @@
 # 🎯 LINQ - Language Integrated Query em C#
 
+<!-- commit: micro tweak 2 -->
+
 ## 📖 Sobre o Projeto
 
 Este é um **guia didático completo** sobre LINQ (Language Integrated Query) em C#, uma das funcionalidades mais poderosas da linguagem. O projeto contém **12 demonstrações práticas** que cobrem desde conceitos básicos até operações avançadas, com exemplos do mundo real.
