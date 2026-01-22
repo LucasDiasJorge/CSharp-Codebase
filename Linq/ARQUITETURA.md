@@ -1,5 +1,7 @@
 # 🏗️ Arquitetura do Projeto LINQ
 
+<!-- commit: micro tweak 4 -->
+
 ## 📁 Estrutura de Diretórios
 
 ```
