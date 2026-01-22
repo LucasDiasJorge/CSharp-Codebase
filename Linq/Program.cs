@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace LinqDemo;
 
+// commit: micro tweak 1
+
 /// <summary>
 /// Programa demonstrativo completo de LINQ (Language Integrated Query)
 /// Este projeto explora desde conceitos básicos até operações avançadas
