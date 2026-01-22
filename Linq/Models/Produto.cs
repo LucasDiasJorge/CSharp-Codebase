@@ -5,6 +5,7 @@ namespace LinqDemo;
 /// </summary>
 public class Produto
 {
+    // commit: micro tweak 5
     /// <summary>
     /// Identificador único do produto
     /// </summary>
