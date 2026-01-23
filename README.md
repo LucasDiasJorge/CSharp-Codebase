@@ -12,6 +12,20 @@
 
 - [📖 Sobre o Projeto](#-sobre-o-projeto)
 - [🗂️ Estrutura Completa do Projeto](#️-estrutura-completa-do-projeto)
+  - [🔐 Autenticação e Segurança](#-autenticação-e-segurança)
+  - [💾 Banco de Dados e ORM](#-banco-de-dados-e-orm)
+  - [💨 Cache e Performance](#-cache-e-performance)
+  - [📬 Mensageria e Streaming](#-mensageria-e-streaming)
+  - [🌐 APIs Web e Serviços](#-apis-web-e-serviços)
+  - [🏗️ Padrões de Design](#️-padrões-de-design-design-patterns)
+  - [🏛️ Padrões Arquiteturais Avançados](#️-padrões-arquiteturais-avançados)
+  - [🔄 Assincronia e Concorrência](#-assincronia-e-concorrência)
+  - [📊 Algoritmos e Estruturas de Dados](#-algoritmos-e-estruturas-de-dados)
+  - [🛠️ Utilitários e Transformação de Dados](#️-utilitários-e-transformação-de-dados)
+  - [⚙️ Serviços e Infraestrutura](#️-serviços-e-infraestrutura)
+  - [📦 SDKs e Bibliotecas](#-sdks-e-bibliotecas)
+  - [🎓 Aprendizado e Exemplos Básicos](#-aprendizado-e-exemplos-básicos)
+  - [🧪 Testes](#-testes)
 - [🚀 Como Usar](#-como-usar)
 - [🛠️ Comandos Essenciais do .NET CLI](#️-comandos-essenciais-do-net-cli)
 - [🏗️ Princípios SOLID](#️-princípios-solid)
@@ -124,6 +138,13 @@ APIs mínimas do .NET 6+ com endpoints simplificados.
 #### `WebApplication/`
 Aplicação web completa com MVC/Razor.
 
+#### `BlazorHelloWorld/`
+Aplicação Blazor Server demonstrando conceitos básicos:
+- Criação de componentes .razor
+- Data binding e manipulação de eventos
+- Renderização condicional
+- Interatividade do lado do servidor
+
 #### `CustomFilterApi/`
 Filtros personalizados (equivalente a interceptors do Java):
 - Action Filters
@@ -220,6 +241,90 @@ Comparação entre modelos de domínio:
 | `AnemicDomain/` | Modelo de domínio anêmico |
 | `COMPARISON.md` | Comparativo detalhado |
 | `QUICK_GUIDE.md` | Guia rápido de referência |
+
+---
+
+### 🏛️ Padrões Arquiteturais Avançados
+
+#### `CQRSDemo/`
+Command Query Responsibility Segregation:
+- Separação de operações de leitura (Queries) e escrita (Commands)
+- Commands para modificações de estado
+- Queries para leituras otimizadas
+- Handlers dedicados para cada operação
+- Event Sourcing opcional
+
+#### `SagaPattern/`
+Padrão Saga para transações distribuídas em microserviços:
+- **Orchestration**: Orquestrador central coordena todos os passos
+- **Choreography**: Serviços reagem a eventos (event-driven)
+- Compensating transactions para rollback
+- Gerenciamento de estado da saga
+- Exemplos: OrderSaga com múltiplos serviços
+
+#### `CircuitBreakerDemo/`
+Implementação do padrão Circuit Breaker para resiliência:
+- **Estados**: Closed (normal), Open (falha), Half-Open (teste)
+- Prevenção de falhas em cascata
+- Fast-fail para evitar timeouts desnecessários
+- Auto-recuperação e retry automático
+- Proteção de sistemas distribuídos
+
+#### `CarriedEvent/`
+Event Carried State Transfer:
+- Eventos carregam dados completos (não apenas IDs)
+- Desacoplamento total entre serviços
+- Consumidores não precisam consultar a origem
+- Redução de chamadas síncronas
+- Maior autonomia dos consumidores
+
+#### `UseCases/`
+Use Cases na Clean Architecture:
+- Encapsulamento da lógica de negócio
+- Independência de frameworks e infraestrutura
+- Inversão de dependência (interfaces)
+- Padrão Result para retorno de operações
+- Single Responsibility por Use Case
+- Exemplos: CreateUser, TransferMoney, ProcessOrder
+
+#### `PersistencePatterns/`
+Padrões de persistência de dados:
+| Padrão | Descrição |
+|--------|-----------|
+| Repository | Abstração do acesso a dados |
+| Unit of Work | Gerenciamento de transações |
+| Identity Map | Cache de entidades carregadas |
+| Data Mapper | Separação entre domínio e persistência |
+| Active Record | Entidade com métodos de persistência |
+
+#### `TransactionPattern/`
+Padrão ExecuteInTransactionAsync:
+- Encapsulamento de lógica transacional assíncrona
+- Garantia de atomicidade (tudo ou nada)
+- Commit/Rollback automático
+- Tratamento centralizado de exceções
+- Operações de banco de dados seguras
+
+#### `TransactionScript/`
+Transaction Script Pattern:
+- Lógica de negócio organizada em procedimentos
+- Ideal para operações CRUD simples
+- Cada script lida com uma requisição
+- Comparação com Domain Model
+- Exemplos: TransferMoney, CreateInvoice, ProcessRefund
+
+#### `ObjectCalisthenics/`
+As 9 regras de Object Calisthenics para código limpo OO:
+- API demonstrativa com implementações "Bad" vs "Good"
+1. Apenas um nível de indentação por método
+2. Não use a palavra-chave ELSE
+3. Encapsule todos os primitivos e strings
+4. First Class Collections
+5. Um ponto por linha (Law of Demeter)
+6. Não abrevie nomes
+7. Mantenha todas as entidades pequenas
+8. Máximo de duas variáveis de instância por classe
+9. Sem getters/setters/properties públicos
 
 ---
 
@@ -321,6 +426,20 @@ Exemplos de serialização:
 - JSON (System.Text.Json / Newtonsoft)
 - XML
 - Binary
+
+#### `NPOIDemo/`
+Geração de arquivos Office com NPOI:
+- Criação de planilhas Excel (.xlsx)
+- Geração de documentos Word (.docx)
+- Formatação avançada (estilos, cores, fontes)
+- Tabelas e cálculos
+- Sem necessidade de Microsoft Office instalado
+
+#### `PDFGenerator/`
+Geração de documentos PDF:
+- Criação de PDFs programaticamente
+- Relatórios e documentos
+- Templates personalizados
 
 #### `CompressDecompress/`
 Compressão e descompressão de dados:
