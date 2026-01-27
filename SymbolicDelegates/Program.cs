@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 class MainClass
 {
@@ -19,7 +21,7 @@ class MainClass
         };
         
         // The "code"
-        string code = "hello world";
+        string code = File.ReadAllText("hello"); // Could using StreamReader as well (line by line)
         
         // "Tokenising" the code
         string[] tokens = code.Split(' ');
@@ -30,6 +32,8 @@ class MainClass
             if (keywords.ContainsKey(token))
             {
                 keywords[token]();
+            }else {
+                Console.WriteLine($"Unknown keyword: {token}");
             }
         }
     }
