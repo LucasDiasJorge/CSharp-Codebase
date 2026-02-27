@@ -49,43 +49,38 @@ O projeto implementa três estratégias de throttling:
 ### Controllers
 - `InvoiceController`: Endpoints para geração e processamento de notas fiscais
 
+## 📁 Estrutura do Projeto
+
+```
+InvoiceThrottlingApi/
+├── Properties/
+│   └── launchSettings.json
+├── InvoiceAppSettings.json      # Configurações da aplicação
+├── InvoiceController.cs         # Controller com endpoints de throttling
+├── InvoiceGenerator.cs          # Serviço de geração de notas fiscais
+├── InvoiceModels.cs             # Models (Invoice, InvoiceItem, etc.)
+├── InvoiceProcessor.cs          # Serviço de processamento com throttling
+├── InvoiceProgram.cs            # Entry point da aplicação
+├── InvoiceThrottlingApi.csproj  # Arquivo de projeto
+└── README.md
+```
+
 ## 🚀 Como Executar
 
-### 1. Criar estrutura de diretórios
-
-Primeiro, execute o script batch para criar a estrutura:
-
-```batch
-setup-invoice-throttling.bat
-```
-
-### 2. Organizar arquivos
-
-Mova os arquivos para seus diretórios corretos:
-
-```batch
-move InvoiceThrottlingApi.csproj InvoiceThrottlingApi\
-move InvoiceModels.cs InvoiceThrottlingApi\Models\Invoice.cs
-move InvoiceGenerator.cs InvoiceThrottlingApi\Services\InvoiceGenerator.cs
-move InvoiceProcessor.cs InvoiceThrottlingApi\Services\InvoiceProcessor.cs
-move InvoiceController.cs InvoiceThrottlingApi\Controllers\InvoiceController.cs
-move InvoiceProgram.cs InvoiceThrottlingApi\Program.cs
-move InvoiceAppSettings.json InvoiceThrottlingApi\appsettings.json
-```
-
-### 3. Restaurar dependências
+### 1. Restaurar dependências
 
 ```bash
-dotnet restore InvoiceThrottlingApi\InvoiceThrottlingApi.csproj
+cd 03-WebAPIs/InvoiceThrottlingApi
+dotnet restore
 ```
 
-### 4. Executar o projeto
+### 2. Executar o projeto
 
 ```bash
-dotnet run --project InvoiceThrottlingApi\InvoiceThrottlingApi.csproj
+dotnet run
 ```
 
-### 5. Acessar Swagger
+### 3. Acessar Swagger
 
 Abra o navegador em: `https://localhost:5001/swagger`
 

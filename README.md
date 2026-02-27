@@ -229,8 +229,7 @@ Testes e benchmarks.
 | Projeto | Descrição |
 |---------|-----------|
 | `BenchmarkTool` | Performance benchmarks |
-| `OrderRuleConsole` | Console de regras |
-| `OrderRuleConsole.Tests` | Testes xUnit |
+| `OrderRuleConsole` | Console de regras com testes xUnit |
 
 ---
 
@@ -240,7 +239,6 @@ SDKs e bibliotecas customizadas.
 | Projeto | Descrição |
 |---------|-----------|
 | `MySimpleSdk` | SDK exemplo |
-| `BlockchainDemo` | Conceitos blockchain |
 
 ---
 
