@@ -11,7 +11,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
         builder.Services.AddAuthorization();
@@ -19,7 +19,7 @@ public class Program
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
 
-        var app = builder.Build();
+        WebApplication app = builder.Build();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -40,43 +40,42 @@ public class Program
     {
         try
         {
-            using (var connection = new MySqlConnection("Server = localhost; Database = my-db; User = root; Password = myrootpass;"))
+            using (MySqlConnection connection = new MySqlConnection("Server = localhost; Database = my-db; User = root; Password = myrootpass;"))
             {
                 connection.Open();
 
-                using (var transaction = new TransactionScope()) // Inicia transação para garantir consistência
+                using (TransactionScope transaction = new TransactionScope()) // Inicia transaï¿½ï¿½o para garantir consistï¿½ncia
                 {
                     // Criar uma empresa
-                    var insertCompanyQuery = @"INSERT INTO companies (Name) VALUES (@Name);";
+                    string insertCompanyQuery = @"INSERT INTO companies (Name) VALUES (@Name);";
                     connection.Execute(insertCompanyQuery, new { Name = "Minha Empresa" });
 
-                    // Obter o ID recém-inserido
-                    var companyId = connection.QuerySingle<int>("SELECT LAST_INSERT_ID();");
+                    // Obter o ID recï¿½m-inserido
+                    int companyId = connection.QuerySingle<int>("SELECT LAST_INSERT_ID();");
                     Console.WriteLine($"Empresa inserida com ID: {companyId}");
 
-                    // Criar um usuário vinculado à empresa
-                    var insertUserQuery = @"INSERT INTO users (Name, Email, Password, company_id) VALUES (@Name, @Email, @Password, @CompanyId);";
+                    // Criar um usuï¿½rio vinculado ï¿½ empresa
+                    string insertUserQuery = @"INSERT INTO users (Name, Email, Password, company_id) VALUES (@Name, @Email, @Password, @CompanyId);";
 
-                    var salt = BCryptHelper.GenerateSalt(12); // Gerar um salt para a senha
+                    string salt = BCryptHelper.GenerateSalt(12); // Gerar um salt para a senha
 
-                    var newUser = new User
+                    User newUser = new User
                     {
                         Name = "Lucas",
                         Email = "lucas@example.com",
                         Password = BCryptHelper.HashPassword("123456", salt),
                         CompanyId = companyId
                     };
+                    int rowsAffected = connection.Execute(insertUserQuery, newUser);
+                    Console.WriteLine($"Usuï¿½rio inserido com sucesso! ID da empresa: {newUser.CompanyId}");
 
-                    var rowsAffected = connection.Execute(insertUserQuery, newUser);
-                    Console.WriteLine($"Usuário inserido com sucesso! ID da empresa: {newUser.CompanyId}");
-
-                    // Commit da transação
+                    // Commit da transaï¿½ï¿½o
                     transaction.Complete();
                 }
 
-                // Selecionar usuários
-                var users = connection.Query<User>("SELECT * FROM users");
-                foreach (var user in users)
+                // Selecionar usuï¿½rios
+                System.Collections.Generic.IEnumerable<User> users = connection.Query<User>("SELECT * FROM users");
+                foreach (User user in users)
                 {
                     Console.WriteLine($"{user.Id}: {user.Name} - {user.Email}");
                 }
