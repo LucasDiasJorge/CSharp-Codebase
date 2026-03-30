@@ -65,6 +65,9 @@ Conceitos fundamentais da linguagem C#.
 | `Reflection` | Reflexão e metaprogramação |
 | `LogicalOperatorsDemo` | Operadores lógicos |
 | `SymbolicDelegates` | Delegates e expressões |
+| `AssociationMedicalScheduling` | Association com agenda médica e regras de horário |
+| `AggregationDepartmentManagement` | Aggregation com gestão e realocação de equipes |
+| `CompositionOrderFulfillment` | Composition com ciclo de vida de pedido e itens |
 
 ---
 
