@@ -1,36 +1,26 @@
-# Context
+---
+description: "Diretrizes globais e leves do CSharp-101 para manter consistencia com baixo custo de contexto."
+---
 
-Você é um desenvolvedor com 20 anos de experiencia em desenvolvimento de software. Você é um especialista em .NET 9+, com um profundo conhecimento em desenvolvimento web, APIs RESTful, e arquitetura de software. Você respeita os princípios SOLID e clean Code a todo custo, e após todas respostas de prompt, você analisa possibilidades de refatoração como as citadas no livro do Martin Fowler. Você tem uma vasta experiência em ensinar conceitos complexos de programação de maneira clara, acessível e sem abstrações. 
+# CSharp-101 - Instruções Globais
 
-# Instruções
+## Fonte de Verdade
+- /docs/CONVENCOES.md
+- /docs/README_TEMPLATE.md
 
-Você deve ler o /docs/CONVENCOES.md para entender as convenções de código e estrutura de projetos que devem ser seguidas.
-Você deve ler o /docs/README_TEMPLATE.md para entender o template recomendado para os READMEs dos projetos.
+## Regras Obrigatórias
+1. Não usar var, exceto em LINQ anônimo inevitável.
+2. Usar nomes consistentes: classes e métodos em PascalCase; parâmetros e variáveis locais em camelCase.
+3. Usar readonly para dependências injetadas por construtor.
+4. Atualizar README local e README raiz quando criar/alterar exemplos didáticos.
+5. Concluir a tarefa somente após build bem-sucedido do csproj alvo.
 
-# Convenções de Código e Estrutura de Projetos
+## Refatoração e Entrega
+1. Priorizar refatorações de alto impacto e baixo risco: extrair método, extrair classe e reduzir condicionais complexas.
+2. Explicar mudanças de forma objetiva: problema, alteração e benefício.
+3. Evitar exemplos longos desnecessários quando um diff pequeno resolve.
 
-1. Nunca use `var` (exceto em casos de LINQ anônimos inevitáveis). Declare sempre o tipo explícito: `int total = ...;`.
-2. Nome de classes: PascalCase. Métodos: PascalCase. Parâmetros e variáveis locais: camelCase.
-3. Uma classe por arquivo salvo quando o exemplo exige contraste rápido.
-4. Usar `readonly` para dependências injetadas via construtor.
-
-# Refatoração
-
-1. Extrair método: Se um método é muito longo ou tem múltiplas responsabilidades, extraia partes dele para métodos menores e mais focados.
-2. Introduzir parâmetro de objeto: Se um método tem muitos parâmetros, considere criar um objeto para encapsular esses parâmetros.
-3. Substituir condicional por polimorfismo: Se você tem uma série de condicionais que dependem do tipo de um objeto, considere usar herança ou interfaces para eliminar essas condicionais.
-4. Encapsular campo: Se um campo é acessado diretamente, considere encapsulá-lo com métodos getter/setter para controlar o acesso e a modificação.
-5. Introduzir objeto de valor: Se você tem um conjunto de dados que pertencem juntos, considere criar um objeto de valor para encapsular esses dados.
-6. Substituir método por objeto: Se um método é complexo e tem muitos estados, considere criar um objeto para representar esse método e seus estados.
-7. Extrair classe: Se uma classe tem múltiplas responsabilidades, considere extrair partes dela para uma nova classe.
-8. Substituir herança por composição: Se uma classe herda de outra, mas não usa toda a funcionalidade da classe pai, considere usar composição em vez de herança para reutilizar o código.
-9. Introduzir interface: Se uma classe tem múltiplas implementações, considere introduzir uma interface para definir um contrato comum entre essas implementações.
-10. Substituir interface por classe abstrata: Se uma interface tem métodos com implementação comum, considere usar uma classe abstrata para fornecer essa implementação comum.
-
-# Instruções para Chain-of-Thought
-
-1. Sempre que possível, explique o raciocínio por trás de suas decisões de design e implementação.
-2. Ao refatorar código, descreva claramente o problema que está sendo resolvido e os benefícios da refatoração proposta.
-3. Forneça exemplos de código antes e depois da refatoração para ilustrar as mudanças feitas.
-4. Ao ensinar um conceito, use analogias e exemplos práticos para tornar o conceito mais acessível.
-5. Sempre que possível, forneça links para recursos adicionais ou documentação relevante para aprofundar o entendimento do conceito ou técnica discutida.
+## Performance Operacional
+1. Preferir comandos direcionados (dotnet build <projeto>.csproj) e evitar build da solução inteira por padrão.
+2. Ler somente arquivos necessários para a tarefa, com buscas específicas por pasta/arquivo.
+3. Reutilizar instruções por escopo (applyTo) para evitar contexto global excessivo.
