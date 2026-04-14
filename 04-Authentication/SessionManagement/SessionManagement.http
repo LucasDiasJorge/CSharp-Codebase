@@ -1,0 +1,82 @@
+@baseUrl = http://localhost:5210
+@contentType = application/json
+
+### 1. Registrar usuário
+POST {{baseUrl}}/api/session/register
+Content-Type: {{contentType}}
+
+{
+  "username": "john_doe",
+  "email": "john@example.com",
+  "password": "SecurePass123!"
+}
+
+###
+
+### 2. Login (cria sessão)
+# @name login
+POST {{baseUrl}}/api/session/login
+Content-Type: {{contentType}}
+
+{
+  "username": "john_doe",
+  "password": "SecurePass123!",
+  "deviceName": "Chrome on Windows"
+}
+
+###
+
+### 3. Login de outro dispositivo
+POST {{baseUrl}}/api/session/login
+Content-Type: {{contentType}}
+
+{
+  "username": "john_doe",
+  "password": "SecurePass123!",
+  "deviceName": "Firefox on Linux"
+}
+
+###
+
+### 4. Renovar tokens (refresh rotation)
+POST {{baseUrl}}/api/session/refresh
+Content-Type: {{contentType}}
+
+{
+  "refreshToken": "COLE_O_REFRESH_TOKEN_AQUI"
+}
+
+###
+
+### 5. Listar sessões ativas
+GET {{baseUrl}}/api/session
+Authorization: Bearer COLE_O_ACCESS_TOKEN_AQUI
+
+###
+
+### 6. Logout da sessão atual
+POST {{baseUrl}}/api/session/logout
+Authorization: Bearer COLE_O_ACCESS_TOKEN_AQUI
+
+###
+
+### 7. Revogar uma sessão específica por ID
+DELETE {{baseUrl}}/api/session/COLE_O_SESSION_ID_AQUI
+Authorization: Bearer COLE_O_ACCESS_TOKEN_AQUI
+Content-Type: {{contentType}}
+
+{
+  "reason": "Dispositivo perdido"
+}
+
+###
+
+### 8. Revogar todas as outras sessões (mantém a atual)
+DELETE {{baseUrl}}/api/session?keepCurrent=true
+Authorization: Bearer COLE_O_ACCESS_TOKEN_AQUI
+
+###
+
+### 9. Revogar TODAS as sessões incluindo a atual
+DELETE {{baseUrl}}/api/session?keepCurrent=false
+Authorization: Bearer COLE_O_ACCESS_TOKEN_AQUI
