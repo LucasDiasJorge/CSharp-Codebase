@@ -101,6 +101,7 @@ APIs Web, serviços e aplicações.
 | `SwaggerClientCode` | Geração de código cliente |
 | `InvoiceThrottlingApi` | Rate limiting |
 | `TransactionalOrderApi` | API transacional |
+| `IdempotencyCacheApi` | Chave de idempotencia com validacao de payload e invalidacao de cache |
 | `ShareableUser` | Biblioteca compartilhável |
 | `WebApplication` | MVC/Razor |
 
