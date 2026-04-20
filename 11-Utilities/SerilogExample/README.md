@@ -1,8 +1,53 @@
 # SerilogExample (Ports and Adapters)
 
+## Visão geral
+
 API mínima organizada em portas e adaptadores (hexagonal). Serilog fica para você plugar depois; aqui há um guia rápido de logging estruturado.
 
-## Arquitetura
+## Conceitos abordados
+
+- Exemplo didático sobre SerilogExample (Ports and Adapters) no contexto de utilitários, transformação de dados e observabilidade.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como SerilogExample (Ports and Adapters) se aplica em um cenário prático de utilitários, transformação de dados e observabilidade.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+SerilogExample/
+\-- SerilogExample/
+    +-- Application/
+    +-- Domain/
+    +-- Infrastructure/
+    +-- logs/
+    +-- Properties/
+    +-- SerilogExample/
+    +-- Web/
+    +-- appsettings.Development.json
+    \-- ...
+```
+
+## Como executar
+
+Escolha um dos projetos abaixo para execução direcionada:
+
+- `dotnet run --project 11-Utilities/SerilogExample/SerilogExample/SerilogExample.csproj`
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Arquitetura
+
 - `Domain`: modelo e contratos de portas (`IGetForecast` inbound, `IWeatherProvider` outbound).
 - `Application`: caso de uso orquestra o domínio (`GetForecastUseCase`).
 - `Infrastructure`: adaptador que satisfaz portas de saída (`InMemoryWeatherProvider`).
@@ -14,14 +59,16 @@ Fluxo do `/api/forecast`:
 3) Caso de uso pede dados à porta outbound `IWeatherProvider`.
 4) Adaptador in-memory devolve a coleção de `WeatherReading` (domínio puro).
 
-## Como rodar
+##### Como rodar
+
 ```powershell
 cd "c:\Users\Lucas Jorge\Documents\Default Projects\Back\CSharp-101\SerilogExample\SerilogExample"
 dotnet run
 # GET https://localhost:5001/api/forecast?days=3
 ```
 
-## Onde plugar o Serilog depois
+##### Onde plugar o Serilog depois
+
 1) Pacotes sugeridos:
    - `Serilog.AspNetCore`
    - `Serilog.Enrichers.Environment`
@@ -40,20 +87,23 @@ dotnet run
 3) No `appsettings*.json`, adicione a seção `Serilog` para controlar nível, enrichers e sinks.
 4) Dentro das camadas, injete `ILogger<T>` (já fornecido pelo host) e use propriedades nomeadas.
 
-## Dicas práticas de logging estruturado
+##### Dicas práticas de logging estruturado
+
 - Prefira `LogInformation("Processando forecast para {Days}", days);` em vez de interpolar strings.
 - Sempre inclua correlação: `TraceIdentifier`, `RequestId`, `UserId` (quando houver).
 - Níveis típicos: `Debug` (detalhe de desenvolvimento), `Information` (eventos de negócio), `Warning` (situações inesperadas), `Error` (falhou, mas continuou), `Fatal` (serviço indisponível).
 - Mantenha mensagens curtas e invariantes; propriedades carregam o contexto.
 - Não logue dados sensíveis (tokens, senhas, PII). Mas logue chaves anônimas (hashes, ids).
 
-### Exemplos de eventos úteis
+##### Exemplos de eventos úteis
+
 - Início/fim de caso de uso: `LogInformation("GetForecastStarted", new { Days = days });`
 - Integrações externas: `LogInformation("WeatherProviderCall", new { Days = days, Provider = "InMemory" });`
 - Erros com contexto: `LogError(ex, "WeatherProviderFailed", new { Days = days });`
 - Métrica derivada: logue contadores ou tempos (`ElapsedMs`) para alimentar dashboards.
 
-### Estrutura sugerida de propriedades
+##### Estrutura sugerida de propriedades
+
 - `event` (nome curto do evento)
 - `message` (frase humana, sem interpolar dados)
 - `user_id` / `tenant_id`
@@ -61,7 +111,8 @@ dotnet run
 - `context` (objeto com dados do domínio)
 - `elapsed_ms` (quando medir duração)
 
-## Teste rápido do endpoint
+##### Teste rápido do endpoint
+
 ```powershell
 # padrão (5 dias)
 Invoke-RestMethod -Uri "https://localhost:5001/api/forecast" -SkipCertificateCheck
@@ -70,7 +121,8 @@ Invoke-RestMethod -Uri "https://localhost:5001/api/forecast" -SkipCertificateChe
 Invoke-RestMethod -Uri "https://localhost:5001/api/forecast?days=10" -SkipCertificateCheck
 ```
 
-## Próximos passos sugeridos
+##### Próximos passos sugeridos
+
 - Trocar `InMemoryWeatherProvider` por um adaptador real (HTTP, banco, cache).
 - Adicionar testes de unidade para o caso de uso e para o adaptador.
 - Configurar Serilog com console JSON e (opcional) um sink de observabilidade.

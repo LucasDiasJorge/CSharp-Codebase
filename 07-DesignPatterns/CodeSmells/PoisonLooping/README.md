@@ -1,8 +1,42 @@
 # Poison Looping (Poisoned Loops)
 
+## Visão geral
+
 This guide explains, in a practical and concise way, what "Poison Looping" (poisoned loops) is, how to spot it in C# code, simple reproductions, and how to mitigate it.
 
-## What is it
+## Conceitos abordados
+
+- Exemplo didático sobre Poison Looping (Poisoned Loops) no contexto de design patterns, modelagem OO e código limpo.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como Poison Looping (Poisoned Loops) se aplica em um cenário prático de design patterns, modelagem OO e código limpo.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+PoisonLooping/
+\-- PoisonLoopingExamples.cs
+```
+
+## Como executar
+
+Consulte o código desta pasta e os projetos relacionados antes de executar comandos específicos.
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### What is it
+
 "Poison Loop" is a term used to describe loops that, either by mistake or malicious intent, cause harmful behavior:
 - Excessive CPU or memory usage (infinite loops or resource-exhaustion loops)
 - Deadlocks, livelocks, or data corruption in concurrent environments
@@ -11,7 +45,8 @@ This guide explains, in a practical and concise way, what "Poison Looping" (pois
 
 This document focuses on developer-facing scenarios in C# applications.
 
-## Warning signs (how to detect)
+##### Warning signs (how to detect)
+
 - CPU stuck at 90–100% while the application appears idle
 - Memory keeps growing without stabilizing (possible leak)
 - Loops without a clear exit condition, or whose condition never changes
@@ -24,9 +59,8 @@ Useful tools:
 - Profilers: `dotnet-trace`, PerfView, Visual Studio Profiler
 - Dumps and thread analysis: `dotnet-dump`
 
-## Simple C# examples
+##### 1) Infinite CPU-draining loop
 
-### 1) Infinite CPU-draining loop
 ```csharp
 // Symptom: high CPU, unresponsive application
 while (true)
@@ -48,7 +82,8 @@ for (int i = 0; i < maxIterations && !shouldStop; i++)
 }
 ```
 
-### 2) Memory-exhaustion loop
+##### 2) Memory-exhaustion loop
+
 ```csharp
 var list = new List<byte[]>();
 while (true)
@@ -71,7 +106,8 @@ list.Clear();
 // In real scenarios, prefer streams, reusable buffers or configurable limits
 ```
 
-### 3) Condition that never changes (logic bug)
+##### 3) Condition that never changes (logic bug)
+
 ```csharp
 int x = 0;
 while (x < 10)
@@ -90,7 +126,8 @@ while (x < 10)
 }
 ```
 
-### 4) Simple livelock (concurrency)
+##### 4) Simple livelock (concurrency)
+
 ```csharp
 // Two threads being "polite" and yielding, so no progress happens
 volatile bool resourceInUse = false;
@@ -128,7 +165,8 @@ finally
 }
 ```
 
-### 5) Busy-wait without pause
+##### 5) Busy-wait without pause
+
 ```csharp
 while (!conditionMet)
 {
@@ -145,7 +183,8 @@ while (!conditionMet)
 }
 ```
 
-## Mitigation strategies (checklist)
+##### Mitigation strategies (checklist)
+
 - Define clear and testable exit conditions
 - Defensive limits: maximum iteration counts, maximum time, maximum buffer sizes
 - Cooperative pauses in long-running loops: `await Task.Delay`, small `Thread.Sleep`
@@ -154,7 +193,8 @@ while (!conditionMet)
 - Exponential backoff and jitter for retries
 - Cancellation support: accept `CancellationToken` in async loops
 
-## How to instrument to detect
+##### How to instrument to detect
+
 - Log loop start/end and execution frequency
 - Expose counters: iterations per second, time per iteration
 - Sample memory and CPU periodically
@@ -177,7 +217,8 @@ while (!stop && iterations < 10_000)
 }
 ```
 
-## Full example: safe async loop pattern
+##### Full example: safe async loop pattern
+
 ```csharp
 public static async Task ProcessQueueAsync(ChannelReader<string> reader, CancellationToken ct)
 {
@@ -203,14 +244,13 @@ public static async Task ProcessQueueAsync(ChannelReader<string> reader, Cancell
 }
 ```
 
-## Code review checklist
+##### Code review checklist
+
 - Does the loop have a clear exit condition?
 - Are the condition variables updated inside the loop?
 - Are there defensive limits (time, iterations, memory)?
 - If waiting, is there a cooperative pause?
 - For concurrency, are safe primitives used?
 - Are there sufficient logs/metrics to observe behavior?
-
----
 
 See also the `PoisonLoopingExamples.cs` file in this folder for quick-to-compile examples.

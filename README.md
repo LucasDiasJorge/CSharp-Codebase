@@ -1,333 +1,122 @@
-# 🎯 C# 101 - Guia Completo de Desenvolvimento .NET
+# CSharp-101
 
-![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
+## Visão geral
 
-> 📚 **Repositório educacional** com exemplos práticos, conceitos fundamentais e guias completos para desenvolvimento C# e .NET
+O CSharp-101 é um repositório educacional com exemplos práticos em C# e .NET organizados por trilhas temáticas. Cada pasta reúne projetos pequenos e focados, com documentação local padronizada para facilitar leitura, execução isolada e reaproveitamento como referência técnica.
 
----
+O catálogo cobre fundamentos da linguagem, APIs web, autenticação, mensageria, cache, padrões de projeto, padrões arquiteturais, persistência, algoritmos, utilitários, testes e SDKs. As convenções de documentação ficam em `docs/` e o padronizador de README em `tools/`.
 
-## 📋 Índice
+## Conceitos abordados
 
-- [📖 Sobre o Projeto](#-sobre-o-projeto)
-- [🗂️ Estrutura do Repositório](#️-estrutura-do-repositório)
-- [📂 Categorias Detalhadas](#-categorias-detalhadas)
-- [🚀 Como Usar](#-como-usar)
-- [🛠️ Comandos Essenciais](#️-comandos-essenciais)
-- [🤝 Como Contribuir](#-como-contribuir)
+- Linguagem C#, orientação a objetos, LINQ, delegates, eventos e reflection.
+- ASP.NET Core, Minimal APIs, middleware, gRPC, autenticação, autorização e segurança.
+- Mensageria, Redis, design patterns, CQRS, Saga, persistência, algoritmos e utilitários de apoio.
+- Testes, benchmarks e construção de bibliotecas e SDKs reutilizáveis.
 
----
+## Objetivos de aprendizagem
 
-## 📖 Sobre o Projeto
+- Encontrar rapidamente um exemplo prático para um tema específico do ecossistema .NET.
+- Executar exemplos de forma isolada, com comandos direcionados por projeto.
+- Comparar abordagens diferentes para o mesmo problema técnico.
+- Usar os READMEs locais como índice curto de estudo e navegação.
 
-Este repositório contém uma coleção abrangente de exemplos práticos em **C#** e **.NET 9**, organizados em **13 categorias temáticas** para facilitar o aprendizado e consulta.
+## Estrutura do projeto
 
-### 🎯 Objetivos
-- ✅ Fornecer exemplos práticos de conceitos C#/.NET
-- ✅ Demonstrar implementações de padrões de design
-- ✅ Apresentar boas práticas de desenvolvimento
-- ✅ Servir como referência rápida para consulta
-
----
-
-## 🗂️ Estrutura do Repositório
-
-```
+```text
 CSharp-101/
-├── 01-Fundamentals/           # Conceitos básicos de C#
-├── 02-AsyncAndConcurrency/    # Async/Await, Threads, Tasks
-├── 03-WebAPIs/                # APIs Web, gRPC, Blazor
-├── 04-Authentication/         # JWT, OAuth, 2FA, Segurança
-├── 05-Messaging/              # Kafka, RabbitMQ, Filas
-├── 06-Caching/                # Redis, Cache patterns
-├── 07-DesignPatterns/         # GoF, SOLID, Clean Code
-├── 08-ArchitecturalPatterns/  # CQRS, Saga, Circuit Breaker
-├── 09-Data/                   # EF, Dapper, MongoDB, SQL
-├── 10-Algorithms/             # Grafos, Ordenação, Algoritmos
-├── 11-Utilities/              # Serialização, PDF, Excel
-├── 12-Testing/                # Benchmarks, Unit Tests
-└── 13-SDKsAndLibraries/       # SDKs customizados
++-- 01-Fundamentals/
++-- 02-AsyncAndConcurrency/
++-- 03-WebAPIs/
++-- 04-Authentication/
++-- 05-Messaging/
++-- 06-Caching/
++-- 07-DesignPatterns/
++-- 08-ArchitecturalPatterns/
++-- 09-Data/
++-- 10-Algorithms/
++-- 11-Utilities/
++-- 12-Testing/
++-- 13-SDKsAndLibraries/
++-- docs/
++-- tools/
++-- CSharp-101.sln
++-- README.md
++\-- .github/
 ```
 
----
+## Como executar
 
-## 📂 Categorias Detalhadas
-
-### 📘 01-Fundamentals
-Conceitos fundamentais da linguagem C#.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `Course` | Exemplos básicos para iniciantes |
-| `Events` | Sistema de eventos e delegates |
-| `Linq` | Language Integrated Query |
-| `Reflection` | Reflexão e metaprogramação |
-| `LogicalOperatorsDemo` | Operadores lógicos |
-| `SymbolicDelegates` | Delegates e expressões |
-| `AssociationMedicalScheduling` | Association com agenda médica e regras de horário |
-| `AggregationDepartmentManagement` | Aggregation com gestão e realocação de equipes |
-| `CompositionOrderFulfillment` | Composition com ciclo de vida de pedido e itens |
-
----
-
-### ⚡ 02-AsyncAndConcurrency
-Programação assíncrona e concorrente.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `Asynchronous` | Async/await básico |
-| `AsyncTasksDemo` | Task.WhenAll, WhenAny |
-| `AtomicOperationsDemo` | Operações atômicas |
-| `Threads` | Threads e sincronização |
-| `BackgroudWorker` | IHostedService |
-| `JobQueueDemo` | Filas de trabalho |
-| `TaskManagement` | Gerenciamento de tarefas |
-
----
-
-### 🌐 03-WebAPIs
-APIs Web, serviços e aplicações.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `MinimalApiDemo` | Minimal APIs .NET 6+ |
-| `SimpleWebAPI` | API REST básica |
-| `BlazorHelloWorld` | Blazor Server |
-| `CustomFilterApi` | Action/Result Filters |
-| `CustomMiddleware` | Middlewares customizados |
-| `FluentValidationUserApi` | Validação com FluentValidation |
-| `GrpcSample` | gRPC Server/Client |
-| `SwaggerClientCode` | Geração de código cliente |
-| `InvoiceThrottlingApi` | Rate limiting |
-| `TransactionalOrderApi` | API transacional |
-| `IdempotencyCacheApi` | Chave de idempotencia com validacao de payload e invalidacao de cache |
-| `ShareableUser` | Biblioteca compartilhável |
-| `WebApplication` | MVC/Razor |
-
----
-
-### 🔐 04-Authentication
-Autenticação, autorização e segurança.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `AdvancedAuthSystem` | JWT + 2FA + RBAC/ABAC |
-| `Authentication/Auth` | JWT básico |
-| `Authentication/OAuthApplication` | OAuth 2.0 |
-| `Security/EncryptDecrypt` | Criptografia |
-| `Security/SafeVault` | Cofre seguro |
-| `Security/SecurityAndAuthentication` | Exemplos integrados |
-
----
-
-### 📬 05-Messaging
-Mensageria e streaming de eventos.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `Kafka/Send` | Producer Kafka |
-| `Kafka/Receive` | Consumer Kafka |
-| `KafkaStreamApi` | Stream processing |
-| `RabbitMQ/Send` | Producer RabbitMQ |
-| `RabbitMQ/Receive` | Consumer RabbitMQ |
-| `QueueExample` | Filas customizadas |
-
----
-
-### 💨 06-Caching
-Estratégias e padrões de cache.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `Caching/CacheAside` | Padrão Cache-Aside |
-| `Caching/CacheIncrement` | Contadores Redis |
-| `Caching/CachePatterns` | 8 padrões de cache |
-| `Caching/FusionCache` | Cache híbrido |
-| `Caching/RedisConsoleApp` | Operações Redis |
-| `Caching/RedisMySQLIntegration` | Redis + MySQL |
-| `UnifiedCacheSdk` | SDK unificado |
-
----
-
-### 🏗️ 07-DesignPatterns
-Padrões de design e boas práticas.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `DesignPattern/Behavioral` | Chain of Responsibility, Mediator, State, Strategy, Visitor |
-| `DesignPattern/Creational` | Builder, Factory |
-| `DesignPattern/Structural` | Adapter, Composite, Decorator |
-| `SOLIDExamples` | 5 princípios SOLID |
-| `ObjectCalisthenics` | 9 regras de OO |
-| `CodeSmells` | Code smells e soluções |
-| `RichVsAnemicDomain` | DDD comparativo |
-| `StrategyIntegration` | Integração Strategy |
-
----
-
-### 🏛️ 08-ArchitecturalPatterns
-Padrões arquiteturais avançados.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `CQRSDemo` | Command/Query Separation |
-| `SagaPattern` | Transações distribuídas |
-| `CircuitBreakerDemo` | Resiliência |
-| `CarriedEvent` | Event Carried State |
-| `UseCases` | Clean Architecture |
-| `PersistencePatterns` | Repository, UoW |
-| `TransactionPattern` | Transações |
-| `TransactionScript` | Script transacional |
-| `ServiceRegistration` | Dependency Injection |
-
----
-
-### 💾 09-Data
-Banco de dados e persistência.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `Data/Dapper` | Micro-ORM Dapper |
-| `Data/DapperExample` | Dapper avançado |
-| `Data/MongoUserApi` | MongoDB |
-| `Data/Postgres` | PostgreSQL |
-| `Data/MysqlExample` | MySQL |
-| `Data/MoneyStorageApi` | API financeira |
-| `Data/ProcedureExample` | Stored procedures |
-
----
-
-### 📊 10-Algorithms
-Algoritmos e estruturas de dados.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `GraphTraversalDemo` | BFS, DFS |
-| `LoadBalancingAlgorithms` | Round Robin, etc. |
-| `RealWorldBubbleSort` | Bubble Sort prático |
-| `SlidingWindows` | Janela deslizante |
-
----
-
-### 🛠️ 11-Utilities
-Utilitários e transformação de dados.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `ClassToDTO` | Mapeamento DTO |
-| `ClassToXml` | Serialização XML |
-| `XmlBasics` | Manipulação XML |
-| `Serialization` | JSON/XML/Binary |
-| `CompressDecompress` | Compressão |
-| `NPOIDemo` | Excel/Word |
-| `PDFGenerator` | Geração PDF |
-| `DictionaryMerge` | Merge de dicionários |
-| `SerilogExample` | Logging estruturado |
-
----
-
-### 🧪 12-Testing
-Testes e benchmarks.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `BenchmarkTool` | Performance benchmarks |
-| `OrderRuleConsole` | Console de regras com testes xUnit |
-
----
-
-### 📦 13-SDKsAndLibraries
-SDKs e bibliotecas customizadas.
-
-| Projeto | Descrição |
-|---------|-----------|
-| `MySimpleSdk` | SDK exemplo |
-
----
-
-## 🚀 Como Usar
-
-### 📋 Pré-requisitos
-
-- [.NET 9.0 SDK](https://dotnet.microsoft.com/download)
-- [Visual Studio Code](https://code.visualstudio.com/) ou [Visual Studio](https://visualstudio.microsoft.com/)
-- [Docker](https://www.docker.com/) (para Kafka/RabbitMQ/Redis)
-
-### ⚡ Instalação
+Prefira comandos direcionados ao arquivo `.csproj` do exemplo que deseja estudar.
 
 ```bash
-# Clonar o repositório
-git clone https://github.com/LucasDiasJorge/CSharp-101.git
-cd CSharp-101
+# Build de um exemplo console
+dotnet build 01-Fundamentals/AggregationDepartmentManagement/AggregationDepartmentManagement.csproj
 
-# Restaurar e compilar
-dotnet build CSharp-101.sln
+# Execução de uma API
+dotnet run --project 03-WebAPIs/MinimalApiDemo/MinimalApiDemo.csproj
 
-# Executar um projeto específico
-cd 01-Fundamentals/Linq
-dotnet run
+# Execução de testes
+dotnet test 12-Testing/OrderRuleConsole/OrderRuleConsole.Tests/OrderRuleConsole.Tests.csproj
+
+# Reaplicar a padronização de documentação
+powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 ```
 
-### 🐳 Docker (serviços externos)
+## Boas práticas e pontos de atenção
+
+- Use o README local de cada pasta antes de executar, alterar ou validar o projeto.
+- Prefira `build`, `run` e `test` por `.csproj`; a solução raiz funciona melhor como índice do workspace do que como ponto único de validação.
+- Exemplos com Kafka, RabbitMQ, Redis, MySQL, PostgreSQL ou MongoDB exigem serviços externos ativos.
+- As convenções oficiais de documentação deste repositório estão em `docs/CONVENCOES.md` e `docs/README_TEMPLATE.md`.
+
+## Conteúdo complementar
+
+### Trilhas temáticas
+
+| Pasta | Foco principal | Exemplos de referência |
+|------|----------------|------------------------|
+| `01-Fundamentals` | Fundamentos da linguagem e OO | `Course`, `Events`, `Linq`, `Reflection` |
+| `02-AsyncAndConcurrency` | Async/await, tasks, threads e coordenação | `Asynchronous`, `AsyncTasksDemo`, `JobQueueDemo` |
+| `03-WebAPIs` | APIs, middleware, gRPC e aplicações web | `MinimalApiDemo`, `GrpcSample`, `CustomMiddleware` |
+| `04-Authentication` | JWT, OAuth, sessão e segurança | `Auth`, `SessionManagement`, `AdvancedAuthSystem` |
+| `05-Messaging` | Filas, brokers e streaming | `Kafka`, `RabbitMQ`, `KafkaStreamApi` |
+| `06-Caching` | Estratégias de cache e Redis | `CacheAside`, `CachePatterns`, `FusionCache` |
+| `07-DesignPatterns` | GoF, SOLID e modelagem OO | `DesignPattern`, `SOLIDExamples`, `ObjectCalisthenics` |
+| `08-ArchitecturalPatterns` | Organização de casos de uso e padrões arquiteturais | `UseCases`, `CQRSDemo`, `SagaPattern` |
+| `09-Data` | Bancos de dados, ORMs e acesso a dados | `Dapper`, `MongoUserApi`, `MoneyStorageApi` |
+| `10-Algorithms` | Estruturas de dados e análise de cenários | `GraphTraversalDemo`, `PriorityQueueDemo`, `SlidingWindows` |
+| `11-Utilities` | Transformação de dados, serialização e observabilidade | `Serialization`, `NPOIDemo`, `SerilogExample` |
+| `12-Testing` | Benchmarks e validação de comportamento | `BenchmarkTool`, `OrderRuleConsole` |
+| `13-SDKsAndLibraries` | Bibliotecas e SDKs reutilizáveis | `MySimpleSdk` |
+
+### Serviços externos comuns
 
 ```bash
-# Kafka
-cd 05-Messaging/Kafka && docker-compose up -d
-
 # RabbitMQ
 docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
 
 # Redis
 docker run -d --name redis -p 6379:6379 redis
+
+# Kafka (exemplo da pasta Kafka)
+cd 05-Messaging/Kafka
+docker compose up -d
 ```
 
----
+### Ferramentas de documentação
 
-## 🛠️ Comandos Essenciais
+- `docs/CONVENCOES.md`: convenções de escrita e manutenção dos READMEs.
+- `docs/README_TEMPLATE.md`: template base para novos exemplos.
+- `tools/ReadmeStandardizer/`: utilitário em C# para padronização em lote.
 
-```bash
-# Criar projeto console
-dotnet new console -n MeuProjeto
+## Referências
 
-# Criar Web API
-dotnet new webapi -n MinhaApi
+- [Documentação do .NET](https://learn.microsoft.com/dotnet/)
+- [ASP.NET Core](https://learn.microsoft.com/aspnet/core/)
+- [Entity Framework Core](https://learn.microsoft.com/ef/core/)
+- [Refactoring Guru](https://refactoring.guru/design-patterns)
 
-# Adicionar pacote
-dotnet add package Newtonsoft.Json
+## Documentação complementar
 
-# Executar testes
-dotnet test
-
-# Build em release
-dotnet build -c Release
-
-# Publicar
-dotnet publish -c Release -o ./publish
-```
-
----
-
-## 🤝 Como Contribuir
-
-1. **Fork** o repositório
-2. Crie uma **branch** (`git checkout -b feature/MinhaFeature`)
-3. **Commit** suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
-4. **Push** para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um **Pull Request**
-
----
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT.
-
----
-
-<div align="center">
-
-**🚀 Feito com ❤️ para a comunidade de desenvolvedores C#/.NET**
-
-[⭐ Deixe uma estrela](https://github.com/LucasDiasJorge/CSharp-101) • [🐛 Reporte um bug](https://github.com/LucasDiasJorge/CSharp-101/issues)
-
-</div>
+- [docs/CONVENCOES.md](./docs/CONVENCOES.md) - Convenções de documentação do repositório.
+- [docs/README_TEMPLATE.md](./docs/README_TEMPLATE.md) - Template base para READMEs padronizados.

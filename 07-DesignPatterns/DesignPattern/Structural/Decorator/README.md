@@ -1,16 +1,57 @@
-# 🎨 Decorator Pattern
+# Decorator Pattern
 
-## 📋 Descrição
+## Visão geral
 
-O **Decorator Pattern** é um padrão de design estrutural que permite adicionar novos comportamentos a objetos dinamicamente, colocando-os dentro de objetos especiais chamados "wrappers" (embrulhos) que contêm esses comportamentos.
+Projeto didático do CSharp-101 dedicado a Decorator Pattern, com foco em design patterns, modelagem OO e código limpo.
 
-## 🎯 Objetivo
+## Conceitos abordados
+
+- Exemplo didático sobre Decorator Pattern no contexto de design patterns, modelagem OO e código limpo.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
 
 - Adicionar responsabilidades a objetos individuais de forma dinâmica e transparente
 - Fornecer uma alternativa flexível à herança para estender funcionalidades
 - Permitir combinações de comportamentos sem criar explosão de subclasses
 
-## 🏗️ Estrutura
+## Estrutura do projeto
+
+```text
+Decorator/
++-- Decorators/
+|   +-- EmailDecorator.cs
+|   +-- PriorityDecorator.cs
+|   +-- SlackDecorator.cs
+|   \-- SmsDecorator.cs
++-- BaseNotifier.cs
++-- Decorator.csproj
++-- Decorator.sln
++-- INotifier.cs
++-- NotifierDecorator.cs
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 07-DesignPatterns/DesignPattern/Structural/Decorator/Decorator.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Descrição
+
+O **Decorator Pattern** é um padrão de design estrutural que permite adicionar novos comportamentos a objetos dinamicamente, colocando-os dentro de objetos especiais chamados "wrappers" (embrulhos) que contêm esses comportamentos.
+
+##### Estrutura
 
 ```
 INotifier (Interface)
@@ -28,24 +69,26 @@ NotifierDecorator (Decorator Abstrato)
     └── PriorityDecorator (Decorator Concreto)
 ```
 
-## 📦 Componentes
+##### 1. **INotifier** (Component Interface)
 
-### 1. **INotifier** (Component Interface)
 Interface que define as operações que podem ser alteradas por decoradores.
 
-### 2. **BaseNotifier** (Concrete Component)
+##### 2. **BaseNotifier** (Concrete Component)
+
 Implementação básica que pode ser decorada.
 
-### 3. **NotifierDecorator** (Base Decorator)
+##### 3. **NotifierDecorator** (Base Decorator)
+
 Classe abstrata que mantém referência ao componente decorado e delega operações para ele.
 
-### 4. **Decoradores Concretos**
+##### 4. **Decoradores Concretos**
+
 - **EmailDecorator**: Adiciona envio por email
 - **SmsDecorator**: Adiciona envio por SMS
 - **SlackDecorator**: Adiciona envio por Slack
 - **PriorityDecorator**: Adiciona marcação de prioridade
 
-## 💡 Exemplo de Uso
+##### Exemplo de Uso
 
 ```csharp
 // Notificação simples
@@ -67,7 +110,7 @@ notifier = new PriorityDecorator(notifier, "HIGH");
 notifier.Send("Mensagem importante!");
 ```
 
-## ✅ Vantagens
+##### Vantagens
 
 1. **Flexibilidade**: Adiciona funcionalidades em tempo de execução
 2. **Composição**: Combina múltiplos comportamentos
@@ -75,16 +118,15 @@ notifier.Send("Mensagem importante!");
 4. **Open/Closed**: Estende funcionalidades sem modificar código existente
 5. **Sem explosão de classes**: Evita criar dezenas de subclasses para cada combinação
 
-## ❌ Desvantagens
+##### Desvantagens
 
 1. Pode resultar em muitas classes pequenas no sistema
 2. Dificulta a remoção de um decorador específico da pilha
 3. Pode ser difícil configurar decoradores que dependem da ordem
 4. Código inicial pode parecer complexo para iniciantes
 
-## 🔄 Diferença: Decorator vs Herança
+##### Herança
 
-### Herança
 ```csharp
 // Precisa criar uma classe para cada combinação
 class EmailNotifier : BaseNotifier { }
@@ -94,7 +136,8 @@ class EmailSmsSlackNotifier : BaseNotifier { }
 // ... explosão de classes!
 ```
 
-### Decorator
+##### Decorator
+
 ```csharp
 // Composição flexível
 var notifier = new EmailDecorator(
@@ -106,7 +149,7 @@ var notifier = new EmailDecorator(
 );
 ```
 
-## 🎭 Cenários de Uso Real
+##### Cenários de Uso Real
 
 1. **Sistema de Logging**: Adicionar timestamps, níveis de log, formatação
 2. **Streams I/O**: BufferedStream, GZipStream, CryptoStream
@@ -116,14 +159,7 @@ var notifier = new EmailDecorator(
 6. **Cache**: Adicionar camadas de cache a repositórios
 7. **Segurança**: Adicionar criptografia, compressão, validação
 
-## 🏃 Como Executar
-
-```bash
-cd DesignPattern/Structural/Decorator
-dotnet run
-```
-
-## 📊 Saída Esperada
+##### Saída Esperada
 
 ```
 === DECORATOR PATTERN DEMO ===
@@ -147,7 +183,7 @@ Descrição: Base Notification + Email + SMS
 Custo: $0.35
 ```
 
-## 🔗 Relação com Outros Padrões
+##### Relação com Outros Padrões
 
 - **Adapter**: Muda a interface, Decorator adiciona funcionalidades
 - **Composite**: Decorator pode ser visto como Composite com um único filho
@@ -155,16 +191,16 @@ Custo: $0.35
 - **Proxy**: Controla acesso, Decorator adiciona funcionalidades
 - **Chain of Responsibility**: Similar na estrutura, mas com propósitos diferentes
 
-## 📚 Referências
-
-- Design Patterns: Elements of Reusable Object-Oriented Software (GoF)
-- [Refactoring Guru - Decorator](https://refactoring.guru/design-patterns/decorator)
-- [Microsoft Docs - Decorator Pattern](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/)
-
-## 🎯 Princípios SOLID Aplicados
+##### Princípios SOLID Aplicados
 
 - ✅ **Single Responsibility**: Cada decorador tem uma responsabilidade
 - ✅ **Open/Closed**: Aberto para extensão (novos decoradores), fechado para modificação
 - ✅ **Liskov Substitution**: Decoradores são substituíveis pelo componente base
 - ✅ **Interface Segregation**: Interface INotifier é específica e coesa
 - ✅ **Dependency Inversion**: Depende de abstrações (INotifier), não de implementações
+
+## Referências
+
+- Design Patterns: Elements of Reusable Object-Oriented Software (GoF)
+- [Refactoring Guru - Decorator](https://refactoring.guru/design-patterns/decorator)
+- [Microsoft Docs - Decorator Pattern](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/)

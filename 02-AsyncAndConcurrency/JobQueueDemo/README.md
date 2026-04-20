@@ -1,10 +1,16 @@
-# 📦 JobQueueDemo - Filas de Processamento em C#
+# JobQueueDemo - Filas de Processamento em C#
+
+## Visão geral
 
 Um sistema didático e progressivo para aprender **filas de processamento concorrente** em C# usando `System.Threading.Channels`.
 
----
+## Conceitos abordados
 
-## 🎯 Objetivos de Aprendizado
+- Exemplo didático sobre JobQueueDemo - Filas de Processamento em C# no contexto de assincronia, tasks, threads e coordenação de trabalho.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
 
 Este projeto ensina os seguintes conceitos de forma **progressiva** e **prática**:
 
@@ -15,13 +21,36 @@ Este projeto ensina os seguintes conceitos de forma **progressiva** e **prática
 5. **Estatísticas e Métricas** de processamento
 6. **Aplicações do Mundo Real** (e-commerce, sistemas financeiros, etc)
 
----
+## Estrutura do projeto
 
-## 📚 Estrutura do Projeto
+```text
+JobQueueDemo/
++-- JobQueueDemo.csproj
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 02-AsyncAndConcurrency/JobQueueDemo/JobQueueDemo.csproj
+```
+
+Você verá um **menu interativo** para escolher qual exemplo executar:
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Estrutura do Projeto
 
 O projeto está organizado em **3 exemplos progressivos**:
 
-### 1️⃣ Exemplo Básico
+##### 1️⃣ Exemplo Básico
+
 **Objetivo:** Entender os fundamentos de filas de processamento
 
 - Como criar e usar a fila
@@ -29,7 +58,8 @@ O projeto está organizado em **3 exemplos progressivos**:
 - Processar itens em paralelo
 - Entender ordem de conclusão vs ordem de entrada
 
-### 2️⃣ Exemplo Avançado
+##### 2️⃣ Exemplo Avançado
+
 **Objetivo:** Processar grande volume com estatísticas
 
 - Processamento em larga escala (50 notas)
@@ -37,7 +67,8 @@ O projeto está organizado em **3 exemplos progressivos**:
 - Cálculo de métricas (taxa de sucesso, tempo médio)
 - Operações atômicas para valores monetários
 
-### 3️⃣ Exemplo Mundo Real
+##### 3️⃣ Exemplo Mundo Real
+
 **Objetivo:** Aplicar em cenário realista de e-commerce
 
 - Simulação de sistema de emissão de notas fiscais
@@ -45,40 +76,11 @@ O projeto está organizado em **3 exemplos progressivos**:
 - Relatório de reconciliação
 - Cálculo de throughput
 
----
+##### Pré-requisitos
 
-## 🚀 Como Executar
-
-### Pré-requisitos
 - .NET 9 SDK instalado
 
-### Executar o Projeto
-
-```bash
-cd JobQueueDemo
-dotnet run
-```
-
-Você verá um **menu interativo** para escolher qual exemplo executar:
-
-```
-╔═════════════════════════════════════════════════════════════════╗
-║        📦 JOBQUEUEDEMO - FILAS DE PROCESSAMENTO EM C#          ║
-╚═════════════════════════════════════════════════════════════════╝
-
-📚 ESCOLHA UM EXEMPLO:
-
-  1️⃣  Exemplo Básico
-  2️⃣  Exemplo Avançado
-  3️⃣  Exemplo Mundo Real
-  0️⃣  Sair
-```
-
----
-
-## 💡 Conceitos Principais
-
-### Channel<T> - Filas Thread-Safe
+##### Channel<T> - Filas Thread-Safe
 
 `System.Threading.Channels` fornece uma forma moderna e eficiente de implementar filas:
 
@@ -91,7 +93,7 @@ var channel = Channel.CreateUnbounded<Job>(new UnboundedChannelOptions
 });
 ```
 
-### Workers Paralelos
+##### Workers Paralelos
 
 Múltiplas tarefas processam a fila simultaneamente:
 
@@ -102,7 +104,7 @@ var workers = Enumerable.Range(0, 4)
     .ToList();
 ```
 
-### Operações Atômicas com Interlocked
+##### Operações Atômicas com Interlocked
 
 Garantem thread-safety sem locks pesados:
 
@@ -114,7 +116,7 @@ long order = Interlocked.Increment(ref _completionSequence);
 Interlocked.Add(ref _totalAmountCents, invoice.AmountCents);
 ```
 
-### Padrão Producer-Consumer
+##### Padrão Producer-Consumer
 
 ```csharp
 // Producer: adiciona itens à fila
@@ -127,11 +129,7 @@ await foreach (Job job in _channel.Reader.ReadAllAsync())
 }
 ```
 
----
-
-## 📊 Saída de Exemplo
-
-### Exemplo Básico (2 Workers)
+##### Exemplo Básico (2 Workers)
 
 ```
 🚀 Fila iniciada com 2 workers paralelos
@@ -150,7 +148,7 @@ await foreach (Job job in _channel.Reader.ReadAllAsync())
     ...
 ```
 
-### Exemplo Avançado (50 Notas, 6 Workers)
+##### Exemplo Avançado (50 Notas, 6 Workers)
 
 ```
 ╔═══════════════════════════════════════════════════════════════╗
@@ -167,11 +165,7 @@ await foreach (Job job in _channel.Reader.ReadAllAsync())
 ⏱️  Tempo total: 4.23s
 ```
 
----
-
-## 🏗️ Arquitetura do Código
-
-### Modelos de Domínio
+##### Modelos de Domínio
 
 **Invoice** - Representa uma nota fiscal
 ```csharp
@@ -205,7 +199,7 @@ public class QueueStatistics
 }
 ```
 
-### Serviço de Fila
+##### Serviço de Fila
 
 **InvoiceQueue** - Gerenciador da fila com workers
 ```csharp
@@ -218,42 +212,41 @@ public sealed class InvoiceQueue : IAsyncDisposable
 }
 ```
 
----
-
-## 🌟 Casos de Uso Reais
+##### Casos de Uso Reais
 
 Este padrão pode ser aplicado em:
 
-### 💼 E-Commerce
+##### E-Commerce
+
 - Emissão de notas fiscais em lote
 - Processamento de pedidos em alta demanda
 - Envio de e-mails de confirmação
 
-### 💰 Sistemas Financeiros
+##### Sistemas Financeiros
+
 - Processamento de transações
 - Conciliação bancária
 - Cálculo de juros e multas
 
-### 🔗 Integração de Sistemas
+##### Integração de Sistemas
+
 - Sincronização de dados entre sistemas
 - Processamento de webhooks
 - ETL (Extract, Transform, Load)
 
-### 📄 Processamento de Arquivos
+##### Processamento de Arquivos
+
 - Upload em lote de documentos
 - Geração de relatórios
 - Conversão de formatos
 
-### 📧 Notificações
+##### Notificações
+
 - E-mails em massa
 - SMS/Push notifications
 - Alertas de sistema
 
----
-
-## 🎓 Conceitos Avançados
-
-### Por que usar Channels em vez de Queue<T>?
+##### Por que usar Channels em vez de Queue<T>?
 
 | Aspecto | Queue<T> | Channel<T> |
 |---------|----------|------------|
@@ -262,7 +255,7 @@ Este padrão pode ser aplicado em:
 | **Backpressure** | Não tem | Bounded channels |
 | **Performance** | Locks pesados | Lock-free algorithms |
 
-### Por que usar Interlocked?
+##### Por que usar Interlocked?
 
 ```csharp
 // ❌ NÃO thread-safe
@@ -278,7 +271,7 @@ _amount = _amount + invoice.Amount;
 Interlocked.Add(ref _amount, invoice.Amount);
 ```
 
-### Por que valores em centavos?
+##### Por que valores em centavos?
 
 ```csharp
 // ❌ Float/Double: imprecisão
@@ -288,9 +281,7 @@ double total = 0.1 + 0.2; // 0.30000000000000004
 long totalCents = 10 + 20; // 30 centavos = R$ 0,30
 ```
 
----
-
-## 🚀 Próximos Passos para Produção
+##### Próximos Passos para Produção
 
 Para usar em produção, considere adicionar:
 
@@ -305,27 +296,19 @@ Para usar em produção, considere adicionar:
 9. **Graceful Shutdown** - Finalização segura dos workers
 10. **Bounded Channels** - Limitar tamanho da fila
 
----
+##### Contribuindo
 
-## 📖 Referências
+Este é um projeto educacional. Sugestões de melhorias são bem-vindas!
+
+##### Licença
+
+Este projeto faz parte do repositório **CSharp-101** e segue a mesma licença.
+
+💡 **Dica**: Execute os exemplos na sequência (1 → 2 → 3) para melhor compreensão dos conceitos!
+
+## Referências
 
 - [System.Threading.Channels Documentation](https://docs.microsoft.com/en-us/dotnet/api/system.threading.channels)
 - [An Introduction to System.Threading.Channels](https://devblogs.microsoft.com/dotnet/an-introduction-to-system-threading-channels/)
 - [Interlocked Class](https://docs.microsoft.com/en-us/dotnet/api/system.threading.interlocked)
 - [Producer-Consumer Pattern](https://docs.microsoft.com/en-us/dotnet/standard/parallel-programming/dataflow-task-parallel-library)
-
----
-
-## 🤝 Contribuindo
-
-Este é um projeto educacional. Sugestões de melhorias são bem-vindas!
-
----
-
-## 📝 Licença
-
-Este projeto faz parte do repositório **CSharp-101** e segue a mesma licença.
-
----
-
-💡 **Dica**: Execute os exemplos na sequência (1 → 2 → 3) para melhor compreensão dos conceitos!

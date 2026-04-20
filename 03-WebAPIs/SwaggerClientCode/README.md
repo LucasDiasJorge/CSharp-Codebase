@@ -1,6 +1,16 @@
-# 🔧 SwaggerClientCode - Geração Automática de Clientes de API
+# SwaggerClientCode - Geração Automática de Clientes de API
 
-## 🎯 Objetivos de Aprendizado
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a SwaggerClientCode - Geração Automática de Clientes de API, com foco em ASP.NET Core, contratos HTTP e pipeline web.
+
+## Conceitos abordados
+
+- Exemplo didático sobre SwaggerClientCode - Geração Automática de Clientes de API no contexto de ASP.NET Core, contratos HTTP e pipeline web.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
 
 - Integrar **Swagger/OpenAPI** em APIs ASP.NET Core
 - Gerar **clientes de API automaticamente** a partir de especificações OpenAPI
@@ -9,9 +19,38 @@
 - Configurar **documentação interativa** com SwaggerUI
 - Aplicar **versionamento de API** e **contratos tipados**
 
-## 📚 Conceitos Fundamentais
+## Estrutura do projeto
 
-### OpenAPI/Swagger
+```text
+SwaggerClientCode/
++-- Controllers/
+|   \-- UserController.cs
++-- Properties/
+|   \-- launchSettings.json
++-- appsettings.Development.json
++-- appsettings.json
++-- ClientGenerator.cs
++-- GeneratedApiClient.cs
++-- Program.cs
++-- SwaggerClientCode.csproj
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet run --project 03-WebAPIs/SwaggerClientCode/SwaggerClientCode.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### OpenAPI/Swagger
 
 **OpenAPI** (anteriormente Swagger) é uma especificação para descrever APIs REST. Permite:
 
@@ -20,7 +59,7 @@
 - 🧪 **Testes**: Interface interativa para testar APIs
 - 📋 **Contratos**: Define interface clara entre frontend/backend
 
-### NSwag vs Swashbuckle
+##### NSwag vs Swashbuckle
 
 | Aspecto | NSwag | Swashbuckle |
 |---------|-------|-------------|
@@ -30,7 +69,7 @@
 | **Configuração** | 🔧 Complexa | 🎯 Simples |
 | **Performance** | ⚡ Otimizada | ⚡ Boa |
 
-## 🏗️ Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```
 SwaggerClientCode/
@@ -43,9 +82,7 @@ SwaggerClientCode/
 └── README.md
 ```
 
-## 💡 Exemplos Práticos
-
-### 1. Configuração do Swagger
+##### 1. Configuração do Swagger
 
 ```csharp
 // Program.cs - Configuração da API
@@ -105,7 +142,7 @@ app.MapControllers();
 app.Run();
 ```
 
-### 2. Controller com Documentação
+##### 2. Controller com Documentação
 
 ```csharp
 /// <summary>
@@ -159,7 +196,7 @@ public class UserController : ControllerBase
 }
 ```
 
-### 3. Modelos com Validação
+##### 3. Modelos com Validação
 
 ```csharp
 /// <summary>
@@ -218,7 +255,7 @@ public class CreateUserRequest
 }
 ```
 
-### 4. Geração Automática de Cliente
+##### 4. Geração Automática de Cliente
 
 ```csharp
 public class ClientGenerator
@@ -271,7 +308,7 @@ public class ClientGenerator
 }
 ```
 
-### 5. Uso do Cliente Gerado
+##### 5. Uso do Cliente Gerado
 
 ```csharp
 public class ApiClientService
@@ -328,7 +365,7 @@ public class ApiClientService
 }
 ```
 
-### 6. Configuração de DI para Cliente
+##### 6. Configuração de DI para Cliente
 
 ```csharp
 // Program.cs - Registro do cliente
@@ -357,9 +394,7 @@ static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 }
 ```
 
-## 🚀 Configuração e Execução
-
-### 1. Dependências necessárias
+##### 1. Dependências necessárias
 
 ```xml
 <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
@@ -369,7 +404,7 @@ static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="8.0.0" />
 ```
 
-### 2. Habilitar Comentários XML
+##### 2. Habilitar Comentários XML
 
 ```xml
 <PropertyGroup>
@@ -378,23 +413,7 @@ static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 </PropertyGroup>
 ```
 
-### 3. Executar o Projeto
-
-```bash
-# Navegar para o diretório
-cd SwaggerClientCode
-
-# Restaurar dependências
-dotnet restore
-
-# Executar a aplicação
-dotnet run
-
-# Acessar documentação
-# http://localhost:5000/swagger
-```
-
-### 4. Gerar Cliente via CLI
+##### 4. Gerar Cliente via CLI
 
 ```bash
 # Instalar ferramenta NSwag
@@ -404,9 +423,7 @@ dotnet tool install -g NSwag.ConsoleCore
 nswag openapi2csclient /input:http://localhost:5000/swagger/v1/swagger.json /output:GeneratedClient.cs /namespace:MyApi.Client
 ```
 
-## 🔧 Configurações Avançadas
-
-### 1. Versionamento de API
+##### 1. Versionamento de API
 
 ```csharp
 // Configuração de versionamento
@@ -435,7 +452,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 ```
 
-### 2. Autenticação JWT no Swagger
+##### 2. Autenticação JWT no Swagger
 
 ```csharp
 builder.Services.AddSwaggerGen(c =>
@@ -467,7 +484,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 ```
 
-### 3. Filtros Customizados
+##### 3. Filtros Customizados
 
 ```csharp
 public class SwaggerExcludeFilter : ISchemaFilter
@@ -497,9 +514,7 @@ public class SwaggerIgnoreAttribute : Attribute
 }
 ```
 
-## 💯 Melhores Práticas
-
-### ✅ Documentação
+##### Documentação
 
 1. **Use comentários XML** em controllers e modelos
 2. **Defina examples** para requests/responses
@@ -507,7 +522,7 @@ public class SwaggerIgnoreAttribute : Attribute
 4. **Inclua validações** nos modelos
 5. **Organize por versões** quando necessário
 
-### ✅ Geração de Cliente
+##### Geração de Cliente
 
 1. **Configure namespace** apropriado
 2. **Gere interfaces** para facilitar testes
@@ -515,7 +530,7 @@ public class SwaggerIgnoreAttribute : Attribute
 4. **Configure timeout** adequado
 5. **Implemente retry policies**
 
-### ❌ Evitar
+##### Evitar
 
 1. **Endpoints sem documentação**
 2. **Modelos sem validação**
@@ -523,9 +538,7 @@ public class SwaggerIgnoreAttribute : Attribute
 4. **Clientes sem tratamento de erro**
 5. **Hardcoded URLs** no cliente
 
-## 🔍 Debugging e Troubleshooting
-
-### Problemas Comuns
+##### Problemas Comuns
 
 | Problema | Causa | Solução |
 |----------|-------|---------|
@@ -534,7 +547,7 @@ public class SwaggerIgnoreAttribute : Attribute
 | **Timeouts** | Operações longas | Aumentar timeout do HttpClient |
 | **Auth failures** | Token inválido | Verificar configuração de auth |
 
-### Debug do Cliente Gerado
+##### Debug do Cliente Gerado
 
 ```csharp
 public class DebuggingApiClient : IApiClient
@@ -568,7 +581,7 @@ public class DebuggingApiClient : IApiClient
 }
 ```
 
-## 📋 Exercícios Práticos
+##### Exercícios Práticos
 
 1. **API Completa**: Crie CRUD completo com documentação
 2. **Multi-versioning**: Implemente versionamento v1 e v2
@@ -576,13 +589,11 @@ public class DebuggingApiClient : IApiClient
 4. **Error Handling**: Implemente tratamento de erros robusto
 5. **Performance**: Benchmark clientes gerados vs manuais
 
-## 🔗 Recursos Adicionais
+## Referências
 
 - [Swashbuckle Documentation](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
 - [NSwag Documentation](https://github.com/RicoSuter/NSwag)
 - [OpenAPI Specification](https://swagger.io/specification/)
 - [ASP.NET Core API Documentation](https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger)
-
----
 
 💡 **Dica**: A combinação de Swagger para documentação e NSwag para geração de clientes cria um ecossistema robusto onde mudanças na API são automaticamente refletidas nos clientes, reduzindo erros e acelerando o desenvolvimento!

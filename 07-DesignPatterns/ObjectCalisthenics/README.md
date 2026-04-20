@@ -1,6 +1,8 @@
-# 🏋️ Object Calisthenics - Guia Completo com Exemplos Práticos
+# Object Calisthenics - Guia Completo com Exemplos Práticos
 
-## 📖 O que é Object Calisthenics?
+## Visão geral
+
+### O que é Object Calisthenics?
 
 **Object Calisthenics** é um conjunto de **9 regras de programação** criadas por **Jeff Bay** no livro "The ThoughtWorks Anthology" (2008). O termo "calisthenics" vem do grego e significa "exercícios físicos" - assim como exercícios fortalecem o corpo, essas regras fortalecem seu código orientado a objetos.
 
@@ -11,7 +13,7 @@ O objetivo é **forçar você a pensar diferente** sobre design de código, cria
 - ✅ Extensível
 - ✅ Coeso
 
-## 🎯 Este Projeto
+### Este Projeto
 
 Este projeto demonstra as 9 regras através de uma **API de Pedidos (Orders)** implementada de duas formas:
 
@@ -20,11 +22,56 @@ Este projeto demonstra as 9 regras através de uma **API de Pedidos (Orders)** i
 | `BadOrderApi` | ❌ **Sem** aplicar Object Calisthenics - código comum com vícios |
 | `GoodOrderApi` | ✅ **Com** Object Calisthenics aplicado - código limpo e bem estruturado |
 
----
+## Conceitos abordados
 
-## 📋 As 9 Regras do Object Calisthenics
+- Exemplo didático sobre Object Calisthenics - Guia Completo com Exemplos Práticos no contexto de design patterns, modelagem OO e código limpo.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
 
-### Índice
+## Objetivos de aprendizagem
+
+- Entender como Object Calisthenics - Guia Completo com Exemplos Práticos se aplica em um cenário prático de design patterns, modelagem OO e código limpo.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+ObjectCalisthenics/
++-- BadOrderApi/
+|   +-- Controllers/
+|   +-- Properties/
+|   +-- Services/
+|   +-- BadOrderApi.csproj
+|   +-- DTOs.cs
+|   +-- Models.cs
+|   \-- Program.cs
+\-- GoodOrderApi/
+    +-- Api/
+    +-- Application/
+    +-- Domain/
+    +-- Properties/
+    +-- GoodOrderApi.csproj
+    \-- Program.cs
+```
+
+## Como executar
+
+Escolha um dos projetos abaixo para execução direcionada:
+
+- `dotnet run --project 07-DesignPatterns/ObjectCalisthenics/BadOrderApi/BadOrderApi.csproj`
+- `dotnet run --project 07-DesignPatterns/ObjectCalisthenics/GoodOrderApi/GoodOrderApi.csproj`
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Índice
+
 1. [Apenas Um Nível de Indentação por Método](#regra-1-apenas-um-nível-de-indentação-por-método)
 2. [Não Use a Palavra-Chave ELSE](#regra-2-não-use-a-palavra-chave-else)
 3. [Encapsule Todos os Primitivos e Strings](#regra-3-encapsule-todos-os-primitivos-e-strings)
@@ -35,20 +82,18 @@ Este projeto demonstra as 9 regras através de uma **API de Pedidos (Orders)** i
 8. [Nenhuma Classe com Mais de Duas Variáveis de Instância](#regra-8-nenhuma-classe-com-mais-de-duas-variáveis-de-instância)
 9. [Sem Getters/Setters/Properties](#regra-9-sem-getterssettersproperties)
 
----
+##### Descrição
 
-## Regra 1: Apenas Um Nível de Indentação por Método
-
-### 📝 Descrição
 Cada método deve ter **apenas um nível de indentação**. Isso força você a extrair código para métodos menores e mais focados.
 
-### ❓ Por que isso importa?
+##### Por que isso importa?
+
 - Métodos com muitos níveis de indentação são difíceis de ler
 - Aumenta a complexidade ciclomática
 - Dificulta testes unitários
 - Esconde múltiplas responsabilidades
 
-### ❌ BadOrderApi - ANTES (Violação)
+##### BadOrderApi - ANTES (Violação)
 
 ```csharp
 // BadOrderApi/Services/OrderService.cs
@@ -108,7 +153,7 @@ public (bool Success, string Message, Order? Order) CreateOrder(CreateOrderReque
 - 🔴 Impossível testar partes individuais
 - 🔴 Difícil de ler e entender
 
-### ✅ GoodOrderApi - DEPOIS (Correto)
+##### GoodOrderApi - DEPOIS (Correto)
 
 ```csharp
 // GoodOrderApi/Application/Services/OrderApplicationService.cs
@@ -163,27 +208,25 @@ private Result AddItemsToOrder(Order order, IReadOnlyList<OrderItemCommand> item
 - ✅ Cada método é testável isoladamente
 - ✅ Código auto-documentado
 
-### 💡 Técnicas para Aplicar
+##### Técnicas para Aplicar
 
 1. **Extract Method**: Extraia blocos de código para métodos separados
 2. **Early Return**: Use retornos antecipados em vez de aninhar ifs
 3. **Decompose Conditional**: Quebre condicionais complexos em métodos
 4. **Replace Loop with Pipeline**: Use LINQ em vez de loops aninhados
 
----
+##### Descrição
 
-## Regra 2: Não Use a Palavra-Chave ELSE
-
-### 📝 Descrição
 Elimine completamente o uso de `else`. Isso força você a pensar em **early returns**, **polimorfismo** e **estratégias**.
 
-### ❓ Por que isso importa?
+##### Por que isso importa?
+
 - `else` aumenta a complexidade cognitiva
 - Geralmente indica que há lógica demais em um método
 - Dificulta a leitura do "caminho feliz"
 - Muitos `else if` indicam necessidade de polimorfismo
 
-### ❌ BadOrderApi - ANTES (Violação)
+##### BadOrderApi - ANTES (Violação)
 
 ```csharp
 // BadOrderApi/Services/OrderService.cs
@@ -246,7 +289,7 @@ public (bool Success, string Message) UpdateOrderStatus(int orderId, string newS
 - 🔴 Lógica de negócio espalhada
 - 🔴 Violação do Open/Closed Principle
 
-### ✅ GoodOrderApi - DEPOIS (Correto)
+##### GoodOrderApi - DEPOIS (Correto)
 
 **Solução 1: Early Returns**
 ```csharp
@@ -326,7 +369,7 @@ public sealed class ConfirmedStatus : OrderStatus
 - ✅ Cada status conhece suas próprias regras
 - ✅ Testável isoladamente
 
-### 💡 Técnicas para Eliminar ELSE
+##### Técnicas para Eliminar ELSE
 
 | Técnica | Quando Usar |
 |---------|-------------|
@@ -338,20 +381,18 @@ public sealed class ConfirmedStatus : OrderStatus
 | **Polimorfismo** | Comportamento varia por tipo |
 | **Strategy Pattern** | Algoritmos intercambiáveis |
 
----
+##### Descrição
 
-## Regra 3: Encapsule Todos os Primitivos e Strings
-
-### 📝 Descrição
 Nunca use tipos primitivos (`int`, `string`, `decimal`, `bool`) diretamente. Encapsule-os em **Value Objects** com significado de domínio.
 
-### ❓ Por que isso importa?
+##### Por que isso importa?
+
 - Primitivos não expressam intenção
 - Não podem conter validação
 - Permitem valores inválidos
 - Causam "Primitive Obsession" (code smell)
 
-### ❌ BadOrderApi - ANTES (Violação)
+##### BadOrderApi - ANTES (Violação)
 
 ```csharp
 // BadOrderApi/Models.cs
@@ -380,7 +421,7 @@ var order = new Order
 - 🔴 Sem significado semântico
 - 🔴 Fácil confundir parâmetros
 
-### ✅ GoodOrderApi - DEPOIS (Correto)
+##### GoodOrderApi - DEPOIS (Correto)
 
 ```csharp
 // GoodOrderApi/Domain/ValueObjects/ValueObjects.cs
@@ -485,20 +526,18 @@ var total = Money.Create(100).MultiplyBy(2); // ✅ OK = $200.00
 - ✅ Código auto-documentado
 - ✅ Type-safe (não confunde Quantity com Money)
 
----
+##### Descrição
 
-## Regra 4: First Class Collections
-
-### 📝 Descrição
 Qualquer classe que contém uma coleção não deve conter outros atributos. A coleção deve ser **wrappada** em sua própria classe com comportamento específico.
 
-### ❓ Por que isso importa?
+##### Por que isso importa?
+
 - Coleções expostas podem ser modificadas externamente
 - Lógica relacionada à coleção fica espalhada
 - Não há ponto único para regras de negócio da coleção
 - Viola encapsulamento
 
-### ❌ BadOrderApi - ANTES (Violação)
+##### BadOrderApi - ANTES (Violação)
 
 ```csharp
 // BadOrderApi/Models.cs
@@ -528,7 +567,7 @@ var hasExpensive = order.Items.Any(i => i.UnitPrice > 100); // E aqui também
 - 🔴 Lógica de cálculo espalhada
 - 🔴 Sem validação de itens
 
-### ✅ GoodOrderApi - DEPOIS (Correto)
+##### GoodOrderApi - DEPOIS (Correto)
 
 ```csharp
 // GoodOrderApi/Domain/Entities/OrderItems.cs
@@ -613,20 +652,18 @@ var qty = items.CalculateTotalQuantity(); // ✅ Único lugar
 - ✅ Imutabilidade (retorna nova instância)
 - ✅ Interface focada no domínio
 
----
+##### Descrição
 
-## Regra 5: Um Ponto por Linha
-
-### 📝 Descrição
 Não use mais de um ponto (`.`) por linha, exceto para fluent interfaces. Isso é conhecido como **Lei de Demeter** - "Fale apenas com seus amigos próximos".
 
-### ❓ Por que isso importa?
+##### Por que isso importa?
+
 - Múltiplos pontos criam acoplamento forte
 - Expõe estrutura interna dos objetos
 - Dificulta mudanças na estrutura
 - Violação de encapsulamento
 
-### ❌ BadOrderApi - ANTES (Violação)
+##### BadOrderApi - ANTES (Violação)
 
 ```csharp
 // BadOrderApi/Services/OrderService.cs
@@ -649,7 +686,7 @@ var total = _orders
 - 🔴 Difícil de mockar em testes
 - 🔴 Cria dependências transitivas
 
-### ✅ GoodOrderApi - DEPOIS (Correto)
+##### GoodOrderApi - DEPOIS (Correto)
 
 **Solução 1: Delegar para o objeto**
 ```csharp
@@ -715,20 +752,18 @@ public static class OrderMapper
 - ✅ Fácil de refatorar
 - ✅ Mais fácil de testar
 
----
+##### Descrição
 
-## Regra 6: Não Abrevie
-
-### 📝 Descrição
 Use nomes completos e descritivos. **Nunca abrevie** nomes de variáveis, métodos, classes ou propriedades.
 
-### ❓ Por que isso importa?
+##### Por que isso importa?
+
 - Abreviações exigem contexto mental
 - Diferentes pessoas abreviam diferente
 - Código é lido mais vezes do que escrito
 - IDE tem autocomplete - não precisa digitar tudo
 
-### ❌ BadOrderApi - ANTES (Violação)
+##### BadOrderApi - ANTES (Violação)
 
 ```csharp
 // BadOrderApi/Models.cs
@@ -757,7 +792,7 @@ var msg = $"Cust {o.CustName} - Qty: {o.Items.Sum(i => i.Qty)}";
 - 🔴 Inconsistência (às vezes Cust, às vezes Customer)
 - 🔴 Erros de interpretação
 
-### ✅ GoodOrderApi - DEPOIS (Correto)
+##### GoodOrderApi - DEPOIS (Correto)
 
 ```csharp
 // GoodOrderApi/Domain/ValueObjects/ValueObjects.cs
@@ -804,7 +839,7 @@ var customerName = order.CustomerData.Customer.Name;
 - ✅ Fácil de entender para novos devs
 - ✅ IDE ajuda com autocomplete
 
-### 💡 Regras para Nomenclatura
+##### Regras para Nomenclatura
 
 | ❌ Evite | ✅ Use |
 |----------|--------|
@@ -820,22 +855,20 @@ var customerName = order.CustomerData.Customer.Name;
 | `tmp` | Nome descritivo do conteúdo |
 | `str` | Nome descritivo do conteúdo |
 
----
+##### Descrição
 
-## Regra 7: Mantenha Todas as Entidades Pequenas
-
-### 📝 Descrição
 - Classes com no máximo **50 linhas**
 - Métodos com no máximo **5 linhas**
 - Pacotes/namespaces com no máximo **10 classes**
 
-### ❓ Por que isso importa?
+##### Por que isso importa?
+
 - Classes grandes têm múltiplas responsabilidades
 - Difícil de testar e manter
 - Aumenta acoplamento
 - Dificulta reuso
 
-### ❌ BadOrderApi - ANTES (Violação)
+##### BadOrderApi - ANTES (Violação)
 
 ```csharp
 // BadOrderApi/Services/OrderService.cs
@@ -868,7 +901,7 @@ public class OrderService
 - 🔴 Métodos gigantes
 - 🔴 Impossível testar isoladamente
 
-### ✅ GoodOrderApi - DEPOIS (Correto)
+##### GoodOrderApi - DEPOIS (Correto)
 
 ```
 GoodOrderApi/
@@ -901,20 +934,18 @@ GoodOrderApi/
 - ✅ Fácil de testar
 - ✅ Fácil de encontrar código
 
----
+##### Descrição
 
-## Regra 8: Nenhuma Classe com Mais de Duas Variáveis de Instância
-
-### 📝 Descrição
 Cada classe deve ter **no máximo 2 variáveis de instância**. Se precisar de mais, agrupe em novos objetos.
 
-### ❓ Por que isso importa?
+##### Por que isso importa?
+
 - Força alta coesão
 - Cria hierarquia de objetos bem definida
 - Cada objeto tem responsabilidade clara
 - Facilita composição
 
-### ❌ BadOrderApi - ANTES (Violação)
+##### BadOrderApi - ANTES (Violação)
 
 ```csharp
 // BadOrderApi/Models.cs
@@ -946,7 +977,7 @@ public class Order
 - 🔴 Múltiplas responsabilidades
 - 🔴 Difícil de entender
 
-### ✅ GoodOrderApi - DEPOIS (Correto)
+##### GoodOrderApi - DEPOIS (Correto)
 
 ```csharp
 // GoodOrderApi/Domain/Entities/Order.cs
@@ -1035,20 +1066,18 @@ Order
 - ✅ Fácil de entender cada parte
 - ✅ Mudanças são localizadas
 
----
+##### Descrição
 
-## Regra 9: Sem Getters/Setters/Properties
-
-### 📝 Descrição
 Evite expor estado interno. Em vez disso, **exponha comportamento**. Pergunte "O que este objeto pode FAZER?" em vez de "O que este objeto TEM?"
 
-### ❓ Por que isso importa?
+##### Por que isso importa?
+
 - Getters/Setters violam encapsulamento
 - Expõem representação interna
 - Lógica de negócio fica fora do objeto
 - Objetos viram "sacos de dados"
 
-### ❌ BadOrderApi - ANTES (Violação)
+##### BadOrderApi - ANTES (Violação)
 
 ```csharp
 // BadOrderApi/Models.cs
@@ -1084,7 +1113,7 @@ public void ProcessOrder(Order order)
 - 🔴 Objeto anêmico (sem comportamento)
 - 🔴 Invariantes não são garantidas
 
-### ✅ GoodOrderApi - DEPOIS (Correto)
+##### GoodOrderApi - DEPOIS (Correto)
 
 ```csharp
 // GoodOrderApi/Domain/Entities/Order.cs
@@ -1178,29 +1207,29 @@ order.Confirm();  // O Order sabe suas próprias regras
 - ✅ Invariantes sempre garantidas
 - ✅ Impossível ter estado inconsistente
 
----
+##### Pré-requisitos
 
-## 🏃 Como Executar os Projetos
-
-### Pré-requisitos
 - .NET 8.0 SDK
 - Visual Studio 2022 ou VS Code
 
-### Executando BadOrderApi
+##### Executando BadOrderApi
+
 ```bash
 cd ObjectCalisthenics/BadOrderApi
 dotnet run
 # Acesse: https://localhost:5001/swagger
 ```
 
-### Executando GoodOrderApi
+##### Executando GoodOrderApi
+
 ```bash
 cd ObjectCalisthenics/GoodOrderApi
 dotnet run
 # Acesse: https://localhost:5001/swagger
 ```
 
-### Testando a API
+##### Testando a API
+
 ```bash
 # Listar produtos
 curl https://localhost:5001/api/orders/products
@@ -1233,9 +1262,7 @@ curl -X PUT https://localhost:5001/api/orders/1/status \
   -d '{ "status": "Confirmed" }'
 ```
 
----
-
-## 📊 Comparativo Final
+##### Comparativo Final
 
 | Aspecto | BadOrderApi | GoodOrderApi |
 |---------|-------------|--------------|
@@ -1252,21 +1279,15 @@ curl -X PUT https://localhost:5001/api/orders/1/status \
 | **Manutenibilidade** | Baixa | Alta |
 | **Legibilidade** | Baixa | Alta |
 
----
+##### Contribuindo
 
-## 📚 Referências
+Sinta-se à vontade para abrir issues e pull requests com melhorias ou correções!
+
+**Lembre-se:** Object Calisthenics são **exercícios**, não regras absolutas. O objetivo é treinar seu cérebro para pensar em design orientado a objetos de forma mais disciplinada. Na prática, use o bom senso e adapte às necessidades do seu projeto.
+
+## Referências
 
 - [Object Calisthenics - Jeff Bay](https://www.cs.helsinki.fi/u/luontola/tdd-2009/ext/ObjectCalisthenics.pdf)
 - [The ThoughtWorks Anthology](https://www.oreilly.com/library/view/the-thoughtworks-anthology/9781934356142/)
 - [Clean Code - Robert C. Martin](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
 - [Domain-Driven Design - Eric Evans](https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)
-
----
-
-## 🤝 Contribuindo
-
-Sinta-se à vontade para abrir issues e pull requests com melhorias ou correções!
-
----
-
-**Lembre-se:** Object Calisthenics são **exercícios**, não regras absolutas. O objetivo é treinar seu cérebro para pensar em design orientado a objetos de forma mais disciplinada. Na prática, use o bom senso e adapte às necessidades do seu projeto.

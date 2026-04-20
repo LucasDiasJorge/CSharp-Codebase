@@ -1,6 +1,10 @@
 # Dependency Injection e Service Registration
 
-## 📚 Conceitos Abordados
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a Dependency Injection e Service Registration, com foco em padrões arquiteturais e organização de casos de uso.
+
+## Conceitos abordados
 
 Este projeto demonstra os fundamentos de Dependency Injection em ASP.NET Core:
 
@@ -12,7 +16,7 @@ Este projeto demonstra os fundamentos de Dependency Injection em ASP.NET Core:
 - **Middleware Integration**: Injeção em middlewares
 - **Constructor Injection**: Injeção via construtor
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Entender os diferentes lifetimes de serviços
 - Configurar o container de DI adequadamente
@@ -21,61 +25,7 @@ Este projeto demonstra os fundamentos de Dependency Injection em ASP.NET Core:
 - Otimizar performance através de lifetimes apropriados
 - Integrar DI com middlewares e endpoints
 
-## 💡 Conceitos Importantes
-
-### Service Lifetimes
-
-#### Singleton
-```csharp
-// Uma única instância para toda a aplicação
-builder.Services.AddSingleton<IMyService, MyService>();
-```
-
-#### Scoped  
-```csharp
-// Uma instância por requisição HTTP
-builder.Services.AddScoped<IMyService, MyService>();
-```
-
-#### Transient
-```csharp
-// Nova instância a cada resolução
-builder.Services.AddTransient<IMyService, MyService>();
-```
-
-### Interface e Implementação
-```csharp
-public interface IMyService
-{
-    void LogCreation(string message);
-}
-
-public class MyService : IMyService
-{
-    private readonly int _serviceId;
-
-    public MyService()
-    {
-        _serviceId = new Random().Next(100000, 999999);
-    }
-
-    public void LogCreation(string message)
-    {
-        Console.WriteLine($"{message} - Service ID: {_serviceId}");
-    }
-}
-```
-
-## 🚀 Como Executar
-
-```bash
-cd ServiceRegistration
-dotnet run
-```
-
-Acesse `http://localhost:5000/` e observe os logs no console para entender os diferentes comportamentos dos lifetimes.
-
-## 📖 O que Você Aprenderá
+### O que Você Aprenderá
 
 1. **Service Lifetimes Detalhados**:
    - **Singleton**: Compartilhado globalmente, ideal para serviços stateless
@@ -98,9 +48,87 @@ Acesse `http://localhost:5000/` e observe os logs no console para entender os di
    - Preferir constructor injection
    - Gerenciar memory leaks
 
-## 🎨 Padrões de Implementação
+## Estrutura do projeto
 
-### 1. Constructor Injection (Recomendado)
+```text
+ServiceRegistration/
++-- Properties/
+|   \-- launchSettings.json
++-- Services/
+|   +-- Interface/
+|   +-- MyService.cs
+|   +-- PostExecutionService.cs
+|   \-- PreExecutionService.cs
++-- appsettings.Development.json
++-- appsettings.json
++-- Program.cs
++-- ServiceRegistration.csproj
+\-- ServiceRegistration.csproj.user
+```
+
+## Como executar
+
+```bash
+dotnet run --project 08-ArchitecturalPatterns/ServiceRegistration/ServiceRegistration.csproj
+```
+
+Acesse `http://localhost:5000/` e observe os logs no console para entender os diferentes comportamentos dos lifetimes.
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Singleton
+
+```csharp
+// Uma única instância para toda a aplicação
+builder.Services.AddSingleton<IMyService, MyService>();
+```
+
+##### Scoped
+
+```csharp
+// Uma instância por requisição HTTP
+builder.Services.AddScoped<IMyService, MyService>();
+```
+
+##### Transient
+
+```csharp
+// Nova instância a cada resolução
+builder.Services.AddTransient<IMyService, MyService>();
+```
+
+##### Interface e Implementação
+
+```csharp
+public interface IMyService
+{
+    void LogCreation(string message);
+}
+
+public class MyService : IMyService
+{
+    private readonly int _serviceId;
+
+    public MyService()
+    {
+        _serviceId = new Random().Next(100000, 999999);
+    }
+
+    public void LogCreation(string message)
+    {
+        Console.WriteLine($"{message} - Service ID: {_serviceId}");
+    }
+}
+```
+
+##### 1. Constructor Injection (Recomendado)
+
 ```csharp
 [ApiController]
 [Route("api/[controller]")]
@@ -126,7 +154,8 @@ public class ProductsController : ControllerBase
 }
 ```
 
-### 2. Multiple Implementations
+##### 2. Multiple Implementations
+
 ```csharp
 public interface INotificationService
 {
@@ -166,7 +195,8 @@ builder.Services.AddScoped<INotificationService>(provider =>
 });
 ```
 
-### 3. Factory Pattern
+##### 3. Factory Pattern
+
 ```csharp
 public interface IServiceFactory<T>
 {
@@ -197,7 +227,8 @@ public class NotificationServiceFactory : IServiceFactory<INotificationService>
 builder.Services.AddScoped<IServiceFactory<INotificationService>, NotificationServiceFactory>();
 ```
 
-### 4. Conditional Registration
+##### 4. Conditional Registration
+
 ```csharp
 public static class ServiceRegistrationExtensions
 {
@@ -227,9 +258,8 @@ public static class ServiceRegistrationExtensions
 builder.Services.AddBusinessServices(builder.Configuration);
 ```
 
-## 🏗️ Cenários Avançados
+##### 1. Decorators
 
-### 1. Decorators
 ```csharp
 public class LoggingProductService : IProductService
 {
@@ -256,7 +286,8 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.Decorate<IProductService, LoggingProductService>();
 ```
 
-### 2. Generic Services
+##### 2. Generic Services
+
 ```csharp
 public interface IRepository<T> where T : class
 {
@@ -283,7 +314,8 @@ public class Repository<T> : IRepository<T> where T : class
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 ```
 
-### 3. Configuration-based Registration
+##### 3. Configuration-based Registration
+
 ```csharp
 public class ServiceConfiguration
 {
@@ -314,9 +346,8 @@ public static class ConfigurationServiceExtensions
 }
 ```
 
-## 🔍 Pontos de Atenção
+##### Memory Leaks
 
-### Memory Leaks
 ```csharp
 // ❌ Problemático - Singleton dependendo de Scoped
 builder.Services.AddSingleton<ISingletonService, SingletonService>(); // Não deve depender de Scoped
@@ -327,7 +358,8 @@ builder.Services.AddSingleton<ISingletonService>(provider =>
     new SingletonService(() => provider.CreateScope().ServiceProvider.GetRequiredService<IScopedService>()));
 ```
 
-### Performance
+##### Performance
+
 ```csharp
 // ✅ Cache expensive computations em Singletons
 builder.Services.AddSingleton<IExpensiveService>(provider =>
@@ -340,7 +372,8 @@ builder.Services.AddSingleton<IExpensiveService>(provider =>
 builder.Services.AddScoped<IUserContext, UserContext>();
 ```
 
-### Thread Safety
+##### Thread Safety
+
 ```csharp
 // ⚠️ Singletons devem ser thread-safe
 public class ThreadSafeSingletonService
@@ -354,9 +387,8 @@ public class ThreadSafeSingletonService
 }
 ```
 
-## 🚀 Testing com DI
+##### Unit Testing
 
-### Unit Testing
 ```csharp
 [Test]
 public async Task GetProduct_WithValidId_ReturnsProduct()
@@ -378,7 +410,8 @@ public async Task GetProduct_WithValidId_ReturnsProduct()
 }
 ```
 
-### Integration Testing
+##### Integration Testing
+
 ```csharp
 public class TestStartup : Startup
 {
@@ -392,7 +425,7 @@ public class TestStartup : Startup
 }
 ```
 
-## 📚 Recursos Adicionais
+## Referências
 
 - [Dependency Injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection)
 - [Service Lifetimes](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#service-lifetimes)

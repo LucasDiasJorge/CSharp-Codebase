@@ -1,10 +1,52 @@
 # Identity Map Pattern
 
-## Descrição
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a Identity Map Pattern, com foco em padrões arquiteturais e organização de casos de uso.
+
+## Conceitos abordados
+
+- Exemplo didático sobre Identity Map Pattern no contexto de padrões arquiteturais e organização de casos de uso.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como Identity Map Pattern se aplica em um cenário prático de padrões arquiteturais e organização de casos de uso.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+IdentityMap/
++-- Entities/
+|   \-- Customer.cs
++-- Implementations/
+|   +-- CustomerRepositoryWithIdentityMap.cs
+|   \-- IdentityMap.cs
+\-- Interfaces/
+    +-- ICustomerRepository.cs
+    \-- IIdentityMap.cs
+```
+
+## Como executar
+
+Consulte o código desta pasta e os projetos relacionados antes de executar comandos específicos.
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Descrição
 
 O **Identity Map** garante que cada objeto seja carregado apenas uma vez, mantendo um mapa de todos os objetos carregados na sessão atual.
 
-## Problema que Resolve
+##### Problema que Resolve
 
 ```csharp
 // Sem Identity Map - duas instâncias diferentes!
@@ -18,7 +60,7 @@ var customer2 = await repo.GetByIdAsync(id);
 customer1 == customer2 // TRUE! Mesmo objeto
 ```
 
-## Estrutura
+##### Estrutura
 
 ```
 IdentityMap/
@@ -33,7 +75,7 @@ IdentityMap/
 └── README.md
 ```
 
-## Diagrama
+##### Diagrama
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -49,14 +91,14 @@ IdentityMap/
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## Benefícios
+##### Benefícios
 
 ✅ **Performance** - Evita queries duplicadas  
 ✅ **Consistência** - Uma única instância por entidade  
 ✅ **Memória** - Não duplica objetos  
-✅ **Integridade referencial** - Mudanças refletem em todos os lugares  
+✅ **Integridade referencial** - Mudanças refletem em todos os lugares
 
-## Exemplo de Uso
+##### Exemplo de Uso
 
 ```csharp
 // Configuração
@@ -79,15 +121,15 @@ customer1.UpdateName("Novo Nome");
 Console.WriteLine(customer2.Name); // "Novo Nome"
 ```
 
-## Quando Usar
+##### Quando Usar
 
 ✅ Múltiplos acessos à mesma entidade  
 ✅ Necessidade de consistência em memória  
 ✅ Operações dentro de uma Unit of Work  
-✅ Cenários com relacionamentos complexos  
+✅ Cenários com relacionamentos complexos
 
-## Cuidados
+##### Cuidados
 
 ⚠️ **Escopo** - Deve ter escopo de request/sessão  
 ⚠️ **Memória** - Limpar após operação  
-⚠️ **Concorrência** - Cuidado com threads  
+⚠️ **Concorrência** - Cuidado com threads

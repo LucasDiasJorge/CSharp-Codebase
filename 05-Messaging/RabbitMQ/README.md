@@ -1,10 +1,10 @@
-# 🐰 RabbitMQ - Hello Queue
+# RabbitMQ - Hello Queue
+
+## Visão geral
 
 Exemplo mínimo de mensageria com RabbitMQ em .NET 9.
 
----
-
-## 📚 Conceitos Abordados
+## Conceitos abordados
 
 - **Message Queue**: Filas de mensagens para comunicação assíncrona
 - **Producer/Consumer**: Padrão publicador/consumidor
@@ -12,18 +12,51 @@ Exemplo mínimo de mensageria com RabbitMQ em .NET 9.
 - **Queue Declaration**: Criação idempotente de filas
 - **Auto Acknowledgement**: Confirmação automática de mensagens
 
----
+### Conceitos Chave
 
-## 🎯 Objetivos de Aprendizado
+| Conceito | Descrição |
+|----------|-----------|
+| **Queue** | Buffer durável para mensagens |
+| **Idempotência** | Declarar fila repetidamente é seguro |
+| **AutoAck** | Confirmação automática (simplificado) |
+| **Exchange** | Roteador de mensagens (não usado neste exemplo básico) |
+
+## Objetivos de aprendizagem
 
 - Configurar ambiente RabbitMQ local com Docker
 - Entender conexão, canal e fila
 - Publicar e consumir mensagens básicas
 - Preparar base para padrões avançados
 
----
+## Estrutura do projeto
 
-## 📂 Estrutura do Projeto
+```text
+RabbitMQ/
++-- Receive/
+|   +-- Receive.cs
+|   \-- Receive.csproj
++-- Send/
+|   +-- Send.cs
+|   \-- Send.csproj
+\-- RabbitMQ.sln
+```
+
+## Como executar
+
+Escolha um dos projetos abaixo para execução direcionada:
+
+- `dotnet build 05-Messaging/RabbitMQ/Receive/Receive.csproj`
+- `dotnet build 05-Messaging/RabbitMQ/Send/Send.csproj`
+
+## Boas práticas e pontos de atenção
+
+- Exemplo usa fila não-durável para simplicidade
+- AutoAck ativado (em produção preferir ack manual)
+- Não demonstra exchanges ou routing keys
+
+## Conteúdo complementar
+
+##### Estrutura do Projeto
 
 ```
 RabbitMQ/
@@ -31,11 +64,7 @@ RabbitMQ/
 └── Receive/      # Consumer - recebe mensagens
 ```
 
----
-
-## 🚀 Como Executar
-
-### 1. Subir Infraestrutura (Docker)
+##### 1. Subir Infraestrutura (Docker)
 
 ```bash
 docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 \
@@ -45,29 +74,13 @@ docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 \
 
 **Dashboard**: http://localhost:15672 (usuario/senha)
 
-### 2. Instalar Dependência
+##### 2. Instalar Dependência
 
 ```bash
 dotnet add package RabbitMQ.Client
 ```
 
-### 3. Executar
-
-```bash
-# Terminal 1 - Consumer (primeiro)
-cd Receive
-dotnet run
-
-# Terminal 2 - Producer
-cd Send
-dotnet run
-```
-
----
-
-## 💡 Exemplos de Código
-
-### Producer (Essência)
+##### Producer (Essência)
 
 ```csharp
 ConnectionFactory factory = new ConnectionFactory { HostName = "localhost" };
@@ -79,7 +92,7 @@ byte[] body = Encoding.UTF8.GetBytes("Hello World!");
 await channel.BasicPublishAsync(string.Empty, "hello", body: body);
 ```
 
-### Consumer (Essência)
+##### Consumer (Essência)
 
 ```csharp
 AsyncEventingBasicConsumer consumer = new AsyncEventingBasicConsumer(channel);
@@ -92,37 +105,14 @@ consumer.ReceivedAsync += (_, ea) =>
 await channel.BasicConsumeAsync("hello", true, consumer);
 ```
 
----
-
-## 📋 Conceitos Chave
-
-| Conceito | Descrição |
-|----------|-----------|
-| **Queue** | Buffer durável para mensagens |
-| **Idempotência** | Declarar fila repetidamente é seguro |
-| **AutoAck** | Confirmação automática (simplificado) |
-| **Exchange** | Roteador de mensagens (não usado neste exemplo básico) |
-
----
-
-## ⚠️ Pontos de Atenção
-
-- Exemplo usa fila não-durável para simplicidade
-- AutoAck ativado (em produção preferir ack manual)
-- Não demonstra exchanges ou routing keys
-
----
-
-## 🔜 Próximos Passos
+##### Próximos Passos
 
 - Tornar fila durável (`durable: true`)
 - Mensagens persistentes (`IBasicProperties.Persistent = true`)
 - Acks manuais + políticas de retry / DLQ
 - Exchanges + routing keys (fanout / topic / direct)
 
----
-
-## 🔧 Troubleshooting
+##### Troubleshooting
 
 | Problema | Solução |
 |----------|---------|
@@ -130,9 +120,7 @@ await channel.BasicConsumeAsync("hello", true, consumer);
 | Sem mensagens | Confirmar producer executou depois do consumer |
 | Dashboard inacessível | Conferir porta 15672 e credenciais |
 
----
-
-## 🔗 Referências
+## Referências
 
 - [RabbitMQ Tutorials](https://www.rabbitmq.com/getstarted.html)
 - [RabbitMQ .NET Client](https://www.rabbitmq.com/dotnet.html)

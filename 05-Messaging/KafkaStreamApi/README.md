@@ -1,10 +1,10 @@
-# 📦 KafkaStreamApi
+# KafkaStreamApi
+
+## Visão geral
 
 API Web para consumo de mensagens Kafka em tempo real via Server-Sent Events (SSE) e NDJSON streaming.
 
----
-
-## 📚 Conceitos Abordados
+## Conceitos abordados
 
 - **Kafka Consumer**: Consumo de mensagens de tópicos Kafka usando Confluent.Kafka
 - **Server-Sent Events (SSE)**: Streaming unidirecional de dados do servidor para o cliente
@@ -12,18 +12,53 @@ API Web para consumo de mensagens Kafka em tempo real via Server-Sent Events (SS
 - **IAsyncEnumerable**: Geração de dados assíncronos com yield return
 - **Serilog**: Logging estruturado para monitoramento
 
----
-
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Implementar consumo de Kafka em uma API ASP.NET Core
 - Criar endpoints de streaming com SSE e NDJSON
 - Usar IAsyncEnumerable para processamento eficiente de streams
 - Configurar logging estruturado com Serilog
 
----
+## Estrutura do projeto
 
-## 📂 Estrutura do Projeto
+```text
+KafkaStreamApi/
++-- Controllers/
+|   \-- KafkaController.cs
++-- KafkaStreamApi/
++-- Properties/
+|   \-- launchSettings.json
++-- Services/
+|   \-- KafkaConsumerService.cs
++-- appsettings.Development.json
++-- appsettings.json
++-- KafkaStreamApi.csproj
++-- KafkaStreamApi.csproj.user
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet run --project 05-Messaging/KafkaStreamApi/KafkaStreamApi.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Usar CancellationToken para cancelamento gracioso
+- Implementar IDisposable no consumer service
+- Logging estruturado para debugging de streams
+- Validar configurações do Kafka no startup
+
+### Pontos de Atenção
+
+- Configurar `appsettings.json` com BootstrapServers e GroupId
+- SSE mantém conexão aberta - considerar timeouts
+- Em produção, usar consumer groups para escalabilidade
+
+## Conteúdo complementar
+
+##### Estrutura do Projeto
 
 ```
 KafkaStreamApi/
@@ -38,16 +73,12 @@ KafkaStreamApi/
 └── README.md
 ```
 
----
-
-## 🚀 Como Executar
-
-### Pré-requisitos
+##### Pré-requisitos
 
 - .NET 9.0 SDK
 - Apache Kafka rodando (Docker recomendado)
 
-### Configuração do Kafka
+##### Configuração do Kafka
 
 ```bash
 # Subir Kafka com Docker
@@ -57,23 +88,14 @@ docker run -d --name kafka -p 9092:9092 \
   confluentinc/cp-kafka
 ```
 
-### Execução
-
-```bash
-cd 05-Messaging/KafkaStreamApi
-dotnet run
-```
-
----
-
-## 📋 Endpoints
+##### Endpoints
 
 | Endpoint | Método | Descrição |
 |----------|--------|-----------|
 | `/api/kafka/stream/{topic}/{groupId}` | GET | Stream SSE de mensagens |
 | `/api/kafka/stream-ndjson/{topic}/{groupId}` | GET | Stream NDJSON de mensagens |
 
-### Exemplo de Uso
+##### Exemplo de Uso
 
 ```bash
 # SSE Stream
@@ -83,11 +105,7 @@ curl -N http://localhost:5000/api/kafka/stream/meu-topico/meu-grupo
 curl -N http://localhost:5000/api/kafka/stream-ndjson/meu-topico/meu-grupo
 ```
 
----
-
-## 💡 Exemplos de Código
-
-### Consumer Service com IAsyncEnumerable
+##### Consumer Service com IAsyncEnumerable
 
 ```csharp
 public async IAsyncEnumerable<string> ConsumeMessagesAsStreamAsync(
@@ -109,7 +127,7 @@ public async IAsyncEnumerable<string> ConsumeMessagesAsStreamAsync(
 }
 ```
 
-### Controller SSE Endpoint
+##### Controller SSE Endpoint
 
 ```csharp
 [HttpGet("stream/{topic}/{groupId}")]
@@ -126,26 +144,7 @@ public async Task GetKafkaStream(string topic, string groupId, CancellationToken
 }
 ```
 
----
-
-## ✅ Boas Práticas
-
-- Usar CancellationToken para cancelamento gracioso
-- Implementar IDisposable no consumer service
-- Logging estruturado para debugging de streams
-- Validar configurações do Kafka no startup
-
----
-
-## ⚠️ Pontos de Atenção
-
-- Configurar `appsettings.json` com BootstrapServers e GroupId
-- SSE mantém conexão aberta - considerar timeouts
-- Em produção, usar consumer groups para escalabilidade
-
----
-
-## 🔗 Referências
+## Referências
 
 - [Confluent Kafka .NET](https://docs.confluent.io/kafka-clients/dotnet/current/overview.html)
 - [Server-Sent Events MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)

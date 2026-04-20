@@ -1,18 +1,71 @@
-# 📚 CQRS Demo - Guia Completo
+# CQRS Demo - Guia Completo
 
-## 🎯 O que é CQRS?
+## Visão geral
 
 **CQRS** (Command Query Responsibility Segregation) é um padrão arquitetural que separa as operações de **leitura** (Queries) das operações de **escrita** (Commands) em um sistema.
 
-### Princípio Fundamental
+## Conceitos abordados
+
+- Exemplo didático sobre CQRS Demo - Guia Completo no contexto de padrões arquiteturais e organização de casos de uso.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como CQRS Demo - Guia Completo se aplica em um cenário prático de padrões arquiteturais e organização de casos de uso.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+CQRSDemo/
++-- Commands/
+|   +-- CreateProductCommand.cs
+|   +-- DeleteProductCommand.cs
+|   \-- UpdateProductCommand.cs
++-- CQRSDemo/
++-- Handlers/
+|   +-- CreateProductCommandHandler.cs
+|   +-- DeleteProductCommandHandler.cs
+|   +-- GetAllProductsQueryHandler.cs
+|   +-- GetLowStockProductsQueryHandler.cs
+|   +-- GetProductByIdQueryHandler.cs
+|   \-- UpdateProductCommandHandler.cs
++-- Infrastructure/
+|   \-- InMemoryDatabase.cs
++-- Models/
+|   \-- Product.cs
++-- Queries/
+|   +-- GetAllProductsQuery.cs
+|   +-- GetLowStockProductsQuery.cs
+|   +-- GetProductByIdQuery.cs
+|   \-- ProductDto.cs
++-- CQRSDemo.csproj
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 08-ArchitecturalPatterns/CQRSDemo/CQRSDemo.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Princípio Fundamental
 
 > **"Uma operação deve ser um Command que modifica o estado OU uma Query que retorna dados, mas nunca ambos."**
 
 Este princípio foi introduzido por **Bertrand Meyer** no conceito de **Command-Query Separation (CQS)** e expandido por **Greg Young** para arquitetura de sistemas completos.
 
----
-
-## 🏗️ Arquitetura do Projeto
+##### Arquitetura do Projeto
 
 ```
 CQRSDemo/
@@ -30,11 +83,7 @@ CQRSDemo/
 └── Program.cs                      # Demonstração prática
 ```
 
----
-
-## 📖 Conceitos Principais
-
-### 1️⃣ **Commands** (Escrita)
+##### 1️⃣ **Commands** (Escrita)
 
 Commands representam a **intenção de modificar o estado** do sistema.
 
@@ -55,7 +104,7 @@ public class CreateProductCommand
 }
 ```
 
-### 2️⃣ **Queries** (Leitura)
+##### 2️⃣ **Queries** (Leitura)
 
 Queries representam a **intenção de ler dados** sem modificar o estado.
 
@@ -74,7 +123,7 @@ public class GetProductByIdQuery
 }
 ```
 
-### 3️⃣ **Handlers**
+##### 3️⃣ **Handlers**
 
 Handlers são responsáveis por **processar** Commands ou Queries.
 
@@ -88,7 +137,7 @@ Handlers são responsáveis por **processar** Commands ou Queries.
 - Transformam entidades em DTOs
 - Aplicam filtros e ordenação
 
-### 4️⃣ **DTOs** (Data Transfer Objects)
+##### 4️⃣ **DTOs** (Data Transfer Objects)
 
 DTOs são objetos simples usados para **transferir dados** das Queries.
 
@@ -98,33 +147,25 @@ DTOs são objetos simples usados para **transferir dados** das Queries.
 - ⚡ Permite otimizações específicas para leitura
 - 🔧 Facilita versionamento de API
 
----
+##### 1. Navegar até o diretório do projeto:
 
-## 🚀 Como Executar
-
-### 1. Navegar até o diretório do projeto:
 ```bash
 cd CQRSDemo
 ```
 
-### 2. Restaurar dependências (se necessário):
+##### 2. Restaurar dependências (se necessário):
+
 ```bash
 dotnet restore
 ```
 
-### 3. Compilar o projeto:
+##### 3. Compilar o projeto:
+
 ```bash
 dotnet build
 ```
 
-### 4. Executar o projeto:
-```bash
-dotnet run
-```
-
----
-
-## 📋 Exemplo de Saída
+##### Exemplo de Saída
 
 ```
 ====================================
@@ -176,11 +217,8 @@ Produtos restantes: 2
   - Mouse Logitech MX Master 3
 ```
 
----
+##### Operação de Escrita (Command)
 
-## 🎓 Fluxo de Execução
-
-### ➡️ Operação de Escrita (Command)
 ```
 Cliente
   ↓
@@ -195,7 +233,8 @@ Database (modificação)
 Retorna ID/Sucesso
 ```
 
-### ➡️ Operação de Leitura (Query)
+##### Operação de Leitura (Query)
+
 ```
 Cliente
   ↓
@@ -210,38 +249,37 @@ Transforma em DTO
 Retorna ProductDto
 ```
 
----
+##### 1. **Separação de Responsabilidades**
 
-## ✅ Benefícios do CQRS
-
-### 1. **Separação de Responsabilidades**
 - Código mais limpo e organizado
 - Facilita manutenção e testes
 - Cada handler tem uma única responsabilidade
 
-### 2. **Escalabilidade**
+##### 2. **Escalabilidade**
+
 - Leitura e escrita podem ser escaladas independentemente
 - Permite diferentes bancos de dados para read/write
 - Facilita cache e otimizações
 
-### 3. **Performance**
+##### 3. **Performance**
+
 - Queries otimizadas especificamente para leitura
 - DTOs podem ter estruturas diferentes do modelo de domínio
 - Permite desnormalização de dados para leitura
 
-### 4. **Segurança**
+##### 4. **Segurança**
+
 - Commands podem ter validações rigorosas
 - Queries nunca modificam estado
 - Facilita auditoria e rastreamento
 
-### 5. **Facilita Event Sourcing**
+##### 5. **Facilita Event Sourcing**
+
 - Commands naturalmente geram eventos
 - Histórico completo de mudanças
 - Possibilidade de replay de eventos
 
----
-
-## ⚠️ Quando NÃO usar CQRS?
+##### Quando NÃO usar CQRS?
 
 CQRS adiciona complexidade ao sistema. Não use quando:
 
@@ -251,9 +289,7 @@ CQRS adiciona complexidade ao sistema. Não use quando:
 - ❌ Não há necessidade de escalabilidade diferenciada
 - ❌ Overhead de código não justifica os benefícios
 
----
-
-## 🔄 Evolução: CQRS + Event Sourcing
+##### Evolução: CQRS + Event Sourcing
 
 Este projeto demonstra CQRS básico. Para sistemas mais complexos, você pode evoluir para:
 
@@ -271,11 +307,8 @@ Command → CommandHandler → Event → EventStore
 - **EventStore**: Database especializado em eventos
 - **Brighter**: Framework para Command Dispatcher
 
----
+##### 1. **Adicionar MediatR**
 
-## 📚 Próximos Passos
-
-### 1. **Adicionar MediatR**
 Usar a biblioteca MediatR para simplificar o dispatch de Commands/Queries:
 
 ```csharp
@@ -294,7 +327,8 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Guid>
 }
 ```
 
-### 2. **Implementar com Entity Framework Core**
+##### 2. **Implementar com Entity Framework Core**
+
 Substituir InMemoryDatabase por um banco real:
 
 ```csharp
@@ -304,7 +338,8 @@ public class ApplicationDbContext : DbContext
 }
 ```
 
-### 3. **Adicionar Validation**
+##### 3. **Adicionar Validation**
+
 Usar FluentValidation para validações mais robustas:
 
 ```csharp
@@ -318,7 +353,8 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
 }
 ```
 
-### 4. **Implementar API REST**
+##### 4. **Implementar API REST**
+
 Criar controllers ASP.NET Core que usam os handlers:
 
 ```csharp
@@ -345,7 +381,8 @@ public class ProductsController : ControllerBase
 }
 ```
 
-### 5. **Adicionar Event Sourcing**
+##### 5. **Adicionar Event Sourcing**
+
 Armazenar eventos ao invés de estado:
 
 ```csharp
@@ -358,19 +395,7 @@ public class ProductCreatedEvent
 }
 ```
 
----
-
-## 📖 Referências e Leitura Recomendada
-
-- **Martin Fowler** - [CQRS Pattern](https://martinfowler.com/bliki/CQRS.html)
-- **Greg Young** - [CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)
-- **Microsoft Docs** - [CQRS Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
-- **Livro**: "Domain-Driven Design" - Eric Evans
-- **Livro**: "Implementing Domain-Driven Design" - Vaughn Vernon
-
----
-
-## 🤝 Contribuindo
+##### Contribuindo
 
 Este é um projeto didático. Sinta-se livre para:
 - Experimentar com o código
@@ -379,15 +404,11 @@ Este é um projeto didático. Sinta-se livre para:
 - Integrar com MediatR
 - Adicionar testes unitários
 
----
-
-## 📝 Licença
+##### Licença
 
 Este projeto é para fins educacionais e está disponível gratuitamente.
 
----
-
-## 💡 Dicas Finais
+##### Dicas Finais
 
 1. **Comece Simples**: Não implemente CQRS em todos os lugares de uma vez
 2. **Use para Bounded Contexts Específicos**: Aplique onde faz sentido
@@ -395,6 +416,12 @@ Este projeto é para fins educacionais e está disponível gratuitamente.
 4. **Pense em Eventos**: Commands devem gerar eventos do domínio
 5. **DTOs são Importantes**: Nunca exponha suas entidades diretamente
 
----
-
 **Feito com 💙 para fins educacionais**
+
+## Referências
+
+- **Martin Fowler** - [CQRS Pattern](https://martinfowler.com/bliki/CQRS.html)
+- **Greg Young** - [CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)
+- **Microsoft Docs** - [CQRS Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
+- **Livro**: "Domain-Driven Design" - Eric Evans
+- **Livro**: "Implementing Domain-Driven Design" - Vaughn Vernon

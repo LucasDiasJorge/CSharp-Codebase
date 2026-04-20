@@ -1,12 +1,53 @@
 # Event Carried State Transfer em C#
 
-## O que é Event Carried State Transfer?
+## Visão geral
 
 O **Event Carried State Transfer** (também conhecido como **Carried Event**) é um padrão onde os eventos carregam todos os dados necessários para que os consumidores processem a informação sem precisar consultar a origem.
 
-## Comparação de Abordagens
+## Conceitos abordados
 
-### Event Notification (Tradicional)
+- Exemplo didático sobre Event Carried State Transfer em C# no contexto de padrões arquiteturais e organização de casos de uso.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como Event Carried State Transfer em C# se aplica em um cenário prático de padrões arquiteturais e organização de casos de uso.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+CarriedEvent/
++-- Core/
+|   +-- CarriedStateEvent.cs
+|   +-- IEvent.cs
+|   +-- IEventBus.cs
+|   +-- IEventHandler.cs
+|   \-- InMemoryEventBus.cs
++-- Examples/
+|   \-- OrderCreated/
++-- CarriedEvent.csproj
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 08-ArchitecturalPatterns/CarriedEvent/CarriedEvent.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Event Notification (Tradicional)
+
 ```json
 {
   "eventType": "OrderCreated",
@@ -15,7 +56,8 @@ O **Event Carried State Transfer** (também conhecido como **Carried Event**) é
 // Consumidor precisa buscar dados do pedido
 ```
 
-### Event Carried State Transfer
+##### Event Carried State Transfer
+
 ```json
 {
   "eventType": "OrderCreated",
@@ -29,7 +71,7 @@ O **Event Carried State Transfer** (também conhecido como **Carried Event**) é
 // Consumidor tem todos os dados necessários
 ```
 
-## Estrutura
+##### Estrutura
 
 ```
 CarriedEvent/
@@ -45,22 +87,15 @@ CarriedEvent/
 └── README.md
 ```
 
-## Benefícios
+##### Benefícios
 
 ✅ **Desacoplamento** - Consumidor não precisa conhecer a origem  
 ✅ **Performance** - Menos chamadas de rede  
 ✅ **Resiliência** - Funciona mesmo se origem estiver indisponível  
-✅ **Autonomia** - Serviços independentes  
+✅ **Autonomia** - Serviços independentes
 
-## Desvantagens
+##### Desvantagens
 
 ⚠️ **Tamanho do evento** - Eventos maiores  
 ⚠️ **Consistência eventual** - Dados podem estar desatualizados  
-⚠️ **Duplicação** - Mesmos dados em múltiplos eventos  
-
-## Como Executar
-
-```bash
-cd CarriedEvent
-dotnet run
-```
+⚠️ **Duplicação** - Mesmos dados em múltiplos eventos

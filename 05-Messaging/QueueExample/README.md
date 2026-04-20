@@ -1,6 +1,16 @@
-# 📦 QueueExample - Estruturas de Dados: Filas (Queue)
+# QueueExample - Estruturas de Dados: Filas (Queue)
 
-## 🎯 Objetivos de Aprendizado
+## Visão geral
+
+Uma **Queue (Fila)** é uma estrutura de dados linear que segue o princípio **FIFO (First In, First Out)** - o primeiro elemento inserido é o primeiro a ser removido, como uma fila de pessoas.
+
+## Conceitos abordados
+
+- Exemplo didático sobre QueueExample - Estruturas de Dados: Filas (Queue) no contexto de mensageria, filas, eventos e integração assíncrona.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
 
 - Entender a **estrutura de dados Queue (Fila)**
 - Implementar operações **FIFO (First In, First Out)**
@@ -9,13 +19,32 @@
 - Comparar **Queue vs Stack vs List**
 - Implementar **padrões de uso** com filas
 
-## 📚 Conceitos Fundamentais
+## Estrutura do projeto
 
-### O que é uma Queue (Fila)?
+```text
+QueueExample/
++-- .gitignore
++-- Program.cs
+\-- QueueExample.csproj
+```
 
-Uma **Queue (Fila)** é uma estrutura de dados linear que segue o princípio **FIFO (First In, First Out)** - o primeiro elemento inserido é o primeiro a ser removido, como uma fila de pessoas.
+## Como executar
 
-### Operações Principais
+```bash
+dotnet run --project 05-Messaging/QueueExample/QueueExample.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+1. **Use ConcurrentQueue** para cenários multi-thread
+2. **Implemente bounds checking** para filas limitadas
+3. **Monitore tamanho** da fila para evitar memory leaks
+4. **Use cancellation tokens** em loops de processamento
+5. **Trate exceções** adequadamente no processamento
+
+## Conteúdo complementar
+
+##### Operações Principais
 
 - **Enqueue**: Adiciona elemento ao final da fila
 - **Dequeue**: Remove e retorna o primeiro elemento
@@ -23,7 +52,7 @@ Uma **Queue (Fila)** é uma estrutura de dados linear que segue o princípio **F
 - **Count**: Número de elementos na fila
 - **Clear**: Remove todos os elementos
 
-### Queue vs Outras Estruturas
+##### Queue vs Outras Estruturas
 
 | Estrutura | Princípio | Inserção | Remoção | Uso Principal |
 |-----------|----------|----------|---------|---------------|
@@ -31,7 +60,7 @@ Uma **Queue (Fila)** é uma estrutura de dados linear que segue o princípio **F
 | **Stack** | LIFO | Topo | Topo | Desfazer operações |
 | **List** | Indexada | Qualquer posição | Qualquer posição | Acesso aleatório |
 
-## 🏗️ Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```
 QueueExample/
@@ -44,9 +73,7 @@ QueueExample/
 └── QueueExample.csproj
 ```
 
-## 💡 Exemplos Práticos
-
-### 1. Operações Básicas
+##### 1. Operações Básicas
 
 ```csharp
 public class QueueBasicOperations
@@ -95,7 +122,7 @@ public class QueueBasicOperations
 }
 ```
 
-### 2. Fila de Tarefas (Task Queue)
+##### 2. Fila de Tarefas (Task Queue)
 
 ```csharp
 public class TaskQueue
@@ -179,7 +206,7 @@ public class WorkItem
 }
 ```
 
-### 3. Simulação de Impressora
+##### 3. Simulação de Impressora
 
 ```csharp
 public class PrinterQueue
@@ -255,7 +282,7 @@ public class PrintJob
 }
 ```
 
-### 4. Busca em Largura (BFS) com Queue
+##### 4. Busca em Largura (BFS) com Queue
 
 ```csharp
 public class BreadthFirstSearch
@@ -324,7 +351,7 @@ public class BreadthFirstSearch
 }
 ```
 
-### 5. Queue Thread-Safe com ConcurrentQueue
+##### 5. Queue Thread-Safe com ConcurrentQueue
 
 ```csharp
 public class ThreadSafeQueueExample
@@ -383,22 +410,7 @@ public class ThreadSafeQueueExample
 }
 ```
 
-## 🚀 Configuração e Execução
-
-### 1. Executar Exemplos Básicos
-
-```bash
-# Navegar para o diretório
-cd QueueExample
-
-# Restaurar dependências
-dotnet restore
-
-# Executar a aplicação
-dotnet run
-```
-
-### 2. Exemplos Interativos
+##### 2. Exemplos Interativos
 
 ```csharp
 public class InteractiveQueueDemo
@@ -472,9 +484,7 @@ public class InteractiveQueueDemo
 }
 ```
 
-## 💯 Melhores Práticas
-
-### ✅ Quando Usar Queue
+##### Quando Usar Queue
 
 1. **Processamento FIFO**: Quando ordem de processamento importa
 2. **Buffer de dados**: Para desacoplar produtores de consumidores
@@ -482,15 +492,7 @@ public class InteractiveQueueDemo
 4. **BFS algorithms**: Busca em largura em grafos/árvores
 5. **Message queues**: Sistemas de mensageria
 
-### ✅ Boas Práticas
-
-1. **Use ConcurrentQueue** para cenários multi-thread
-2. **Implemente bounds checking** para filas limitadas
-3. **Monitore tamanho** da fila para evitar memory leaks
-4. **Use cancellation tokens** em loops de processamento
-5. **Trate exceções** adequadamente no processamento
-
-### ❌ Evitar
+##### Evitar
 
 1. **Acesso direto por índice** (use List<T> se precisar)
 2. **Filas muito grandes** sem controle de tamanho
@@ -498,7 +500,7 @@ public class InteractiveQueueDemo
 4. **Múltiplas threads** sem sincronização adequada
 5. **Loops infinitos** sem cancellation
 
-## 🔍 Complexidade de Operações
+##### Complexidade de Operações
 
 | Operação | Complexidade | Descrição |
 |----------|-------------|-----------|
@@ -509,9 +511,7 @@ public class InteractiveQueueDemo
 | **Contains** | O(n) | Busca linear |
 | **ToArray** | O(n) | Copia todos elementos |
 
-## 📋 Casos de Uso Reais
-
-### 1. Sistema de Cache com Expiração
+##### 1. Sistema de Cache com Expiração
 
 ```csharp
 public class ExpiringCache<T>
@@ -562,7 +562,7 @@ public class CacheItem<T>
 }
 ```
 
-## 📋 Exercícios Práticos
+##### Exercícios Práticos
 
 1. **Rate Limiter**: Implemente rate limiting usando Queue
 2. **Undo System**: Sistema de desfazer operações
@@ -570,13 +570,11 @@ public class CacheItem<T>
 4. **Chat System**: Fila de mensagens em chat
 5. **Job Scheduler**: Sistema de agendamento de tarefas
 
-## 🔗 Recursos Adicionais
+## Referências
 
 - [Queue<T> Class Documentation](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.queue-1)
 - [ConcurrentQueue<T> Documentation](https://docs.microsoft.com/en-us/dotnet/api/system.collections.concurrent.concurrentqueue-1)
 - [Choosing Collections](https://docs.microsoft.com/en-us/dotnet/standard/collections/selecting-a-collection-class)
 - [Data Structures and Algorithms](https://docs.microsoft.com/en-us/dotnet/standard/collections/)
-
----
 
 💡 **Dica**: Queue é fundamental para implementar padrões como Producer-Consumer, BFS, e task scheduling. Escolha Queue<T> para single-thread e ConcurrentQueue<T> para cenários multi-thread!

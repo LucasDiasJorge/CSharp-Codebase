@@ -1,6 +1,10 @@
 # Events e Event Handling em C#
 
-## 📚 Conceitos Abordados
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a Events e Event Handling em C#, com foco em conceitos fundamentais da linguagem C# e orientação a objetos.
+
+## Conceitos abordados
 
 Este projeto demonstra o sistema de eventos em C#, incluindo:
 
@@ -11,7 +15,7 @@ Este projeto demonstra o sistema de eventos em C#, incluindo:
 - **Multicast Delegates**: Múltiplos subscribers para um evento
 - **Event Lifecycle**: Ciclo de vida de eventos
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Implementar o padrão Publisher-Subscriber
 - Entender a diferença entre delegates e events
@@ -19,44 +23,7 @@ Este projeto demonstra o sistema de eventos em C#, incluindo:
 - Evitar memory leaks em event handling
 - Criar sistemas desacoplados usando eventos
 
-## 💡 Conceitos Importantes
-
-### Declaração de Evento
-```csharp
-public class Button
-{
-    public event EventHandler? Clicked;
-    
-    protected virtual void OnClicked()
-    {
-        Clicked?.Invoke(this, EventArgs.Empty);
-    }
-}
-```
-
-### Subscription/Unsubscription
-```csharp
-button.Clicked += OnButtonClicked;  // Subscribe
-button.Clicked -= OnButtonClicked;  // Unsubscribe
-```
-
-### Custom EventArgs
-```csharp
-public class CustomEventArgs : EventArgs
-{
-    public string Message { get; set; }
-    public DateTime Timestamp { get; set; }
-}
-```
-
-## 🚀 Como Executar
-
-```bash
-cd Events
-dotnet run
-```
-
-## 📖 O que Você Aprenderá
+### O que Você Aprenderá
 
 1. **Publisher-Subscriber Pattern**:
    - Desacoplamento entre componentes
@@ -78,9 +45,61 @@ dotnet run
    - Importância de unsubscribe para evitar memory leaks
    - Weak events para cenários específicos
 
-## 🎨 Padrões de Implementação
+## Estrutura do projeto
 
-### 1. Standard Event Pattern
+```text
+Events/
++-- Events.csproj
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 01-Fundamentals/Events/Events.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Declaração de Evento
+
+```csharp
+public class Button
+{
+    public event EventHandler? Clicked;
+    
+    protected virtual void OnClicked()
+    {
+        Clicked?.Invoke(this, EventArgs.Empty);
+    }
+}
+```
+
+##### Subscription/Unsubscription
+
+```csharp
+button.Clicked += OnButtonClicked;  // Subscribe
+button.Clicked -= OnButtonClicked;  // Unsubscribe
+```
+
+##### Custom EventArgs
+
+```csharp
+public class CustomEventArgs : EventArgs
+{
+    public string Message { get; set; }
+    public DateTime Timestamp { get; set; }
+}
+```
+
+##### 1. Standard Event Pattern
+
 ```csharp
 public class Publisher
 {
@@ -93,7 +112,8 @@ public class Publisher
 }
 ```
 
-### 2. Custom Delegate
+##### 2. Custom Delegate
+
 ```csharp
 public delegate void CustomEventHandler(string message);
 
@@ -108,7 +128,8 @@ public class CustomPublisher
 }
 ```
 
-### 3. Event com Múltiplos Parâmetros
+##### 3. Event com Múltiplos Parâmetros
+
 ```csharp
 public class DataEventArgs : EventArgs
 {
@@ -119,9 +140,8 @@ public class DataEventArgs : EventArgs
 public event EventHandler<DataEventArgs>? DataReceived;
 ```
 
-## 🏗️ Casos de Uso Comuns
+##### 1. UI Events
 
-### 1. UI Events
 ```csharp
 public class Button
 {
@@ -131,7 +151,8 @@ public class Button
 }
 ```
 
-### 2. Model Events
+##### 2. Model Events
+
 ```csharp
 public class Model
 {
@@ -141,7 +162,8 @@ public class Model
 }
 ```
 
-### 3. Service Events
+##### 3. Service Events
+
 ```csharp
 public class DataService
 {
@@ -151,9 +173,8 @@ public class DataService
 }
 ```
 
-## 🔍 Pontos de Atenção
+##### Memory Leaks
 
-### Memory Leaks
 ```csharp
 // ❌ Problemático - não faz unsubscribe
 publisher.Event += Handler;
@@ -164,7 +185,8 @@ publisher.Event += Handler;
 publisher.Event -= Handler;
 ```
 
-### Exception Handling
+##### Exception Handling
+
 ```csharp
 protected virtual void OnEvent()
 {
@@ -186,7 +208,8 @@ protected virtual void OnEvent()
 }
 ```
 
-### Thread Safety
+##### Thread Safety
+
 ```csharp
 public event EventHandler? MyEvent;
 
@@ -197,15 +220,16 @@ protected virtual void OnMyEvent()
 }
 ```
 
-## 🚀 Padrões Avançados
+##### 1. Event Aggregator
 
-### 1. Event Aggregator
 Centralizador de eventos para sistemas complexos.
 
-### 2. Weak Events
+##### 2. Weak Events
+
 Previne memory leaks automaticamente.
 
-### 3. Async Events
+##### 3. Async Events
+
 ```csharp
 public event Func<object, EventArgs, Task>? AsyncEvent;
 
@@ -219,21 +243,16 @@ protected virtual async Task OnAsyncEvent()
 }
 ```
 
-## 📚 Recursos Adicionais
+##### Estrutura do Projeto
 
-- [Events (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/events/)
-- [Observer Pattern](https://refactoring.guru/design-patterns/observer)
-- [Weak Event Patterns](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/weak-event-patterns)
-
-## Estrutura do Projeto
 O projeto cont�m os seguintes componentes principais:
 
 - **Publisher (Button)**: Define um evento `Clicked`, ao qual outros objetos podem se inscrever.
 - **Subscriber (Logger)**: Escuta o evento `Clicked` e executa uma a��o quando notificado.
 - **Program**: Cont�m o ponto de entrada da aplica��o e demonstra a funcionalidade do padr�o Observer.
 
-## C�digo Explicado
-### Classe Button (Publisher)
+##### Classe Button (Publisher)
+
 ```csharp
 public class Button
 {
@@ -249,7 +268,8 @@ public class Button
 - Define um evento `Clicked` do tipo `EventHandler`.
 - Quando o m�todo `Click()` � chamado, ele dispara o evento `Clicked`, notificando todos os assinantes.
 
-### Classe Logger (Subscriber)
+##### Classe Logger (Subscriber)
+
 ```csharp
 public class Logger
 {
@@ -262,7 +282,8 @@ public class Logger
 - Define o manipulador de eventos `OnButtonClicked`, que responde ao evento `Clicked` do `Button`.
 - Exibe uma mensagem no console sempre que o evento � acionado.
 
-### Classe Program (Execu��o do Programa)
+##### Classe Program (Execu��o do Programa)
+
 ```csharp
 class Program
 {
@@ -284,18 +305,26 @@ class Program
 - Quando `Click()` � chamado, `OnButtonClicked()` � acionado.
 - Em seguida, o `Logger` � desinscrito do evento, e novos cliques n�o geram sa�da.
 
-## Similaridade com o Padr�o Observer
+##### Similaridade com o Padr�o Observer
+
 Os eventos em C# seguem a mesma filosofia do padr�o Observer:
 - O **Button** � o *Sujeito (Subject)* que mant�m uma lista de ouvintes (subscribers).
 - O **Logger** � o *Observer*, que responde �s mudan�as (cliques no bot�o).
 - A notifica��o ocorre automaticamente atrav�s do evento `Clicked`.
 - Podemos adicionar ou remover observadores dinamicamente, tornando o sistema flex�vel e modular.
 
-## Benef�cios
+##### Benef�cios
+
 - **Desacoplamento**: O *Publisher* n�o precisa conhecer os detalhes dos *Subscribers*.
 - **Flexibilidade**: Novos *Subscribers* podem ser adicionados sem modificar o c�digo do *Publisher*.
 - **Manuten��o facilitada**: Segue o princ�pio **Open/Closed**, permitindo extens�es sem altera��es no c�digo existente.
 
-## Conclus�o
+##### Conclus�o
+
 Este projeto demonstra como os eventos e delegados do C# implementam eficientemente o padr�o Observer. Usar eventos � uma maneira idiom�tica e segura de implementar comunica��o ass�ncrona entre objetos em C#.
 
+## Referências
+
+- [Events (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/events/)
+- [Observer Pattern](https://refactoring.guru/design-patterns/observer)
+- [Weak Event Patterns](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/weak-event-patterns)

@@ -1,6 +1,10 @@
 # MySQL com Entity Framework Core
 
-## 📚 Conceitos Abordados
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a MySQL com Entity Framework Core, com foco em persistência, bancos de dados e acesso a dados.
+
+## Conceitos abordados
 
 Este projeto demonstra a integração do MySQL com .NET usando Entity Framework Core:
 
@@ -12,7 +16,7 @@ Este projeto demonstra a integração do MySQL com .NET usando Entity Framework 
 - **Connection Strings**: Configuração de conexão
 - **Dependency Injection**: Injeção do contexto
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Configurar MySQL com Entity Framework Core
 - Criar modelos de dados (entities)
@@ -21,69 +25,7 @@ Este projeto demonstra a integração do MySQL com .NET usando Entity Framework 
 - Configurar connection strings
 - Realizar operações CRUD básicas
 
-## 💡 Conceitos Importantes
-
-### Instalação de Pacotes
-```bash
-dotnet add package MySql.EntityFrameworkCore
-dotnet add package Microsoft.EntityFrameworkCore.Design
-```
-
-### Connection String
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=meubanco;User=root;Password=minhasenha;"
-  }
-}
-```
-
-### DbContext Configuration
-```csharp
-public class MeuDbContext : DbContext
-{
-    public MeuDbContext(DbContextOptions<MeuDbContext> options) : base(options) { }
-
-    public DbSet<Usuario> Usuarios { get; set; }
-    
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Usuario>(entity =>
-        {
-            entity.HasKey(e => e.Id);
-            entity.Property(e => e.Nome).IsRequired().HasMaxLength(100);
-            entity.Property(e => e.Email).IsRequired().HasMaxLength(255);
-        });
-    }
-}
-```
-
-### Entity Model
-```csharp
-public class Usuario
-{
-    public int Id { get; set; }
-    public string Nome { get; set; }
-    public string Email { get; set; }
-    public DateTime DataCriacao { get; set; }
-}
-```
-
-## 🚀 Como Executar
-
-### 1. Migrations
-```bash
-dotnet ef migrations add Inicial
-dotnet ef database update
-```
-
-### 2. Executar Aplicação
-```bash
-cd MysqlExample
-dotnet run
-```
-
-## 📖 O que Você Aprenderá
+### O que Você Aprenderá
 
 1. **Setup MySQL**:
    - Instalação do provider MySQL
@@ -106,9 +48,99 @@ dotnet run
    - Update: Atualização de registros
    - Delete: Remoção de dados
 
-## 🎨 Operações CRUD
+## Estrutura do projeto
 
-### Create (Inserir)
+```text
+MysqlExample/
++-- Migrations/
+|   +-- 20250609230719_Inicial.cs
+|   +-- 20250609230719_Inicial.Designer.cs
+|   \-- MeuDbContextModelSnapshot.cs
++-- Properties/
+|   \-- launchSettings.json
++-- src/
+|   \-- DbContext.cs
++-- .gitignore
++-- appsettings.Development.json
++-- appsettings.json
++-- MysqlExample.csproj
++-- MysqlExample.csproj.user
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet run --project 09-Data/Data/MysqlExample/MysqlExample.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Instalação de Pacotes
+
+```bash
+dotnet add package MySql.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.Design
+```
+
+##### Connection String
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=meubanco;User=root;Password=minhasenha;"
+  }
+}
+```
+
+##### DbContext Configuration
+
+```csharp
+public class MeuDbContext : DbContext
+{
+    public MeuDbContext(DbContextOptions<MeuDbContext> options) : base(options) { }
+
+    public DbSet<Usuario> Usuarios { get; set; }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Usuario>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Nome).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Email).IsRequired().HasMaxLength(255);
+        });
+    }
+}
+```
+
+##### Entity Model
+
+```csharp
+public class Usuario
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public string Email { get; set; }
+    public DateTime DataCriacao { get; set; }
+}
+```
+
+##### 1. Migrations
+
+```bash
+dotnet ef migrations add Inicial
+dotnet ef database update
+```
+
+##### Create (Inserir)
+
 ```csharp
 [HttpPost]
 public async Task<IActionResult> CriarUsuario(Usuario usuario)
@@ -119,7 +151,8 @@ public async Task<IActionResult> CriarUsuario(Usuario usuario)
 }
 ```
 
-### Read (Consultar)
+##### Read (Consultar)
+
 ```csharp
 [HttpGet]
 public async Task<ActionResult<IEnumerable<Usuario>>> ObterUsuarios()
@@ -135,7 +168,8 @@ public async Task<ActionResult<Usuario>> ObterUsuario(int id)
 }
 ```
 
-### Update (Atualizar)
+##### Update (Atualizar)
+
 ```csharp
 [HttpPut("{id}")]
 public async Task<IActionResult> AtualizarUsuario(int id, Usuario usuario)
@@ -160,7 +194,8 @@ public async Task<IActionResult> AtualizarUsuario(int id, Usuario usuario)
 }
 ```
 
-### Delete (Remover)
+##### Delete (Remover)
+
 ```csharp
 [HttpDelete("{id}")]
 public async Task<IActionResult> RemoverUsuario(int id)
@@ -176,9 +211,8 @@ public async Task<IActionResult> RemoverUsuario(int id)
 }
 ```
 
-## 🏗️ Configurações Avançadas
+##### 1. Connection Pooling
 
-### 1. Connection Pooling
 ```csharp
 builder.Services.AddDbContext<MeuDbContext>(options =>
     options.UseMySQL(connectionString, mysqlOptions =>
@@ -189,7 +223,8 @@ builder.Services.AddDbContext<MeuDbContext>(options =>
 // Connection pooling é automático no EF Core
 ```
 
-### 2. Logging
+##### 2. Logging
+
 ```csharp
 builder.Services.AddDbContext<MeuDbContext>(options =>
     options.UseMySQL(connectionString)
@@ -197,7 +232,8 @@ builder.Services.AddDbContext<MeuDbContext>(options =>
            .EnableSensitiveDataLogging()); // Apenas em desenvolvimento
 ```
 
-### 3. Retry Policy
+##### 3. Retry Policy
+
 ```csharp
 builder.Services.AddDbContext<MeuDbContext>(options =>
     options.UseMySQL(connectionString, mysqlOptions =>
@@ -209,9 +245,8 @@ builder.Services.AddDbContext<MeuDbContext>(options =>
     }));
 ```
 
-## 🔍 Pontos de Atenção
+##### Performance
 
-### Performance
 ```csharp
 // ✅ Use async para operações de banco
 var usuarios = await _context.Usuarios.ToListAsync();
@@ -227,7 +262,8 @@ var usuariosComPosts = await _context.Usuarios
     .ToListAsync();
 ```
 
-### Security
+##### Security
+
 ```csharp
 // ✅ Use parâmetros para evitar SQL injection
 var usuarios = await _context.Usuarios
@@ -240,7 +276,8 @@ var usuarios = await _context.Usuarios
 public string Email { get; set; }
 ```
 
-### Migrations
+##### Migrations
+
 ```csharp
 // ✅ Sempre revise migrations antes de aplicar
 // ✅ Faça backup antes de migrations em produção
@@ -252,7 +289,7 @@ public string Email { get; set; }
 // dotnet ef database drop
 ```
 
-## 📚 Recursos Adicionais
+## Referências
 
 - [MySQL EntityFrameworkCore Provider](https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework-core.html)
 - [Entity Framework Core Documentation](https://docs.microsoft.com/en-us/ef/core/)

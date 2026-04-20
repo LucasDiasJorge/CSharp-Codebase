@@ -1,10 +1,53 @@
 # Transaction Script Pattern em C#
 
-## O que é Transaction Script?
+## Visão geral
 
 O **Transaction Script** é um padrão que organiza a lógica de negócio em procedimentos, onde cada procedimento lida com uma única requisição do usuário. É um dos padrões mais simples de arquitetura de domínio.
 
-## Quando Usar
+## Conceitos abordados
+
+- Exemplo didático sobre Transaction Script Pattern em C# no contexto de padrões arquiteturais e organização de casos de uso.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como Transaction Script Pattern em C# se aplica em um cenário prático de padrões arquiteturais e organização de casos de uso.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+TransactionScript/
++-- Core/
+|   +-- IDataGateway.cs
+|   +-- InMemoryDataGateway.cs
+|   +-- ITransactionScript.cs
+|   \-- ScriptResult.cs
++-- Examples/
+|   +-- CreateInvoice/
+|   +-- ProcessRefund/
+|   \-- TransferMoney/
++-- Program.cs
+\-- TransactionScript.csproj
+```
+
+## Como executar
+
+```bash
+dotnet run --project 08-ArchitecturalPatterns/TransactionScript/TransactionScript.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Quando Usar
 
 | ✅ Usar Quando | ❌ Evitar Quando |
 |----------------|------------------|
@@ -14,7 +57,7 @@ O **Transaction Script** é um padrão que organiza a lógica de negócio em pro
 | Equipes inexperientes | Domínio rico |
 | Scripts/utilitários | Alta manutenibilidade necessária |
 
-## Estrutura
+##### Estrutura
 
 ```
 TransactionScript/
@@ -28,9 +71,8 @@ TransactionScript/
 └── README.md
 ```
 
-## Comparação com Domain Model
+##### Transaction Script
 
-### Transaction Script
 ```csharp
 public class TransferMoneyScript
 {
@@ -48,7 +90,8 @@ public class TransferMoneyScript
 }
 ```
 
-### Domain Model
+##### Domain Model
+
 ```csharp
 public class Account
 {
@@ -60,22 +103,15 @@ public class Account
 }
 ```
 
-## Benefícios
+##### Benefícios
 
 ✅ **Simples** - Fácil de entender e implementar  
 ✅ **Direto** - Código procedural linear  
 ✅ **Rápido** - Desenvolvimento ágil  
-✅ **Independente** - Cada script é autônomo  
+✅ **Independente** - Cada script é autônomo
 
-## Desvantagens
+##### Desvantagens
 
 ⚠️ **Duplicação** - Código pode ser repetido  
 ⚠️ **Manutenção** - Difícil com crescimento  
-⚠️ **Testabilidade** - Mais difícil de testar isoladamente  
-
-## Como Executar
-
-```bash
-cd TransactionScript
-dotnet run
-```
+⚠️ **Testabilidade** - Mais difícil de testar isoladamente

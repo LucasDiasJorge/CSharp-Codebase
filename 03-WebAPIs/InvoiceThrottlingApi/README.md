@@ -1,55 +1,110 @@
 # Invoice Throttling API
 
+## Visão geral
+
 Projeto de demonstração de técnicas de **throttling** (controle de taxa) em C# .NET 9 usando o domínio de processamento de **1000 notas fiscais**.
 
-## 🎯 Objetivo
+## Conceitos abordados
+
+1. **Throttling vs Rate Limiting**
+   - Throttling: controle de concorrência (quantos ao mesmo tempo)
+   - Rate Limiting: controle de taxa (quantos por período de tempo)
+
+2. **SemaphoreSlim**
+   - Controla acesso concorrente a recursos
+   - Não garante taxa constante ao longo do tempo
+
+3. **System.Threading.RateLimiting**
+   - Algoritmos: Fixed Window, Sliding Window, Token Bucket, Concurrency
+   - Garante distribuição temporal das requisições
+
+4. **ASP.NET Core Rate Limiting Middleware**
+   - Proteção de endpoints HTTP
+   - Resposta 429 Too Many Requests
+   - Metadata RetryAfter
+
+## Objetivos de aprendizagem
 
 Demonstrar diferentes estratégias de controle de concorrência e taxa de processamento para evitar sobrecarga de recursos ao processar grandes volumes de notas fiscais.
 
-## 🏗️ Arquitetura
+## Estrutura do projeto
+
+```text
+InvoiceThrottlingApi/
++-- Properties/
+|   \-- launchSettings.json
++-- InvoiceAppSettings.json
++-- InvoiceController.cs
++-- InvoiceGenerator.cs
++-- InvoiceModels.cs
++-- InvoiceProcessor.cs
++-- InvoiceProgram.cs
+\-- InvoiceThrottlingApi.csproj
+```
+
+## Como executar
+
+```bash
+dotnet build 03-WebAPIs/InvoiceThrottlingApi/InvoiceThrottlingApi.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Arquitetura
 
 O projeto implementa três estratégias de throttling:
 
-### 1. **Processamento Ilimitado (Baseline)**
+##### 1. **Processamento Ilimitado (Baseline)**
+
 - Processa todas as notas fiscais simultaneamente sem controle
 - Útil para comparação de performance
 - Pode sobrecarregar recursos do sistema
 
-### 2. **Semaphore (Controle de Concorrência)**
+##### 2. **Semaphore (Controle de Concorrência)**
+
 - Limita o número de processamentos simultâneos
 - Exemplo: máximo de 50 notas fiscais sendo processadas ao mesmo tempo
 - Ideal para controlar uso de threads/conexões
 
-### 3. **Rate Limiter (Controle de Taxa)**
+##### 3. **Rate Limiter (Controle de Taxa)**
+
 - Limita o número de requisições por unidade de tempo
 - Exemplo: 100 requisições por segundo
 - Usa `System.Threading.RateLimiting` (.NET 7+)
 - Implementa padrão Fixed Window
 
-### 4. **Rate Limiting de API**
+##### 4. **Rate Limiting de API**
+
 - Proteção de endpoints HTTP
 - Três algoritmos disponíveis:
   - **Fixed Window**: 10 requisições por minuto
   - **Sliding Window**: 20 requisições por minuto (4 segmentos)
   - **Token Bucket**: 100 tokens, reposição de 50 a cada 10 segundos
 
-## 📦 Componentes
+##### Models
 
-### Models
 - `Invoice`: Nota fiscal com itens, cliente e valor total
 - `InvoiceItem`: Item da nota fiscal
 - `InvoiceStatus`: Status do processamento (Pending, Processing, Processed, Failed, ThrottledRejected)
 - `InvoiceProcessingResult`: Resultado do processamento de uma nota
 - `BatchProcessingResult`: Resultado do processamento em lote
 
-### Services
+##### Services
+
 - `IInvoiceGenerator` / `InvoiceGenerator`: Gera notas fiscais fictícias
 - `IInvoiceProcessor` / `InvoiceProcessor`: Processa notas fiscais com diferentes estratégias
 
-### Controllers
+##### Controllers
+
 - `InvoiceController`: Endpoints para geração e processamento de notas fiscais
 
-## 📁 Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```
 InvoiceThrottlingApi/
@@ -65,28 +120,18 @@ InvoiceThrottlingApi/
 └── README.md
 ```
 
-## 🚀 Como Executar
-
-### 1. Restaurar dependências
+##### 1. Restaurar dependências
 
 ```bash
 cd 03-WebAPIs/InvoiceThrottlingApi
 dotnet restore
 ```
 
-### 2. Executar o projeto
-
-```bash
-dotnet run
-```
-
-### 3. Acessar Swagger
+##### 3. Acessar Swagger
 
 Abra o navegador em: `https://localhost:5001/swagger`
 
-## 📝 Endpoints Principais
-
-### `POST /api/invoice/process/demo1000`
+##### POST /api/invoice/process/demo1000`
 
 Executa uma demonstração completa processando 1000 notas fiscais com as três estratégias:
 
@@ -118,7 +163,7 @@ Executa uma demonstração completa processando 1000 notas fiscais com as três 
 }
 ```
 
-### `GET /api/invoice/generate/{count}`
+##### GET /api/invoice/generate/{count}`
 
 Gera N notas fiscais para testes:
 
@@ -126,7 +171,7 @@ Gera N notas fiscais para testes:
 curl https://localhost:5001/api/invoice/generate/1000
 ```
 
-### `POST /api/invoice/process/unlimited`
+##### POST /api/invoice/process/unlimited`
 
 Processa notas sem controle de concorrência:
 
@@ -136,7 +181,7 @@ curl -X POST https://localhost:5001/api/invoice/process/unlimited \
   -d @invoices.json
 ```
 
-### `POST /api/invoice/process/semaphore/{maxConcurrency}`
+##### POST /api/invoice/process/semaphore/{maxConcurrency}`
 
 Processa com controle de concorrência:
 
@@ -146,7 +191,7 @@ curl -X POST https://localhost:5001/api/invoice/process/semaphore/50 \
   -d @invoices.json
 ```
 
-### `POST /api/invoice/process/ratelimit/{requestsPerSecond}`
+##### POST /api/invoice/process/ratelimit/{requestsPerSecond}`
 
 Processa com controle de taxa:
 
@@ -156,7 +201,7 @@ curl -X POST https://localhost:5001/api/invoice/process/ratelimit/100 \
   -d @invoices.json
 ```
 
-### `GET /api/invoice/api-limited`
+##### GET /api/invoice/api-limited`
 
 Endpoint com rate limiting (10 requisições por minuto):
 
@@ -164,9 +209,7 @@ Endpoint com rate limiting (10 requisições por minuto):
 curl https://localhost:5001/api/invoice/api-limited
 ```
 
-## 🧪 Testes Manuais
-
-### Cenário 1: Comparação de Performance
+##### Cenário 1: Comparação de Performance
 
 1. Gere 1000 notas fiscais
 2. Chame o endpoint `/api/invoice/process/demo1000`
@@ -177,7 +220,7 @@ curl https://localhost:5001/api/invoice/api-limited
 - Semaphore: tempo intermediário, uso controlado de threads
 - Rate Limiter: mais lento, respeita limite de taxa
 
-### Cenário 2: Teste de Rate Limiting de API
+##### Cenário 2: Teste de Rate Limiting de API
 
 1. Faça 15 requisições consecutivas para `/api/invoice/api-limited`
 2. As primeiras 10 devem retornar 200 OK
@@ -190,7 +233,7 @@ for i in {1..15}; do
 done
 ```
 
-### Cenário 3: Teste com Volumes Diferentes
+##### Cenário 3: Teste com Volumes Diferentes
 
 ```bash
 # 100 notas
@@ -212,9 +255,7 @@ curl -X POST https://localhost:5001/api/invoice/process/ratelimit/100 \
   -d @1000-invoices.json
 ```
 
-## 🔧 Configurações de Throttling
-
-### Ajustar Semaphore
+##### Ajustar Semaphore
 
 No controller, altere o parâmetro `maxConcurrency`:
 
@@ -222,7 +263,7 @@ No controller, altere o parâmetro `maxConcurrency`:
 ProcessWithSemaphore([FromBody] List<Invoice> invoices, int maxConcurrency = 50)
 ```
 
-### Ajustar Rate Limiter
+##### Ajustar Rate Limiter
 
 No controller, altere o parâmetro `requestsPerSecond`:
 
@@ -230,7 +271,7 @@ No controller, altere o parâmetro `requestsPerSecond`:
 ProcessWithRateLimit([FromBody] List<Invoice> invoices, int requestsPerSecond = 100)
 ```
 
-### Ajustar Rate Limiting de API
+##### Ajustar Rate Limiting de API
 
 No `Program.cs`, configure os limitadores:
 
@@ -242,7 +283,7 @@ options.AddFixedWindowLimiter("fixed", opt =>
 });
 ```
 
-## 📊 Métricas Coletadas
+##### Métricas Coletadas
 
 Para cada estratégia, o sistema retorna:
 
@@ -252,52 +293,31 @@ Para cada estratégia, o sistema retorna:
 - **ThrottledRejected**: Notas rejeitadas por limite de taxa
 - **Duration**: Tempo total de processamento
 
-## 🎓 Conceitos Demonstrados
-
-1. **Throttling vs Rate Limiting**
-   - Throttling: controle de concorrência (quantos ao mesmo tempo)
-   - Rate Limiting: controle de taxa (quantos por período de tempo)
-
-2. **SemaphoreSlim**
-   - Controla acesso concorrente a recursos
-   - Não garante taxa constante ao longo do tempo
-
-3. **System.Threading.RateLimiting**
-   - Algoritmos: Fixed Window, Sliding Window, Token Bucket, Concurrency
-   - Garante distribuição temporal das requisições
-
-4. **ASP.NET Core Rate Limiting Middleware**
-   - Proteção de endpoints HTTP
-   - Resposta 429 Too Many Requests
-   - Metadata RetryAfter
-
-## 🔗 Dependências
+##### Dependências
 
 - **.NET 9.0**
 - **Microsoft.AspNetCore.OpenApi** 9.0.0
 - **Swashbuckle.AspNetCore** 7.2.0
 - **System.Threading.RateLimiting** 9.0.0 (incluído no .NET 9)
 
-## 📚 Recursos Adicionais
+##### Erro: "PermitLimit must be greater than zero"
+
+Certifique-se de que os parâmetros de rate limiting sejam positivos.
+
+##### Alto uso de memória
+
+Reduza o `maxConcurrency` do semaphore ou o `requestsPerSecond` do rate limiter.
+
+##### 429 Too Many Requests
+
+Aguarde o período da janela (window) ou aumente o `PermitLimit`.
+
+##### Licença
+
+Este é um projeto educacional para demonstração de conceitos de throttling em .NET.
+
+## Referências
 
 - [Rate Limiting Middleware in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit)
 - [System.Threading.RateLimiting](https://learn.microsoft.com/en-us/dotnet/api/system.threading.ratelimiting)
 - [SemaphoreSlim Class](https://learn.microsoft.com/en-us/dotnet/api/system.threading.semaphoreslim)
-
-## 🐛 Troubleshooting
-
-### Erro: "PermitLimit must be greater than zero"
-
-Certifique-se de que os parâmetros de rate limiting sejam positivos.
-
-### Alto uso de memória
-
-Reduza o `maxConcurrency` do semaphore ou o `requestsPerSecond` do rate limiter.
-
-### 429 Too Many Requests
-
-Aguarde o período da janela (window) ou aumente o `PermitLimit`.
-
-## 📄 Licença
-
-Este é um projeto educacional para demonstração de conceitos de throttling em .NET.

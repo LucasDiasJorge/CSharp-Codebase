@@ -1,10 +1,10 @@
-# 🔐 Advanced Authentication System
+# Advanced Authentication System
+
+## Visão geral
 
 Sistema completo de autenticação e autorização em .NET 9 demonstrando práticas avançadas de segurança.
 
----
-
-## 📚 Conceitos Abordados
+## Conceitos abordados
 
 - **JWT Authentication**: Access tokens e refresh tokens
 - **2FA (TOTP)**: Autenticação de dois fatores
@@ -13,9 +13,7 @@ Sistema completo de autenticação e autorização em .NET 9 demonstrando práti
 - **Custom Policies**: Políticas de autorização customizadas
 - **Password Hashing**: BCrypt para armazenamento seguro
 
----
-
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Implementar autenticação JWT completa
 - Configurar 2FA com TOTP
@@ -23,9 +21,43 @@ Sistema completo de autenticação e autorização em .NET 9 demonstrando práti
 - Entender RBAC vs ABAC
 - Aplicar boas práticas de segurança
 
----
+## Estrutura do projeto
 
-## 📂 Estrutura do Projeto
+```text
+AdvancedAuthSystem/
++-- Properties/
+|   \-- launchSettings.json
++-- AdvancedAuthSystem.AppDbContext.cs
++-- AdvancedAuthSystem.appsettings.Development.json
++-- AdvancedAuthSystem.appsettings.json
++-- AdvancedAuthSystem.AuthController.cs
++-- AdvancedAuthSystem.AuthService.cs
++-- AdvancedAuthSystem.csproj
++-- AdvancedAuthSystem.DTOs.cs
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet build 04-Authentication/AdvancedAuthSystem/AdvancedAuthSystem.csproj
+```
+
+**Swagger**: http://localhost:5000 ou https://localhost:5001
+
+## Boas práticas e pontos de atenção
+
+- Separation of Concerns
+- Dependency Injection
+- JWT com tokens de curta duração
+- Refresh tokens com revogação
+- BCrypt para hash de senhas
+- Claims-based authorization
+- Resource-based authorization
+
+## Conteúdo complementar
+
+##### Estrutura do Projeto
 
 ```
 AdvancedAuthSystem/
@@ -47,21 +79,7 @@ AdvancedAuthSystem/
 └── Program.cs                   # Configuração da aplicação
 ```
 
----
-
-## 🚀 Como Executar
-
-```bash
-cd AdvancedAuthSystem
-dotnet restore
-dotnet run
-```
-
-**Swagger**: http://localhost:5000 ou https://localhost:5001
-
----
-
-## 👥 Usuários de Teste
+##### Usuários de Teste
 
 | Usuário | Senha | Roles | Departamento |
 |---------|-------|-------|--------------|
@@ -69,11 +87,7 @@ dotnet run
 | `manager` | `Manager123!` | Manager | IT |
 | `user` | `User123!` | User | Sales |
 
----
-
-## 📋 Endpoints Principais
-
-### Autenticação
+##### Autenticação
 
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
@@ -84,21 +98,7 @@ dotnet run
 | `POST` | `/api/auth/enable-2fa` | Habilitar 2FA |
 | `GET` | `/api/auth/me` | Dados do usuário atual |
 
-### Recursos (Demonstração de Autorização)
-
-| Método | Endpoint | Política |
-|--------|----------|----------|
-| `GET` | `/api/resource` | Público |
-| `POST` | `/api/resource` | Idade >= 18 |
-| `PUT` | `/api/resource/{id}` | Resource Owner |
-| `DELETE` | `/api/resource/{id}` | Admin Only |
-| `GET` | `/api/resource/it-resources` | Departamento IT |
-
----
-
-## 💡 Exemplos de Uso
-
-### Login
+##### Login
 
 ```http
 POST /api/auth/login
@@ -120,48 +120,35 @@ Content-Type: application/json
 }
 ```
 
-### Habilitar 2FA
+##### Habilitar 2FA
 
 ```http
 POST /api/auth/enable-2fa
 Authorization: Bearer {accessToken}
 ```
 
----
+##### Age-Based
 
-## 🛡️ Políticas de Autorização
-
-### Age-Based
 - `MinimumAge18` / `MinimumAge21`
 
-### Role-Based
+##### Role-Based
+
 - `Admin` / `AdminOrManager`
 
-### Department-Based
+##### Department-Based
+
 - `ITDepartment` / `SalesDepartment`
 
-### Time-Based
+##### Time-Based
+
 - `WorkingHours` (9h-17h)
 - `WeekdaysOnly`
 
-### Resource-Based
+##### Resource-Based
+
 - `ResourceOwner` - Dono do recurso ou Admin
 
----
-
-## ✅ Boas Práticas Demonstradas
-
-- Separation of Concerns
-- Dependency Injection
-- JWT com tokens de curta duração
-- Refresh tokens com revogação
-- BCrypt para hash de senhas
-- Claims-based authorization
-- Resource-based authorization
-
----
-
-## 🔜 Extensões Futuras
+##### Extensões Futuras
 
 - OAuth 2.0 / OpenID Connect
 - External providers (Google, GitHub)
@@ -170,10 +157,23 @@ Authorization: Bearer {accessToken}
 - Account lockout
 - Email verification
 
----
+## Referências
 
-## 🔗 Referências
+### Recursos (Demonstração de Autorização)
+
+| Método | Endpoint | Política |
+|--------|----------|----------|
+| `GET` | `/api/resource` | Público |
+| `POST` | `/api/resource` | Idade >= 18 |
+| `PUT` | `/api/resource/{id}` | Resource Owner |
+| `DELETE` | `/api/resource/{id}` | Admin Only |
+| `GET` | `/api/resource/it-resources` | Departamento IT |
 
 - [ASP.NET Core Security](https://docs.microsoft.com/aspnet/core/security/)
 - [JWT.io](https://jwt.io/)
 - [TOTP RFC 6238](https://tools.ietf.org/html/rfc6238)
+
+## Documentação complementar
+
+- [AdvancedAuthSystem.OVERVIEW.md](./AdvancedAuthSystem.OVERVIEW.md) - Advanced Authentication & Authorization System
+- [AdvancedAuthSystem.SETUP_GUIDE.md](./AdvancedAuthSystem.SETUP_GUIDE.md) - Advanced Authentication & Authorization System - Setup Guide

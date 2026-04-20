@@ -1,42 +1,75 @@
 # Domínio Anêmico (Anemic Domain)
 
-## ⚠️ O que é Domínio Anêmico?
+## Visão geral
 
 Domínio Anêmico é um **anti-padrão** onde as classes de domínio são apenas "sacolas de dados" (data bags) sem comportamento significativo. Toda a lógica de negócio fica em serviços externos.
 
-## 🚨 Problemas Demonstrados
+## Conceitos abordados
 
-### 1. Falta de Encapsulamento
+- Exemplo didático sobre Domínio Anêmico (Anemic Domain) no contexto de design patterns, modelagem OO e código limpo.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como Domínio Anêmico (Anemic Domain) se aplica em um cenário prático de design patterns, modelagem OO e código limpo.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+AnemicDomain/
++-- Models/
+|   \-- Order.cs
++-- Services/
+|   \-- OrderService.cs
++-- AnemicDomain.csproj
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 07-DesignPatterns/RichVsAnemicDomain/AnemicDomain/AnemicDomain.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### 1. Falta de Encapsulamento
+
 ```csharp
 order.CustomerName = ""; // ❌ Aceita valor inválido
 order.Total = 999999;    // ❌ Pode ser manipulado diretamente
 ```
 
-### 2. Lógica Espalhada
+##### 2. Lógica Espalhada
+
 - Cálculos estão no `OrderService`
 - Validações estão no `OrderService`
 - Regras de negócio estão no `OrderService`
 - O modelo não sabe nada sobre suas próprias regras!
 
-### 3. Estado Inconsistente
+##### 3. Estado Inconsistente
+
 ```csharp
 order.Items[0].Quantity = 10;
 // Total NÃO é recalculado automaticamente! ❌
 ```
 
-### 4. Difícil Manutenção
+##### 4. Difícil Manutenção
+
 - Precisa lembrar de chamar `RecalculateTotal()` manualmente
 - Fácil esquecer validações
 - Código duplicado em vários lugares
 
-## 🏃 Como Executar
-
-```bash
-cd AnemicDomain
-dotnet run
-```
-
-## 📝 Estrutura
+##### Estrutura
 
 ```
 AnemicDomain/
@@ -48,7 +81,7 @@ AnemicDomain/
 └── Program.cs
 ```
 
-## 🎯 Principais Problemas
+##### Principais Problemas
 
 | Problema | Descrição | Exemplo |
 |----------|-----------|---------|
@@ -58,7 +91,7 @@ AnemicDomain/
 | **Acoplamento** | Serviço conhece tudo | Service manipula internals |
 | **Teste Difícil** | Sempre precisa de mocks | Não testa domínio isolado |
 
-## ❌ Código Problemático
+##### Código Problemático
 
 ```csharp
 // Modelo Anêmico - apenas dados
@@ -80,7 +113,7 @@ public class OrderService
 }
 ```
 
-## 🔍 O que Observar
+##### O que Observar
 
 1. **Models/Order.cs**: 
    - Note que é apenas uma classe com propriedades
@@ -97,18 +130,17 @@ public class OrderService
    - Mostra problemas de sincronização
    - Exemplifica falta de proteção
 
-## 💭 Por que é Ruim?
+##### Por que é Ruim?
 
 > "The fundamental horror of this anti-pattern is that it's so contrary to the basic idea of object-oriented design; which is to combine data and process together."
 > 
 > — Martin Fowler
 
-## ➡️ Solução
+##### Solução
 
 Veja o projeto **RichDomain** para a abordagem correta!
 
-
-## 📚 Referências
+## Referências
 
 - [Anemic Domain Model - Martin Fowler](https://martinfowler.com/bliki/AnemicDomainModel.html)
 - [Domain-Driven Design - Eric Evans](https://www.domainlanguage.com/ddd/)

@@ -1,10 +1,42 @@
 # Authenticate User Use Case
 
-## Descrição
+## Visão geral
 
-Use Case de autenticação segura que implementa verificação de credenciais, proteção contra brute-force, geração de tokens JWT e auditoria de logins.
+Projeto didático do CSharp-101 dedicado a Authenticate User Use Case, com foco em padrões arquiteturais e organização de casos de uso.
 
-## Fluxo de Execução
+## Conceitos abordados
+
+- Exemplo didático sobre Authenticate User Use Case no contexto de padrões arquiteturais e organização de casos de uso.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como Authenticate User Use Case se aplica em um cenário prático de padrões arquiteturais e organização de casos de uso.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+AuthenticateUser/
++-- DTOs/
+|   +-- AuthenticateUserInput.cs
+|   \-- AuthenticateUserOutput.cs
++-- Entities/
+|   +-- AuthUser.cs
+|   +-- LoginAuditLog.cs
+|   \-- RefreshToken.cs
++-- Interfaces/
+|   +-- IAuthUserRepository.cs
+|   +-- IJwtTokenGenerator.cs
+|   +-- ILoginAuditRepository.cs
+|   +-- IPasswordVerifier.cs
+|   \-- IRefreshTokenRepository.cs
+\-- AuthenticateUserUseCase.cs
+```
+
+## Como executar
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -39,7 +71,19 @@ Use Case de autenticação segura que implementa verificação de credenciais, p
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## Mecanismo de Proteção contra Brute-Force
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Descrição
+
+Use Case de autenticação segura que implementa verificação de credenciais, proteção contra brute-force, geração de tokens JWT e auditoria de logins.
+
+##### Mecanismo de Proteção contra Brute-Force
 
 | Parâmetro | Valor |
 |-----------|-------|
@@ -47,7 +91,7 @@ Use Case de autenticação segura que implementa verificação de credenciais, p
 | Duração do lockout | 15 minutos |
 | Auto-unlock | Sim, após período |
 
-### Mensagens de Erro Progressivas
+##### Mensagens de Erro Progressivas
 
 ```
 Tentativa 1: "Credenciais inválidas. Tentativas restantes: 4"
@@ -57,15 +101,15 @@ Tentativa 4: "Credenciais inválidas. Tentativas restantes: 1"
 Tentativa 5: "Conta bloqueada por 15 minutos após 5 tentativas falhas"
 ```
 
-## Segurança Implementada
+##### Segurança Implementada
 
 ✅ **Mensagens genéricas** - Não revela se email existe no sistema  
 ✅ **Proteção brute-force** - Lockout após múltiplas falhas  
 ✅ **Auditoria completa** - Logs de todas as tentativas  
 ✅ **Refresh token rotation** - Tokens antigos são revogados  
-✅ **IP e User-Agent** - Registrados para análise de segurança  
+✅ **IP e User-Agent** - Registrados para análise de segurança
 
-## Dependências
+##### Dependências
 
 | Interface | Responsabilidade |
 |-----------|------------------|
@@ -75,7 +119,7 @@ Tentativa 5: "Conta bloqueada por 15 minutos após 5 tentativas falhas"
 | `IPasswordVerifier` | Verificação de hash de senha |
 | `IJwtTokenGenerator` | Geração de tokens JWT |
 
-## Exemplo de Uso
+##### Exemplo de Uso
 
 ```csharp
 var input = new AuthenticateUserInput(
@@ -100,7 +144,7 @@ else
 }
 ```
 
-## Auditoria
+##### Auditoria
 
 Todos os eventos de login são registrados:
 
@@ -117,7 +161,7 @@ Todos os eventos de login são registrados:
 }
 ```
 
-## Cenários de Teste
+##### Cenários de Teste
 
 - ✅ Login com credenciais válidas
 - ✅ Retorno de tokens JWT e refresh

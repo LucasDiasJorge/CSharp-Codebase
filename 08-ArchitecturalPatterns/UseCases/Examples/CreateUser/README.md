@@ -1,10 +1,38 @@
 # Create User Use Case
 
-## Descrição
+## Visão geral
 
-Este Use Case demonstra a criação de um novo usuário no sistema, aplicando validações, verificações de unicidade e notificações.
+Projeto didático do CSharp-101 dedicado a Create User Use Case, com foco em padrões arquiteturais e organização de casos de uso.
 
-## Fluxo de Execução
+## Conceitos abordados
+
+- Exemplo didático sobre Create User Use Case no contexto de padrões arquiteturais e organização de casos de uso.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como Create User Use Case se aplica em um cenário prático de padrões arquiteturais e organização de casos de uso.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+CreateUser/
++-- DTOs/
+|   +-- CreateUserInput.cs
+|   \-- CreateUserOutput.cs
++-- Entities/
+|   \-- User.cs
++-- Interfaces/
+|   +-- INotificationService.cs
+|   +-- IPasswordHasher.cs
+|   \-- IUserRepository.cs
+\-- CreateUserUseCase.cs
+```
+
+## Como executar
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -30,7 +58,19 @@ Este Use Case demonstra a criação de um novo usuário no sistema, aplicando va
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## Regras de Negócio
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Descrição
+
+Este Use Case demonstra a criação de um novo usuário no sistema, aplicando validações, verificações de unicidade e notificações.
+
+##### Regras de Negócio
 
 | Regra | Descrição |
 |-------|-----------|
@@ -40,13 +80,13 @@ Este Use Case demonstra a criação de um novo usuário no sistema, aplicando va
 | Idade | Mínimo 18 anos |
 | Unicidade | Email deve ser único no sistema |
 
-## Dependências (Ports)
+##### Dependências (Ports)
 
 - `IUserRepository` - Acesso a dados de usuário
 - `IPasswordHasher` - Serviço de hash de senha
 - `INotificationService` - Serviço de notificações
 
-## Exemplo de Uso
+##### Exemplo de Uso
 
 ```csharp
 var useCase = new CreateUserUseCase(
@@ -74,7 +114,7 @@ else
 }
 ```
 
-## Testes Sugeridos
+##### Testes Sugeridos
 
 - ✅ Criação com dados válidos
 - ✅ Falha com email duplicado

@@ -1,28 +1,53 @@
-# 📦 CompressDecompress
+# CompressDecompress
+
+## Visão geral
 
 Exemplo de compressão e descompressão de strings usando GZipStream do .NET.
 
----
-
-## 📚 Conceitos Abordados
+## Conceitos abordados
 
 - **GZipStream**: Stream de compressão GZIP nativo do .NET
 - **MemoryStream**: Manipulação de dados em memória
 - **Encoding UTF-8**: Conversão entre strings e bytes
 - **Base64**: Codificação de dados binários para texto
 
----
-
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Implementar compressão e descompressão de dados em C#
 - Entender o uso de streams encadeados
 - Converter entre representações de dados (string, bytes, base64)
 - Aplicar using para gerenciamento correto de recursos
 
----
+## Estrutura do projeto
 
-## 📂 Estrutura do Projeto
+```text
+CompressDecompress/
++-- CompressDecompress.csproj
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 11-Utilities/CompressDecompress/CompressDecompress.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Usar `using` para garantir dispose dos streams
+- Preferir `CompressionLevel.Optimal` para melhor compressão
+- Validar dados antes de descomprimir
+- Considerar BrotliStream para compressão web
+
+### Pontos de Atenção
+
+- GZip adiciona overhead - não comprimir dados já pequenos
+- Dados aleatórios/já comprimidos podem aumentar de tamanho
+- Streams devem ser fechados na ordem correta
+
+## Conteúdo complementar
+
+##### Estrutura do Projeto
 
 ```
 CompressDecompress/
@@ -31,16 +56,7 @@ CompressDecompress/
 └── README.md
 ```
 
----
-
-## 🚀 Como Executar
-
-```bash
-cd 11-Utilities/CompressDecompress
-dotnet run
-```
-
-### Exemplo de Uso
+##### Exemplo de Uso
 
 ```
 Digite o texto a ser comprimido:
@@ -53,11 +69,7 @@ Texto descomprimido:
 Este é um texto de exemplo para demonstrar a compressão com GZip.
 ```
 
----
-
-## 💡 Exemplos de Código
-
-### Compressão
+##### Compressão
 
 ```csharp
 static byte[] CompressString(string text)
@@ -75,7 +87,7 @@ static byte[] CompressString(string text)
 }
 ```
 
-### Descompressão
+##### Descompressão
 
 ```csharp
 static string DecompressToString(byte[] compressedData)
@@ -90,7 +102,7 @@ static string DecompressToString(byte[] compressedData)
 }
 ```
 
-### Uso Completo
+##### Uso Completo
 
 ```csharp
 string input = "Texto para comprimir";
@@ -104,9 +116,7 @@ string decompressed = DecompressToString(compressed);
 Console.WriteLine($"Original: {decompressed}");
 ```
 
----
-
-## 📊 Comparação de Tamanhos
+##### Comparação de Tamanhos
 
 | Texto Original | Tamanho Original | Tamanho Comprimido | Redução |
 |---------------|------------------|-------------------|---------|
@@ -116,26 +126,7 @@ Console.WriteLine($"Original: {decompressed}");
 
 > A compressão é mais eficiente em dados com padrões repetitivos.
 
----
-
-## ✅ Boas Práticas
-
-- Usar `using` para garantir dispose dos streams
-- Preferir `CompressionLevel.Optimal` para melhor compressão
-- Validar dados antes de descomprimir
-- Considerar BrotliStream para compressão web
-
----
-
-## ⚠️ Pontos de Atenção
-
-- GZip adiciona overhead - não comprimir dados já pequenos
-- Dados aleatórios/já comprimidos podem aumentar de tamanho
-- Streams devem ser fechados na ordem correta
-
----
-
-## 🔗 Referências
+## Referências
 
 - [GZipStream Class](https://learn.microsoft.com/en-us/dotnet/api/system.io.compression.gzipstream)
 - [BrotliStream](https://learn.microsoft.com/en-us/dotnet/api/system.io.compression.brotlistream)

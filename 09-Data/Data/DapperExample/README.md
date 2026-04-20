@@ -1,10 +1,10 @@
-# 📦 DapperExample
+# DapperExample
+
+## Visão geral
 
 Exemplo de uso do Dapper como micro-ORM para operações com MySQL, incluindo transações e criptografia de senhas.
 
----
-
-## 📚 Conceitos Abordados
+## Conceitos abordados
 
 - **Dapper**: Micro-ORM de alta performance para .NET
 - **TransactionScope**: Gerenciamento de transações distribuídas
@@ -12,18 +12,52 @@ Exemplo de uso do Dapper como micro-ORM para operações com MySQL, incluindo tr
 - **MySQL**: Conexão e operações com MySQL
 - **Minimal API**: Estrutura de API minimalista do .NET
 
----
-
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Executar queries SQL com Dapper de forma eficiente
 - Gerenciar transações para garantir consistência de dados
 - Implementar hashing seguro de senhas com BCrypt
 - Estruturar modelos de dados com relacionamentos
 
----
+## Estrutura do projeto
 
-## 📂 Estrutura do Projeto
+```text
+DapperExample/
++-- Properties/
+|   \-- launchSettings.json
++-- src/
+|   +-- Database/
+|   \-- Models/
++-- appsettings.Development.json
++-- appsettings.json
++-- DapperExample.csproj
++-- DapperExample.csproj.user
++-- DapperExample.http
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 09-Data/Data/DapperExample/DapperExample.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Usar TransactionScope para operações que envolvem múltiplas tabelas
+- Nunca armazenar senhas em texto plano
+- Usar salt único por senha com BCrypt
+- Parametrizar queries para evitar SQL Injection
+
+### Pontos de Atenção
+
+- Configurar connection string em `appsettings.json` (não hardcoded)
+- BCrypt é intencionalmente lento - ideal para senhas
+- TransactionScope requer DTC em cenários distribuídos
+
+## Conteúdo complementar
+
+##### Estrutura do Projeto
 
 ```
 DapperExample/
@@ -42,17 +76,13 @@ DapperExample/
 └── README.md
 ```
 
----
-
-## 🚀 Como Executar
-
-### Pré-requisitos
+##### Pré-requisitos
 
 - .NET 9.0 SDK
 - MySQL Server rodando
 - Banco de dados `my-db` criado
 
-### Configuração do Banco
+##### Configuração do Banco
 
 ```sql
 CREATE DATABASE IF NOT EXISTS `my-db`;
@@ -72,18 +102,7 @@ CREATE TABLE users (
 );
 ```
 
-### Execução
-
-```bash
-cd 09-Data/Data/DapperExample
-dotnet run
-```
-
----
-
-## 💡 Exemplos de Código
-
-### Conexão e Insert com Transação
+##### Conexão e Insert com Transação
 
 ```csharp
 using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -120,7 +139,7 @@ using (MySqlConnection connection = new MySqlConnection(connectionString))
 }
 ```
 
-### Select com Dapper
+##### Select com Dapper
 
 ```csharp
 IEnumerable<User> users = connection.Query<User>("SELECT * FROM users");
@@ -130,9 +149,7 @@ foreach (User user in users)
 }
 ```
 
----
-
-## 📋 Dependências
+##### Dependências
 
 | Pacote | Descrição |
 |--------|-----------|
@@ -140,26 +157,7 @@ foreach (User user in users)
 | `MySqlConnector` | Driver MySQL |
 | `DevOne.Security.Cryptography.BCrypt` | Hashing BCrypt |
 
----
-
-## ✅ Boas Práticas
-
-- Usar TransactionScope para operações que envolvem múltiplas tabelas
-- Nunca armazenar senhas em texto plano
-- Usar salt único por senha com BCrypt
-- Parametrizar queries para evitar SQL Injection
-
----
-
-## ⚠️ Pontos de Atenção
-
-- Configurar connection string em `appsettings.json` (não hardcoded)
-- BCrypt é intencionalmente lento - ideal para senhas
-- TransactionScope requer DTC em cenários distribuídos
-
----
-
-## 🔗 Referências
+## Referências
 
 - [Dapper GitHub](https://github.com/DapperLib/Dapper)
 - [MySqlConnector](https://mysqlconnector.net/)

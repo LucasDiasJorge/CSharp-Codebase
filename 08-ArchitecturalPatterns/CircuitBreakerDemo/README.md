@@ -1,11 +1,6 @@
-# 🔌 Circuit Breaker - C# Didático
+# Circuit Breaker - C# Didático
 
-> **Implementação simples e intuitiva do padrão Circuit Breaker**  
-> Aprenda o conceito essencial em menos de 150 linhas de código!
-
----
-
-## 📚 O que é Circuit Breaker?
+## Visão geral
 
 Circuit Breaker é um padrão de design que **previne falhas em cascata** em sistemas distribuídos.
 
@@ -14,11 +9,51 @@ Circuit Breaker é um padrão de design que **previne falhas em cascata** em sis
 - 🔥 Se detecta sobrecarga (muitos erros), **desliga** automaticamente
 - ⏰ Após um tempo, **tenta religar** para ver se voltou ao normal
 
----
+## Conceitos abordados
 
-## 🎯 Por que usar?
+- Exemplo didático sobre Circuit Breaker - C# Didático no contexto de padrões arquiteturais e organização de casos de uso.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
 
-### Problema sem Circuit Breaker:
+## Objetivos de aprendizagem
+
+- Entender como Circuit Breaker - C# Didático se aplica em um cenário prático de padrões arquiteturais e organização de casos de uso.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+CircuitBreakerDemo/
++-- CircuitBreaker.cs
++-- CircuitBreakerDemo.csproj
++-- Program.cs
+\-- ServicoInstavel.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 08-ArchitecturalPatterns/CircuitBreakerDemo/CircuitBreakerDemo.csproj
+```
+
+**O que você verá:**
+1. Serviço falha 3 vezes → Circuito **ABRE** 🔴
+2. Próximas chamadas são **bloqueadas** imediatamente 🚫
+3. Após 5 segundos → Entra em **MEIO-ABERTO** ⚠️
+4. Serviço funciona → Circuito **FECHA** 🟢
+5. Volta ao normal ✅
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Problema sem Circuit Breaker:
+
 ```
 Seu App → Serviço Lento/Fora
    ↓           ↓
@@ -31,7 +66,8 @@ Repete      Timeout
 ❌ Sistema trava esperando algo que não funciona
 ```
 
-### Solução com Circuit Breaker:
+##### Solução com Circuit Breaker:
+
 ```
 Seu App → Circuit Breaker → Serviço Lento/Fora
    ↓            ↓
@@ -50,9 +86,7 @@ Falha       Abre circuito
 - 🔄 **Auto-recuperação** - Testa automaticamente quando voltar
 - 📊 **Feedback** - Sabe quando algo está errado
 
----
-
-## 🚦 Estados do Circuit Breaker
+##### Estados do Circuit Breaker
 
 ```
         Normal                    3+ Erros              Timeout
@@ -66,27 +100,26 @@ Falha       Abre circuito
    └─────────────────────────── Sucesso ────────────────────┘
 ```
 
-### 1️⃣ **FECHADO** (Closed)
+##### 1️⃣ **FECHADO** (Closed)
+
 - ✅ Estado normal
 - Permite todas as chamadas
 - Conta erros consecutivos
 
-### 2️⃣ **ABERTO** (Open)
+##### 2️⃣ **ABERTO** (Open)
+
 - 🚫 Modo proteção
 - Rejeita todas as chamadas imediatamente
 - Aguarda tempo de timeout (ex: 60 segundos)
 
-### 3️⃣ **MEIO-ABERTO** (Half-Open)
+##### 3️⃣ **MEIO-ABERTO** (Half-Open)
+
 - ⚠️ Testando recuperação
 - Permite **1 chamada** de teste
 - Se funcionar → volta FECHADO ✅
 - Se falhar → volta ABERTO 🚫
 
----
-
-## 🚀 Como usar?
-
-### Uso básico:
+##### Uso básico:
 
 ```csharp
 // 1. Criar o Circuit Breaker
@@ -111,7 +144,7 @@ catch (Exception ex)
 }
 ```
 
-### Exemplo real:
+##### Exemplo real:
 
 ```csharp
 // Proteger chamada HTTP
@@ -127,9 +160,7 @@ string BuscarUsuario(int id)
 }
 ```
 
----
-
-## ⚙️ Configuração
+##### Configuração
 
 | Parâmetro | Descrição | Valor Recomendado |
 |-----------|-----------|-------------------|
@@ -142,26 +173,8 @@ string BuscarUsuario(int id)
 - **APIs estáveis:** `limiteErros: 5, segundosEspera: 60`
 - **Serviços lentos:** `limiteErros: 3, segundosEspera: 120`
 
----
+##### Fast-Fail
 
-## 🎮 Executar demonstração
-
-```bash
-dotnet run
-```
-
-**O que você verá:**
-1. Serviço falha 3 vezes → Circuito **ABRE** 🔴
-2. Próximas chamadas são **bloqueadas** imediatamente 🚫
-3. Após 5 segundos → Entra em **MEIO-ABERTO** ⚠️
-4. Serviço funciona → Circuito **FECHA** 🟢
-5. Volta ao normal ✅
-
----
-
-## 📖 Conceitos importantes
-
-### Fast-Fail
 > Falhar rápido em vez de esperar timeout
 
 **Sem Circuit Breaker:**
@@ -175,7 +188,8 @@ Timeout: 30s × 10 tentativas = 5 minutos esperando ❌
 Depois: rejeição imediata (0.001s) ✅
 ```
 
-### Self-Healing
+##### Self-Healing
+
 > Recuperação automática sem intervenção manual
 
 O Circuit Breaker **testa automaticamente** se o serviço voltou:
@@ -183,7 +197,8 @@ O Circuit Breaker **testa automaticamente** se o serviço voltou:
 - Não precisa intervenção humana
 - Recupera sozinho quando possível
 
-### Graceful Degradation
+##### Graceful Degradation
+
 > Degradação elegante do serviço
 
 ```csharp
@@ -198,26 +213,22 @@ catch
 }
 ```
 
----
+##### Use Circuit Breaker quando:
 
-## 🔬 Quando usar?
-
-### ✅ Use Circuit Breaker quando:
 - Chamar **APIs externas** (podem estar fora)
 - Acessar **banco de dados** (pode ficar lento)
 - Integrar com **microsserviços** (podem falhar)
 - Operações com **timeout** (rede, I/O)
 - Sistemas **distribuídos** (falhas parciais)
 
-### ❌ Não use para:
+##### Não use para:
+
 - Validação de entrada do usuário
 - Lógica de negócio local
 - Operações sempre síncronas e rápidas
 - Erros de programação (bugs)
 
----
-
-## 🏗️ Estrutura do código
+##### Estrutura do código
 
 ```
 CircuitBreakerDemo/
@@ -231,20 +242,16 @@ CircuitBreakerDemo/
 
 **Simples assim!** Apenas 1 arquivo de código. 🎯
 
----
+##### Artigos Fundamentais
 
-## 📚 Referências para estudo aprofundado
-
-### 📄 Artigos Fundamentais
 - [**Martin Fowler - Circuit Breaker**](https://martinfowler.com/bliki/CircuitBreaker.html)  
   ⭐ O artigo original que define o padrão
 
 - [**Microsoft - Circuit Breaker Pattern**](https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker)  
   Implementação em ambientes cloud
 
-### 📦 Bibliotecas Profissionais
+##### Polly (.NET)
 
-#### Polly (.NET)
 ```bash
 dotnet add package Polly
 ```
@@ -261,16 +268,18 @@ var policy = Policy
 await policy.ExecuteAsync(() => MinhaOperacao());
 ```
 
-#### Resilience4j (Java)
+##### Resilience4j (Java)
+
 - Circuit Breaker para ecosistema Java/Spring
 - [GitHub Resilience4j](https://github.com/resilience4j/resilience4j)
 
-#### Hystrix (Java - Netflix)
+##### Hystrix (Java - Netflix)
+
 - Pioneiro, agora em manutenção
 - Inspirou Polly e Resilience4j
 - [GitHub Netflix/Hystrix](https://github.com/Netflix/Hystrix)
 
-### 📖 Livros
+##### Livros
 
 **Release It! (Michael Nygard)**
 - Capítulo sobre Circuit Breaker e padrões de estabilidade
@@ -280,12 +289,12 @@ await policy.ExecuteAsync(() => MinhaOperacao());
 - Circuit Breaker no contexto de microsserviços
 - [Link O'Reilly](https://www.oreilly.com/library/view/building-microservices-2nd/9781492034018/)
 
-### 🎥 Vídeos
+##### Vídeos
 
 - [Circuit Breaker Pattern - Gaurav Sen](https://www.youtube.com/watch?v=ADHcBxEXvFA) ⭐
 - [Microservices Resilience - IBM Technology](https://www.youtube.com/watch?v=zKdRmKB1_lA)
 
-### 🔧 Padrões Relacionados
+##### Padrões Relacionados
 
 | Padrão | O que faz | Quando usar |
 |--------|-----------|-------------|
@@ -321,15 +330,7 @@ var policy = Policy
     );
 ```
 
-### 🌐 Recursos Online
-
-- [Awesome Resilience](https://github.com/Badel2/awesome-resilience) - Lista curada de recursos
-- [Azure Architecture Patterns](https://learn.microsoft.com/en-us/azure/architecture/patterns/) - Padrões cloud
-- [AWS Well-Architected](https://aws.amazon.com/architecture/well-architected/) - Best practices
-
----
-
-## ❓ FAQ
+##### FAQ
 
 **P: Circuit Breaker substitui tratamento de exceções?**  
 R: Não, ele **complementa**. Você ainda precisa de try-catch.
@@ -346,4 +347,8 @@ R: O Circuit Breaker vai continuar testando periodicamente.
 **P: Funciona com async/await?**  
 R: Esta versão não, mas basta trocar `Func<T>` por `Func<Task<T>>`.
 
----
+## Referências
+
+- [Awesome Resilience](https://github.com/Badel2/awesome-resilience) - Lista curada de recursos
+- [Azure Architecture Patterns](https://learn.microsoft.com/en-us/azure/architecture/patterns/) - Padrões cloud
+- [AWS Well-Architected](https://aws.amazon.com/architecture/well-architected/) - Best practices

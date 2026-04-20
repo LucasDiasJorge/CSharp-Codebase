@@ -1,12 +1,63 @@
-# 🔍 Custom Filter API - ASP.NET Core
+# Custom Filter API - ASP.NET Core
 
-![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
-![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?style=for-the-badge&logo=.net&logoColor=white)
+## Visão geral
 
 > 📚 **Projeto educacional** demonstrando o uso de **Action Filters customizados** no ASP.NET Core para capturar e logar propriedades específicas de modelos baseado em atributos personalizados.
 
-## 📋 Índice
+## Conceitos abordados
+
+- Exemplo didático sobre Custom Filter API - ASP.NET Core no contexto de ASP.NET Core, contratos HTTP e pipeline web.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como Custom Filter API - ASP.NET Core se aplica em um cenário prático de ASP.NET Core, contratos HTTP e pipeline web.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+CustomFilterApi/
++-- Attributes/
+|   +-- DisableLogPropertyAttribute.cs
+|   \-- LogPropertyAttribute.cs
++-- Controllers/
+|   +-- ProductsController.cs
+|   \-- UsersController.cs
++-- Filters/
+|   \-- LogPropertyFilter.cs
++-- Models/
+|   +-- ProductDto.cs
+|   \-- UserDto.cs
++-- Properties/
+|   \-- launchSettings.json
++-- Services/
+|   +-- BusinessServiceA.cs
+|   +-- BusinessServiceB.cs
+|   +-- IBusinessService.cs
+|   \-- SelectedServiceAccessor.cs
++-- appsettings.Development.json
++-- appsettings.json
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet run --project 03-WebAPIs/CustomFilterApi/CustomFilterApi.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Índice
 
 - [Sobre o Projeto](#sobre-o-projeto)
 - [Conceitos Demonstrados](#conceitos-demonstrados)
@@ -16,7 +67,7 @@
 - [Exemplos de Uso](#exemplos-de-uso)
 - [Saída de Log Esperada](#saída-de-log-esperada)
 
-## 🎯 Sobre o Projeto
+##### Sobre o Projeto
 
 Este projeto demonstra uma implementação didática e profissional de **Action Filters** no ASP.NET Core 9, mostrando como:
 
@@ -27,22 +78,23 @@ Este projeto demonstra uma implementação didática e profissional de **Action 
 - ✅ Logar valores de forma seletiva e segura (com mascaramento de dados sensíveis)
 - ✅ Organizar código seguindo as melhores práticas .NET
 
-## 💡 Conceitos Demonstrados
+##### 1. **Action Filters**
 
-### 1. **Action Filters**
 Filtros são componentes que executam código antes ou depois de etapas específicas no pipeline de processamento de requisições. Este projeto implementa `IActionFilter` com dois métodos:
 - `OnActionExecuting`: Executa **ANTES** do método do controller
 - `OnActionExecuted`: Executa **DEPOIS** do método do controller
 
-### 2. **Atributos Customizados**
+##### 2. **Atributos Customizados**
+
 Criamos `[LogProperty]`, um atributo personalizado que pode ser aplicado a propriedades para marcá-las como "loggable". Suporta:
 - Nome customizado para o log
 - Mascaramento de valores sensíveis
 
-### 3. **Reflection (Reflexão)**
+##### 3. **Reflection (Reflexão)**
+
 O filtro usa reflexão para inspecionar objetos em tempo de execução, buscando propriedades decoradas com `[LogProperty]` e extraindo seus valores dinamicamente.
 
-## 📁 Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```
 CustomFilterApi/
@@ -60,40 +112,14 @@ CustomFilterApi/
 └── README.md                        # Este arquivo
 ```
 
-### Organização por Responsabilidade
+##### Organização por Responsabilidade
 
 - **Attributes**: Contém atributos customizados reutilizáveis
 - **Filters**: Implementações de filtros do ASP.NET Core
 - **Models**: DTOs e modelos de dados
 - **Controllers**: Endpoints da API
 
-## 🔧 Como Funciona
-
-### Fluxo de Execução
-
-```
-1. Requisição HTTP chega ao endpoint
-         ↓
-2. LogPropertyFilter.OnActionExecuting() é executado
-         ↓
-3. Filtro inspeciona os argumentos da action
-         ↓
-4. Busca propriedades com [LogProperty] usando Reflection
-         ↓
-5. Extrai valores das propriedades marcadas
-         ↓
-6. Loga os valores (com mascaramento se necessário)
-         ↓
-7. Execução continua para o método do controller
-         ↓
-8. Controller processa a requisição
-         ↓
-9. LogPropertyFilter.OnActionExecuted() é executado
-         ↓
-10. Resposta HTTP é retornada
-```
-
-### Exemplo de Modelo Anotado
+##### Exemplo de Modelo Anotado
 
 ```csharp
 public class UserDto
@@ -112,11 +138,12 @@ public class UserDto
 }
 ```
 
-### Aplicação do Filtro
+##### Aplicação do Filtro
 
 O filtro pode ser aplicado em **3 níveis**:
 
-#### 1. **Global** (afeta toda a aplicação)
+##### 1. **Global** (afeta toda a aplicação)
+
 ```csharp
 builder.Services.AddControllers(options =>
 {
@@ -124,7 +151,8 @@ builder.Services.AddControllers(options =>
 });
 ```
 
-#### 2. **Controller** (afeta todas as actions do controller)
+##### 2. **Controller** (afeta todas as actions do controller)
+
 ```csharp
 [ApiController]
 [ServiceFilter(typeof(LogPropertyFilter))]
@@ -134,7 +162,8 @@ public class UsersController : ControllerBase
 }
 ```
 
-#### 3. **Action** (afeta apenas uma action específica)
+##### 3. **Action** (afeta apenas uma action específica)
+
 ```csharp
 [HttpPost]
 [ServiceFilter(typeof(LogPropertyFilter))]
@@ -144,13 +173,11 @@ public IActionResult CreateProduct([FromBody] ProductDto product)
 }
 ```
 
-## 🚀 Como Executar
-
-### Pré-requisitos
+##### Pré-requisitos
 
 - [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
 
-### Passos
+##### Passos
 
 1. **Clone ou navegue até o diretório do projeto**
 
@@ -177,9 +204,7 @@ A aplicação estará disponível em:
 - HTTPS: `https://localhost:5001`
 - Swagger UI: `https://localhost:5001/swagger`
 
-## 📝 Exemplos de Uso
-
-### 1. Criar um Usuário (POST)
+##### 1. Criar um Usuário (POST)
 
 **Endpoint**: `POST /api/users`
 
@@ -207,7 +232,7 @@ curl -X POST https://localhost:5001/api/users \
   }'
 ```
 
-### 2. Criar um Produto (POST)
+##### 2. Criar um Produto (POST)
 
 **Endpoint**: `POST /api/products`
 
@@ -235,7 +260,7 @@ curl -X POST https://localhost:5001/api/products \
   }'
 ```
 
-### 3. Atualizar um Usuário (PUT)
+##### 3. Atualizar um Usuário (PUT)
 
 **Endpoint**: `PUT /api/users/1`
 
@@ -250,7 +275,7 @@ curl -X POST https://localhost:5001/api/products \
 }
 ```
 
-## 📊 Saída de Log Esperada
+##### Saída de Log Esperada
 
 Ao fazer uma requisição POST para criar um usuário, você verá logs similares a:
 
@@ -281,7 +306,7 @@ info: CustomFilterApi.Filters.LogPropertyFilter[0]
       Action executada. Status: 200
 ```
 
-### Observações sobre o Log:
+##### Observações sobre o Log:
 
 - ✅ `Username` foi logado normalmente
 - ✅ `Email` foi logado com o nome customizado "E-mail do usuário"
@@ -289,9 +314,7 @@ info: CustomFilterApi.Filters.LogPropertyFilter[0]
 - ✅ `Age` foi logado normalmente
 - ❌ `PhoneNumber` **NÃO** foi logado (não tem o atributo `[LogProperty]`)
 
-## 🎓 Conceitos Avançados
-
-### Mascaramento de Dados Sensíveis
+##### Mascaramento de Dados Sensíveis
 
 O filtro implementa uma função de mascaramento para proteger dados sensíveis:
 
@@ -300,7 +323,7 @@ O filtro implementa uma função de mascaramento para proteger dados sensíveis:
 "12345678" → "12***78"
 ```
 
-### Reflection em Ação
+##### Reflection em Ação
 
 O código usa `GetProperties()` e `GetCustomAttribute()` para inspecionar tipos em runtime:
 
@@ -317,7 +340,7 @@ foreach (var property in properties)
 }
 ```
 
-## 🛠️ Tecnologias Utilizadas
+##### Tecnologias Utilizadas
 
 - **.NET 9** - Framework principal
 - **ASP.NET Core** - Framework web
@@ -325,7 +348,7 @@ foreach (var property in properties)
 - **Swagger/OpenAPI** - Documentação da API
 - **Reflection** - Inspeção de tipos em runtime
 
-## 📚 Aprendizados
+##### Aprendizados
 
 Este projeto demonstra:
 
@@ -336,7 +359,7 @@ Este projeto demonstra:
 5. **Logging**: Práticas de logging estruturado
 6. **Segurança**: Mascaramento de dados sensíveis
 
-## 🤝 Melhores Práticas Demonstradas
+##### Melhores Práticas Demonstradas
 
 - ✅ Separação de responsabilidades (SoC)
 - ✅ Princípio DRY (Don't Repeat Yourself)
@@ -345,10 +368,20 @@ Este projeto demonstra:
 - ✅ Configuração centralizada no Program.cs
 - ✅ Logging estruturado
 
-## 📄 Licença
+##### Licença
 
 Este projeto é parte do repositório educacional CSharp-101 e está disponível para fins de aprendizado.
 
----
-
 Desenvolvido com 💙 como material educacional para a comunidade .NET
+
+## Referências
+
+- [LOG_EXAMPLES.md](./LOG_EXAMPLES.md) - Exemplo de Saída de Log
+- [SERVICE_SELECTION_TODO.md](./SERVICE_SELECTION_TODO.md) - Plano de Ação — Seleção de Service via Filter (CustomFilterApi)
+- [todo.md](./todo.md) - Plano de ação para melhorias no CustomFilterApi
+
+## Documentação complementar
+
+- [LOG_EXAMPLES.md](./LOG_EXAMPLES.md) - Exemplo de Saída de Log
+- [SERVICE_SELECTION_TODO.md](./SERVICE_SELECTION_TODO.md) - Plano de Ação — Seleção de Service via Filter (CustomFilterApi)
+- [todo.md](./todo.md) - Plano de ação para melhorias no CustomFilterApi

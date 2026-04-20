@@ -1,6 +1,10 @@
 # Simple Web API
 
-## 📚 Conceitos Abordados
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a Simple Web API, com foco em ASP.NET Core, contratos HTTP e pipeline web.
+
+## Conceitos abordados
 
 Este projeto demonstra a criação de uma Web API simples em ASP.NET Core:
 
@@ -12,7 +16,7 @@ Este projeto demonstra a criação de uma Web API simples em ASP.NET Core:
 - **Content Negotiation**: Negociação de formato de resposta
 - **Status Codes**: Códigos de resposta HTTP apropriados
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Criar endpoints RESTful
 - Implementar operações CRUD básicas
@@ -21,9 +25,72 @@ Este projeto demonstra a criação de uma Web API simples em ASP.NET Core:
 - Implementar validação de entrada
 - Retornar respostas HTTP apropriadas
 
-## 💡 Conceitos Importantes
+### O que Você Aprenderá
 
-### Basic Controller
+1. **HTTP Methods**:
+   - GET: Recuperar recursos
+   - POST: Criar novos recursos
+   - PUT: Atualizar recursos completos
+   - PATCH: Atualizar recursos parcialmente
+   - DELETE: Remover recursos
+
+2. **Status Codes**:
+   - 200 OK: Sucesso
+   - 201 Created: Recurso criado
+   - 400 Bad Request: Dados inválidos
+   - 404 Not Found: Recurso não encontrado
+   - 500 Internal Server Error: Erro no servidor
+
+3. **Content Types**:
+   - application/json (padrão)
+   - application/xml
+   - text/plain
+
+4. **Routing**:
+   - Attribute routing
+   - Convention-based routing
+   - Route parameters
+   - Query strings
+
+## Estrutura do projeto
+
+```text
+SimpleWebAPI/
++-- Annotations/
+|   \-- PriceAttibute.cs
++-- Controllers/
+|   \-- ProductController.cs
++-- Models/
+|   \-- ProductModel.cs
++-- Properties/
+|   \-- launchSettings.json
++-- .gitignore
++-- appsettings.Development.json
++-- appsettings.json
++-- Program.cs
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet run --project 03-WebAPIs/SimpleWebAPI/SimpleWebAPI.csproj
+```
+
+Acesse: `https://localhost:5001/api/products`
+
+### Program.cs Setup
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Basic Controller
+
 ```csharp
 [ApiController]
 [Route("api/[controller]")]
@@ -62,7 +129,8 @@ public class ProductsController : ControllerBase
 }
 ```
 
-### Model Classes
+##### Model Classes
+
 ```csharp
 public class Product
 {
@@ -80,45 +148,8 @@ public class Product
 }
 ```
 
-## 🚀 Como Executar
+##### 1. CRUD Controller
 
-```bash
-cd SimpleWebAPI
-dotnet run
-```
-
-Acesse: `https://localhost:5001/api/products`
-
-## 📖 O que Você Aprenderá
-
-1. **HTTP Methods**:
-   - GET: Recuperar recursos
-   - POST: Criar novos recursos
-   - PUT: Atualizar recursos completos
-   - PATCH: Atualizar recursos parcialmente
-   - DELETE: Remover recursos
-
-2. **Status Codes**:
-   - 200 OK: Sucesso
-   - 201 Created: Recurso criado
-   - 400 Bad Request: Dados inválidos
-   - 404 Not Found: Recurso não encontrado
-   - 500 Internal Server Error: Erro no servidor
-
-3. **Content Types**:
-   - application/json (padrão)
-   - application/xml
-   - text/plain
-
-4. **Routing**:
-   - Attribute routing
-   - Convention-based routing
-   - Route parameters
-   - Query strings
-
-## 🎨 Implementações Completas
-
-### 1. CRUD Controller
 ```csharp
 [ApiController]
 [Route("api/[controller]")]
@@ -212,7 +243,8 @@ public class ProductsController : ControllerBase
 }
 ```
 
-### 2. DTOs (Data Transfer Objects)
+##### 2. DTOs (Data Transfer Objects)
+
 ```csharp
 public class CreateProductDto
 {
@@ -243,7 +275,8 @@ public class UpdateProductDto
 }
 ```
 
-### 3. Error Handling
+##### 3. Error Handling
+
 ```csharp
 public class GlobalExceptionMiddleware
 {
@@ -292,7 +325,8 @@ public class GlobalExceptionMiddleware
 }
 ```
 
-### 4. Custom Validation
+##### 4. Custom Validation
+
 ```csharp
 public class FutureDateAttribute : ValidationAttribute
 {
@@ -321,51 +355,8 @@ public class ProductDto
 }
 ```
 
-## 🏗️ Configuration
+##### Custom Filters
 
-### Program.cs Setup
-```csharp
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services
-builder.Services.AddControllers(options =>
-{
-    options.Filters.Add<ValidateModelStateFilter>();
-});
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// CORS configuration
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
-    });
-});
-
-var app = builder.Build();
-
-// Configure pipeline
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseMiddleware<GlobalExceptionMiddleware>();
-app.UseHttpsRedirection();
-app.UseCors();
-app.UseAuthorization();
-app.MapControllers();
-
-app.Run();
-```
-
-### Custom Filters
 ```csharp
 public class ValidateModelStateFilter : ActionFilterAttribute
 {
@@ -390,9 +381,8 @@ public class ValidateModelStateFilter : ActionFilterAttribute
 }
 ```
 
-## 🔍 Pontos de Atenção
+##### Validation
 
-### Validation
 ```csharp
 // ✅ Always validate input
 [HttpPost]
@@ -405,7 +395,8 @@ public ActionResult<Product> Create([FromBody] CreateProductDto dto)
 }
 ```
 
-### Status Codes
+##### Status Codes
+
 ```csharp
 // ✅ Use appropriate status codes
 [HttpGet("{id}")]
@@ -427,7 +418,8 @@ public ActionResult<Product> Create(Product product)
 }
 ```
 
-### Security
+##### Security
+
 ```csharp
 // ✅ Validate and sanitize input
 public class SanitizeInputAttribute : ActionFilterAttribute
@@ -447,9 +439,8 @@ public class SanitizeInputAttribute : ActionFilterAttribute
 }
 ```
 
-## 🚀 Testing
+##### Unit Testing
 
-### Unit Testing
 ```csharp
 [Test]
 public void GetById_WithValidId_ReturnsProduct()
@@ -467,7 +458,8 @@ public void GetById_WithValidId_ReturnsProduct()
 }
 ```
 
-### Integration Testing
+##### Integration Testing
+
 ```csharp
 [Test]
 public async Task GetProducts_ReturnsSuccessStatusCode()
@@ -486,7 +478,7 @@ public async Task GetProducts_ReturnsSuccessStatusCode()
 }
 ```
 
-## 📚 Recursos Adicionais
+## Referências
 
 - [ASP.NET Core Web API](https://docs.microsoft.com/en-us/aspnet/core/web-api/)
 - [REST API Best Practices](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design)

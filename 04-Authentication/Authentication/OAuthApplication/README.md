@@ -1,6 +1,10 @@
 # OAuth Application - Autenticação Externa
 
-## 📚 Conceitos Abordados
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a OAuth Application - Autenticação Externa, com foco em autenticação, autorização e segurança.
+
+## Conceitos abordados
 
 Este projeto demonstra implementação de OAuth 2.0 para autenticação externa:
 
@@ -12,7 +16,7 @@ Este projeto demonstra implementação de OAuth 2.0 para autenticação externa:
 - **Social Login**: Login via Google, Facebook, GitHub, etc.
 - **PKCE**: Proof Key for Code Exchange
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Configurar OAuth com provedores externos
 - Implementar fluxo de autorização
@@ -21,16 +25,50 @@ Este projeto demonstra implementação de OAuth 2.0 para autenticação externa:
 - Implementar logout seguro
 - Lidar com diferentes provedores OAuth
 
-## 💡 Conceitos Importantes
+## Estrutura do projeto
 
-### OAuth Flow
+```text
+OAuthApplication/
++-- Properties/
+|   \-- launchSettings.json
++-- Services/
+|   +-- AuthService.cs
+|   +-- IAuthService.cs
+|   +-- ITokenValidationService.cs
+|   \-- TokenValidationService.cs
++-- .gitignore
++-- appsettings.Development.json
++-- appsettings.json
++-- AuthController.cs
++-- OAuthApplication.csproj
++-- OAuthApplication.csproj.user
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet run --project 04-Authentication/Authentication/OAuthApplication/OAuthApplication.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### OAuth Flow
+
 1. **Authorization Request**: Redireciona para provedor
 2. **User Consent**: Usuário autoriza aplicação
 3. **Authorization Code**: Provedor retorna código
 4. **Token Exchange**: Troca código por tokens
 5. **Resource Access**: Usa tokens para acessar recursos
 
-### Configuration
+##### Configuration
+
 ```csharp
 builder.Services.AddAuthentication(options =>
 {
@@ -47,9 +85,8 @@ builder.Services.AddAuthentication(options =>
 });
 ```
 
-## 🚀 Como Executar
+##### 1. Configurar OAuth Apps
 
-### 1. Configurar OAuth Apps
 ```json
 {
   "Authentication": {
@@ -65,15 +102,8 @@ builder.Services.AddAuthentication(options =>
 }
 ```
 
-### 2. Executar Aplicação
-```bash
-cd OAuthApplication
-dotnet run
-```
+##### Google OAuth
 
-## 📖 Implementações por Provedor
-
-### Google OAuth
 ```csharp
 builder.Services.AddAuthentication()
     .AddGoogle(options =>
@@ -91,7 +121,8 @@ builder.Services.AddAuthentication()
     });
 ```
 
-### GitHub OAuth
+##### GitHub OAuth
+
 ```csharp
 builder.Services.AddAuthentication()
     .AddGitHub(options =>
@@ -106,7 +137,8 @@ builder.Services.AddAuthentication()
     });
 ```
 
-### Microsoft OAuth
+##### Microsoft OAuth
+
 ```csharp
 builder.Services.AddAuthentication()
     .AddMicrosoftAccount(options =>
@@ -117,9 +149,8 @@ builder.Services.AddAuthentication()
     });
 ```
 
-## 🎨 Controllers e Endpoints
+##### Authentication Controller
 
-### Authentication Controller
 ```csharp
 [ApiController]
 [Route("api/[controller]")]
@@ -168,7 +199,8 @@ public class AuthController : ControllerBase
 }
 ```
 
-### User Profile
+##### User Profile
+
 ```csharp
 [ApiController]
 [Route("api/[controller]")]
@@ -202,9 +234,8 @@ public class ProfileController : ControllerBase
 }
 ```
 
-## 🏗️ Recursos Avançados
+##### Custom Claims Transformation
 
-### Custom Claims Transformation
 ```csharp
 public class CustomClaimsTransformation : IClaimsTransformation
 {
@@ -239,7 +270,8 @@ public class CustomClaimsTransformation : IClaimsTransformation
 builder.Services.AddScoped<IClaimsTransformation, CustomClaimsTransformation>();
 ```
 
-### Token Management
+##### Token Management
+
 ```csharp
 public class TokenService
 {
@@ -266,7 +298,8 @@ public class TokenService
 }
 ```
 
-### User Persistence
+##### User Persistence
+
 ```csharp
 public class OAuthUserService
 {
@@ -309,9 +342,8 @@ public class OAuthUserService
 }
 ```
 
-## 🔍 Pontos de Atenção
+##### Security
 
-### Security
 ```csharp
 // ✅ Always use HTTPS in production
 builder.Services.AddHttpsRedirection(options =>
@@ -329,7 +361,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 ```
 
-### Error Handling
+##### Error Handling
+
 ```csharp
 builder.Services.AddAuthentication()
     .AddGoogle(options =>
@@ -344,7 +377,8 @@ builder.Services.AddAuthentication()
     });
 ```
 
-### State Management
+##### State Management
+
 ```csharp
 // ✅ Use state parameter for CSRF protection
 [HttpGet("login/{provider}")]
@@ -366,7 +400,7 @@ public IActionResult Login(string provider, string returnUrl = "/")
 }
 ```
 
-## 📚 Recursos Adicionais
+## Referências
 
 - [OAuth 2.0 RFC](https://tools.ietf.org/html/rfc6749)
 - [OpenID Connect](https://openid.net/connect/)

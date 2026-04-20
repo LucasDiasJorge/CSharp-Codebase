@@ -1,6 +1,10 @@
-﻿# Reflection em C#
+# Reflection em C#
 
-## 📚 Conceitos Abordados
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a Reflection em C#, com foco em conceitos fundamentais da linguagem C# e orientação a objetos.
+
+## Conceitos abordados
 
 Este projeto demonstra o uso de Reflection em C#, incluindo:
 
@@ -11,7 +15,7 @@ Este projeto demonstra o uso de Reflection em C#, incluindo:
 - **Attribute Reading**: Leitura de atributos customizados
 - **Dynamic Object Creation**: Criação de objetos em runtime
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Entender como inspecionar tipos em runtime
 - Acessar membros de classes dinamicamente
@@ -19,53 +23,7 @@ Este projeto demonstra o uso de Reflection em C#, incluindo:
 - Trabalhar com metadados de assemblies
 - Criar frameworks flexíveis usando reflection
 
-## � Conceitos Importantes
-
-### Obtendo Type Information
-```csharp
-Type type = typeof(Product);
-Type type2 = product.GetType();
-Type type3 = Type.GetType("MyNamespace.Product");
-```
-
-### Acessando Propriedades
-```csharp
-PropertyInfo[] properties = type.GetProperties();
-foreach (var prop in properties)
-{
-    var value = prop.GetValue(instance);
-    Console.WriteLine($"{prop.Name}: {value}");
-}
-```
-
-### Invocando Métodos
-```csharp
-MethodInfo method = type.GetMethod("MethodName");
-object result = method.Invoke(instance, parameters);
-```
-
-## 🚀 Como Executar
-
-```bash
-cd Reflection
-dotnet run
-```
-
-## �🔍 What Can You Do with Reflection?
-
-- Discover the type of an object at runtime.
-- List all methods, properties, or fields of a class.
-- Dynamically invoke methods or access properties.
-- Create instances of types dynamically (like a plugin system).
-- Read custom attributes (like [Price] or [Required]).
-
-## ⚠️ When to Use Reflection
-Reflection is powerful, but it comes with trade-offs:
-- Slower than direct code execution.
-- Bypasses compile-time checks, so more prone to runtime errors.
-- Best used for frameworks, tooling, or dynamic scenarios (like serialization, dependency injection, or test runners).
-
-## 📖 O que Você Aprenderá
+### O que Você Aprenderá
 
 1. **Metadados de Tipo**:
    - Nome do tipo, namespace, assembly
@@ -88,9 +46,71 @@ Reflection is powerful, but it comes with trade-offs:
    - Leitura de metadados
    - Validação baseada em atributos
 
-## 🎨 Casos de Uso Práticos
+## Estrutura do projeto
 
-### 1. Object Mapping
+```text
+Reflection/
++-- Program.cs
+\-- Reflection.csproj
+```
+
+## Como executar
+
+```bash
+dotnet run --project 01-Fundamentals/Reflection/Reflection.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Obtendo Type Information
+
+```csharp
+Type type = typeof(Product);
+Type type2 = product.GetType();
+Type type3 = Type.GetType("MyNamespace.Product");
+```
+
+##### Acessando Propriedades
+
+```csharp
+PropertyInfo[] properties = type.GetProperties();
+foreach (var prop in properties)
+{
+    var value = prop.GetValue(instance);
+    Console.WriteLine($"{prop.Name}: {value}");
+}
+```
+
+##### Invocando Métodos
+
+```csharp
+MethodInfo method = type.GetMethod("MethodName");
+object result = method.Invoke(instance, parameters);
+```
+
+##### What Can You Do with Reflection?
+
+- Discover the type of an object at runtime.
+- List all methods, properties, or fields of a class.
+- Dynamically invoke methods or access properties.
+- Create instances of types dynamically (like a plugin system).
+- Read custom attributes (like [Price] or [Required]).
+
+##### When to Use Reflection
+
+Reflection is powerful, but it comes with trade-offs:
+- Slower than direct code execution.
+- Bypasses compile-time checks, so more prone to runtime errors.
+- Best used for frameworks, tooling, or dynamic scenarios (like serialization, dependency injection, or test runners).
+
+##### 1. Object Mapping
+
 ```csharp
 public static T MapProperties<T>(object source) where T : new()
 {
@@ -112,7 +132,8 @@ public static T MapProperties<T>(object source) where T : new()
 }
 ```
 
-### 2. Validation Framework
+##### 2. Validation Framework
+
 ```csharp
 public static ValidationResult Validate(object obj)
 {
@@ -136,7 +157,8 @@ public static ValidationResult Validate(object obj)
 }
 ```
 
-### 3. Plugin Architecture
+##### 3. Plugin Architecture
+
 ```csharp
 public static IEnumerable<T> LoadPlugins<T>(string pluginDirectory)
 {
@@ -160,9 +182,8 @@ public static IEnumerable<T> LoadPlugins<T>(string pluginDirectory)
 }
 ```
 
-## 🔍 Pontos de Atenção
+##### Performance
 
-### Performance
 ```csharp
 // ❌ Reflexão é lenta - evite em loops
 for (int i = 0; i < 1000000; i++)
@@ -179,14 +200,15 @@ for (int i = 0; i < 1000000; i++)
 }
 ```
 
-### Security
+##### Security
+
 ```csharp
 // ⚠️ Cuidado com acesso a membros privados
 var privateField = type.GetField("_secretData", 
     BindingFlags.NonPublic | BindingFlags.Instance);
 ```
 
-## 📚 Recursos Adicionais
+## Referências
 
 - [Reflection in .NET](https://docs.microsoft.com/en-us/dotnet/framework/reflection-and-codedom/reflection)
 - [Expression Trees](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/expression-trees/)
@@ -210,7 +232,7 @@ public class ProductModel
 {
     public string Name { get; set; }
 
-    [Price]
+[Price]
     public decimal Price { get; set; }
 }
 ```
@@ -225,7 +247,7 @@ class Program
     {
         var type = typeof(ProductModel);
 
-        foreach (var prop in type.GetProperties())
+foreach (var prop in type.GetProperties())
         {
             var attrs = prop.GetCustomAttributes(typeof(PriceAttribute), inherit: false);
             if (attrs.Length > 0)
@@ -241,4 +263,3 @@ class Program
 
 ````sh
 Property 'Price' has the [Price] attribute.
-```

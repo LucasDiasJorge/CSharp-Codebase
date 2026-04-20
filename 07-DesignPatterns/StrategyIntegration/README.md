@@ -1,28 +1,60 @@
-# 📦 StrategyIntegration
+# StrategyIntegration
+
+## Visão geral
 
 Exemplo prático do padrão Strategy aplicado a integrações de dados com diferentes provedores.
 
----
-
-## 📚 Conceitos Abordados
+## Conceitos abordados
 
 - **Strategy Pattern**: Encapsulamento de algoritmos intercambiáveis em classes separadas
 - **Interface Segregation**: Definição de contrato comum para estratégias
 - **Dependency Injection**: Injeção de estratégias via construtor
 - **Open/Closed Principle**: Extensibilidade sem modificação do código existente
 
----
-
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Entender quando e por que usar o padrão Strategy
 - Implementar estratégias intercambiáveis em tempo de execução
 - Aplicar o princípio Open/Closed em integrações
 - Desacoplar lógica de negócio de implementações específicas
 
----
+## Estrutura do projeto
 
-## 📂 Estrutura do Projeto
+```text
+StrategyIntegration/
++-- IntegrationClasses/
+|   +-- FirstIntegration.cs
+|   \-- SecondIntegration.cs
++-- Interfaces/
+|   \-- IIntegrationStrategy.cs
++-- IntegrationStrategy.cs
++-- Program.cs
++-- Response.cs
+\-- StrategyIntegration.csproj
+```
+
+## Como executar
+
+```bash
+dotnet run --project 07-DesignPatterns/StrategyIntegration/StrategyIntegration.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Definir interface clara e coesa para as estratégias
+- Usar injeção de dependência para flexibilidade
+- Nomear estratégias de forma descritiva
+- Considerar Factory para criação de estratégias
+
+### Pontos de Atenção
+
+- Evitar estratégias com responsabilidades muito diferentes
+- Cuidado com estado compartilhado entre estratégias
+- Em cenários complexos, considerar combinar com Factory Pattern
+
+## Conteúdo complementar
+
+##### Estrutura do Projeto
 
 ```
 StrategyIntegration/
@@ -37,16 +69,7 @@ StrategyIntegration/
 └── README.md
 ```
 
----
-
-## 🚀 Como Executar
-
-```bash
-cd 07-DesignPatterns/StrategyIntegration
-dotnet run
-```
-
-### Saída Esperada
+##### Saída Esperada
 
 ```
 FirstIntegration: Processing data integration...
@@ -58,11 +81,7 @@ Integrating data from source: { key2: value2 } to destination: Destination2
 Response Id: 2, Message: Data integration successful., At: 2025-02-27 10:30:01
 ```
 
----
-
-## 💡 Exemplos de Código
-
-### Interface da Estratégia
+##### Interface da Estratégia
 
 ```csharp
 public interface IIntegrationStrategy
@@ -71,7 +90,7 @@ public interface IIntegrationStrategy
 }
 ```
 
-### Implementação de uma Estratégia
+##### Implementação de uma Estratégia
 
 ```csharp
 public class FirstIntegration : IIntegrationStrategy
@@ -89,7 +108,7 @@ public class FirstIntegration : IIntegrationStrategy
 }
 ```
 
-### Context (Executor)
+##### Context (Executor)
 
 ```csharp
 public class IntegrationStrategy
@@ -113,7 +132,7 @@ public class IntegrationStrategy
 }
 ```
 
-### Uso no Main
+##### Uso no Main
 
 ```csharp
 IntegrationStrategy integrationStrategy = new IntegrationStrategy(new FirstIntegration());
@@ -124,26 +143,7 @@ integrationStrategy.SetStrategy(new SecondIntegration());
 PrintResponse(integrationStrategy.ExecuteIntegration(data2, "Destination2"));
 ```
 
----
-
-## ✅ Boas Práticas
-
-- Definir interface clara e coesa para as estratégias
-- Usar injeção de dependência para flexibilidade
-- Nomear estratégias de forma descritiva
-- Considerar Factory para criação de estratégias
-
----
-
-## ⚠️ Pontos de Atenção
-
-- Evitar estratégias com responsabilidades muito diferentes
-- Cuidado com estado compartilhado entre estratégias
-- Em cenários complexos, considerar combinar com Factory Pattern
-
----
-
-## 🔗 Referências
+## Referências
 
 - [Strategy Pattern - Refactoring Guru](https://refactoring.guru/design-patterns/strategy)
 - [Design Patterns in C#](https://learn.microsoft.com/en-us/dotnet/standard/design-patterns/)

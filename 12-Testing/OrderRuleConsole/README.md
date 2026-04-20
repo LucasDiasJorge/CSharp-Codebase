@@ -1,5 +1,7 @@
 # OrderRuleConsole
 
+## Visão geral
+
 Console app para aplicar regras simples a objetos `Order` em tempo de execução.
 
 O projeto contém um motor de regras leve (`OrderRuleEngine`) que recebe uma descrição (`RuleInput`) e aplica alterações em propriedades alvo de um `Order` quando condições específicas são satisfeitas.
@@ -91,3 +93,44 @@ Se `Order.OrderName` for igual a `"Name"`, a condição `==` faz com que a alter
 **Contribuindo**
 - Abra uma issue descrevendo a proposta ou bug.
 - Envie PRs pequenos e focados.
+
+## Conceitos abordados
+
+- Exemplo didático sobre OrderRuleConsole no contexto de testes, benchmarks e validação de comportamento.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como OrderRuleConsole se aplica em um cenário prático de testes, benchmarks e validação de comportamento.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+OrderRuleConsole/
++-- Models/
+|   +-- Order.cs
+|   \-- RuleInput.cs
++-- OrderRuleConsole.Tests/
+|   +-- OrderRuleConsole.Tests.csproj
+|   \-- OrderRuleEngineTests.cs
++-- Services/
+|   \-- OrderRuleEngine.cs
++-- OrderRuleConsole.csproj
++-- OrderRuleConsole.sln
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 12-Testing/OrderRuleConsole/OrderRuleConsole.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.

@@ -1,18 +1,63 @@
 # Padrão Adapter (Adaptador)
 
-## 🎯 Objetivo
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a Padrão Adapter (Adaptador), com foco em design patterns, modelagem OO e código limpo.
+
+## Conceitos abordados
+
+- Exemplo didático sobre Padrão Adapter (Adaptador) no contexto de design patterns, modelagem OO e código limpo.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
 O **Adapter** (Adaptador) permite que **interfaces incompatíveis trabalhem juntas** ao atuar como um tradutor entre o código cliente e um sistema legado ou biblioteca externa. Resolve o problema de integração sem modificar o código existente.
 
 > Benefício principal: Integra sistemas com interfaces diferentes sem alterar suas implementações originais.
 
-## 🧠 Quando Usar
+## Estrutura do projeto
+
+```text
+Adapter/
++-- Adapters/
+|   \-- ClientRepositoryAdapter.cs
++-- Interfaces/
+|   \-- IClientRepository.cs
++-- Legacy/
+|   \-- LegacyDatabase.cs
++-- Models/
+|   \-- Client.cs
++-- Adapter.csproj
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 07-DesignPatterns/DesignPattern/Structural/Adapter/Adapter.csproj
+```
+
+Saída esperada:
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Quando Usar
+
 Use este padrão quando:
 - Precisa integrar uma biblioteca ou sistema com interface incompatível
 - Quer reutilizar código legado em uma arquitetura moderna
 - Há necessidade de converter formatos de dados entre camadas
 - Deseja isolar dependências externas através de uma interface limpa
 
-## 🏗️ Estrutura do Exemplo
+##### Estrutura do Exemplo
+
 Este exemplo simula a integração entre um **repositório moderno** e um **banco de dados legado** com formatos incompatíveis.
 
 | Componente | Função | Localização |
@@ -23,7 +68,8 @@ Este exemplo simula a integração entre um **repositório moderno** e um **banc
 | `ClientRepositoryAdapter` | Adapter que traduz as interfaces | `Adapters/` |
 | `Program.cs` | Demonstração de uso | Raiz |
 
-## 📁 Organização do Projeto
+##### Organização do Projeto
+
 ```
 Adapter/
 ├── Adapters/
@@ -38,52 +84,16 @@ Adapter/
 └── README.md                        # Este arquivo
 ```
 
-## 🔄 Fluxo Demonstrado
+##### Fluxo Demonstrado
+
 1. **Criação** do adapter que encapsula o sistema legado
 2. **Adição** de clientes usando interface moderna (`IClientRepository`)
 3. **Conversão** automática para formato legado (dicionários)
 4. **Recuperação** e conversão de volta para objetos modernos
 5. **Demonstração** de funcionalidades adicionais do adapter
 
-## ▶️ Execução
-```bash
-cd Adapter
-dotnet run
-```
+##### Exemplo de Código (trecho de `ClientRepositoryAdapter.cs`)
 
-Saída esperada:
-```
-=== Demonstração do Padrão Adapter ===
-Integrando sistema legado com interface moderna
-
-1. Criando repositório com adapter:
-[Adapter] Initialized with legacy database
-
-2. Adicionando clientes através da interface moderna:
-[Legacy DB] Inserted client: Lucas
-[Legacy DB] Inserted client: Maria
-[Legacy DB] Inserted client: João
-
-3. Recuperando clientes através da interface moderna:
-[Legacy DB] Fetching 3 records
-[Adapter] Converted 3 legacy records to Client objects
-
-4. Listando clientes:
-  • Lucas, 22 years old
-  • Maria, 30 years old
-  • João, 25 years old
-
-5. Demonstrando funcionalidade adicional do adapter:
-  Total de clientes: 3
-
-=== Benefícios do Adapter ===
-✅ Sistema legado integrado sem modificações
-✅ Interface moderna mantida consistente
-✅ Conversões de dados centralizadas no adapter
-✅ Facilita testes e manutenção
-```
-
-## 🧪 Exemplo de Código (trecho de `ClientRepositoryAdapter.cs`)
 ```csharp
 public void AddClient(Client client)
 {
@@ -117,13 +127,15 @@ public List<Client> GetAllClients()
 }
 ```
 
-## ✅ Benefícios Evidenciados
+##### Benefícios Evidenciados
+
 - **Reutilização**: Sistema legado continua funcionando sem modificações
 - **Desacoplamento**: Interface moderna isolada de detalhes legados
 - **Manutenibilidade**: Conversões centralizadas em um local
 - **Testabilidade**: Adapter pode ser facilmente testado e mockado
 
-## ⚠️ Trade-offs
+##### Trade-offs
+
 | Aspecto | Consideração |
 |---------|--------------|
 | **Complexidade** | Adiciona uma camada extra de abstração |
@@ -131,24 +143,26 @@ public List<Client> GetAllClients()
 | **Manutenção** | Mudanças no sistema legado podem quebrar o adapter |
 | **Debugging** | Pode dificultar rastreamento de bugs entre sistemas |
 
-## 🔧 Possíveis Extensões
+##### Possíveis Extensões
+
 - **Cache**: Implementar cache para reduzir chamadas ao sistema legado
 - **Validação**: Adicionar validações na conversão de dados
 - **Logging**: Melhorar logs para auditoria e debugging
 - **Async**: Suporte a operações assíncronas
 - **Múltiplos Sistemas**: Adapter para vários sistemas legados diferentes
 
-## 🆚 Vs Outros Padrões
+##### Vs Outros Padrões
+
 | Padrão | Diferença |
 |--------|-----------|
 | **Facade** | Adapter traduz interfaces; Facade simplifica complexidade |
 | **Decorator** | Adapter muda interface; Decorator mantém interface e adiciona comportamento |
 | **Proxy** | Adapter muda interface; Proxy mantém mesma interface |
 
-## 📌 TL;DR
+##### TL;DR
+
 Use o Adapter para **integrar sistemas incompatíveis** mantendo o código cliente limpo e o sistema legado inalterado.
 
----
 **Autor:** Lucas Jorge  
 **Tecnologia:** .NET / C#  
 **Categoria:** Structural Pattern

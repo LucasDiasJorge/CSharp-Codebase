@@ -1,12 +1,57 @@
 # Domínio Rico vs Domínio Anêmico
 
-## 📚 O que é este projeto?
+## Visão geral
 
 Este projeto demonstra as diferenças práticas entre **Domínio Anêmico (Anemic Domain)** e **Domínio Rico (Rich Domain)** usando C# e exemplos do mundo real.
 
-## 🎯 Conceitos
+## Conceitos abordados
 
-### Domínio Anêmico (Anemic Domain)
+- Organização de exemplos sobre design patterns, modelagem OO e código limpo.
+- Navegação entre implementações relacionadas a Domínio Rico vs Domínio Anêmico.
+- Comparação prática entre abordagens presentes nesta pasta.
+
+## Objetivos de aprendizagem
+
+- Identificar como os exemplos desta pasta cobrem design patterns, modelagem OO e código limpo.
+- Escolher o subprojeto mais adequado para aprofundar o estudo.
+- Reutilizar a navegação da pasta como índice prático de consulta.
+
+## Estrutura do projeto
+
+```text
+RichVsAnemicDomain/
++-- AnemicDomain/
+|   +-- Models/
+|   +-- Services/
+|   +-- AnemicDomain.csproj
+|   \-- Program.cs
++-- RichDomain/
+|   +-- Models/
+|   +-- Services/
+|   +-- Program.cs
+|   \-- RichDomain.csproj
++-- RichVsAnemicDomain/
+|   \-- RichDomain/
++-- COMPARISON.md
+\-- QUICK_GUIDE.md
+```
+
+## Como executar
+
+Escolha um dos projetos abaixo para execução direcionada:
+
+- `dotnet run --project 07-DesignPatterns/RichVsAnemicDomain/AnemicDomain/AnemicDomain.csproj`
+- `dotnet run --project 07-DesignPatterns/RichVsAnemicDomain/RichDomain/RichDomain.csproj`
+
+## Boas práticas e pontos de atenção
+
+- Use os READMEs dos subprojetos como ponto de entrada antes de alterar o código.
+- Compare implementações relacionadas mantendo o mesmo conceito em foco.
+- Prefira build ou execução direcionada por projeto em vez de validar a solução inteira.
+
+## Conteúdo complementar
+
+##### Domínio Anêmico (Anemic Domain)
 
 **Definição**: Um antipadrão onde as classes de domínio contêm apenas dados (propriedades) sem comportamento (lógica de negócio). A lógica fica em serviços externos.
 
@@ -22,7 +67,7 @@ Este projeto demonstra as diferenças práticas entre **Domínio Anêmico (Anemi
 - Protótipos rápidos
 - Casos onde o domínio é trivial
 
-### Domínio Rico (Rich Domain)
+##### Domínio Rico (Rich Domain)
 
 **Definição**: Um padrão onde as classes de domínio encapsulam tanto dados quanto comportamento, mantendo a lógica de negócio próxima aos dados que ela manipula.
 
@@ -40,7 +85,7 @@ Este projeto demonstra as diferenças práticas entre **Domínio Anêmico (Anemi
 - Quando regras de negócio são críticas
 - Aplicações enterprise
 
-## 🏗️ Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```
 RichVsAnemicDomain/
@@ -56,7 +101,7 @@ RichVsAnemicDomain/
 └── COMPARISON.md              # Comparação detalhada
 ```
 
-## 💡 Exemplo Prático: Sistema de Pedidos (E-commerce)
+##### Exemplo Prático: Sistema de Pedidos (E-commerce)
 
 Ambos os projetos implementam o mesmo cenário: um sistema de pedidos com as seguintes regras:
 
@@ -67,21 +112,21 @@ Ambos os projetos implementam o mesmo cenário: um sistema de pedidos com as seg
 5. Pedido só pode ser cancelado se estiver "Pendente"
 6. Validações: quantidade mínima, valores positivos, etc.
 
-## 🚀 Como Executar
+##### Domínio Anêmico
 
-### Domínio Anêmico
 ```bash
 cd AnemicDomain
 dotnet run
 ```
 
-### Domínio Rico
+##### Domínio Rico
+
 ```bash
 cd RichDomain
 dotnet run
 ```
 
-## 📊 Comparação Rápida
+##### Comparação Rápida
 
 | Aspecto | Domínio Anêmico | Domínio Rico |
 |---------|----------------|--------------|
@@ -93,25 +138,19 @@ dotnet run
 | **Validação** | Espalhada | Centralizada |
 | **Regras de Negócio** | Em serviços | No domínio |
 
-## 📖 Referências
+##### Do Domínio Anêmico:
 
-- **Martin Fowler**: [Anemic Domain Model](https://martinfowler.com/bliki/AnemicDomainModel.html)
-- **Eric Evans**: Domain-Driven Design: Tackling Complexity in the Heart of Software
-- **Vernon Vaughn**: Implementing Domain-Driven Design
-
-## 🎓 Aprendizados
-
-### Do Domínio Anêmico:
 - Veja como a lógica fica espalhada nos serviços
 - Note a falta de proteção contra estados inválidos
 - Observe a dificuldade em encontrar regras de negócio
 
-### Do Domínio Rico:
+##### Do Domínio Rico:
+
 - Veja como as regras ficam próximas aos dados
 - Note o encapsulamento e proteção de invariantes
 - Observe a facilidade de entender e testar o domínio
 
-## 🔍 O que observar no código
+##### O que observar no código
 
 1. **Construtores**: Como cada abordagem inicializa objetos
 2. **Setters**: Públicos (anêmico) vs Privados (rico)
@@ -120,6 +159,15 @@ dotnet run
 5. **Regras de Negócio**: Onde estão localizadas
 6. **Testes**: Qual é mais fácil de testar
 
----
-
 **Conclusão**: Domínio Rico é preferível na maioria dos casos, especialmente em aplicações com lógica de negócio significativa. Domínio Anêmico pode ser aceitável apenas em CRUDs muito simples.
+
+## Referências
+
+- **Martin Fowler**: [Anemic Domain Model](https://martinfowler.com/bliki/AnemicDomainModel.html)
+- **Eric Evans**: Domain-Driven Design: Tackling Complexity in the Heart of Software
+- **Vernon Vaughn**: Implementing Domain-Driven Design
+
+## Documentação complementar
+
+- [COMPARISON.md](./COMPARISON.md) - Comparação: Domínio Anêmico vs Domínio Rico
+- [QUICK_GUIDE.md](./QUICK_GUIDE.md) - Guia Rápido: Domínio Anêmico vs Rico

@@ -1,17 +1,6 @@
-# 🔗 CustomMiddleware - Pipeline de Middleware Personalizado
+# CustomMiddleware - Pipeline de Middleware Personalizado
 
-## 🎯 Objetivos de Aprendizado
-
-- Entender o **pipeline de middleware** do ASP.NET Core
-- Criar **middlewares personalizados** para funcionalidades específicas
-- Implementar **logging**, **timing**, **headers customizados** e **correlation IDs**
-- Organizar middlewares com **extension methods**
-- Configurar **ordem de execução** dos middlewares
-- Aplicar **padrões de middleware** para cross-cutting concerns
-
-## 📚 Conceitos Fundamentais
-
-### O que são Middlewares?
+## Visão geral
 
 **Middlewares** são componentes que formam o pipeline de processamento de requisições HTTP no ASP.NET Core. Cada middleware:
 
@@ -20,7 +9,61 @@
 - Pode processar a resposta quando ela volta
 - Implementa funcionalidades transversais (logging, autenticação, caching, etc.)
 
-### Pipeline de Middleware
+## Conceitos abordados
+
+- Exemplo didático sobre CustomMiddleware - Pipeline de Middleware Personalizado no contexto de ASP.NET Core, contratos HTTP e pipeline web.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender o **pipeline de middleware** do ASP.NET Core
+- Criar **middlewares personalizados** para funcionalidades específicas
+- Implementar **logging**, **timing**, **headers customizados** e **correlation IDs**
+- Organizar middlewares com **extension methods**
+- Configurar **ordem de execução** dos middlewares
+- Aplicar **padrões de middleware** para cross-cutting concerns
+
+## Estrutura do projeto
+
+```text
+CustomMiddleware/
++-- Middlewares/
+|   +-- Extensions/
+|   +-- CorrelationIdMiddleware.cs
+|   +-- CustomHeaderMiddleware.cs
+|   +-- RequestResponseLoggingMiddleware.cs
+|   \-- RequestTimingMiddleware.cs
++-- Models/
+|   \-- WeatherForecast.cs
++-- Properties/
+|   \-- launchSettings.json
++-- appsettings.Development.json
++-- appsettings.json
++-- CustomMiddleware.csproj
++-- CustomMiddleware.csproj.user
++-- CustomMiddleware.http
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet run --project 03-WebAPIs/CustomMiddleware/CustomMiddleware.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+1. **Ordem importa**: Middlewares são executados na ordem de registro
+2. **Performance**: Middlewares mais rápidos primeiro (exceto exception handling)
+3. **Responsabilidade única**: Cada middleware deve ter uma função específica
+4. **Configurabilidade**: Use options pattern para configurações
+5. **Logging**: Sempre implemente logging adequado
+6. **Async**: Use async/await corretamente
+
+## Conteúdo complementar
+
+##### Pipeline de Middleware
 
 ```
 Request  →  [Middleware 1]  →  [Middleware 2]  →  [Middleware 3]  →  Endpoint
@@ -28,7 +71,7 @@ Request  →  [Middleware 1]  →  [Middleware 2]  →  [Middleware 3]  →  End
 Response    [Middleware 1]  ←  [Middleware 2]  ←  [Middleware 3]  ←
 ```
 
-## 🏗️ Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```
 CustomMiddleware/
@@ -45,9 +88,7 @@ CustomMiddleware/
 └── README.md
 ```
 
-## 💡 Exemplos Práticos
-
-### 1. Middleware Básico - Request Timing
+##### 1. Middleware Básico - Request Timing
 
 ```csharp
 public class RequestTimingMiddleware
@@ -90,7 +131,7 @@ public class RequestTimingMiddleware
 }
 ```
 
-### 2. Middleware de Correlation ID
+##### 2. Middleware de Correlation ID
 
 ```csharp
 public class CorrelationIdMiddleware
@@ -132,7 +173,7 @@ public class CorrelationIdMiddleware
 }
 ```
 
-### 3. Middleware de Headers Customizados
+##### 3. Middleware de Headers Customizados
 
 ```csharp
 public class CustomHeaderOptions
@@ -171,7 +212,7 @@ public class CustomHeaderMiddleware
 }
 ```
 
-### 4. Middleware de Logging Avançado
+##### 4. Middleware de Logging Avançado
 
 ```csharp
 public class RequestResponseLoggingMiddleware
@@ -238,9 +279,7 @@ public class RequestResponseLoggingMiddleware
 }
 ```
 
-## 🚀 Configuração e Execução
-
-### 1. Configuração no Program.cs
+##### 1. Configuração no Program.cs
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -266,7 +305,7 @@ app.MapControllers();
 app.Run();
 ```
 
-### 2. Extension Methods para Organização
+##### 2. Extension Methods para Organização
 
 ```csharp
 public static class UseCustomMiddlewaresExtensions
@@ -284,20 +323,7 @@ public static class UseCustomMiddlewaresExtensions
 }
 ```
 
-### 3. Executar o Projeto
-
-```bash
-# Navegar para o diretório
-cd CustomMiddleware
-
-# Restaurar dependências
-dotnet restore
-
-# Executar a aplicação
-dotnet run
-```
-
-### 4. Testando os Middlewares
+##### 4. Testando os Middlewares
 
 ```bash
 # Teste com correlation ID
@@ -312,9 +338,7 @@ curl -I https://localhost:7000/weatherforecast
 curl -X GET https://localhost:7000/weatherforecast -w "Total time: %{time_total}s\n"
 ```
 
-## 🔧 Padrões Avançados
-
-### 1. Middleware Condicional
+##### 1. Middleware Condicional
 
 ```csharp
 public class ConditionalMiddleware
@@ -340,7 +364,7 @@ public class ConditionalMiddleware
 }
 ```
 
-### 2. Middleware com Configuração
+##### 2. Middleware com Configuração
 
 ```csharp
 public class ConfigurableMiddlewareOptions
@@ -381,7 +405,7 @@ public class ConfigurableMiddleware
 }
 ```
 
-### 3. Middleware de Error Handling
+##### 3. Middleware de Error Handling
 
 ```csharp
 public class ErrorHandlingMiddleware
@@ -425,18 +449,7 @@ public class ErrorHandlingMiddleware
 }
 ```
 
-## 💯 Melhores Práticas
-
-### ✅ Boas Práticas
-
-1. **Ordem importa**: Middlewares são executados na ordem de registro
-2. **Performance**: Middlewares mais rápidos primeiro (exceto exception handling)
-3. **Responsabilidade única**: Cada middleware deve ter uma função específica
-4. **Configurabilidade**: Use options pattern para configurações
-5. **Logging**: Sempre implemente logging adequado
-6. **Async**: Use async/await corretamente
-
-### 📋 Ordem Recomendada de Middlewares
+##### Ordem Recomendada de Middlewares
 
 ```csharp
 app.UseMiddleware<ExceptionHandlingMiddleware>();  // 1. Error handling primeiro
@@ -450,7 +463,7 @@ app.UseRateLimiting();                            // 8. Rate limiting
 // Endpoints por último
 ```
 
-### ❌ Evitar
+##### Evitar
 
 1. **Middlewares pesados**: Evite operações demoradas
 2. **Estado mutável**: Middlewares devem ser stateless
@@ -458,7 +471,7 @@ app.UseRateLimiting();                            // 8. Rate limiting
 4. **Vazamentos**: Dispose recursos adequadamente
 5. **Exception não tratadas**: Sempre trate exceções
 
-## 🔍 Casos de Uso Comuns
+##### Casos de Uso Comuns
 
 | Middleware | Função | Quando Usar |
 |-----------|--------|-------------|
@@ -470,7 +483,7 @@ app.UseRateLimiting();                            // 8. Rate limiting
 | **Compression** | Otimização | Responses grandes |
 | **Authentication** | Segurança | Endpoints protegidos |
 
-## 📋 Exercícios Práticos
+##### Exercícios Práticos
 
 1. **Rate Limiting**: Implemente middleware de rate limiting
 2. **Compression**: Adicione middleware de compressão
@@ -478,13 +491,11 @@ app.UseRateLimiting();                            // 8. Rate limiting
 4. **Request Validation**: Valide requests antes de controllers
 5. **Metrics**: Colete métricas de API (throughput, latência)
 
-## 🔗 Recursos Adicionais
+## Referências
 
 - [ASP.NET Core Middleware](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/)
 - [Custom Middleware](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write)
 - [Middleware Order](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/index#middleware-order)
 - [Built-in Middleware](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/index#built-in-middleware)
-
----
 
 💡 **Dica**: Middlewares são a espinha dorsal de aplicações ASP.NET Core. Dominar sua criação e organização é essencial para construir APIs robustas e escaláveis!

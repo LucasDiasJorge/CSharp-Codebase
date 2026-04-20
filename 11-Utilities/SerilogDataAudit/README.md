@@ -1,8 +1,16 @@
 # Projeto: Auditoria de Dados com Serilog
 
+## Visão geral
+
 Este documento serve como base para voce desenvolver um projeto focado em auditoria de dados usando Serilog no ecossistema .NET.
 
-## Objetivo
+## Conceitos abordados
+
+- Exemplo didático sobre Projeto: Auditoria de Dados com Serilog no contexto de utilitários, transformação de dados e observabilidade.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
 
 Implementar trilha de auditoria para registrar:
 
@@ -12,7 +20,25 @@ Implementar trilha de auditoria para registrar:
 4. Quando ocorreu
 5. Qual foi o resultado
 
-## Escopo inicial sugerido
+## Estrutura do projeto
+
+```text
+SerilogDataAudit/
+```
+
+## Como executar
+
+Consulte o código desta pasta e os projetos relacionados antes de executar comandos específicos.
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Escopo inicial sugerido
 
 - API ASP.NET com autenticacao
 - Logs estruturados com Serilog
@@ -20,7 +46,7 @@ Implementar trilha de auditoria para registrar:
 - Registro de eventos de sucesso, cancelamento e falha
 - Persistencia de logs em arquivo JSON (ou sink externo)
 
-## Pacotes recomendados
+##### Pacotes recomendados
 
 - Serilog.AspNetCore
 - Serilog.Sinks.Console
@@ -28,7 +54,7 @@ Implementar trilha de auditoria para registrar:
 - Serilog.Formatting.Compact
 - Serilog.Enrichers.Environment
 
-## Estrutura de auditoria (padrao)
+##### Estrutura de auditoria (padrao)
 
 Padronize propriedades em todos os eventos:
 
@@ -43,7 +69,7 @@ Padronize propriedades em todos os eventos:
 - error_type
 - elapsed_ms
 
-## Exemplo de configuracao no Program.cs
+##### Exemplo de configuracao no Program.cs
 
 ```csharp
 using Serilog;
@@ -59,7 +85,7 @@ builder.Host.UseSerilog((context, services, configuration) =>
         .Enrich.FromLogContext());
 ```
 
-## Exemplo de configuracao no appsettings.json
+##### Exemplo de configuracao no appsettings.json
 
 ```json
 {
@@ -87,7 +113,7 @@ builder.Host.UseSerilog((context, services, configuration) =>
 }
 ```
 
-## Exemplo de evento auditavel em endpoint
+##### Exemplo de evento auditavel em endpoint
 
 ```csharp
 using var scope = logger.BeginScope(new Dictionary<string, object>
@@ -117,14 +143,14 @@ catch (Exception ex)
 }
 ```
 
-## Regras de seguranca para auditoria
+##### Regras de seguranca para auditoria
 
 - Nunca logar senha, token completo ou dados pessoais sensiveis.
 - Preferir identificadores internos, hash ou mascaramento.
 - Limitar payload logado ao minimo necessario.
 - Definir retencao de logs e politica de acesso aos arquivos.
 
-## Roadmap de implementacao
+##### Roadmap de implementacao
 
 1. Criar API base e endpoints criticos.
 2. Configurar Serilog no bootstrap.
@@ -133,7 +159,7 @@ catch (Exception ex)
 5. Validar logs por cenarios de sucesso e erro.
 6. Conectar sink centralizado (ex: Seq, ELK, Datadog).
 
-## Checklist de pronto
+##### Checklist de pronto
 
 - Eventos auditaveis padronizados por acao de negocio.
 - Correlacao por request/trace funcionando.

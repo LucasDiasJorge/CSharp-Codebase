@@ -1,8 +1,16 @@
 # Transactional Order API
 
+## Visão geral
+
 Projeto educacional em ASP.NET Core minimalista criado para demonstrar, de ponta a ponta, como controlar **transações** ao orquestrar fluxos de pedidos envolvendo clientes e itens. O foco é responder perguntas comuns sobre `ExecuteInTransactionAsync`, boas práticas e posicionamento do controle transacional dentro da aplicação.
 
-## Objetivos de Aprendizado
+## Conceitos abordados
+
+- Exemplo didático sobre Transactional Order API no contexto de ASP.NET Core, contratos HTTP e pipeline web.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
 
 - Centralizar o controle transacional em um **serviço de aplicação** (camada de orquestração).
 - Compartilhar uma implementação simples de `ExecuteInTransactionAsync` que encapsula `BeginTransaction/Commit/Rollback`.
@@ -10,7 +18,48 @@ Projeto educacional em ASP.NET Core minimalista criado para demonstrar, de ponta
 - Ilustrar uma API REST (pedidos, clientes e itens) com separação em camadas (Domain, Application, Infrastructure).
 - Disponibilizar um template genérico de Unit of Work/Transaction Runner reutilizável.
 
-## Arquitetura em Camadas
+## Estrutura do projeto
+
+```text
+TransactionalOrderApi/
++-- Api/
+|   \-- Controllers/
++-- Application/
+|   +-- Contracts/
+|   \-- Services/
++-- Domain/
+|   \-- Entities/
++-- Infrastructure/
+|   +-- Persistence/
+|   \-- Repositories/
++-- Properties/
+|   \-- launchSettings.json
++-- Templates/
+|   \-- GenericUnitOfWork.cs
++-- appsettings.json
++-- Program.cs
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet run --project 03-WebAPIs/TransactionalOrderApi/TransactionalOrderApi.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+1. **Transações curtas**: somente operações de banco necessárias entram na transação. Nada de chamadas HTTP externas ou cálculos longos.
+2. **Uma entrada / uma saída**: `ExecuteInTransactionAsync` recebe uma função e devolve um resultado. Sem estado global.
+3. **Evite leaks**: nunca exponha `IDbTransaction` para camadas superiores (Controller). Só serviços o conhecem.
+4. **Idempotência fora da transação**: valide inputs antes de abrir a transação (`request.EnsureIsValid()`).
+5. **Logging**: logue o início/fim de `ExecuteInTransactionAsync` em produção (omitido aqui por simplicidade).
+6. **Cancelamento**: propague `CancellationToken` até o runner para abortar operações longas.
+7. **Conexão única**: use o mesmo `DbContext`/`IDbConnection` dentro da lambda. Evita múltiplas conexões com transação aberta.
+
+## Conteúdo complementar
+
+##### Arquitetura em Camadas
 
 ```
 Api (Controllers)
@@ -19,7 +68,7 @@ Api (Controllers)
           ↳ Infrastructure (EF Core, Repositories, Transaction Runner)
 ```
 
-### Componentes-chave
+##### Componentes-chave
 
 | Camada | Responsabilidade | Arquivos relevantes |
 | --- | --- | --- |
@@ -28,7 +77,7 @@ Api (Controllers)
 | Domain | Modelos ricos (`Customer`, `Order`, `OrderItem`) | `Domain/Entities/*` |
 | Infrastructure | EF Core + SQLite, repositories | `Infrastructure/Persistence/*`, `Infrastructure/Repositories/*` |
 
-## Controle Transacional (ExecuteInTransactionAsync)
+##### Controle Transacional (ExecuteInTransactionAsync)
 
 ```csharp
 public class EfCoreTransactionRunner : ITransactionRunner
@@ -52,14 +101,14 @@ public class EfCoreTransactionRunner : ITransactionRunner
 }
 ```
 
-### Por que a transação mora na camada de serviço?
+##### Por que a transação mora na camada de serviço?
 
 1. **Orquestração completa**: somente a camada de aplicação conhece todo o fluxo (criar cliente, registrar pedido, ajustar totais). Ela decide quando iniciar/encerrar a transação.
 2. **Repositories simples**: adicionam/consultam entidades, mas não têm contexto do caso de uso. Sem transações dentro deles, evitamos aninhamentos e commits prematuros.
 3. **Testabilidade**: `ITransactionRunner` é mockável. É fácil testar o caso de uso sem tocar em banco físico.
 4. **Reuso**: qualquer serviço pode chamar `ExecuteInTransactionAsync`, mantendo o padrão único.
 
-### Fluxo do endpoint `POST /api/orders`
+##### Fluxo do endpoint `POST /api/orders`
 
 1. Controller recebe `CreateOrderRequest` e delega para `IOrderService`.
 2. `OrderService.PlaceOrderAsync` chama `_transactionRunner.ExecuteAsync`.
@@ -67,17 +116,7 @@ public class EfCoreTransactionRunner : ITransactionRunner
 4. `OrderService` NÃO chama `SaveChanges`. O runner centraliza `SaveChanges` + `Commit`.
 5. Em caso de falha em qualquer etapa, `Rollback` acontece automaticamente.
 
-## Boas Práticas de Transações (aplicadas aqui)
-
-1. **Transações curtas**: somente operações de banco necessárias entram na transação. Nada de chamadas HTTP externas ou cálculos longos.
-2. **Uma entrada / uma saída**: `ExecuteInTransactionAsync` recebe uma função e devolve um resultado. Sem estado global.
-3. **Evite leaks**: nunca exponha `IDbTransaction` para camadas superiores (Controller). Só serviços o conhecem.
-4. **Idempotência fora da transação**: valide inputs antes de abrir a transação (`request.EnsureIsValid()`).
-5. **Logging**: logue o início/fim de `ExecuteInTransactionAsync` em produção (omitido aqui por simplicidade).
-6. **Cancelamento**: propague `CancellationToken` até o runner para abortar operações longas.
-7. **Conexão única**: use o mesmo `DbContext`/`IDbConnection` dentro da lambda. Evita múltiplas conexões com transação aberta.
-
-## Executando o Projeto
+##### Executando o Projeto
 
 ```powershell
 cd "c:\Users\Lucas Jorge\Documents\Default Projects\Back\CSharp-101\TransactionalOrderApi"
@@ -87,7 +126,7 @@ dotnet run
 - Swagger UI: `https://localhost:5001/swagger`
 - Banco: SQLite (`transactions.db`) criado automaticamente na raiz do projeto.
 
-### Requisições de Exemplo
+##### Requisições de Exemplo
 
 **Criar pedido**
 ```http
@@ -109,7 +148,7 @@ Content-Type: application/json
 GET https://localhost:5001/api/orders/1
 ```
 
-## Respondendo às Perguntas
+##### Respondendo às Perguntas
 
 > **Posso criar uma função `ExecuteInTransactionAsync` e colocar minhas operações dentro da lambda?**  
 Sim. `EfCoreTransactionRunner` é exatamente isso. Ele inicia a transação, executa a lambda, chama `SaveChanges` uma vez e faz commit/rollback.
@@ -124,7 +163,7 @@ Sim, a camada de serviço inicia a transação. Em EF Core, não é preciso pass
 - Evite operações externas (HTTP, fila) dentro da transação; finalize o commit e depois publique eventos.
 - Centralize a lógica em um runner/unidade de trabalho reutilizável.
 
-## Template de Unit of Work / Transaction Runner (ADO.NET / Dapper)
+##### Template de Unit of Work / Transaction Runner (ADO.NET / Dapper)
 
 Arquivo: `Templates/GenericUnitOfWork.cs`
 
@@ -177,12 +216,10 @@ public sealed class GenericUnitOfWork(IDbConnection connection) : IUnitOfWork
 
 Use esse template quando trabalhar com `IDbConnection` (Dapper, ADO.NET). A regra permanece: **o unit of work executa a lambda, repositories só recebem o `IDbTransaction` via parâmetro**.
 
-## Próximos Passos
+##### Próximos Passos
 
 - Expandir casos de uso: cancelamento de pedidos, estorno financeiro, publicação de eventos após `Commit`.
 - Adicionar testes unitários/integrados validando rollback em caso de exceções.
 - Demonstrar integração com `TransactionScope` para cenários distribuídos.
-
----
 
 > "Transação bem controlada é aquela que você quase esquece que existe" – mantenha seu domínio limpo e deixe o runner fazer o trabalho pesado.

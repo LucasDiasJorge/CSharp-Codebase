@@ -1,6 +1,10 @@
 # Threading em C#
 
-## 📚 Conceitos Abordados
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a Threading em C#, com foco em assincronia, tasks, threads e coordenação de trabalho.
+
+## Conceitos abordados
 
 Este projeto demonstra os fundamentos de threading em C#:
 
@@ -12,7 +16,7 @@ Este projeto demonstra os fundamentos de threading em C#:
 - **Parallel Programming**: Programação paralela
 - **Race Conditions**: Condições de corrida
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Criar e gerenciar threads manualmente
 - Entender conceitos de paralelismo vs concorrência
@@ -21,46 +25,7 @@ Este projeto demonstra os fundamentos de threading em C#:
 - Usar ThreadPool para eficiência
 - Aplicar boas práticas de threading
 
-## 💡 Conceitos Importantes
-
-### Criação de Thread
-```csharp
-Thread thread = new Thread(Trabalho);
-thread.Start();
-
-static void Trabalho()
-{
-    Console.WriteLine($"Thread ID: {Thread.CurrentThread.ManagedThreadId}");
-}
-```
-
-### Thread com Parâmetros
-```csharp
-Thread thread = new Thread(TrabalhoComParametro);
-thread.Start("Dados para a thread");
-
-static void TrabalhoComParametro(object data)
-{
-    string dados = (string)data;
-    Console.WriteLine($"Processando: {dados}");
-}
-```
-
-### Thread Join
-```csharp
-thread.Start();
-thread.Join(); // Espera a thread terminar
-Console.WriteLine("Thread finalizada");
-```
-
-## 🚀 Como Executar
-
-```bash
-cd Threads
-dotnet run
-```
-
-## 📖 O que Você Aprenderá
+### O que Você Aprenderá
 
 1. **Threading Basics**:
    - Diferença entre processo e thread
@@ -85,9 +50,64 @@ dotnet run
    - ThreadPool benefits
    - CPU-bound vs I/O-bound tasks
 
-## 🎨 Padrões de Implementação
+## Estrutura do projeto
 
-### 1. Thread Safety com Lock
+```text
+Threads/
++-- Threads/
++-- Program.cs
+\-- Threads.csproj
+```
+
+## Como executar
+
+```bash
+dotnet run --project 02-AsyncAndConcurrency/Threads/Threads.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Criação de Thread
+
+```csharp
+Thread thread = new Thread(Trabalho);
+thread.Start();
+
+static void Trabalho()
+{
+    Console.WriteLine($"Thread ID: {Thread.CurrentThread.ManagedThreadId}");
+}
+```
+
+##### Thread com Parâmetros
+
+```csharp
+Thread thread = new Thread(TrabalhoComParametro);
+thread.Start("Dados para a thread");
+
+static void TrabalhoComParametro(object data)
+{
+    string dados = (string)data;
+    Console.WriteLine($"Processando: {dados}");
+}
+```
+
+##### Thread Join
+
+```csharp
+thread.Start();
+thread.Join(); // Espera a thread terminar
+Console.WriteLine("Thread finalizada");
+```
+
+##### 1. Thread Safety com Lock
+
 ```csharp
 public class ContadorThreadSafe
 {
@@ -141,7 +161,8 @@ class Program
 }
 ```
 
-### 2. Producer-Consumer com AutoResetEvent
+##### 2. Producer-Consumer com AutoResetEvent
+
 ```csharp
 public class ProducerConsumer
 {
@@ -195,7 +216,8 @@ public class ProducerConsumer
 }
 ```
 
-### 3. Worker Threads com ThreadPool
+##### 3. Worker Threads com ThreadPool
+
 ```csharp
 public class WorkerThreadExample
 {
@@ -238,7 +260,8 @@ public class WorkerThreadExample
 }
 ```
 
-### 4. Background vs Foreground Threads
+##### 4. Background vs Foreground Threads
+
 ```csharp
 public class ThreadTypesExample
 {
@@ -279,44 +302,8 @@ public class ThreadTypesExample
 }
 ```
 
-## 🏗️ Sincronização Avançada
+##### 2. Reader-Writer Lock
 
-### 1. Semáforo para Controle de Recursos
-```csharp
-public class ResourceManager
-{
-    private readonly Semaphore _semaphore;
-    private readonly string[] _resources;
-    
-    public ResourceManager(int resourceCount)
-    {
-        _semaphore = new Semaphore(resourceCount, resourceCount);
-        _resources = new string[resourceCount];
-        for (int i = 0; i < resourceCount; i++)
-        {
-            _resources[i] = $"Resource {i}";
-        }
-    }
-    
-    public void UseResource(int threadId)
-    {
-        _semaphore.WaitOne(); // Adquire um recurso
-        
-        try
-        {
-            Console.WriteLine($"Thread {threadId} adquiriu um recurso");
-            Thread.Sleep(2000); // Simula uso do recurso
-            Console.WriteLine($"Thread {threadId} liberou o recurso");
-        }
-        finally
-        {
-            _semaphore.Release(); // Libera o recurso
-        }
-    }
-}
-```
-
-### 2. Reader-Writer Lock
 ```csharp
 public class ReadWriteExample
 {
@@ -356,9 +343,8 @@ public class ReadWriteExample
 }
 ```
 
-## 🔍 Pontos de Atenção
+##### Deadlock Prevention
 
-### Deadlock Prevention
 ```csharp
 // ❌ Pode causar deadlock
 object lock1 = new object();
@@ -383,7 +369,8 @@ lock (lock1)
 }
 ```
 
-### Resource Management
+##### Resource Management
+
 ```csharp
 // ✅ Sempre limpe recursos
 public class ThreadSafeResource : IDisposable
@@ -410,7 +397,8 @@ public class ThreadSafeResource : IDisposable
 }
 ```
 
-### Performance Considerations
+##### Performance Considerations
+
 ```csharp
 // ✅ Prefira ThreadPool para trabalhos curtos
 ThreadPool.QueueUserWorkItem(DoShortWork);
@@ -429,9 +417,8 @@ public void DoWork(CancellationToken cancellationToken)
 }
 ```
 
-## 🚀 Evolução para Async/Await
+##### Threading Tradicional vs Async/Await
 
-### Threading Tradicional vs Async/Await
 ```csharp
 // Threading tradicional - bloqueia thread
 public void TraditionalApproach()
@@ -452,7 +439,45 @@ public async Task ModernApproach()
 }
 ```
 
-## 📚 Recursos Adicionais
+## Referências
+
+### 1. Semáforo para Controle de Recursos
+
+```csharp
+public class ResourceManager
+{
+    private readonly Semaphore _semaphore;
+    private readonly string[] _resources;
+    
+    public ResourceManager(int resourceCount)
+    {
+        _semaphore = new Semaphore(resourceCount, resourceCount);
+        _resources = new string[resourceCount];
+        for (int i = 0; i < resourceCount; i++)
+        {
+            _resources[i] = $"Resource {i}";
+        }
+    }
+    
+    public void UseResource(int threadId)
+    {
+        _semaphore.WaitOne(); // Adquire um recurso
+        
+        try
+        {
+            Console.WriteLine($"Thread {threadId} adquiriu um recurso");
+            Thread.Sleep(2000); // Simula uso do recurso
+            Console.WriteLine($"Thread {threadId} liberou o recurso");
+        }
+        finally
+        {
+            _semaphore.Release(); // Libera o recurso
+        }
+    }
+}
+```
+
+### Recursos Adicionais
 
 - [Threading in C#](https://docs.microsoft.com/en-us/dotnet/standard/threading/)
 - [Thread Safety](https://docs.microsoft.com/en-us/dotnet/standard/threading/thread-safety)

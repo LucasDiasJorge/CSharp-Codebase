@@ -1,14 +1,50 @@
 # Sliding Window Example
 
+## Visão geral
+
 Este projeto demonstra o uso do algoritmo Sliding Window (Janela Deslizante) em C# para resolver problemas relacionados a subarrays em arrays de inteiros de forma eficiente. O exemplo implementado calcula a soma máxima de qualquer subarray de tamanho fixo dentro de um array.
 
-## Descrição
+## Conceitos abordados
+
+- Exemplo didático sobre Sliding Window Example no contexto de algoritmos, estruturas de dados e análise de cenários.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como Sliding Window Example se aplica em um cenário prático de algoritmos, estruturas de dados e análise de cenários.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+SlidingWindows/
++-- Program.cs
+\-- SlidingWindows.csproj
+```
+
+## Como executar
+
+```bash
+dotnet run --project 10-Algorithms/SlidingWindows/SlidingWindows.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Descrição
 
 O padrão Sliding Window é uma técnica eficiente para resolver problemas que envolvem arrays ou listas, especialmente quando se busca por subarrays ou subsequências de tamanho fixo ou variável. Em vez de usar loops aninhados (O(n·k)), movemos uma janela ao longo do array, atualizando incrementos e decrementos de forma incremental (O(n)).
 
 No exemplo deste projeto, o método `MaxSumSlidingWindow` recebe um array de inteiros e um tamanho de janela fixa, retornando a soma máxima encontrada em qualquer subarray contíguo desse tamanho.
 
-## Como funciona o algoritmo
+##### Como funciona o algoritmo
 
 1. Definimos dois ponteiros (início e fim) que representam a janela deslizante.  
 2. Inicializamos a métrica desejada (soma, contagem, etc.) com os primeiros elementos da janela.  
@@ -16,12 +52,12 @@ No exemplo deste projeto, o método `MaxSumSlidingWindow` recebe um array de int
 4. Removemos a contribuição do elemento que sai da janela movendo o ponteiro de início.  
 5. A cada passo, registramos o melhor resultado encontrado.
 
-## Complexidade
+##### Complexidade
 
 - **Tempo:** O(n), pois cada elemento entra e sai da janela apenas uma vez.  
 - **Espaço:** O(1), pois usamos apenas variáveis auxiliares para calcular a métrica.
 
-## Exemplo de Uso
+##### Exemplo de Uso
 
 ```csharp
 using System;
@@ -59,11 +95,11 @@ namespace SlidingWindows
 }
 ```
 
-## Observação
+##### Observação
 
 Antes de deslizar a janela, calculamos a soma inicial dos primeiros `k` elementos e atribuimos a `windowSum` e `maxSum`. Em cada passo subsequente, adicionamos o novo valor que entra na janela e subtraímos o que sai, evitando recalcular a soma completa. Assim, reduzimos a complexidade de O(n·k) para O(n).
 
-## Exemplos de Uso no Mundo Real
+##### Exemplos de Uso no Mundo Real
 
 - **Análise de tráfego de rede:** em sistemas de monitoramento de redes, coletamos métricas de pacotes ou bytes recebidos em intervalos de tempo fixos (por exemplo, 1 minuto) e usamos uma janela deslizante para calcular médias móveis. Isso ajuda a identificar picos incomuns ou quedas súbitas no tráfego, permitindo alertas em tempo real e diagnóstico de problemas.
 

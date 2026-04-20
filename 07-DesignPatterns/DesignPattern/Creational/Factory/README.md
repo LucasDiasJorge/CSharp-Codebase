@@ -1,10 +1,10 @@
 # Factory Pattern - Sistema de Veículos
 
-## 📖 Visão Geral
+## Visão geral
 
 Este projeto implementa o **Design Pattern Factory** através de um sistema de criação de veículos. O padrão Factory é usado para criar objetos sem especificar a classe exata do objeto que será criado, promovendo o desacoplamento entre a criação e o uso dos objetos.
 
-## 🎯 Problema Resolvido
+## Conceitos abordados
 
 O padrão Factory resolve os seguintes problemas:
 - **Acoplamento forte** - Reduz dependência entre cliente e classes concretas
@@ -12,9 +12,40 @@ O padrão Factory resolve os seguintes problemas:
 - **Violação do DIP** - Depende de abstrações, não de implementações
 - **Dificuldade de manutenção** - Facilita mudanças na criação de objetos
 
-## 🏗️ Tipos de Factory Implementados
+## Objetivos de aprendizagem
 
-### 1. Simple Factory (Static Factory)
+- Entender como Factory Pattern - Sistema de Veículos se aplica em um cenário prático de design patterns, modelagem OO e código limpo.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+Factory/
++-- Factory.csproj
++-- IVeiculo.cs
++-- Program.cs
++-- TipoVeiculo.cs
++-- VeiculoFactory.cs
+\-- Veiculos.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 07-DesignPatterns/DesignPattern/Creational/Factory/Factory.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### 1. Simple Factory (Static Factory)
+
 A implementação mais simples, com um método estático que decide qual objeto criar.
 
 ```csharp
@@ -33,7 +64,8 @@ public static class VeiculoFactory
 }
 ```
 
-### 2. Factory Method
+##### 2. Factory Method
+
 Implementações específicas para cada tipo de produto.
 
 ```csharp
@@ -50,9 +82,8 @@ public static class CarroFactory
 }
 ```
 
-## 🚗 Hierarquia de Veículos
+##### Interface Base
 
-### Interface Base
 ```csharp
 public interface IVeiculo
 {
@@ -61,9 +92,8 @@ public interface IVeiculo
 }
 ```
 
-### Implementações Concretas
+##### Carro
 
-#### Carro
 ```csharp
 public class Carro : IVeiculo
 {
@@ -78,7 +108,8 @@ public class Carro : IVeiculo
 }
 ```
 
-#### Moto
+##### Moto
+
 ```csharp
 public class Moto : IVeiculo
 {
@@ -93,7 +124,8 @@ public class Moto : IVeiculo
 }
 ```
 
-#### Carro Elétrico
+##### Carro Elétrico
+
 ```csharp
 public class CarroEletrico : IVeiculo
 {
@@ -108,9 +140,8 @@ public class CarroEletrico : IVeiculo
 }
 ```
 
-## 🚀 Como Usar
+##### Simple Factory
 
-### Simple Factory
 ```csharp
 // Criação usando enum
 IVeiculo carro = VeiculoFactory.CriarVeiculo(TipoVeiculo.Carro);
@@ -125,7 +156,8 @@ IVeiculo carroCustom = VeiculoFactory.CriarVeiculoCustomizado(
 );
 ```
 
-### Factory Method
+##### Factory Method
+
 ```csharp
 // Usando factories específicas
 var carroEletrico = CarroFactory.CriarCarroEletrico();
@@ -135,7 +167,7 @@ carroEletrico.ExibirInfo();
 motoEsportiva.ExibirInfo();
 ```
 
-## ✅ Vantagens
+##### Vantagens
 
 1. **Desacoplamento**: Cliente não depende de classes concretas
 2. **Centralização**: Lógica de criação em um local
@@ -143,9 +175,8 @@ motoEsportiva.ExibirInfo();
 4. **Testabilidade**: Permite injeção de mocks
 5. **Princípios SOLID**: Segue SRP, OCP e DIP
 
-## 🔄 Variações Avançadas
+##### Abstract Factory
 
-### Abstract Factory
 Para famílias de objetos relacionados:
 
 ```csharp
@@ -168,7 +199,8 @@ public class VeiculoCombustaoFactory : IVeiculoAbstractFactory
 }
 ```
 
-### Factory com Dependency Injection
+##### Factory com Dependency Injection
+
 ```csharp
 public interface IVeiculoFactory
 {
@@ -196,7 +228,8 @@ public class VeiculoFactory : IVeiculoFactory
 }
 ```
 
-### Factory com Configuração
+##### Factory com Configuração
+
 ```csharp
 public class VeiculoFactoryComConfig
 {
@@ -220,7 +253,7 @@ public class VeiculoFactoryComConfig
 }
 ```
 
-## 🎯 Casos de Uso Ideais
+##### Casos de Uso Ideais
 
 - **Sistemas de logging** com diferentes providers
 - **Acesso a dados** com diferentes repositórios
@@ -228,14 +261,14 @@ public class VeiculoFactoryComConfig
 - **Parsers** para diferentes formatos de arquivo
 - **Conexões de banco** para diferentes SGBDs
 
-## ❌ Quando NÃO usar
+##### Quando NÃO usar
 
 - Apenas uma implementação de interface
 - Criação de objetos é trivial
 - Não há necessidade de desacoplamento
 - Sistema muito simples
 
-## 🧪 Exemplos de Teste
+##### Exemplos de Teste
 
 ```csharp
 [Test]
@@ -270,7 +303,7 @@ public void CarroFactory_DeveCriarCarroEletrico_ComPropriedadesPadrao()
 }
 ```
 
-## 📊 Comparação de Factories
+##### Comparação de Factories
 
 | Tipo | Complexidade | Flexibilidade | Uso |
 |------|-------------|---------------|-----|
@@ -278,9 +311,8 @@ public void CarroFactory_DeveCriarCarroEletrico_ComPropriedadesPadrao()
 | **Factory Method** | Média | Média | Extensibilidade |
 | **Abstract Factory** | Alta | Alta | Famílias de objetos |
 
-## 🔧 Integrações
+##### Com Builder Pattern
 
-### Com Builder Pattern
 ```csharp
 public static class VeiculoFactory
 {
@@ -298,7 +330,8 @@ var carro = VeiculoFactory.CriarBuilderCarro()
     .Build();
 ```
 
-### Com Strategy Pattern
+##### Com Strategy Pattern
+
 ```csharp
 public class VeiculoComStrategy
 {
@@ -313,7 +346,7 @@ public class VeiculoComStrategy
 }
 ```
 
-## 📚 Referências
+## Referências
 
 - [Factory Pattern - Refactoring Guru](https://refactoring.guru/design-patterns/factory-method)
 - [Abstract Factory Pattern](https://refactoring.guru/design-patterns/abstract-factory)

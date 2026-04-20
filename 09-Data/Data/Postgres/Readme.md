@@ -1,7 +1,10 @@
-
 # PostgreSQL com Entity Framework Core
 
-## 📚 Conceitos Abordados
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a PostgreSQL com Entity Framework Core, com foco em persistência, bancos de dados e acesso a dados.
+
+## Conceitos abordados
 
 Este projeto demonstra a integração do PostgreSQL com .NET usando Entity Framework Core:
 
@@ -13,7 +16,7 @@ Este projeto demonstra a integração do PostgreSQL com .NET usando Entity Frame
 - **JSON Support**: Suporte nativo a tipos JSON
 - **Full-Text Search**: Busca textual avançada
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Configurar PostgreSQL com Entity Framework Core
 - Usar recursos específicos do PostgreSQL
@@ -22,9 +25,39 @@ Este projeto demonstra a integração do PostgreSQL com .NET usando Entity Frame
 - Otimizar performance com índices
 - Gerenciar migrações complexas
 
-## 💡 Setup Básico
+## Estrutura do projeto
 
-### Instalação de Pacotes
+```text
+Postgres/
++-- Migrations/
+|   +-- 20250409184037_InitialCreate.cs
+|   +-- 20250409184037_InitialCreate.Designer.cs
+|   \-- AppDbContextModelSnapshot.cs
++-- Models/
+|   +-- Roles.cs
+|   \-- Users.cs
++-- .gitignore
++-- AppDbContext.cs
++-- Postgres.csproj
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 09-Data/Data/Postgres/Postgres.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Instalação de Pacotes
+
 ```bash
 dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 dotnet add package Microsoft.EntityFrameworkCore.Design
@@ -32,21 +65,22 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet tool install --global dotnet-ef
 ```
 
-### Criação de Migrations
+##### Criação de Migrations
+
 ```bash
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-## 🚀 Como Executar
+##### 1. Instalar PostgreSQL
 
-### 1. Instalar PostgreSQL
 ```bash
 # Docker
 docker run --name postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
 ```
 
-### 2. Configurar Connection String
+##### 2. Configurar Connection String
+
 ```json
 {
   "ConnectionStrings": {
@@ -55,15 +89,8 @@ docker run --name postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgre
 }
 ```
 
-### 3. Executar
-```bash
-cd Postgres
-dotnet run
-```
+##### 1. DbContext Configuration
 
-## 📖 Recursos Específicos do PostgreSQL
-
-### 1. DbContext Configuration
 ```csharp
 public class ApplicationDbContext : DbContext
 {
@@ -89,7 +116,8 @@ public class ApplicationDbContext : DbContext
 }
 ```
 
-### 2. JSON Support
+##### 2. JSON Support
+
 ```csharp
 public class Product
 {
@@ -105,7 +133,8 @@ var products = await context.Products
     .ToListAsync();
 ```
 
-### 3. Full-Text Search
+##### 3. Full-Text Search
+
 ```csharp
 // Configuration
 modelBuilder.Entity<Product>()
@@ -122,9 +151,8 @@ var products = await context.Products
     .ToListAsync();
 ```
 
-## 🔍 Performance e Otimização
+##### Índices Especializados
 
-### Índices Especializados
 ```csharp
 // GIN index for JSON
 modelBuilder.Entity<Product>()
@@ -138,7 +166,8 @@ modelBuilder.Entity<Product>()
     .HasOperators("gin_trgm_ops");
 ```
 
-### Connection Pooling
+##### Connection Pooling
+
 ```csharp
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString, npgsqlOptions =>
@@ -148,7 +177,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     }));
 ```
 
-## 📚 Recursos Adicionais
+## Referências
 
 - [Npgsql Documentation](https://www.npgsql.org/efcore/)
 - [PostgreSQL Features in EF Core](https://docs.microsoft.com/en-us/ef/core/providers/npgsql/)

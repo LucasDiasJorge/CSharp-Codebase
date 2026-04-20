@@ -1,8 +1,49 @@
 # Code Smells – Study Checklist
 
+## Visão geral
+
 Use this checklist to track and reference examples in your projects while studying each smell.
 
-## Checklist
+## Conceitos abordados
+
+- Organização de exemplos sobre design patterns, modelagem OO e código limpo.
+- Navegação entre implementações relacionadas a Code Smells – Study Checklist.
+- Comparação prática entre abordagens presentes nesta pasta.
+
+## Objetivos de aprendizagem
+
+- Identificar como os exemplos desta pasta cobrem design patterns, modelagem OO e código limpo.
+- Escolher o subprojeto mais adequado para aprofundar o estudo.
+- Reutilizar a navegação da pasta como índice prático de consulta.
+
+## Estrutura do projeto
+
+```text
+CodeSmells/
+\-- PoisonLooping/
+    \-- PoisonLoopingExamples.cs
+```
+
+## Como executar
+
+Esta pasta organiza subprojetos. Comece por um dos READMEs abaixo:
+
+- [PoisonLooping](PoisonLooping/README.md)
+
+- [PoisonLooping](PoisonLooping/README.md)
+
+- [PoisonLooping](PoisonLooping/README.md)
+
+- [PoisonLooping](PoisonLooping/README.md)
+
+## Boas práticas e pontos de atenção
+
+- Use os READMEs dos subprojetos como ponto de entrada antes de alterar o código.
+- Compare implementações relacionadas mantendo o mesmo conceito em foco.
+- Prefira build ou execução direcionada por projeto em vez de validar a solução inteira.
+
+## Conteúdo complementar
+
 - [ ] Long Method — reference: [Add project link here]
 - [ ] Large Class — reference: [Add project link here]
 - [ ] God Object — reference: [Add project link here]

@@ -1,15 +1,64 @@
 # MoneyStorageApi
 
+## Visão geral
+
 API minimalista em C# que demonstra como armazenar valores monetários no MySQL com segurança usando Entity Framework Core.
 
-## 🔍 O que você aprende
+## Conceitos abordados
+
+- Exemplo didático sobre MoneyStorageApi no contexto de persistência, bancos de dados e acesso a dados.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como MoneyStorageApi se aplica em um cenário prático de persistência, bancos de dados e acesso a dados.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+MoneyStorageApi/
++-- Properties/
+|   \-- launchSettings.json
++-- src/
+|   +-- Data/
+|   +-- Domain/
+|   +-- DTOs/
+|   \-- Services/
++-- appsettings.Development.json
++-- appsettings.json
++-- MoneyStorageApi.csproj
++-- MoneyStorageApi.http
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 09-Data/Data/MoneyStorageApi/MoneyStorageApi.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- `decimal` para valores monetários e `HasColumnType("decimal(18,2)")`
+- `RowVersion` para detectar gravações concorrentes
+- Serviço `AccountService` concentra regras de negócio e garante `SaveChanges` único por operação
+- `EnableRetryOnFailure` e `CommandTimeout` para resiliência nas conexões MySQL
+
+## Conteúdo complementar
+
+##### O que você aprende
+
 - Configurar MySQL como banco de dados para uma API .NET 9
 - Aplicar `decimal(18,2)` para armazenar dinheiro sem perda de precisão
 - Registrar depósitos e saques com histórico (`MoneyMovement`)
 - Usar `RowVersion` para proteger contra concorrência otimista
 - Organizar operações financeiras em um serviço de domínio dedicado
 
-## 🏗️ Estrutura
+##### Estrutura
+
 ```
 Data/
   MoneyStorageApi/
@@ -23,17 +72,20 @@ Data/
       Services/AccountService.cs
 ```
 
-### Modelagem
+##### Modelagem
+
 - `Account` (Guid, OwnerName, Balance, CreatedAtUtc, RowVersion)
 - `MoneyMovement` (Id, AccountId, Type, Amount, Description, OccurredAtUtc)
 - Movimentos são gerados automaticamente a cada depósito/saque, inclusive no saldo inicial.
 
-## ⚙️ Pré-requisitos
+##### Pré-requisitos
+
 1. MySQL executando localmente (porta 3306)
 2. Usuário com permissão de criação de schema
 3. .NET 9 SDK instalado
 
-## 🚀 Como rodar
+##### Como rodar
+
 ```bash
 cd Data/MoneyStorageApi
 # Ajuste appsettings*.json com sua senha/porta
@@ -49,7 +101,8 @@ cd Data/MoneyStorageApi
 ```
 > Observação: o `dotnet ef` utiliza os pacotes já declarados no `csproj`. Instale a ferramenta global se ainda não tiver (`dotnet tool install --global dotnet-ef`).
 
-## 📡 Endpoints principais
+##### Endpoints principais
+
 | Verbo | Rota | Corpo | Descrição |
 |-------|------|-------|-----------|
 | POST | `/accounts` | `{ "ownerName": "João", "initialBalance": 1000.00 }` | Cria uma conta e registra o depósito inicial |
@@ -60,16 +113,12 @@ cd Data/MoneyStorageApi
 
 Todas as operações retornam `AccountResponse`, contendo saldo atual e o histórico ordenado.
 
-## 🔐 Boas práticas aplicadas
-- `decimal` para valores monetários e `HasColumnType("decimal(18,2)")`
-- `RowVersion` para detectar gravações concorrentes
-- Serviço `AccountService` concentra regras de negócio e garante `SaveChanges` único por operação
-- `EnableRetryOnFailure` e `CommandTimeout` para resiliência nas conexões MySQL
+##### Testando rapidamente
 
-## 🧪 Testando rapidamente
 Arquivo `MoneyStorageApi.http` possui exemplos de requisições HTTP para VS Code/REST Client.
 
-## 📎 Configuração adicional
+##### Configuração adicional
+
 - Altere a connection string de `appsettings.Development.json` para apontar para seu banco local.
 - Se desejar publicar em produção, crie um usuário específico apenas com permissões necessárias e troque a credential em `appsettings.json`.
 

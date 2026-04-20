@@ -1,10 +1,40 @@
 # Transfer Money Use Case
 
-## Descrição
+## Visão geral
 
-Use Case complexo que demonstra uma transferência bancária entre duas contas, aplicando regras de negócio, transações de banco de dados e auditoria.
+Projeto didático do CSharp-101 dedicado a Transfer Money Use Case, com foco em padrões arquiteturais e organização de casos de uso.
 
-## Fluxo de Execução
+## Conceitos abordados
+
+- Exemplo didático sobre Transfer Money Use Case no contexto de padrões arquiteturais e organização de casos de uso.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como Transfer Money Use Case se aplica em um cenário prático de padrões arquiteturais e organização de casos de uso.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+TransferMoney/
++-- DTOs/
+|   +-- TransferMoneyInput.cs
+|   \-- TransferMoneyOutput.cs
++-- Entities/
+|   +-- BankAccount.cs
+|   +-- Transaction.cs
+|   \-- TransactionStatus.cs
++-- Interfaces/
+|   +-- IAuditService.cs
+|   +-- IBankAccountRepository.cs
+|   \-- ITransactionRepository.cs
+\-- TransferMoneyUseCase.cs
+```
+
+## Como executar
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -39,7 +69,19 @@ Use Case complexo que demonstra uma transferência bancária entre duas contas, 
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## Regras de Negócio
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Descrição
+
+Use Case complexo que demonstra uma transferência bancária entre duas contas, aplicando regras de negócio, transações de banco de dados e auditoria.
+
+##### Regras de Negócio
 
 | Regra | Descrição |
 |-------|-----------|
@@ -49,18 +91,19 @@ Use Case complexo que demonstra uma transferência bancária entre duas contas, 
 | Saldo suficiente | Origem deve ter saldo >= valor |
 | Limite diário | Não exceder limite de transferência |
 
-## Padrões Aplicados
+##### 1. Unit of Work
 
-### 1. Unit of Work
 Garante que todas as operações sejam atômicas - ou tudo funciona, ou tudo é revertido.
 
-### 2. Rich Domain Model
+##### 2. Rich Domain Model
+
 A entidade `BankAccount` contém lógica de negócio (Withdraw, Deposit) ao invés de ser anêmica.
 
-### 3. Result Pattern
+##### 3. Result Pattern
+
 Evita exceções para fluxos de controle, tornando os erros explícitos.
 
-## Dependências
+##### Dependências
 
 | Interface | Responsabilidade |
 |-----------|------------------|
@@ -69,7 +112,7 @@ Evita exceções para fluxos de controle, tornando os erros explícitos.
 | `IUnitOfWork` | Gerenciamento de transações DB |
 | `IAuditService` | Registro de auditoria |
 
-## Cenários de Erro
+##### Cenários de Erro
 
 ```csharp
 // Saldo insuficiente
@@ -85,7 +128,7 @@ Evita exceções para fluxos de controle, tornando os erros explícitos.
 "Conta de origem não encontrada"
 ```
 
-## Exemplo de Uso
+##### Exemplo de Uso
 
 ```csharp
 var useCase = new TransferMoneyUseCase(

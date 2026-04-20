@@ -1,12 +1,65 @@
-# 🎯 LINQ - Language Integrated Query em C#
+# LINQ - Language Integrated Query em C#
 
-<!-- commit: micro tweak 2 -->
+## Visão geral
 
-## 📖 Sobre o Projeto
+Projeto didático do CSharp-101 dedicado a LINQ - Language Integrated Query em C#, com foco em conceitos fundamentais da linguagem C# e orientação a objetos.
+
+## Conceitos abordados
+
+- Exemplo didático sobre LINQ - Language Integrated Query em C# no contexto de conceitos fundamentais da linguagem C# e orientação a objetos.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como LINQ - Language Integrated Query em C# se aplica em um cenário prático de conceitos fundamentais da linguagem C# e orientação a objetos.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+Linq/
++-- Models/
+|   +-- Cliente.cs
+|   +-- Funcionario.cs
+|   +-- Pedido.cs
+|   \-- Produto.cs
++-- ARQUITETURA.md
++-- EXERCICIOS.md
++-- Linq.csproj
+\-- Program.cs
+```
+
+## Como executar
+
+```bash
+dotnet run --project 01-Fundamentals/Linq/Linq.csproj
+```
+
+Entenda como e quando as queries LINQ são executadas.
+
+**Conceitos**:
+- Lazy evaluation
+- Operadores imediatos vs adiados
+- ToList(), ToArray() para cache
+- Impacto em performance
+
+## Boas práticas e pontos de atenção
+
+- 💡 Quando usar execução adiada vs imediata
+- 💡 Como evitar múltiplas execuções de queries caras
+- 💡 Quando usar ToList() ou ToArray()
+- 💡 Otimização de queries complexas
+- 💡 Legibilidade: Method Syntax vs Query Syntax
+
+## Conteúdo complementar
+
+##### Sobre o Projeto
 
 Este é um **guia didático completo** sobre LINQ (Language Integrated Query) em C#, uma das funcionalidades mais poderosas da linguagem. O projeto contém **12 demonstrações práticas** que cobrem desde conceitos básicos até operações avançadas, com exemplos do mundo real.
 
-### 🌟 Diferenciais deste Guia
+##### Diferenciais deste Guia
 
 - ✅ **Exemplos Práticos**: Cenários reais de uso em sistemas empresariais
 - ✅ **Tom Didático**: Explicações claras e progressivas
@@ -15,11 +68,8 @@ Este é um **guia didático completo** sobre LINQ (Language Integrated Query) em
 - ✅ **Performance**: Entenda execução adiada vs imediata
 - ✅ **Casos de Uso**: Aplicações práticas em dashboards, relatórios e análises
 
----
+##### 1️⃣ Filtros Básicos com WHERE
 
-## 📚 Conteúdo das Demonstrações
-
-### 1️⃣ Filtros Básicos com WHERE
 Aprenda a filtrar dados com condições simples e compostas.
 ```csharp
 // Filtrar produtos em estoque com preço menor que R$ 500
@@ -31,9 +81,8 @@ var produtos = lista.Where(p => p.Preco < 500 && p.EmEstoque);
 - Operadores lógicos (&&, ||)
 - Method Syntax vs Query Syntax
 
----
+##### 2️⃣ Projeção com SELECT
 
-### 2️⃣ Projeção com SELECT
 Transforme dados criando novas estruturas e objetos anônimos.
 ```csharp
 // Criar objeto com desconto
@@ -50,9 +99,8 @@ var produtosComDesconto = produtos.Select(p => new
 - SelectMany para achatar coleções
 - Transformações e cálculos
 
----
+##### 3️⃣ Ordenação com ORDERBY
 
-### 3️⃣ Ordenação com ORDERBY
 Ordene dados de forma simples ou com múltiplos critérios.
 ```csharp
 // Ordenar por categoria e depois por preço
@@ -66,9 +114,8 @@ var ordenados = produtos
 - ThenBy para ordenação secundária
 - Reverse para inverter sequências
 
----
+##### 4️⃣ Agrupamento com GROUPBY
 
-### 4️⃣ Agrupamento com GROUPBY
 Agrupe elementos e calcule estatísticas por grupo.
 ```csharp
 // Estatísticas por categoria
@@ -87,9 +134,8 @@ var stats = produtos
 - Agregações por grupo
 - Análises estatísticas
 
----
+##### 5️⃣ Junção (JOIN) entre Coleções
 
-### 5️⃣ Junção (JOIN) entre Coleções
 Combine dados de múltiplas fontes relacionadas.
 ```csharp
 // Join entre pedidos e clientes
@@ -105,9 +151,8 @@ var resultado = pedidos
 - Joins múltiplos
 - Relacionamentos entre entidades
 
----
+##### 6️⃣ Operações de Agregação
 
-### 6️⃣ Operações de Agregação
 Calcule valores únicos a partir de coleções.
 ```csharp
 // Estatísticas gerais
@@ -123,9 +168,8 @@ var max = produtos.Max(p => p.Preco);
 - Aggregate personalizado
 - LongCount para grandes volumes
 
----
+##### 7️⃣ Quantificadores (ANY, ALL, CONTAINS)
 
-### 7️⃣ Quantificadores (ANY, ALL, CONTAINS)
 Verifique condições booleanas em coleções.
 ```csharp
 // Verificações
@@ -139,9 +183,8 @@ bool contem = cidades.Contains("São Paulo");
 - All para validação total
 - Contains para verificar elemento específico
 
----
+##### 8️⃣ Particionamento (TAKE, SKIP, Paginação)
 
-### 8️⃣ Particionamento (TAKE, SKIP, Paginação)
 Divida sequências em partes menores.
 ```csharp
 // Paginação
@@ -157,9 +200,8 @@ var pagina = produtos
 - Implementação de paginação
 - Chunk para processamento em lotes
 
----
+##### 9️⃣ Operações de Conjunto
 
-### 9️⃣ Operações de Conjunto
 Trate coleções como conjuntos matemáticos.
 ```csharp
 // Operações de conjunto
@@ -174,25 +216,8 @@ var diferenca = lista1.Except(lista2);
 - Union, Intersect, Except
 - Concat vs Union
 
----
+##### 1️⃣1️⃣ Operações Avançadas
 
-### 🔟 Execução Adiada (Deferred Execution)
-Entenda como e quando as queries LINQ são executadas.
-```csharp
-// Execução adiada
-var query = numeros.Where(n => n > 5);  // NÃO executa
-var lista = query.ToList();             // Executa agora
-```
-
-**Conceitos**:
-- Lazy evaluation
-- Operadores imediatos vs adiados
-- ToList(), ToArray() para cache
-- Impacto em performance
-
----
-
-### 1️⃣1️⃣ Operações Avançadas
 Explore funcionalidades sofisticadas do LINQ.
 ```csharp
 // Operações avançadas
@@ -208,9 +233,8 @@ var lookup = produtos.ToLookup(p => p.Categoria);
 - Cast e OfType
 - SequenceEqual
 
----
+##### 1️⃣2️⃣ Casos de Uso Reais
 
-### 1️⃣2️⃣ Casos de Uso Reais
 Aplicações práticas em cenários empresariais.
 
 **Exemplos incluem**:
@@ -221,15 +245,12 @@ Aplicações práticas em cenários empresariais.
 - 🔔 Auditoria de estoque crítico
 - 📅 Análise temporal de pedidos
 
----
+##### Pré-requisitos
 
-## 🚀 Como Executar
-
-### Pré-requisitos
 - .NET 6.0 ou superior
 - Visual Studio, VS Code ou Rider
 
-### Executando o Projeto
+##### Executando o Projeto
 
 ```bash
 # Navegue até o diretório
@@ -241,17 +262,15 @@ dotnet run
 
 O programa apresentará um menu interativo onde você pode explorar cada demonstração passo a passo.
 
----
+##### Fundamentos
 
-## 🎓 O que Você Aprenderá
-
-### Fundamentos
 - ✅ Sintaxe básica do LINQ (Method e Query Syntax)
 - ✅ Expressões lambda e delegates
 - ✅ Diferença entre IEnumerable e IQueryable
 - ✅ Execução adiada vs execução imediata
 
-### Operadores LINQ
+##### Operadores LINQ
+
 - 🔍 **Filtragem**: Where, OfType
 - 🔄 **Projeção**: Select, SelectMany
 - 📊 **Ordenação**: OrderBy, ThenBy, Reverse
@@ -264,16 +283,7 @@ O programa apresentará um menu interativo onde você pode explorar cada demonst
 - 🎯 **Elemento**: First, Last, Single, ElementAt
 - 📝 **Geração**: Range, Repeat, Empty
 
-### Boas Práticas
-- 💡 Quando usar execução adiada vs imediata
-- 💡 Como evitar múltiplas execuções de queries caras
-- 💡 Quando usar ToList() ou ToArray()
-- 💡 Otimização de queries complexas
-- 💡 Legibilidade: Method Syntax vs Query Syntax
-
----
-
-## 📊 Estrutura do Código
+##### Estrutura do Código
 
 ```
 Linq/
@@ -288,7 +298,7 @@ Linq/
 └── Linq.csproj            # Arquivo de projeto
 ```
 
-### Classes de Modelo Utilizadas
+##### Classes de Modelo Utilizadas
 
 O projeto utiliza classes que simulam um sistema de e-commerce:
 
@@ -299,11 +309,7 @@ O projeto utiliza classes que simulam um sistema de e-commerce:
 - Funcionario  (Id, Nome, Cargo, Salario, GerenteId)
 ```
 
----
-
-## 💡 Dicas e Truques
-
-### 1. Method Syntax vs Query Syntax
+##### 1. Method Syntax vs Query Syntax
 
 **Method Syntax** (mais usado):
 ```csharp
@@ -323,9 +329,7 @@ var resultado = from p in produtos
 
 💡 **Recomendação**: Use Method Syntax na maioria dos casos. É mais flexível e permite encadear operações facilmente.
 
----
-
-### 2. Evite Múltiplas Iterações
+##### 2. Evite Múltiplas Iterações
 
 ❌ **Ruim** (executa a query 3 vezes):
 ```csharp
@@ -343,9 +347,7 @@ var primeiro = lista.First();
 var ultimo = lista.Last();
 ```
 
----
-
-### 3. Use FirstOrDefault para Evitar Exceções
+##### 3. Use FirstOrDefault para Evitar Exceções
 
 ❌ **Ruim** (lança exceção se não encontrar):
 ```csharp
@@ -361,9 +363,7 @@ if (produto != null)
 }
 ```
 
----
-
-### 4. Encadeie Operações para Maior Legibilidade
+##### 4. Encadeie Operações para Maior Legibilidade
 
 ✅ **Bom**:
 ```csharp
@@ -379,40 +379,30 @@ var resultado = produtos
     .Take(10);                          // Limitar
 ```
 
----
+##### Documentação Oficial
 
-## 🔗 Recursos Adicionais
-
-### Documentação Oficial
 - [LINQ (Language Integrated Query)](https://learn.microsoft.com/pt-br/dotnet/csharp/linq/)
 - [101 LINQ Samples](https://learn.microsoft.com/en-us/samples/dotnet/try-samples/101-linq-samples/)
 - [Standard Query Operators](https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview)
 
-### Artigos Recomendados
+##### Artigos Recomendados
+
 - [LINQ Performance Tips](https://learn.microsoft.com/en-us/dotnet/standard/linq/performance)
 - [Deferred vs Immediate Execution](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution)
 
----
-
-## 🤝 Contribuindo
+##### Contribuindo
 
 Este é um projeto didático. Sugestões de melhorias são bem-vindas!
 
----
-
-## 📝 Licença
+##### Licença
 
 Este projeto é fornecido como material educacional e pode ser usado livremente para aprendizado.
 
----
-
-## 👨‍💻 Autor
+##### Autor
 
 Desenvolvido como parte do repositório **CSharp-101** para ensino e aprendizado de C#.
 
----
-
-## 🎯 Próximos Passos
+##### Próximos Passos
 
 Após dominar este conteúdo, recomendamos explorar:
 
@@ -421,8 +411,6 @@ Após dominar este conteúdo, recomendamos explorar:
 3. **Parallel LINQ (PLINQ)** - LINQ paralelo para alta performance
 4. **Expression Trees** - Entenda como LINQ funciona internamente
 5. **IQueryable vs IEnumerable** - Otimização de queries em banco de dados
-
----
 
 <div align="center">
 
@@ -446,9 +434,8 @@ Após dominar este conteúdo, recomendamos explorar:
 4. **Operadores de Agrupamento**:
    - `GroupBy()`: Agrupa elementos por chave
 
-## 🎨 Operadores LINQ Essenciais
+##### Filtering (Filtragem)
 
-### Filtering (Filtragem)
 ```csharp
 // Where - filtragem condicional
 var adults = people.Where(p => p.Age >= 18);
@@ -461,7 +448,8 @@ var firstFive = items.Take(5);
 var skipFirst = items.Skip(10);
 ```
 
-### Projection (Projeção)
+##### Projection (Projeção)
+
 ```csharp
 // Select - transformação
 var names = people.Select(p => p.Name);
@@ -476,7 +464,8 @@ var summary = people.Select(p => new {
 var allPhones = people.SelectMany(p => p.PhoneNumbers);
 ```
 
-### Aggregation (Agregação)
+##### Aggregation (Agregação)
+
 ```csharp
 // Count, Sum, Average, Min, Max
 var totalAge = people.Sum(p => p.Age);
@@ -485,14 +474,16 @@ var oldestAge = people.Max(p => p.Age);
 var count = people.Count(p => p.Age > 30);
 ```
 
-### Joining (Junção)
+##### Joining (Junção)
+
 ```csharp
 var result = from person in people
              join address in addresses on person.Id equals address.PersonId
              select new { person.Name, address.City };
 ```
 
-### Grouping (Agrupamento)
+##### Grouping (Agrupamento)
+
 ```csharp
 var grouped = people.GroupBy(p => p.City)
                    .Select(g => new { 
@@ -501,9 +492,8 @@ var grouped = people.GroupBy(p => p.City)
                    });
 ```
 
-## 🏗️ Casos de Uso Práticos
+##### 1. Processamento de Dados
 
-### 1. Processamento de Dados
 ```csharp
 var result = orders
     .Where(o => o.Date >= DateTime.Today.AddDays(-30))
@@ -516,7 +506,8 @@ var result = orders
     .OrderByDescending(x => x.TotalAmount);
 ```
 
-### 2. Validação e Filtros
+##### 2. Validação e Filtros
+
 ```csharp
 var validEmails = contacts
     .Where(c => !string.IsNullOrEmpty(c.Email))
@@ -525,7 +516,8 @@ var validEmails = contacts
     .Distinct();
 ```
 
-### 3. Relatórios e Estatísticas
+##### 3. Relatórios e Estatísticas
+
 ```csharp
 var stats = sales
     .GroupBy(s => s.Date.Month)
@@ -539,9 +531,8 @@ var stats = sales
     });
 ```
 
-## 🔍 Pontos de Atenção
+##### Performance
 
-### Performance
 ```csharp
 // ❌ Múltiplas enumerações
 var data = GetData().Where(x => x.IsValid);
@@ -553,7 +544,8 @@ var data = GetData().Where(x => x.IsValid).ToList();
 var count = data.Count;
 ```
 
-### Null Handling
+##### Null Handling
+
 ```csharp
 // ❌ Pode gerar NullReferenceException
 var names = people.Select(p => p.Name.ToUpper());
@@ -564,7 +556,8 @@ var names = people
     .Select(p => p.Name.ToUpper());
 ```
 
-### Memory Usage
+##### Memory Usage
+
 ```csharp
 // Para grandes datasets, considere usar yield return
 public static IEnumerable<T> ProcessLargeDataset<T>(IEnumerable<T> source)
@@ -577,27 +570,34 @@ public static IEnumerable<T> ProcessLargeDataset<T>(IEnumerable<T> source)
 }
 ```
 
-## 🚀 LINQ Providers
+##### 1. LINQ to Objects
 
-### 1. LINQ to Objects
 Para coleções em memória (IEnumerable).
 
-### 2. LINQ to SQL / Entity Framework
+##### 2. LINQ to SQL / Entity Framework
+
 Para consultas em banco de dados.
 
-### 3. LINQ to XML
+##### 3. LINQ to XML
+
 Para manipulação de documentos XML.
 
-### 4. Parallel LINQ (PLINQ)
+##### 4. Parallel LINQ (PLINQ)
+
 ```csharp
 var result = numbers.AsParallel()
                    .Where(n => IsExpensiveOperation(n))
                    .Select(n => ProcessNumber(n));
 ```
 
-## 📚 Recursos Adicionais
+## Referências
 
 - [LINQ (Language-Integrated Query)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/)
 - [101 LINQ Samples](https://docs.microsoft.com/en-us/samples/dotnet/try-samples/101-linq-samples/)
 - [LINQ Performance Tips](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/query-execution)
 - [Artigo de referência](https://medium.com/@ravipatel.it/introduction-to-linq-in-c-26bf70607d14)
+
+## Documentação complementar
+
+- [ARQUITETURA.md](./ARQUITETURA.md) - Arquitetura do Projeto LINQ
+- [EXERCICIOS.md](./EXERCICIOS.md) - Exercícios Práticos de LINQ

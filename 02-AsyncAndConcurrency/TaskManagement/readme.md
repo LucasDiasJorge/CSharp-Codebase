@@ -1,6 +1,10 @@
 # Sistema de Gerenciamento de Tarefas
 
-## 📚 Conceitos Abordados
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a Sistema de Gerenciamento de Tarefas, com foco em assincronia, tasks, threads e coordenação de trabalho.
+
+## Conceitos abordados
 
 Este projeto demonstra um sistema completo de gerenciamento de tarefas usando .NET:
 
@@ -12,7 +16,7 @@ Este projeto demonstra um sistema completo de gerenciamento de tarefas usando .N
 - **LINQ**: Consultas e filtros de dados
 - **Repository Pattern**: Padrão de acesso a dados
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Modelar entidades de negócio complexas
 - Implementar operações CRUD completas
@@ -21,9 +25,45 @@ Este projeto demonstra um sistema completo de gerenciamento de tarefas usando .N
 - Gerenciar relacionamentos entre entidades
 - Implementar validações de negócio
 
-## 💡 Conceitos Importantes
+## Estrutura do projeto
 
-### Modelo de Tarefa
+```text
+TaskManagement/
++-- Enums/
+|   +-- TaskPriority.cs
+|   \-- TaskStatus.cs
++-- Migrations/
+|   +-- 20250224154635_InitialCreate.cs
+|   +-- 20250224154635_InitialCreate.Designer.cs
+|   \-- AppDbContextModelSnapshot.cs
++-- Models/
+|   \-- TaskModel.cs
++-- .gitignore
++-- AppDbContext.cs
++-- Program.cs
+\-- TaskManagement.csproj
+```
+
+## Como executar
+
+```bash
+dotnet run --project 02-AsyncAndConcurrency/TaskManagement/TaskManagement.csproj
+```
+
+### Setup com PostgreSQL
+
+Para integrar o **Entity Framework Core** com o PostgreSQL, você precisará seguir algumas etapas, incluindo a instalação de pacotes necessários, a configuração da conexão com o banco de dados e a criação de migrações.
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Modelo de Tarefa
+
 ```csharp
 public class TaskModel
 {
@@ -43,7 +83,8 @@ public class TaskModel
 }
 ```
 
-### Enums para Tipagem Forte
+##### Enums para Tipagem Forte
+
 ```csharp
 public enum TaskStatus
 {
@@ -62,7 +103,8 @@ public enum TaskPriority
 }
 ```
 
-### DbContext Configuration
+##### DbContext Configuration
+
 ```csharp
 public class AppDbContext : DbContext
 {
@@ -87,17 +129,8 @@ public class AppDbContext : DbContext
 }
 ```
 
-## 🚀 Como Executar
+##### Operações CRUD Completas
 
-```bash
-cd TaskManagement
-dotnet ef database update  # Criar/atualizar banco
-dotnet run
-```
-
-## 📋 Funcionalidades
-
-### Operações CRUD Completas
 - ✅ Criar novas tarefas
 - ✅ Listar tarefas com filtros
 - ✅ Atualizar status e prioridades
@@ -105,24 +138,21 @@ dotnet run
 - ✅ Relatórios por categoria
 - ✅ Métricas de produtividade
 
-### Filtros Avançados
+##### Filtros Avançados
+
 - Status (Pendente, Em Progresso, Concluída)
 - Prioridade (Baixa, Média, Alta, Crítica)
 - Categoria de trabalho
 - Intervalo de datas de vencimento
 - Tarefas em atraso
 
-## 📖 Setup com PostgreSQL
-
-Para integrar o **Entity Framework Core** com o PostgreSQL, você precisará seguir algumas etapas, incluindo a instalação de pacotes necessários, a configuração da conexão com o banco de dados e a criação de migrações.
-
-### 1. Instalar os Pacotes Necessários
+##### 1. Instalar os Pacotes Necessários
 
 ```bash
 dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 ```
 
-### 2. **Configurar o `DbContext`**
+##### 2. **Configurar o `DbContext`**
 
 No seu projeto, você precisa configurar o `DbContext` para usar o PostgreSQL. O `DbContext` é a classe que representa o banco de dados e permite realizar operações CRUD.
 
@@ -159,7 +189,7 @@ namespace TaskManagement
 - **Connection String**: Substitua `yourusername` e `yourpassword` pelos valores corretos de conexão com seu banco de dados PostgreSQL.
 - O método `OnModelCreating` define o tipo de coluna para `DueDate` como `timestamp with time zone` para garantir que os valores de data sejam salvos corretamente no banco.
 
-### 3. **Criar a Classe de Modelo `TaskModel`**
+##### 3. **Criar a Classe de Modelo `TaskModel`**
 
 A classe de modelo representa as tabelas no banco de dados. Crie o arquivo `TaskModel.cs` com o seguinte conteúdo:
 
@@ -194,7 +224,7 @@ namespace TaskManagement.Models
 }
 ```
 
-### 4. **Configurar as Migrations**
+##### 4. **Configurar as Migrations**
 
 Para criar e aplicar as migrações ao banco de dados, você precisa primeiro gerar a migração usando o comando do **Entity Framework Core**. Execute o seguinte comando:
 
@@ -210,7 +240,7 @@ dotnet ef database update
 
 Esses dois comandos irão criar a tabela `Tasks` no banco de dados PostgreSQL conforme a estrutura definida no `DbContext` e no modelo `TaskModel`.
 
-### 5. **Conectar e Usar o Banco de Dados**
+##### 5. **Conectar e Usar o Banco de Dados**
 
 Depois de ter configurado o `DbContext`, você pode realizar operações de CRUD no banco de dados. Aqui está um exemplo de como adicionar e listar tarefas no banco de dados:
 
@@ -254,13 +284,13 @@ class Program
 }
 ```
 
-### 6. **Alternativa: Modo de Migração Manual**
+##### 6. **Alternativa: Modo de Migração Manual**
 
 Se você não quiser usar as ferramentas de migração diretamente no código, você pode criar o banco de dados manualmente com um script SQL, mas usar o **Entity Framework Core** para manipular as operações de dados.
 
 No caso de migrações manuais, seria necessário criar a tabela e suas colunas usando um script SQL diretamente no PostgreSQL, mas isso é menos flexível em termos de desenvolvimento contínuo e manutenção do banco de dados.
 
-### Resumo:
+##### Resumo:
 
 1. Instale o pacote `Npgsql.EntityFrameworkCore.PostgreSQL`.
 2. Configure o `DbContext` para usar PostgreSQL com uma string de conexão adequada.

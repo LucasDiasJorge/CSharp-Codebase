@@ -1,19 +1,60 @@
 # Domínio Rico (Rich Domain)
 
-## ✅ O que é Domínio Rico?
+## Visão geral
 
 Domínio Rico é um padrão onde as classes de domínio encapsulam tanto **dados** quanto **comportamento**, mantendo a lógica de negócio próxima aos dados que ela manipula.
 
-## 🎯 Características Principais
+## Conceitos abordados
 
-### 1. Encapsulamento Forte
+- **Entities**: Order tem identidade (Id)
+- **Value Objects**: OrderItem poderia ser VO
+- **Invariants**: Sempre em estado válido
+- **Factory Methods**: Create()
+- **Aggregates**: Order é raiz, Items são filhos
+- **Encapsulation**: Setters privados, coleções read-only
+
+## Objetivos de aprendizagem
+
+- Entender como Domínio Rico (Rich Domain) se aplica em um cenário prático de design patterns, modelagem OO e código limpo.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+RichDomain/
++-- Models/
+|   \-- Order.cs
++-- Services/
+|   \-- OrderApplicationService.cs
++-- Program.cs
+\-- RichDomain.csproj
+```
+
+## Como executar
+
+```bash
+dotnet run --project 07-DesignPatterns/RichVsAnemicDomain/RichDomain/RichDomain.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### 1. Encapsulamento Forte
+
 ```csharp
 public decimal Total { get; private set; } // ✅ Setter privado
 private readonly List<OrderItem> _items = new();
 public IReadOnlyCollection<OrderItem> Items => _items.AsReadOnly(); // ✅ Read-only
 ```
 
-### 2. Auto-Validação
+##### 2. Auto-Validação
+
 ```csharp
 public static Order Create(string customerName)
 {
@@ -24,7 +65,8 @@ public static Order Create(string customerName)
 }
 ```
 
-### 3. Comportamento no Domínio
+##### 3. Comportamento no Domínio
+
 ```csharp
 public void AddItem(string productName, int quantity, decimal unitPrice)
 {
@@ -34,14 +76,7 @@ public void AddItem(string productName, int quantity, decimal unitPrice)
 }
 ```
 
-## 🏃 Como Executar
-
-```bash
-cd RichDomain
-dotnet run
-```
-
-## 📝 Estrutura
+##### Estrutura
 
 ```
 RichDomain/
@@ -53,7 +88,7 @@ RichDomain/
 └── Program.cs
 ```
 
-## 🎯 Principais Vantagens
+##### Principais Vantagens
 
 | Vantagem | Descrição | Exemplo |
 |----------|-----------|---------|
@@ -63,7 +98,7 @@ RichDomain/
 | **Cálculos** | Sempre consistentes | `Total` calculado auto |
 | **Testabilidade** | Testa sem mocks | Unidade pura |
 
-## ✅ Código Correto
+##### Código Correto
 
 ```csharp
 // Modelo Rico - dados + comportamento
@@ -92,7 +127,7 @@ public class OrderApplicationService
 }
 ```
 
-## 🔍 O que Observar
+##### O que Observar
 
 1. **Models/Order.cs**: 
    - Setters privados
@@ -112,9 +147,8 @@ public class OrderApplicationService
    - Impossível criar estados inválidos
    - Total sempre consistente
 
-## 💡 Princípios Aplicados
+##### 1. Tell, Don't Ask
 
-### 1. Tell, Don't Ask
 ```csharp
 // ❌ Anêmico - ASK
 if (order.Status == OrderStatus.Pending)
@@ -124,7 +158,8 @@ if (order.Status == OrderStatus.Pending)
 order.Process(); // Sabe como se processar
 ```
 
-### 2. Information Expert
+##### 2. Information Expert
+
 ```csharp
 // ✅ Quem tem os dados, tem a lógica
 public class Order
@@ -133,7 +168,8 @@ public class Order
 }
 ```
 
-### 3. Fail Fast
+##### 3. Fail Fast
+
 ```csharp
 // ✅ Valida no construtor/factory
 public static Order Create(string name)
@@ -143,7 +179,7 @@ public static Order Create(string name)
 }
 ```
 
-## 🧪 Testabilidade
+##### Testabilidade
 
 ```csharp
 [Test]
@@ -163,16 +199,7 @@ public void Should_Calculate_Total_With_Discount()
 }
 ```
 
-## 📚 Conceitos de DDD Aplicados
-
-- **Entities**: Order tem identidade (Id)
-- **Value Objects**: OrderItem poderia ser VO
-- **Invariants**: Sempre em estado válido
-- **Factory Methods**: Create()
-- **Aggregates**: Order é raiz, Items são filhos
-- **Encapsulation**: Setters privados, coleções read-only
-
-## 💭 Por que é Bom?
+##### Por que é Bom?
 
 > "The fundamental horror of [anemic domain model] is that it's so contrary to the basic idea of object-oriented design; which is to combine data and process together."
 > 
@@ -180,7 +207,7 @@ public void Should_Calculate_Total_With_Discount()
 
 Domínio Rico **resolve** isso mantendo dados e processos juntos!
 
-## 🎓 Quando Usar
+##### Quando Usar
 
 - ✅ Aplicações com lógica de negócio complexa
 - ✅ Projetos de longo prazo
@@ -189,11 +216,11 @@ Domínio Rico **resolve** isso mantendo dados e processos juntos!
 - ✅ Quando quer testabilidade máxima
 - ✅ Quando quer manutenibilidade
 
-## 🔄 Comparação com Anêmico
+##### Comparação com Anêmico
 
 Veja o arquivo [COMPARISON.md](../COMPARISON.md) para comparação lado a lado!
 
-## 📚 Referências
+## Referências
 
 - Fowler, Martin. [Anemic Domain Model](https://martinfowler.com/bliki/AnemicDomainModel.html)
 - Vernon, Vaughn. *Implementing Domain-Driven Design*. Addison-Wesley, 2013.

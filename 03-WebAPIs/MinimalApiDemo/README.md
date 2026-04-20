@@ -1,6 +1,10 @@
 # Minimal API Demo
 
-## 📚 Conceitos Abordados
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a Minimal API Demo, com foco em ASP.NET Core, contratos HTTP e pipeline web.
+
+## Conceitos abordados
 
 Este projeto demonstra o uso de Minimal APIs em .NET, incluindo:
 
@@ -12,7 +16,7 @@ Este projeto demonstra o uso de Minimal APIs em .NET, incluindo:
 - **CORS**: Configuração de Cross-Origin Resource Sharing
 - **Actuators**: Endpoints de monitoramento e métricas
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Criar APIs simples e eficientes
 - Configurar endpoints sem controllers tradicionais
@@ -21,60 +25,7 @@ Este projeto demonstra o uso de Minimal APIs em .NET, incluindo:
 - Configurar CORS para aplicações client-side
 - Usar actuators para observabilidade
 
-## 💡 Conceitos Importantes
-
-### Minimal API Endpoints
-```csharp
-app.MapGet("/products", (ApplicationDbContext db) => 
-    db.Products.ToList());
-
-app.MapPost("/products", (Product product, ApplicationDbContext db) =>
-{
-    db.Products.Add(product);
-    db.SaveChanges();
-    return Results.Created($"/products/{product.Id}", product);
-});
-```
-
-### Health Checks
-```csharp
-builder.Services.AddHealthChecks()
-    .AddDbContext<ApplicationDbContext>();
-
-app.MapHealthChecks("/health");
-```
-
-### CORS Configuration
-```csharp
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("_myAllowAllOrigins", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
-    });
-});
-```
-
-## 🚀 Como Executar
-
-```bash
-cd MinimalApiDemo
-dotnet run
-```
-
-## 📋 Endpoints Disponíveis
-
-- `GET /products` - Listar todos os produtos
-- `POST /products` - Criar novo produto
-- `GET /products/{id}` - Obter produto por ID
-- `PUT /products/{id}` - Atualizar produto
-- `DELETE /products/{id}` - Deletar produto
-- `GET /health` - Health check da aplicação
-- `GET /actuator/*` - Endpoints de monitoramento
-
-## 📖 O que Você Aprenderá
+### O que Você Aprenderá
 
 1. **Minimal APIs vs Controllers**:
    - Menos boilerplate code
@@ -99,9 +50,87 @@ dotnet run
    - Ordem de execução
    - Custom middleware
 
-## 🎨 Padrões de Implementação
+## Estrutura do projeto
 
-### 1. CRUD Operations
+```text
+MinimalApiDemo/
++-- Annotations/
+|   \-- ProductPriceAttribute.cs
++-- Models/
+|   \-- Product.cs
++-- Properties/
+|   \-- launchSettings.json
++-- ApplicationDbContext.cs
++-- appsettings.Development.json
++-- appsettings.json
++-- MinimalApiDemo.csproj
++-- MinimalApiDemo.csproj.user
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet run --project 03-WebAPIs/MinimalApiDemo/MinimalApiDemo.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Minimal API Endpoints
+
+```csharp
+app.MapGet("/products", (ApplicationDbContext db) => 
+    db.Products.ToList());
+
+app.MapPost("/products", (Product product, ApplicationDbContext db) =>
+{
+    db.Products.Add(product);
+    db.SaveChanges();
+    return Results.Created($"/products/{product.Id}", product);
+});
+```
+
+##### Health Checks
+
+```csharp
+builder.Services.AddHealthChecks()
+    .AddDbContext<ApplicationDbContext>();
+
+app.MapHealthChecks("/health");
+```
+
+##### CORS Configuration
+
+```csharp
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("_myAllowAllOrigins", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+```
+
+##### Endpoints Disponíveis
+
+- `GET /products` - Listar todos os produtos
+- `POST /products` - Criar novo produto
+- `GET /products/{id}` - Obter produto por ID
+- `PUT /products/{id}` - Atualizar produto
+- `DELETE /products/{id}` - Deletar produto
+- `GET /health` - Health check da aplicação
+- `GET /actuator/*` - Endpoints de monitoramento
+
+##### 1. CRUD Operations
+
 ```csharp
 var group = app.MapGroup("/api/products");
 
@@ -124,7 +153,8 @@ static async Task<IResult> GetProductById(int id, ApplicationDbContext db)
 }
 ```
 
-### 2. Validation
+##### 2. Validation
+
 ```csharp
 app.MapPost("/products", async (Product product, ApplicationDbContext db) =>
 {
@@ -141,7 +171,8 @@ app.MapPost("/products", async (Product product, ApplicationDbContext db) =>
 });
 ```
 
-### 3. Route Groups
+##### 3. Route Groups
+
 ```csharp
 var api = app.MapGroup("/api/v1");
 
@@ -154,7 +185,8 @@ users.MapGet("/", GetUsers);
 users.MapPost("/", CreateUser);
 ```
 
-### 4. Authentication
+##### 4. Authentication
+
 ```csharp
 var secured = app.MapGroup("/api/secure")
                 .RequireAuthorization();
@@ -165,9 +197,8 @@ secured.MapGet("/profile", (ClaimsPrincipal user) =>
 });
 ```
 
-## 🏗️ Configuração Avançada
+##### 1. OpenAPI/Swagger
 
-### 1. OpenAPI/Swagger
 ```csharp
 app.MapPost("/products", CreateProduct)
    .WithName("CreateProduct")
@@ -176,7 +207,8 @@ app.MapPost("/products", CreateProduct)
    .ProducesProblem(400);
 ```
 
-### 2. Rate Limiting
+##### 2. Rate Limiting
+
 ```csharp
 builder.Services.AddRateLimiter(options =>
 {
@@ -192,15 +224,15 @@ builder.Services.AddRateLimiter(options =>
 });
 ```
 
-### 3. Response Caching
+##### 3. Response Caching
+
 ```csharp
 app.MapGet("/products", GetProducts)
    .CacheOutput(policy => policy.Expire(TimeSpan.FromMinutes(5)));
 ```
 
-## 🔍 Pontos de Atenção
+##### Performance
 
-### Performance
 ```csharp
 // ✅ Use async/await para operações I/O
 app.MapGet("/products", async (ApplicationDbContext db) =>
@@ -212,7 +244,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         sqlOptions => sqlOptions.EnableRetryOnFailure()));
 ```
 
-### Error Handling
+##### Error Handling
+
 ```csharp
 app.UseExceptionHandler(exceptionHandlerApp =>
 {
@@ -233,7 +266,8 @@ app.UseExceptionHandler(exceptionHandlerApp =>
 });
 ```
 
-### Security
+##### Security
+
 ```csharp
 // HTTPS redirection
 app.UseHttpsRedirection();
@@ -248,9 +282,8 @@ app.Use(async (context, next) =>
 });
 ```
 
-## 🚀 Monitoramento e Observabilidade
+##### Health Checks
 
-### Health Checks
 ```csharp
 builder.Services.AddHealthChecks()
     .AddDbContext<ApplicationDbContext>()
@@ -262,7 +295,8 @@ app.MapHealthChecks("/health", new HealthCheckOptions
 });
 ```
 
-### Metrics
+##### Metrics
+
 ```csharp
 builder.Services.AddSingleton<IMetrics, Metrics>();
 
@@ -272,7 +306,7 @@ app.MapGet("/metrics", (IMetrics metrics) =>
 });
 ```
 
-## 📚 Recursos Adicionais
+## Referências
 
 - [Minimal APIs in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis)
 - [Health checks in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks)

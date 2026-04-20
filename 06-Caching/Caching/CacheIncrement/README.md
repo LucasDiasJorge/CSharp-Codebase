@@ -1,9 +1,7 @@
-<!-- README padronizado (versão condensada) -->
 # CacheIncrement (Contadores de Alta Performance)
 
-API ASP.NET Core (.NET 9) demonstrando padrão de contadores de alta escala: incrementos atômicos ultra-rápidos no Redis com sincronização periódica para MySQL, garantindo performance e durabilidade. Padrão usado por sistemas como Facebook, YouTube e Twitter.
+## Visão geral
 
-## 1. Visão Geral
 Arquitetura em duas camadas:
 - **Redis** (camada rápida): operações `INCR` atômicas com latência sub-milissegundo
 - **MySQL** (camada durável): persistência periódica via background service
@@ -11,14 +9,71 @@ Arquitetura em duas camadas:
 
 Benefícios: throughput massivo (100k+ ops/s no Redis), garantia de durabilidade, recuperação após restart, histórico com timestamps.
 
-## 2. Objetivos Didáticos
+## Conceitos abordados
+
+- Exemplo didático sobre CacheIncrement (Contadores de Alta Performance) no contexto de estratégias de cache e integração com Redis.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
 - Demonstrar separação entre camada de velocidade e camada de persistência
 - Ilustrar operações atômicas do Redis (`INCR`)
 - Mostrar background service para sync automático
 - Evidenciar monitoramento de status (Redis vs MySQL)
 - Preparar para cenários de contadores, rate limiting, analytics em tempo real
 
-## 3. Estrutura Principal
+## Estrutura do projeto
+
+```text
+CacheIncrement/
++-- Controllers/
+|   \-- CounterController.cs
++-- Data/
+|   \-- ApplicationDbContext.cs
++-- Interfaces/
+|   \-- ICounterService.cs
++-- Models/
+|   +-- Counter.cs
+|   \-- CounterResponse.cs
++-- Properties/
+|   \-- launchSettings.json
++-- Services/
+|   +-- CounterService.cs
+|   \-- CounterSyncService.cs
++-- appsettings.Development.json
++-- appsettings.json
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet run --project 06-Caching/Caching/CacheIncrement/CacheIncrement.csproj
+```
+
+Swagger: `https://localhost:5001` (ou porta atribuída).
+
+## Boas práticas e pontos de atenção
+
+- Operações atômicas do Redis (thread-safe por design)
+- Background service registrado como `IHostedService`
+- Logging estruturado de sync e incrementos
+- Health check para monitoramento
+- Separação clara entre camadas rápida e durável
+- Configuração externalizada (appsettings)
+
+### 12. Pontos de Atenção
+
+- Falha antes do sync = perda de contagem (mitigar com Redis persistence `RDB`/`AOF`)
+- Múltiplas instâncias da API devem compartilhar mesmo Redis
+- Intervalo de sync muito curto = pressão em MySQL; muito longo = risco de perda
+- Monitorar diferença Redis vs MySQL para detectar problemas de sync
+
+## Conteúdo complementar
+
+##### 3. Estrutura Principal
+
 ```
 CacheIncrement/
   Controllers/ (CounterController)
@@ -30,12 +85,14 @@ CacheIncrement/
   docker-compose.yml (setup de infra)
 ```
 
-## 4. Pré-requisitos
+##### 4. Pré-requisitos
+
 - **.NET 9 SDK** (via props global)
 - **MySQL** (localhost:3306 ou Docker)
 - **Redis** (localhost:6379 ou Docker)
 
-### Subir Infraestrutura (Docker)
+##### Subir Infraestrutura (Docker)
+
 ```powershell
 docker run -d --name redis -p 6379:6379 redis
 docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=senha123 -p 3306:3306 mysql:8
@@ -46,7 +103,7 @@ Ou usar `docker-compose.yml` do projeto:
 docker-compose up -d
 ```
 
-## 5. Configuração
+##### 5. Configuração
 
 Editar `appsettings.json`:
 ```json
@@ -66,15 +123,7 @@ Criar banco de dados:
 CREATE DATABASE CacheIncrementDb;
 ```
 
-## 6. Execução Rápida
-```powershell
-cd "C:\Users\Lucas Jorge\Documents\Default Projects\Back\CSharp-101\Caching\CacheIncrement"
-dotnet restore
-dotnet run
-```
-Swagger: `https://localhost:5001` (ou porta atribuída).
-
-## 7. Endpoints Principais
+##### 7. Endpoints Principais
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
@@ -86,7 +135,8 @@ Swagger: `https://localhost:5001` (ou porta atribuída).
 | GET | `/api/counter/mysql/all` | Lista todos os contadores persistidos |
 | GET | `/api/counter/health` | Health check |
 
-### Exemplos de Uso
+##### Exemplos de Uso
+
 ```powershell
 # Incrementar contador
 curl -X POST "http://localhost:5000/api/counter/page_views/increment"
@@ -104,9 +154,8 @@ curl "http://localhost:5000/api/counter/page_views/sync-status"
 curl -X POST "http://localhost:5000/api/counter/page_views/sync"
 ```
 
-## 8. Fluxo de Operação
+##### Incremento (Pseudo)
 
-### Incremento (Pseudo)
 ```csharp
 public async Task<long> IncrementAsync(string counterId, long incrementBy)
 {
@@ -116,7 +165,8 @@ public async Task<long> IncrementAsync(string counterId, long incrementBy)
 }
 ```
 
-### Background Sync (Periódico)
+##### Background Sync (Periódico)
+
 ```csharp
 protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 {
@@ -128,15 +178,8 @@ protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 }
 ```
 
-## 9. Boas Práticas Aplicadas
-- Operações atômicas do Redis (thread-safe por design)
-- Background service registrado como `IHostedService`
-- Logging estruturado de sync e incrementos
-- Health check para monitoramento
-- Separação clara entre camadas rápida e durável
-- Configuração externalizada (appsettings)
+##### 10. Casos de Uso
 
-## 10. Casos de Uso
 - Contadores de visualizações de página
 - Sistemas de likes/upvotes
 - Rate limiting (contagem de requisições)
@@ -144,7 +187,8 @@ protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 - Tracking de atividade de usuário
 - Leaderboards de jogos
 
-## 11. Performance
+##### 11. Performance
+
 | Camada | Latência | Throughput | Durabilidade |
 |--------|----------|------------|--------------|
 | Redis | < 1ms | 100k+ ops/s | Volátil (configurável) |
@@ -152,20 +196,16 @@ protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 
 Estratégia: aceitar latência eventual (1-5min) entre Redis e MySQL em troca de performance massiva.
 
-## 12. Pontos de Atenção
-- Falha antes do sync = perda de contagem (mitigar com Redis persistence `RDB`/`AOF`)
-- Múltiplas instâncias da API devem compartilhar mesmo Redis
-- Intervalo de sync muito curto = pressão em MySQL; muito longo = risco de perda
-- Monitorar diferença Redis vs MySQL para detectar problemas de sync
+##### 13. Extensões Futuras
 
-## 13. Extensões Futuras
 - Redis Cluster para alta disponibilidade
 - MySQL read replicas para consultas históricas
 - Métricas Prometheus (hit rate, sync lag, latência)
 - Circuit breaker para falhas de MySQL
 - Implementar compaction (merge de contadores antigos)
 
-## 14. Troubleshooting
+##### 14. Troubleshooting
+
 ```powershell
 # Verificar Redis
 redis-cli ping  # Deve retornar PONG
@@ -177,14 +217,17 @@ mysql -u root -p -e "SHOW DATABASES;"
 # Console exibe status de conexão e sincronizações
 ```
 
-## 15. Referências
+##### 16. Aprendizados Esperados
+
+Após estudar: compreender trade-offs entre velocidade e durabilidade, implementar contadores de alta escala, configurar sync periódico, monitorar consistência entre camadas.
+
+## Referências
+
 - Redis INCR command (redis.io)
 - Background services (.NET IHostedService)
 - StackExchange.Redis docs
 - High-performance counters patterns
 
-## 16. Aprendizados Esperados
-Após estudar: compreender trade-offs entre velocidade e durabilidade, implementar contadores de alta escala, configurar sync periódico, monitorar consistência entre camadas.
+## Documentação complementar
 
----
-Material versão condensada padronizada com demais projetos do repositório.
+- [instructions.md](./instructions.md) - ✅ fast **in-memory counters** (e.g., Redis `INCR`)

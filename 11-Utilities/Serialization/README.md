@@ -1,6 +1,16 @@
-# 🔄 Serialization - Técnicas de Serialização e Exception Handling
+# Serialization - Técnicas de Serialização e Exception Handling
 
-## 🎯 Objetivos de Aprendizado
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a Serialization - Técnicas de Serialização e Exception Handling, com foco em utilitários, transformação de dados e observabilidade.
+
+## Conceitos abordados
+
+- Exemplo didático sobre Serialization - Técnicas de Serialização e Exception Handling no contexto de utilitários, transformação de dados e observabilidade.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
 
 - Dominar **diferentes tipos de serialização** em .NET
 - Comparar **Binary**, **JSON**, **XML** e **MessagePack**
@@ -9,9 +19,30 @@
 - Aplicar **melhores práticas** de tratamento de erros
 - Avaliar **performance** entre formatos de serialização
 
-## 📚 Conceitos Fundamentais
+## Estrutura do projeto
 
-### Tipos de Serialização
+```text
+Serialization/
++-- Pessoa.cs
++-- Program.cs
+\-- Serialization.csproj
+```
+
+## Como executar
+
+```bash
+dotnet run --project 11-Utilities/Serialization/Serialization.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Tipos de Serialização
 
 | Formato | Uso | Vantagens | Desvantagens |
 |---------|-----|-----------|--------------|
@@ -20,14 +51,14 @@
 | **XML** | Sistemas legados | 📋 Estruturado, validável | 🐌 Verboso, lento |
 | **MessagePack** | Performance crítica | ⚡ Muito rápido, compacto | 🔧 Menos suporte |
 
-### Exception Handling Patterns
+##### Exception Handling Patterns
 
 - **Catch and Handle**: Trata a exceção localmente
 - **Catch and Rethrow**: Adiciona contexto e repropaga
 - **Catch and Wrap**: Encapsula em exceção mais específica
 - **Let it Bubble**: Deixa exceção subir para camadas superiores
 
-## 🏗️ Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```
 Serialization/
@@ -39,9 +70,7 @@ Serialization/
 └── README.md
 ```
 
-## 💡 Exemplos Práticos
-
-### 1. Modelos para Serialização
+##### 1. Modelos para Serialização
 
 ```csharp
 [Serializable]
@@ -68,7 +97,7 @@ public class Person
 }
 ```
 
-### 2. Serialização JSON (System.Text.Json)
+##### 2. Serialização JSON (System.Text.Json)
 
 ```csharp
 public class JsonSerializationService
@@ -131,7 +160,7 @@ public class JsonSerializationService
 }
 ```
 
-### 3. Serialização XML
+##### 3. Serialização XML
 
 ```csharp
 public class XmlSerializationService
@@ -176,7 +205,7 @@ public class XmlSerializationService
 }
 ```
 
-### 4. Serialização MessagePack
+##### 4. Serialização MessagePack
 
 ```csharp
 public class MessagePackSerializationService
@@ -228,7 +257,7 @@ public class MessagePackSerializationService
 }
 ```
 
-### 5. Exception Handling Patterns
+##### 5. Exception Handling Patterns
 
 ```csharp
 public class ExceptionHandlingExamples
@@ -319,7 +348,7 @@ public class ExceptionHandlingExamples
 }
 ```
 
-### 6. Exception Handling com Logging
+##### 6. Exception Handling com Logging
 
 ```csharp
 public class LoggingExceptionHandler
@@ -364,9 +393,7 @@ public class LoggingExceptionHandler
 }
 ```
 
-## 🚀 Configuração e Execução
-
-### 1. Dependências necessárias
+##### 1. Dependências necessárias
 
 ```xml
 <PackageReference Include="MessagePack" Version="2.5.108" />
@@ -374,20 +401,7 @@ public class LoggingExceptionHandler
 <PackageReference Include="System.Text.Json" Version="8.0.0" />
 ```
 
-### 2. Executar o Projeto
-
-```bash
-# Navegar para o diretório
-cd Serialization
-
-# Restaurar dependências
-dotnet restore
-
-# Executar a aplicação
-dotnet run
-```
-
-### 3. Teste de Performance
+##### 3. Teste de Performance
 
 ```csharp
 public class SerializationBenchmark
@@ -440,9 +454,7 @@ public class SerializationBenchmark
 }
 ```
 
-## 💯 Melhores Práticas
-
-### ✅ Exception Handling
+##### Exception Handling
 
 1. **Use 'throw' não 'throw ex'** para preservar stack trace
 2. **Catch exceções específicas** primeiro, genéricas por último
@@ -450,7 +462,7 @@ public class SerializationBenchmark
 4. **Use try patterns** quando apropriado
 5. **Implemente retry** para operações transientes
 
-### ✅ Serialização
+##### Serialização
 
 1. **Escolha formato apropriado** para o caso de uso
 2. **Configure opções uma vez** e reutilize
@@ -458,7 +470,7 @@ public class SerializationBenchmark
 4. **Use async** para I/O operations
 5. **Trate encoding** adequadamente (UTF-8 padrão)
 
-### ❌ Evitar
+##### Evitar
 
 1. **Catch Exception** genérico sem motivo específico
 2. **Engolir exceções** sem logging
@@ -466,7 +478,7 @@ public class SerializationBenchmark
 4. **Misturar formatos** sem necessidade
 5. **Serializar dados sensíveis** sem criptografia
 
-## 🔍 Comparação de Performance
+##### Comparação de Performance
 
 | Métrica | JSON | XML | MessagePack | Binary* |
 |---------|------|-----|------------|---------|
@@ -478,7 +490,7 @@ public class SerializationBenchmark
 
 *Binary = BinaryFormatter (obsoleto)
 
-## 📋 Exercícios Práticos
+##### Exercícios Práticos
 
 1. **Benchmark Comparison**: Compare performance de todos os formatos
 2. **Custom Converters**: Implemente conversores customizados
@@ -486,13 +498,11 @@ public class SerializationBenchmark
 4. **Encryption**: Combine serialização com criptografia
 5. **Compression**: Adicione compressão aos dados serializados
 
-## 🔗 Recursos Adicionais
+## Referências
 
 - [System.Text.Json Documentation](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview)
 - [MessagePack for C#](https://github.com/neuecc/MessagePack-CSharp)
 - [Exception Handling Best Practices](https://docs.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions)
 - [Serialization Security](https://docs.microsoft.com/en-us/dotnet/standard/serialization/security)
-
----
 
 💡 **Dica**: A escolha do formato de serialização depende dos requisitos: JSON para APIs web, MessagePack para performance crítica, XML para sistemas legados que requerem validação de schema!

@@ -1,6 +1,16 @@
-﻿# � ClassToDTO - Data Transfer Objects (DTOs)
+# ClassToDTO - Data Transfer Objects (DTOs)
 
-## 🎯 Objetivos de Aprendizado
+## Visão geral
+
+**Data Transfer Objects (DTOs)** são objetos simples que transportam dados entre diferentes camadas da aplicação ou sistemas externos. Eles servem como contratos de dados que definem exatamente quais informações serão transferidas.
+
+## Conceitos abordados
+
+- Exemplo didático sobre ClassToDTO - Data Transfer Objects (DTOs) no contexto de utilitários, transformação de dados e observabilidade.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
 
 - Entender o padrão **Data Transfer Object (DTO)**
 - Implementar transformação de **entidades de domínio** para **DTOs**
@@ -9,13 +19,43 @@
 - Controlar exposição de dados sensíveis
 - Otimizar performance reduzindo over-fetching
 
-## 📚 Conceitos Fundamentais
+## Estrutura do projeto
 
-### O que são DTOs?
+```text
+ClassToDTO/
++-- ClassToDTO/
++-- Properties/
+|   \-- launchSettings.json
++-- src/
+|   +-- Controllers/
+|   +-- Db/
+|   +-- DTO/
+|   \-- Models/
++-- .gitignore
++-- appsettings.Development.json
++-- appsettings.json
++-- ClassToDTO.csproj
++-- ClassToDTO.csproj.user
+\-- ...
+```
 
-**Data Transfer Objects (DTOs)** são objetos simples que transportam dados entre diferentes camadas da aplicação ou sistemas externos. Eles servem como contratos de dados que definem exatamente quais informações serão transferidas.
+## Como executar
 
-### Por que usar DTOs?
+```bash
+dotnet run --project 11-Utilities/ClassToDTO/ClassToDTO.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+1. **Nomes descritivos**: Use sufixo "DTO" ou prefixos como "Create", "Update"
+2. **Validação**: Aplique validações nos DTOs de input
+3. **Versionamento**: Mantenha diferentes versões de DTOs para compatibilidade
+4. **Documentação**: Use XML docs ou Swagger para documentar DTOs
+5. **Imutabilidade**: Quando possível, torne DTOs imutáveis
+
+## Conteúdo complementar
+
+##### Por que usar DTOs?
 
 - **🔒 Segurança**: Controla quais dados são expostos
 - **📡 Performance**: Reduz a quantidade de dados transferidos
@@ -23,7 +63,7 @@
 - **🛡️ Isolamento**: Protege o modelo de domínio de mudanças externas
 - **📋 Contratos claros**: Define interface específica para cada uso
 
-## 🏗️ Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```
 ClassToDTO/
@@ -39,9 +79,7 @@ ClassToDTO/
 └── README.md
 ```
 
-## � Exemplos Práticos
-
-### 1. Entidade de Domínio (Model)
+##### 1. Entidade de Domínio (Model)
 
 ```csharp
 // Models/Customer.cs
@@ -66,7 +104,7 @@ public class Order
 }
 ```
 
-### 2. DTO (Data Transfer Object)
+##### 2. DTO (Data Transfer Object)
 
 ```csharp
 // DTO/OrderDTO.cs
@@ -90,7 +128,7 @@ public class CustomerDTO
 }
 ```
 
-### 3. Mapeamento Manual
+##### 3. Mapeamento Manual
 
 ```csharp
 // Controlador ou Service
@@ -118,7 +156,7 @@ public class OrderService
 }
 ```
 
-### 4. Mapeamento com AutoMapper
+##### 4. Mapeamento com AutoMapper
 
 ```csharp
 // Profile de mapeamento
@@ -163,15 +201,13 @@ public class OrdersController : ControllerBase
 }
 ```
 
-## 🚀 Configuração e Execução
-
-### 1. Pré-requisitos
+##### 1. Pré-requisitos
 
 - .NET 8 SDK
 - PostgreSQL instalado e rodando
 - Ferramenta de cliente de banco (pgAdmin, DBeaver, etc.)
 
-### 2. Configuração do Banco
+##### 2. Configuração do Banco
 
 ```sql
 -- Criar banco de dados
@@ -180,23 +216,7 @@ CREATE DATABASE csharp_db;
 -- Tabelas serão criadas via EF Migrations
 ```
 
-### 3. Executar o Projeto
-
-```bash
-# Navegar para o diretório
-cd ClassToDTO
-
-# Restaurar dependências
-dotnet restore
-
-# Aplicar migrations (se houver)
-dotnet ef database update
-
-# Executar a aplicação
-dotnet run
-```
-
-### 4. Testando a API
+##### 4. Testando a API
 
 ```bash
 # Listar orders como DTOs
@@ -212,9 +232,7 @@ curl -X POST https://localhost:7000/api/orders \
   }'
 ```
 
-## � Padrões Avançados
-
-### 1. DTOs para Input e Output
+##### 1. DTOs para Input e Output
 
 ```csharp
 // Para receber dados (Input)
@@ -242,7 +260,7 @@ public class OrderResponseDTO
 }
 ```
 
-### 2. DTOs Hierárquicos
+##### 2. DTOs Hierárquicos
 
 ```csharp
 public class CustomerWithOrdersDTO
@@ -261,7 +279,7 @@ public class OrderSummaryDTO
 }
 ```
 
-### 3. DTOs Condicionais
+##### 3. DTOs Condicionais
 
 ```csharp
 public class CustomerDTO
@@ -279,24 +297,14 @@ public class CustomerDTO
 }
 ```
 
-## 💯 Melhores Práticas
-
-### ✅ Boas Práticas
-
-1. **Nomes descritivos**: Use sufixo "DTO" ou prefixos como "Create", "Update"
-2. **Validação**: Aplique validações nos DTOs de input
-3. **Versionamento**: Mantenha diferentes versões de DTOs para compatibilidade
-4. **Documentação**: Use XML docs ou Swagger para documentar DTOs
-5. **Imutabilidade**: Quando possível, torne DTOs imutáveis
-
-### ❌ Evitar
+##### Evitar
 
 1. **Expor entidades diretamente**: Nunca retorne entidades EF nas APIs
 2. **DTOs muito grandes**: Evite DTOs com muitas propriedades
 3. **Lógica de negócio**: DTOs devem ser objetos "burros" de transporte
 4. **Dependências**: DTOs não devem depender de outras camadas
 
-## � Comparação: Entity vs DTO
+##### Comparação: Entity vs DTO
 
 | Aspecto | Entity (Model) | DTO |
 |---------|---------------|-----|
@@ -307,7 +315,7 @@ public class CustomerDTO
 | **Versionamento** | Evolui com domínio | Versões específicas |
 | **Exposição** | Interna | Externa (API) |
 
-## 📋 Exercícios Práticos
+##### Exercícios Práticos
 
 1. **Criar DTOs completos**: Implemente DTOs para todas as operações CRUD
 2. **Mapeamento automático**: Configure AutoMapper para todos os mapeamentos
@@ -315,14 +323,12 @@ public class CustomerDTO
 4. **DTOs aninhados**: Crie DTOs que incluem relacionamentos
 5. **Performance**: Compare queries com e sem DTOs
 
-## 🔗 Recursos Adicionais
+## Referências
 
 - [AutoMapper Documentation](https://automapper.org/)
 - [System.Text.Json Guide](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview)
 - [Data Transfer Object Pattern](https://martinfowler.com/eaaCatalog/dataTransferObject.html)
 - [ASP.NET Core Model Binding](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding)
-
----
 
 💡 **Dica**: DTOs são fundamentais para APIs bem projetadas. Eles fornecem controle total sobre quais dados são expostos e como são estruturados, garantindo segurança e flexibilidade!
 
@@ -331,5 +337,3 @@ public class CustomerDTO
 | **Lazy**     | `var itens = pedido.Itens;`                              | Só ao acessar a propriedade      |
 | **Eager**    | `.Include(p => p.Itens)`                                 | Junto com o `Pedido` na consulta |
 | **Explicit** | `context.Entry(pedido).Collection(p => p.Itens).Load();` | Manualmente, sob demanda         |
-
----

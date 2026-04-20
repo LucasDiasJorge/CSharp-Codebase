@@ -1,6 +1,10 @@
 # Dapper - Micro ORM para .NET
 
-## 📚 Conceitos Abordados
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a Dapper - Micro ORM para .NET, com foco em persistência, bancos de dados e acesso a dados.
+
+## Conceitos abordados
 
 Este projeto demonstra o uso do Dapper, um micro ORM para .NET:
 
@@ -12,7 +16,7 @@ Este projeto demonstra o uso do Dapper, um micro ORM para .NET:
 - **Stored Procedures**: Chamada de procedures
 - **Performance**: Otimização de consultas
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de aprendizagem
 
 - Entender as vantagens do Dapper sobre ORMs pesados
 - Executar queries SQL de forma eficiente
@@ -21,38 +25,7 @@ Este projeto demonstra o uso do Dapper, um micro ORM para .NET:
 - Trabalhar com stored procedures
 - Otimizar acesso a dados
 
-## 💡 Conceitos Importantes
-
-### Consulta Simples
-```csharp
-var products = connection.Query<Product>(
-    "SELECT Id, Name, Price FROM Products WHERE Price > @minPrice",
-    new { minPrice = 100 }
-);
-```
-
-### Consulta Única
-```csharp
-var product = connection.QuerySingleOrDefault<Product>(
-    "SELECT * FROM Products WHERE Id = @id",
-    new { id = productId }
-);
-```
-
-### Inserção
-```csharp
-var sql = "INSERT INTO Products (Name, Price) VALUES (@Name, @Price)";
-connection.Execute(sql, new { Name = "Product", Price = 99.99 });
-```
-
-## 🚀 Como Executar
-
-```bash
-cd Dapper
-dotnet run
-```
-
-## 📖 O que Você Aprenderá
+### O que Você Aprenderá
 
 1. **Vantagens do Dapper**:
    - Performance superior aos ORMs pesados
@@ -77,9 +50,63 @@ dotnet run
    - DynamicParameters
    - Prevenção de SQL Injection
 
-## 🎨 Padrões de Implementação
+## Estrutura do projeto
 
-### 1. Repository Pattern
+```text
+Dapper/
++-- Properties/
+|   \-- launchSettings.json
++-- appsettings.Development.json
++-- appsettings.json
++-- Dapper.csproj
++-- Dapper.csproj.user
++-- Dapper.http
++-- Dapper.sln
++-- Program.cs
+\-- ...
+```
+
+## Como executar
+
+```bash
+dotnet run --project 09-Data/Data/Dapper/Dapper.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Consulta Simples
+
+```csharp
+var products = connection.Query<Product>(
+    "SELECT Id, Name, Price FROM Products WHERE Price > @minPrice",
+    new { minPrice = 100 }
+);
+```
+
+##### Consulta Única
+
+```csharp
+var product = connection.QuerySingleOrDefault<Product>(
+    "SELECT * FROM Products WHERE Id = @id",
+    new { id = productId }
+);
+```
+
+##### Inserção
+
+```csharp
+var sql = "INSERT INTO Products (Name, Price) VALUES (@Name, @Price)";
+connection.Execute(sql, new { Name = "Product", Price = 99.99 });
+```
+
+##### 1. Repository Pattern
+
 ```csharp
 public class ProductRepository
 {
@@ -135,7 +162,8 @@ public class ProductRepository
 }
 ```
 
-### 2. Multiple Results
+##### 2. Multiple Results
+
 ```csharp
 public async Task<(IEnumerable<Product> Products, int TotalCount)> GetPagedAsync(
     int page, int pageSize)
@@ -161,7 +189,8 @@ public async Task<(IEnumerable<Product> Products, int TotalCount)> GetPagedAsync
 }
 ```
 
-### 3. Join Queries
+##### 3. Join Queries
+
 ```csharp
 public async Task<IEnumerable<ProductWithCategory>> GetProductsWithCategoryAsync()
 {
@@ -203,7 +232,8 @@ public async Task<IEnumerable<Product>> GetProductsWithCategoryMappedAsync()
 }
 ```
 
-### 4. Stored Procedures
+##### 4. Stored Procedures
+
 ```csharp
 public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId)
 {
@@ -223,9 +253,8 @@ public async Task<ProductStatistics> GetProductStatisticsAsync()
 }
 ```
 
-## 🏗️ Configuração e Setup
+##### 1. Dependency Injection
 
-### 1. Dependency Injection
 ```csharp
 // Program.cs
 builder.Services.AddScoped<IDbConnection>(provider =>
@@ -234,7 +263,8 @@ builder.Services.AddScoped<IDbConnection>(provider =>
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 ```
 
-### 2. Transaction Management
+##### 2. Transaction Management
+
 ```csharp
 public async Task<bool> TransferProductsAsync(int fromCategoryId, int toCategoryId)
 {
@@ -264,7 +294,8 @@ public async Task<bool> TransferProductsAsync(int fromCategoryId, int toCategory
 }
 ```
 
-### 3. Custom Type Handlers
+##### 3. Custom Type Handlers
+
 ```csharp
 public class JsonTypeHandler<T> : SqlMapper.TypeHandler<T>
 {
@@ -283,9 +314,8 @@ public class JsonTypeHandler<T> : SqlMapper.TypeHandler<T>
 SqlMapper.AddTypeHandler(new JsonTypeHandler<List<string>>());
 ```
 
-## 🔍 Pontos de Atenção
+##### Performance
 
-### Performance
 ```csharp
 // ✅ Use async para operações I/O
 var products = await connection.QueryAsync<Product>(sql);
@@ -300,7 +330,8 @@ var product = await connection.QuerySingleAsync<Product>(
 );
 ```
 
-### Memory Management
+##### Memory Management
+
 ```csharp
 // ✅ Para grandes datasets, use QueryUnbuffered
 var largeResult = connection.QueryUnbuffered<Product>(
@@ -313,7 +344,8 @@ foreach (var product in largeResult)
 }
 ```
 
-### Error Handling
+##### Error Handling
+
 ```csharp
 try
 {
@@ -334,18 +366,19 @@ catch (InvalidOperationException ex)
 }
 ```
 
-## 🚀 Dicas de Performance
+##### 1. Connection Pooling
 
-### 1. Connection Pooling
 ```csharp
 // Connection string com pooling configurado
 "Server=.;Database=MyDb;Trusted_Connection=true;Max Pool Size=100;Min Pool Size=5;"
 ```
 
-### 2. Compiled Queries
+##### 2. Compiled Queries
+
 Para queries frequentes, considere cache de execution plans.
 
-### 3. Bulk Operations
+##### 3. Bulk Operations
+
 ```csharp
 // Para inserções em massa
 public async Task BulkInsertAsync(IEnumerable<Product> products)
@@ -355,8 +388,12 @@ public async Task BulkInsertAsync(IEnumerable<Product> products)
 }
 ```
 
-## 📚 Recursos Adicionais
+## Referências
 
 - [Dapper Documentation](https://github.com/DapperLib/Dapper)
 - [Dapper Tutorial](https://dapper-tutorial.net/)
 - [Performance Comparison](https://github.com/DapperLib/Dapper#performance)
+
+## Documentação complementar
+
+- [SQL-ANNOTATIONS.md](./SQL-ANNOTATIONS.md) - SQL Annotations - Comandos Essenciais

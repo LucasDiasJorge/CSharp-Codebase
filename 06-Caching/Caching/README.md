@@ -1,10 +1,10 @@
-# 💨 Caching - Padrões e Técnicas de Cache
+# Caching - Padrões e Técnicas de Cache
+
+## Visão geral
 
 Coleção de exemplos práticos de estratégias de caching para .NET 9.
 
----
-
-## 📚 Conceitos Abordados
+## Conceitos abordados
 
 - **Cache-Aside**: Padrão lazy loading mais comum
 - **Write-Through/Write-Behind**: Estratégias de escrita
@@ -12,9 +12,78 @@ Coleção de exemplos práticos de estratégias de caching para .NET 9.
 - **Cache Híbrido**: Combinação de memória local + Redis
 - **Resiliência**: Proteção contra cache stampede
 
----
+## Objetivos de aprendizagem
 
-## 📂 Projetos Disponíveis
+- Identificar como os exemplos desta pasta cobrem estratégias de cache e integração com Redis.
+- Escolher o subprojeto mais adequado para aprofundar o estudo.
+- Reutilizar a navegação da pasta como índice prático de consulta.
+
+## Estrutura do projeto
+
+```text
+Caching/
++-- CacheAside/
+|   +-- Controllers/
+|   +-- Data/
+|   +-- Interfaces/
+|   +-- Models/
+|   +-- Properties/
+|   +-- Repositories/
+|   +-- Services/
+|   +-- appsettings.Development.json
+|   \-- ...
++-- CacheIncrement/
+|   +-- Controllers/
+|   +-- Data/
+|   +-- Interfaces/
+|   +-- Models/
+|   +-- Properties/
+|   +-- Services/
+|   +-- appsettings.Development.json
+|   +-- appsettings.json
+|   \-- ...
++-- CachePatterns/
+|   +-- .vscode/
+|   +-- Data/
+|   +-- Models/
+|   +-- Patterns/
+|   +-- appsettings.json
+|   +-- CachePatterns.csproj
+|   +-- CachePatterns.sln
+|   \-- Program.cs
++-- FusionCache/
+|   +-- FusionCache.csproj
+|   \-- Program.cs
++-- RedisConsoleApp/
+|   +-- Program.cs
+|   \-- RedisConsoleApp.csproj
+\-- RedisMySQLIntegration/
+    +-- Program.cs
+    \-- RedisMySQLIntegration.csproj
+```
+
+## Como executar
+
+Escolha um dos projetos abaixo para execução direcionada:
+
+- `dotnet run --project 06-Caching/Caching/CacheAside/CacheAside.csproj`
+- `dotnet run --project 06-Caching/Caching/CacheIncrement/CacheIncrement.csproj`
+- `dotnet run --project 06-Caching/Caching/CachePatterns/CachePatterns.csproj`
+- `dotnet run --project 06-Caching/Caching/FusionCache/FusionCache.csproj`
+- `dotnet run --project 06-Caching/Caching/RedisConsoleApp/RedisConsoleApp.csproj`
+- `dotnet run --project 06-Caching/Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj`
+
+## Boas práticas e pontos de atenção
+
+- **Chaves estruturadas**: Use prefixos (`product:123`, `user:session:abc`)
+- **TTL apropriado**: Dados estáticos (horas), dados dinâmicos (minutos)
+- **Invalidação seletiva**: Remova apenas chaves afetadas
+- **Monitoramento**: Acompanhe hit/miss ratio
+- **Fallback**: Sempre tenha plano B quando cache falhar
+
+## Conteúdo complementar
+
+##### Projetos Disponíveis
 
 | Projeto | Descrição | Tecnologias |
 |---------|-----------|-------------|
@@ -25,9 +94,7 @@ Coleção de exemplos práticos de estratégias de caching para .NET 9.
 | [RedisConsoleApp](./RedisConsoleApp) | Operações essenciais do Redis | StackExchange.Redis |
 | [RedisMySQLIntegration](./RedisMySQLIntegration) | Cache distribuído + persistência | Redis + MySQL |
 
----
-
-## 🎯 Quando Usar Cada Projeto
+##### Quando Usar Cada Projeto
 
 | Cenário | Projeto Recomendado |
 |---------|---------------------|
@@ -38,17 +105,13 @@ Coleção de exemplos práticos de estratégias de caching para .NET 9.
 | Explorar recursos avançados do Redis | **RedisConsoleApp** |
 | Cache distribuído simples com banco | **RedisMySQLIntegration** |
 
----
-
-## 🚀 Como Executar
-
-### Pré-requisitos
+##### Pré-requisitos
 
 - .NET 9.0 SDK
 - Redis (para projetos com cache distribuído)
 - MySQL (para projetos com persistência)
 
-### Instalação de Dependências (Docker)
+##### Instalação de Dependências (Docker)
 
 ```bash
 # Redis
@@ -58,46 +121,25 @@ docker run -d --name redis -p 6379:6379 redis
 docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=senha123 -p 3306:3306 mysql:8
 ```
 
-### Execução
+##### Cache-Aside (Lazy Loading)
 
-```bash
-# Exemplo: CacheAside
-cd Caching/CacheAside
-dotnet run
-```
-
----
-
-## 💡 Padrões de Cache Explicados
-
-### Cache-Aside (Lazy Loading)
 ```
 App → Verifica Cache → Miss → Busca DB → Popula Cache → Retorna
 ```
 
-### Write-Through
+##### Write-Through
+
 ```
 App → Escreve Cache + DB (síncrono)
 ```
 
-### Write-Behind
+##### Write-Behind
+
 ```
 App → Escreve Cache → Background Job → Persiste DB
 ```
 
----
-
-## ✅ Boas Práticas
-
-- **Chaves estruturadas**: Use prefixos (`product:123`, `user:session:abc`)
-- **TTL apropriado**: Dados estáticos (horas), dados dinâmicos (minutos)
-- **Invalidação seletiva**: Remova apenas chaves afetadas
-- **Monitoramento**: Acompanhe hit/miss ratio
-- **Fallback**: Sempre tenha plano B quando cache falhar
-
----
-
-## 📖 Ordem de Estudo Recomendada
+##### Ordem de Estudo Recomendada
 
 1. **CacheAside** → Fundamentos e padrão mais comum
 2. **CachePatterns** → Visão comparativa de estratégias
@@ -106,9 +148,7 @@ App → Escreve Cache → Background Job → Persiste DB
 5. **CacheIncrement** → Padrão de alta performance
 6. **FusionCache** → Resiliência e recursos avançados
 
----
-
-## 🔗 Referências
+## Referências
 
 - [Microsoft Docs - Caching](https://docs.microsoft.com/aspnet/core/performance/caching/)
 - [Redis Patterns](https://redis.io/topics/patterns)

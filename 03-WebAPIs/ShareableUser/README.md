@@ -1,6 +1,16 @@
-# 👥 ShareableUser - Singleton Services e Thread Safety
+# ShareableUser - Singleton Services e Thread Safety
 
-## 🎯 Objetivos de Aprendizado
+## Visão geral
+
+Projeto didático do CSharp-101 dedicado a ShareableUser - Singleton Services e Thread Safety, com foco em ASP.NET Core, contratos HTTP e pipeline web.
+
+## Conceitos abordados
+
+- Exemplo didático sobre ShareableUser - Singleton Services e Thread Safety no contexto de ASP.NET Core, contratos HTTP e pipeline web.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
 
 - Entender **padrão Singleton** em dependency injection
 - Implementar **thread safety** em serviços compartilhados
@@ -9,9 +19,38 @@
 - Monitorar **concorrência** em aplicações web
 - Aplicar **lifetimes de serviços** adequadamente
 
-## 📚 Conceitos Fundamentais
+## Estrutura do projeto
 
-### Singleton Pattern
+```text
+ShareableUser/
++-- Middleware/
+|   \-- UserMiddleware.cs
++-- Properties/
+|   \-- launchSettings.json
++-- Services/
+|   \-- UserServices.cs
++-- appsettings.Development.json
++-- appsettings.json
++-- Program.cs
++-- ShareableUser.csproj
+\-- ShareableUser.csproj.user
+```
+
+## Como executar
+
+```bash
+dotnet run --project 03-WebAPIs/ShareableUser/ShareableUser.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Singleton Pattern
 
 O **padrão Singleton** garante que apenas uma instância de uma classe seja criada durante toda a execução da aplicação. No ASP.NET Core, serviços Singleton:
 
@@ -20,11 +59,11 @@ O **padrão Singleton** garante que apenas uma instância de uma classe seja cri
 - 💾 **Mantêm estado** entre requisições
 - 🧵 Devem ser **thread-safe**
 
-### Thread Safety
+##### Thread Safety
 
 **Thread Safety** significa que o código pode ser executado simultaneamente por múltiplas threads sem causar inconsistências nos dados.
 
-### Lifetimes de Serviços
+##### Lifetimes de Serviços
 
 | Lifetime | Escopo | Uso |
 |----------|--------|-----|
@@ -32,7 +71,7 @@ O **padrão Singleton** garante que apenas uma instância de uma classe seja cri
 | **Scoped** | Por requisição | DbContext, user context |
 | **Transient** | Por injeção | Stateless services |
 
-## 🏗️ Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```
 ShareableUser/
@@ -45,9 +84,7 @@ ShareableUser/
 └── README.md
 ```
 
-## 💡 Exemplos Práticos
-
-### 1. Serviço Singleton Thread-Safe
+##### 1. Serviço Singleton Thread-Safe
 
 ```csharp
 public interface IUsuarioSingletonService
@@ -117,7 +154,7 @@ public class UsuarioSingletonService : IUsuarioSingletonService
 }
 ```
 
-### 2. Versão com ConcurrentDictionary (Thread-Safe)
+##### 2. Versão com ConcurrentDictionary (Thread-Safe)
 
 ```csharp
 public class UsuarioSingletonServiceConcurrent : IUsuarioSingletonService
@@ -173,7 +210,7 @@ public class UsuarioSingletonServiceConcurrent : IUsuarioSingletonService
 }
 ```
 
-### 3. Middleware de Monitoramento
+##### 3. Middleware de Monitoramento
 
 ```csharp
 public class UsuarioMonitorMiddleware
@@ -231,7 +268,7 @@ public class UsuarioMonitorMiddleware
 }
 ```
 
-### 4. Endpoints para Demonstração
+##### 4. Endpoints para Demonstração
 
 ```csharp
 // Program.cs - Configuração de endpoints
@@ -291,7 +328,7 @@ app.MapGet("/teste-concorrencia", async (IUsuarioSingletonService usuario) =>
 public record UpdateNameRequest(string NovoNome);
 ```
 
-### 5. Demonstração de Race Conditions
+##### 5. Demonstração de Race Conditions
 
 ```csharp
 public class RaceConditionDemo
@@ -336,9 +373,7 @@ public class RaceConditionDemo
 }
 ```
 
-## 🚀 Configuração e Execução
-
-### 1. Registro do Serviço Singleton
+##### 1. Registro do Serviço Singleton
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -365,20 +400,7 @@ app.UseMiddleware<UsuarioMonitorMiddleware>();
 app.Run();
 ```
 
-### 2. Executar o Projeto
-
-```bash
-# Navegar para o diretório
-cd ShareableUser
-
-# Restaurar dependências
-dotnet restore
-
-# Executar a aplicação
-dotnet run
-```
-
-### 3. Testes de Concorrência
+##### 3. Testes de Concorrência
 
 ```bash
 # Teste básico
@@ -402,9 +424,7 @@ for i in {1..10}; do curl http://localhost:5000/ & done; wait
 1..10 | ForEach-Object { Start-Job -ScriptBlock { Invoke-RestMethod http://localhost:5000/ } }
 ```
 
-## 🔧 Cenários de Thread Safety
-
-### 1. Sem Thread Safety (❌ PERIGOSO)
+##### 1. Sem Thread Safety (❌ PERIGOSO)
 
 ```csharp
 public class UnsafeCounter
@@ -421,7 +441,7 @@ public class UnsafeCounter
 }
 ```
 
-### 2. Com Lock (✅ SEGURO mas pode ter bottleneck)
+##### 2. Com Lock (✅ SEGURO mas pode ter bottleneck)
 
 ```csharp
 public class SafeCounterWithLock
@@ -450,7 +470,7 @@ public class SafeCounterWithLock
 }
 ```
 
-### 3. Com Interlocked (✅ SEGURO e performático)
+##### 3. Com Interlocked (✅ SEGURO e performático)
 
 ```csharp
 public class SafeCounterWithInterlocked
@@ -466,9 +486,7 @@ public class SafeCounterWithInterlocked
 }
 ```
 
-## 💯 Melhores Práticas
-
-### ✅ Thread Safety
+##### Thread Safety
 
 1. **Use locks** para operações complexas
 2. **Prefira Interlocked** para operações simples
@@ -476,7 +494,7 @@ public class SafeCounterWithInterlocked
 4. **Minimize tempo em locks** críticos
 5. **Evite locks aninhados** (deadlock risk)
 
-### ✅ Singleton Services
+##### Singleton Services
 
 1. **Torne thread-safe** por padrão
 2. **Evite estado mutável** quando possível
@@ -484,7 +502,7 @@ public class SafeCounterWithInterlocked
 4. **Documente comportamento** de concorrência
 5. **Teste sob carga** para detectar race conditions
 
-### ❌ Evitar
+##### Evitar
 
 1. **Estado mutável sem sincronização**
 2. **Locks muito granulares** (performance)
@@ -492,9 +510,7 @@ public class SafeCounterWithInterlocked
 4. **Operações I/O dentro de locks**
 5. **Singleton para dados por usuário**
 
-## 🔍 Detectando Race Conditions
-
-### Ferramentas e Técnicas
+##### Ferramentas e Técnicas
 
 ```csharp
 public class RaceConditionDetector
@@ -530,7 +546,7 @@ public class RaceConditionDetector
 }
 ```
 
-## 📋 Exercícios Práticos
+##### Exercícios Práticos
 
 1. **Implementar Cache**: Crie cache thread-safe com expiração
 2. **Contador Global**: Implemente contador compartilhado entre requisições
@@ -538,13 +554,11 @@ public class RaceConditionDetector
 4. **Rate Limiter**: Crie rate limiting usando Singleton
 5. **Metrics Collector**: Colete métricas de performance da aplicação
 
-## 🔗 Recursos Adicionais
+## Referências
 
 - [Thread Safety in .NET](https://docs.microsoft.com/en-us/dotnet/standard/threading/thread-safety)
 - [Dependency Injection Lifetimes](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection#service-lifetimes)
 - [Concurrent Collections](https://docs.microsoft.com/en-us/dotnet/standard/collections/thread-safe/)
 - [Interlocked Class](https://docs.microsoft.com/en-us/dotnet/api/system.threading.interlocked)
-
----
 
 💡 **Dica**: Singleton services são úteis para dados compartilhados, mas sempre implemente thread safety adequada. Race conditions são bugs sutis que aparecem apenas sob carga, então teste sempre com múltiplas requisições simultâneas!

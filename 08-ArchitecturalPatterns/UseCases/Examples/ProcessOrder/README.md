@@ -1,10 +1,47 @@
 # Process Order Use Case
 
-## Descrição
+## Visão geral
 
-Use Case completo de e-commerce que demonstra o processamento de um pedido, incluindo validação de estoque, cálculo de descontos, pagamento e notificações.
+Projeto didático do CSharp-101 dedicado a Process Order Use Case, com foco em padrões arquiteturais e organização de casos de uso.
 
-## Fluxo de Execução
+## Conceitos abordados
+
+- Exemplo didático sobre Process Order Use Case no contexto de padrões arquiteturais e organização de casos de uso.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
+- Entender como Process Order Use Case se aplica em um cenário prático de padrões arquiteturais e organização de casos de uso.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+ProcessOrder/
++-- DTOs/
+|   +-- OrderItemInput.cs
+|   +-- PaymentMethod.cs
+|   +-- ProcessOrderInput.cs
+|   \-- ProcessOrderOutput.cs
++-- Entities/
+|   +-- Customer.cs
+|   +-- CustomerTier.cs
+|   +-- Order.cs
+|   +-- OrderItem.cs
+|   +-- OrderStatus.cs
+|   \-- Product.cs
++-- Interfaces/
+|   +-- ICustomerRepository.cs
+|   +-- IEmailService.cs
+|   +-- IOrderRepository.cs
+|   +-- IPaymentGateway.cs
+|   \-- IProductRepository.cs
+\-- ProcessOrderUseCase.cs
+```
+
+## Como executar
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -42,7 +79,19 @@ Use Case completo de e-commerce que demonstra o processamento de um pedido, incl
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## Sistema de Descontos por Tier
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Descrição
+
+Use Case completo de e-commerce que demonstra o processamento de um pedido, incluindo validação de estoque, cálculo de descontos, pagamento e notificações.
+
+##### Sistema de Descontos por Tier
 
 | Tier | Desconto |
 |------|----------|
@@ -51,7 +100,7 @@ Use Case completo de e-commerce que demonstra o processamento de um pedido, incl
 | Gold | 10% |
 | Platinum | 15% |
 
-## Estimativa de Entrega por Método de Pagamento
+##### Estimativa de Entrega por Método de Pagamento
 
 | Método | Dias |
 |--------|------|
@@ -60,7 +109,7 @@ Use Case completo de e-commerce que demonstra o processamento de um pedido, incl
 | Cartão de Débito | 5 |
 | Boleto | 10 |
 
-## Regras de Negócio
+##### Regras de Negócio
 
 1. **Pedido deve ter itens** - Não é permitido pedido vazio
 2. **Cliente válido** - Cliente deve existir no sistema
@@ -68,7 +117,7 @@ Use Case completo de e-commerce que demonstra o processamento de um pedido, incl
 4. **Estoque suficiente** - Quantidade solicitada deve estar disponível
 5. **Pagamento aprovado** - Pagamento deve ser processado com sucesso
 
-## Dependências
+##### Dependências
 
 | Interface | Responsabilidade |
 |-----------|------------------|
@@ -79,7 +128,7 @@ Use Case completo de e-commerce que demonstra o processamento de um pedido, incl
 | `IEmailService` | Envio de notificações |
 | `IUnitOfWork` | Transações de banco |
 
-## Exemplo de Uso
+##### Exemplo de Uso
 
 ```csharp
 var input = new ProcessOrderInput(
@@ -105,7 +154,7 @@ if (result.IsSuccess)
 }
 ```
 
-## Cenários de Teste
+##### Cenários de Teste
 
 - ✅ Pedido com desconto Platinum
 - ✅ Pedido sem desconto (Bronze)

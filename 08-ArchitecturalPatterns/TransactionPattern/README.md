@@ -1,8 +1,54 @@
 # Transaction Pattern - ExecuteInTransactionAsync
 
-> **Padrão de execução transacional assíncrona para garantir atomicidade e consistência em operações de banco de dados.**
+## Visão geral
 
-## 📋 Índice
+O padrão **ExecuteInTransactionAsync** encapsula a lógica de gerenciamento de transações de banco de dados, garantindo que múltiplas operações sejam executadas atomicamente (tudo ou nada) de forma assíncrona e segura.
+
+## Conceitos abordados
+
+- **ACID Transactions**: Atomicidade, Consistência, Isolamento, Durabilidade
+- **Unit of Work Pattern**: Rastreia mudanças e coordena commits
+- **Repository Pattern**: Abstração de acesso a dados
+- **Command Pattern**: Encapsulamento de operações
+- **Template Method Pattern**: Define esqueleto de algoritmo
+
+## Objetivos de aprendizagem
+
+- Entender como Transaction Pattern - ExecuteInTransactionAsync se aplica em um cenário prático de padrões arquiteturais e organização de casos de uso.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+TransactionPattern/
++-- Core/
+|   +-- BaseRepository.cs
+|   \-- IRepository.cs
++-- Examples/
+|   +-- BankTransferService.cs
+|   \-- OrderService.cs
++-- TransactionPattern/
++-- Program.cs
++-- QUICKSTART.md
+\-- TransactionPattern.csproj
+```
+
+## Como executar
+
+```bash
+dotnet run --project 08-ArchitecturalPatterns/TransactionPattern/TransactionPattern.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Índice
 
 - [Visão Geral](#-visão-geral)
 - [O Problema](#-o-problema)
@@ -13,13 +59,7 @@
 - [Boas Práticas](#-boas-práticas)
 - [Comparação de Abordagens](#-comparação-de-abordagens)
 
----
-
-## 🎯 Visão Geral
-
-O padrão **ExecuteInTransactionAsync** encapsula a lógica de gerenciamento de transações de banco de dados, garantindo que múltiplas operações sejam executadas atomicamente (tudo ou nada) de forma assíncrona e segura.
-
-### Código Principal
+##### Código Principal
 
 ```csharp
 private async Task ExecuteInTransactionAsync(Func<IDbTransaction, Task> action)
@@ -38,11 +78,7 @@ private async Task ExecuteInTransactionAsync(Func<IDbTransaction, Task> action)
 }
 ```
 
----
-
-## ❌ O Problema
-
-### Código sem o padrão (problemático):
+##### Código sem o padrão (problemático):
 
 ```csharp
 public async Task TransferMoney(int fromAccount, int toAccount, decimal amount)
@@ -55,7 +91,7 @@ public async Task TransferMoney(int fromAccount, int toAccount, decimal amount)
 }
 ```
 
-### Problemas comuns:
+##### Problemas comuns:
 
 1. **🔴 Inconsistência de dados**: Se a segunda operação falhar, a primeira já foi commitada
 2. **🔴 Código duplicado**: Lógica de try/catch/commit/rollback repetida em todo lugar
@@ -63,11 +99,7 @@ public async Task TransferMoney(int fromAccount, int toAccount, decimal amount)
 4. **🔴 Resource Leaks**: Transações não fechadas corretamente (sem `using`)
 5. **🔴 Baixa legibilidade**: Código de infraestrutura misturado com lógica de negócio
 
----
-
-## ✅ A Solução
-
-### Código COM o padrão (correto):
+##### Código COM o padrão (correto):
 
 ```csharp
 public async Task TransferMoney(int fromAccount, int toAccount, decimal amount)
@@ -81,11 +113,7 @@ public async Task TransferMoney(int fromAccount, int toAccount, decimal amount)
 }
 ```
 
----
-
-## 🌟 Benefícios
-
-### 1. **Atomicidade Garantida (ACID)**
+##### 1. **Atomicidade Garantida (ACID)**
 
 Todas as operações dentro da transação são executadas como uma **unidade atômica**:
 - ✅ **Tudo funciona** → Commit automático
@@ -101,7 +129,7 @@ await ExecuteInTransactionAsync(async tx =>
 });
 ```
 
-### 2. **Separação de Responsabilidades (SRP)**
+##### 2. **Separação de Responsabilidades (SRP)**
 
 - **Lógica de negócio** fica dentro do lambda
 - **Gerenciamento de transação** fica encapsulado no método helper
@@ -135,7 +163,7 @@ public async Task ProcessOrder(Order order)
 }
 ```
 
-### 3. **DRY (Don't Repeat Yourself)**
+##### 3. **DRY (Don't Repeat Yourself)**
 
 Elimina duplicação de código de gerenciamento de transação em toda a aplicação.
 
@@ -150,7 +178,7 @@ try { /* ... */ tx.Commit(); } catch { tx.Rollback(); throw; }
 await ExecuteInTransactionAsync(async tx => { /* ... */ });
 ```
 
-### 4. **Gerenciamento Automático de Recursos**
+##### 4. **Gerenciamento Automático de Recursos**
 
 O `using` garante que a transação seja **sempre** liberada, mesmo em caso de exceção.
 
@@ -159,7 +187,7 @@ using IDbTransaction transaction = BeginTransaction();
 // ✓ Sempre será disposed, não importa o que aconteça
 ```
 
-### 5. **Testabilidade**
+##### 5. **Testabilidade**
 
 Facilita testes unitários ao isolar a lógica de negócio:
 
@@ -178,7 +206,7 @@ public async Task Transfer_ShouldRollback_WhenInsufficientFunds()
 }
 ```
 
-### 6. **Legibilidade e Manutenibilidade**
+##### 6. **Legibilidade e Manutenibilidade**
 
 O código fica mais **declarativo** e **fácil de entender**:
 
@@ -192,7 +220,7 @@ await ExecuteInTransactionAsync(async tx =>
 });
 ```
 
-### 7. **Suporte Assíncrono Nativo**
+##### 7. **Suporte Assíncrono Nativo**
 
 Funciona perfeitamente com `async/await`, evitando bloqueios de threads:
 
@@ -203,7 +231,7 @@ await ExecuteInTransactionAsync(async tx =>
 });
 ```
 
-### 8. **Tratamento Consistente de Erros**
+##### 8. **Tratamento Consistente de Erros**
 
 Sempre propaga a exceção original após o rollback:
 
@@ -215,11 +243,7 @@ catch
 }
 ```
 
----
-
-## 📚 Como Usar
-
-### 1. Herdar de `BaseRepository`
+##### 1. Herdar de `BaseRepository`
 
 ```csharp
 public class MyService : BaseRepository
@@ -236,7 +260,7 @@ public class MyService : BaseRepository
 }
 ```
 
-### 2. Passar a transação para operações filhas
+##### 2. Passar a transação para operações filhas
 
 ```csharp
 await ExecuteInTransactionAsync(async transaction =>
@@ -247,13 +271,11 @@ await ExecuteInTransactionAsync(async transaction =>
 });
 ```
 
----
-
-## 🔥 Exemplos Práticos
+##### Exemplos Práticos
 
 Este projeto inclui dois exemplos completos:
 
-### 1️⃣ **Transferência Bancária** ([BankTransferService.cs](Examples/BankTransferService.cs))
+##### 1️⃣ **Transferência Bancária** ([BankTransferService.cs](Examples/BankTransferService.cs))
 
 ```csharp
 await transferService.TransferAsync(
@@ -269,7 +291,7 @@ await transferService.TransferAsync(
 3. ✅ Log da operação
 4. ✅ **Tudo commitado** OU ❌ **Tudo revertido** se algo falhar
 
-### 2️⃣ **Processamento de Pedido** ([OrderService.cs](Examples/OrderService.cs))
+##### 2️⃣ **Processamento de Pedido** ([OrderService.cs](Examples/OrderService.cs))
 
 ```csharp
 await orderService.ProcessOrderAsync(
@@ -290,11 +312,7 @@ await orderService.ProcessOrderAsync(
 5. ✅ Registra pagamento
 6. ✅ **Tudo commitado** OU ❌ **Tudo revertido** se algo falhar
 
----
-
-## 🎯 Boas Práticas
-
-### ✅ FAÇA
+##### FAÇA
 
 ```csharp
 // ✓ Passe a transação para métodos filhos
@@ -312,7 +330,7 @@ if (balance < amount)
 using IDbTransaction transaction = BeginTransaction();
 ```
 
-### ❌ NÃO FAÇA
+##### NÃO FAÇA
 
 ```csharp
 // ✗ NÃO chame Commit/Rollback manualmente dentro do lambda
@@ -336,9 +354,7 @@ catch (Exception ex)
 }
 ```
 
----
-
-## ⚖️ Comparação de Abordagens
+##### Comparação de Abordagens
 
 | Aspecto | ❌ Sem Padrão | ✅ Com Padrão |
 |---------|---------------|---------------|
@@ -350,16 +366,7 @@ catch (Exception ex)
 | **Testabilidade** | Complexa | Simples |
 | **Atomicidade** | Não garantida | Garantida |
 
----
-
-## 🚀 Executar os Exemplos
-
-```bash
-cd TransactionPattern
-dotnet run
-```
-
-### Saída esperada:
+##### Saída esperada:
 
 ```
 === Exemplo 1: Transferência Bancária ===
@@ -378,9 +385,7 @@ dotnet run
 ✓ Pedido #4521 processado com sucesso! Total: R$ 200,00
 ```
 
----
-
-## 🏗️ Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```
 TransactionPattern/
@@ -395,19 +400,7 @@ TransactionPattern/
 └── README.md                    # Este arquivo
 ```
 
----
-
-## 📖 Conceitos Relacionados
-
-- **ACID Transactions**: Atomicidade, Consistência, Isolamento, Durabilidade
-- **Unit of Work Pattern**: Rastreia mudanças e coordena commits
-- **Repository Pattern**: Abstração de acesso a dados
-- **Command Pattern**: Encapsulamento de operações
-- **Template Method Pattern**: Define esqueleto de algoritmo
-
----
-
-## 🎓 Quando Usar
+##### Quando Usar
 
 ✅ **Use quando:**
 - Múltiplas operações de banco devem ser atômicas
@@ -420,12 +413,12 @@ TransactionPattern/
 - Não precisa de atomicidade
 - Usando ORM com Unit of Work integrado (EF Core já tem isso)
 
----
-
-## 📝 Licença
+##### Licença
 
 Este é um projeto de exemplo educacional - use livremente! 🚀
 
----
-
 **Criado com ❤️ para demonstrar boas práticas de desenvolvimento C#**
+
+## Documentação complementar
+
+- [QUICKSTART.md](./QUICKSTART.md) - Quick Start - Transaction Pattern

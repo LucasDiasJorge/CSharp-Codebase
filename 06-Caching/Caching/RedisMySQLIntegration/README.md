@@ -1,9 +1,7 @@
-<!-- README padronizado (versão condensada) -->
 # RedisMySQLIntegration (Cache Distribuído com Persistência)
 
-Projeto demonstrativo de integração Redis + MySQL, mostrando padrão de cache distribuído como camada frontal para reduzir latência e carga no banco de dados. Usa `StackExchange.Redis` para cache e `MySql.Data` para persistência.
+## Visão geral
 
-## 1. Visão Geral
 Arquitetura simples em duas camadas:
 - **Redis** (camada de leitura rápida): armazena resultados de queries frequentes com TTL
 - **MySQL** (fonte de verdade): banco de dados relacional com dados persistentes
@@ -11,14 +9,55 @@ Arquitetura simples em duas camadas:
 
 Benefícios: redução de latência em leituras repetidas, menor carga no banco, escalabilidade horizontal facilitada.
 
-## 2. Objetivos Didáticos
+## Conceitos abordados
+
+- Exemplo didático sobre RedisMySQLIntegration (Cache Distribuído com Persistência) no contexto de estratégias de cache e integração com Redis.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
+
 - Demonstrar integração básica Redis + MySQL
 - Ilustrar padrão cache-aside em cache distribuído
 - Mostrar conexão singleton do Redis (`ConnectionMultiplexer`)
 - Evidenciar estratégia de chaves estruturadas
 - Preparar para migração de cache local (memória) para distribuído
 
-## 3. Estrutura Principal
+## Estrutura do projeto
+
+```text
+RedisMySQLIntegration/
++-- Program.cs
+\-- RedisMySQLIntegration.csproj
+```
+
+## Como executar
+
+```bash
+dotnet run --project 06-Caching/Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- **Conexão singleton**: `ConnectionMultiplexer` é thread-safe e reutilizável
+- **Serialização**: `System.Text.Json` com DTOs claros
+- **Chaves previsíveis**: Padrão `prefixo:identificador`
+- **TTL apropriado**: Balanceado por tipo de dado
+- **Separação de responsabilidades**: Repository (MySQL) vs CacheService (Redis)
+- **Logging**: Hit/miss para observabilidade
+
+### 12. Pontos de Atenção
+
+- Primeira requisição de cada chave sempre paga custo do MySQL (miss)
+- Invalidação incorreta = dados obsoletos ou desperdício de memória
+- Múltiplas instâncias da aplicação compartilham mesmo Redis (consistência melhorada)
+- Falha do Redis deve ter fallback para MySQL (graceful degradation)
+- TTL muito longo em dados voláteis = inconsistência
+
+## Conteúdo complementar
+
+##### 3. Estrutura Principal
+
 ```
 RedisMySQLIntegration/
   Program.cs (exemplo de uso e fluxo)
@@ -26,12 +65,14 @@ RedisMySQLIntegration/
 ```
 Projeto console minimalista focado em demonstrar a integração.
 
-## 4. Pré-requisitos
+##### 4. Pré-requisitos
+
 - **.NET 9 SDK** (via props global)
 - **MySQL** (localhost:3306 ou Docker)
 - **Redis** (localhost:6379 ou Docker)
 
-### Subir Infraestrutura (Docker)
+##### Subir Infraestrutura (Docker)
+
 ```powershell
 # MySQL
 docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=senha123 -p 3306:3306 mysql:8
@@ -40,15 +81,15 @@ docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=senha123 -p 3306:3306 mysql:8
 docker run -d --name redis -p 6379:6379 redis
 ```
 
-## 5. Dependências
+##### 5. Dependências
+
 ```powershell
 dotnet add package MySql.Data
 dotnet add package StackExchange.Redis
 ```
 
-## 6. Configuração
+##### Connection Strings (appsettings.json)
 
-### Connection Strings (appsettings.json)
 ```json
 {
   "ConnectionStrings": {
@@ -58,7 +99,8 @@ dotnet add package StackExchange.Redis
 }
 ```
 
-### Criar Banco de Dados
+##### Criar Banco de Dados
+
 ```sql
 CREATE DATABASE MeuBanco;
 USE MeuBanco;
@@ -74,16 +116,8 @@ INSERT INTO Usuarios (Nome, Email) VALUES
 ('Maria Santos', 'maria@example.com');
 ```
 
-## 7. Execução Rápida
-```powershell
-cd "C:\Users\Lucas Jorge\Documents\Default Projects\Back\CSharp-101\Caching\RedisMySQLIntegration"
-dotnet restore
-dotnet run
-```
+##### Leitura com Cache-Aside
 
-## 8. Fluxo de Cache (Pseudo)
-
-### Leitura com Cache-Aside
 ```csharp
 public async Task<Usuario?> GetUsuarioAsync(int id)
 {
@@ -111,7 +145,8 @@ public async Task<Usuario?> GetUsuarioAsync(int id)
 }
 ```
 
-### Serviço de Cache Redis
+##### Serviço de Cache Redis
+
 ```csharp
 public class RedisService
 {
@@ -138,7 +173,7 @@ public class RedisService
 }
 ```
 
-## 9. Estratégia de Chaves & TTL
+##### 9. Estratégia de Chaves & TTL
 
 | Tipo de Dado | Formato da Chave | TTL Recomendado |
 |--------------|------------------|-----------------|
@@ -152,9 +187,8 @@ public class RedisService
 - Leituras muito frequentes = TTL maior (com invalidação em escritas)
 - Chaves estruturadas facilitam invalidação em lote
 
-## 10. Invalidação em Escritas
+##### Criar/Atualizar Usuário
 
-### Criar/Atualizar Usuário
 ```csharp
 public async Task UpdateUsuarioAsync(Usuario usuario)
 {
@@ -170,22 +204,8 @@ public async Task UpdateUsuarioAsync(Usuario usuario)
 }
 ```
 
-## 11. Boas Práticas Aplicadas
-- **Conexão singleton**: `ConnectionMultiplexer` é thread-safe e reutilizável
-- **Serialização**: `System.Text.Json` com DTOs claros
-- **Chaves previsíveis**: Padrão `prefixo:identificador`
-- **TTL apropriado**: Balanceado por tipo de dado
-- **Separação de responsabilidades**: Repository (MySQL) vs CacheService (Redis)
-- **Logging**: Hit/miss para observabilidade
+##### 13. Extensões Futuras
 
-## 12. Pontos de Atenção
-- Primeira requisição de cada chave sempre paga custo do MySQL (miss)
-- Invalidação incorreta = dados obsoletos ou desperdício de memória
-- Múltiplas instâncias da aplicação compartilham mesmo Redis (consistência melhorada)
-- Falha do Redis deve ter fallback para MySQL (graceful degradation)
-- TTL muito longo em dados voláteis = inconsistência
-
-## 13. Extensões Futuras
 - **Write-through**: atualizar cache simultaneamente com banco
 - **Write-behind**: buffer de escritas assíncronas
 - **Circuit breaker**: Polly para falhas sucessivas de MySQL
@@ -194,7 +214,7 @@ public async Task UpdateUsuarioAsync(Usuario usuario)
 - **Redis Cluster**: alta disponibilidade
 - **Invalidação via Pub/Sub**: coordenar entre múltiplas instâncias
 
-## 14. Performance Comparativa
+##### 14. Performance Comparativa
 
 | Operação | Latência Típica |
 |----------|-----------------|
@@ -204,7 +224,8 @@ public async Task UpdateUsuarioAsync(Usuario usuario)
 
 **Ganho**: 10-100x redução de latência em cache hit.
 
-## 15. Troubleshooting
+##### 15. Troubleshooting
+
 ```powershell
 # Verificar Redis
 redis-cli ping  # Deve retornar PONG
@@ -217,14 +238,13 @@ mysql -u root -p -e "SELECT * FROM Usuarios LIMIT 5;"
 # Console exibe hits/misses e operações
 ```
 
-## 16. Referências
+##### 17. Aprendizados Esperados
+
+Após estudar: compreender integração Redis + MySQL, implementar cache-aside distribuído, gerenciar TTL e invalidação, avaliar trade-offs de consistência eventual.
+
+## Referências
+
 - [StackExchange.Redis Docs](https://stackexchange.github.io/StackExchange.Redis/)
 - [MySQL Connector/NET](https://dev.mysql.com/doc/connector-net/en/)
 - Cache-Aside Pattern (Azure Architecture)
 - Redis Best Practices (redis.io)
-
-## 17. Aprendizados Esperados
-Após estudar: compreender integração Redis + MySQL, implementar cache-aside distribuído, gerenciar TTL e invalidação, avaliar trade-offs de consistência eventual.
-
----
-Material versão condensada padronizada com demais projetos do repositório.

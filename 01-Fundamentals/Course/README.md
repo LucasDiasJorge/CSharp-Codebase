@@ -1,6 +1,16 @@
-# 🔄 Course - JSON Serialization e Deserialization
+# Course - JSON Serialization e Deserialization
 
-## 🎯 Objetivos de Aprendizado
+## Visão geral
+
+**Serialização** é o processo de converter objetos .NET em formato JSON (texto). **Desserialização** é o processo inverso - converter JSON em objetos .NET.
+
+## Conceitos abordados
+
+- Exemplo didático sobre Course - JSON Serialization e Deserialization no contexto de conceitos fundamentais da linguagem C# e orientação a objetos.
+- Estrutura de código preparada para estudo, leitura rápida e execução direcionada.
+- Observação prática das decisões técnicas presentes nesta implementação.
+
+## Objetivos de aprendizagem
 
 - Dominar **serialização e desserialização JSON** em .NET
 - Usar **System.Text.Json** para manipulação de dados
@@ -9,13 +19,33 @@
 - Implementar **conversores customizados**
 - Comparar **System.Text.Json** vs **Newtonsoft.Json**
 
-## 📚 Conceitos Fundamentais
+## Estrutura do projeto
 
-### O que é Serialização JSON?
+```text
+Course/
++-- Course/
++-- Course.csproj
+\-- Program.cs
+```
 
-**Serialização** é o processo de converter objetos .NET em formato JSON (texto). **Desserialização** é o processo inverso - converter JSON em objetos .NET.
+## Como executar
 
-### System.Text.Json vs Newtonsoft.Json
+```bash
+dotnet run --project 01-Fundamentals/Course/Course.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+1. **Use System.Text.Json** para novos projetos (.NET Core 3.0+)
+2. **Configure options uma vez** e reutilize
+3. **Use async methods** para I/O de arquivos grandes
+4. **Valide dados** após desserialização
+5. **Cache JsonSerializerOptions** para performance
+6. **Use source generators** para AOT scenarios
+
+## Conteúdo complementar
+
+##### System.Text.Json vs Newtonsoft.Json
 
 | Aspecto | System.Text.Json | Newtonsoft.Json |
 |---------|------------------|-----------------|
@@ -25,7 +55,7 @@
 | **Compatibilidade** | .NET Core 3.0+ | .NET Framework 2.0+ |
 | **Features** | 📦 Básico, extensível | 🚀 Rico em recursos |
 
-## 🏗️ Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```
 Course/
@@ -36,9 +66,7 @@ Course/
 └── Course.csproj
 ```
 
-## 💡 Exemplos Práticos
-
-### 1. Modelo Base - DebtConfirmation
+##### 1. Modelo Base - DebtConfirmation
 
 ```csharp
 public class DebtConfirmation 
@@ -66,7 +94,7 @@ public class DebtConfirmation
 }
 ```
 
-### 2. Desserialização Básica
+##### 2. Desserialização Básica
 
 ```csharp
 string jsonData = @"[
@@ -91,7 +119,7 @@ foreach (var debt in debts)
 }
 ```
 
-### 3. Serialização para JSON
+##### 3. Serialização para JSON
 
 ```csharp
 var debt = new DebtConfirmation
@@ -118,7 +146,7 @@ string prettyJson = JsonSerializer.Serialize(debt, options);
 Console.WriteLine(prettyJson);
 ```
 
-### 4. Configurações Avançadas
+##### 4. Configurações Avançadas
 
 ```csharp
 var options = new JsonSerializerOptions
@@ -146,7 +174,7 @@ var options = new JsonSerializerOptions
 var result = JsonSerializer.Serialize(debt, options);
 ```
 
-### 5. Conversores Customizados
+##### 5. Conversores Customizados
 
 ```csharp
 // Conversor para formato de data personalizado
@@ -173,7 +201,7 @@ options.Converters.Add(new CustomDateTimeConverter());
 var debt = JsonSerializer.Deserialize<DebtConfirmation>(json, options);
 ```
 
-### 6. Trabalhar com JSON Dinâmico
+##### 6. Trabalhar com JSON Dinâmico
 
 ```csharp
 // JsonDocument para JSON estruturado
@@ -202,36 +230,19 @@ if (array != null)
 }
 ```
 
-## 🚀 Configuração e Execução
-
-### 1. Pré-requisitos
+##### 1. Pré-requisitos
 
 - .NET 8 SDK
 - Editor de código (Visual Studio, VS Code, etc.)
 
-### 2. Executar o Projeto
-
-```bash
-# Navegar para o diretório
-cd Course
-
-# Restaurar dependências
-dotnet restore
-
-# Executar a aplicação
-dotnet run
-```
-
-### 3. Exemplos de Saída
+##### 3. Exemplos de Saída
 
 ```
 2021-07-27T16:01:39.41+00:00
 2021-08-25T14:47:18.13+00:00
 ```
 
-## 🔧 Cenários Avançados
-
-### 1. Herança e Polimorfismo
+##### 1. Herança e Polimorfismo
 
 ```csharp
 [JsonDerivedType(typeof(PersonalDebt), typeDiscriminator: "personal")]
@@ -268,7 +279,7 @@ string json = @"{
 BaseDebt debt = JsonSerializer.Deserialize<BaseDebt>(json);
 ```
 
-### 2. Validação durante Desserialização
+##### 2. Validação durante Desserialização
 
 ```csharp
 public class ValidatedDebtConfirmation : DebtConfirmation
@@ -297,7 +308,7 @@ public class ValidatedDebtConfirmation : DebtConfirmation
 }
 ```
 
-### 3. Performance com Utf8JsonReader
+##### 3. Performance com Utf8JsonReader
 
 ```csharp
 public static List<DebtConfirmation> ParseDebtsHighPerformance(ReadOnlySpan<byte> jsonUtf8)
@@ -349,18 +360,7 @@ private static DebtConfirmation ReadDebtFromReader(ref Utf8JsonReader reader)
 }
 ```
 
-## 💯 Melhores Práticas
-
-### ✅ Boas Práticas
-
-1. **Use System.Text.Json** para novos projetos (.NET Core 3.0+)
-2. **Configure options uma vez** e reutilize
-3. **Use async methods** para I/O de arquivos grandes
-4. **Valide dados** após desserialização
-5. **Cache JsonSerializerOptions** para performance
-6. **Use source generators** para AOT scenarios
-
-### 📋 Configuração Recomendada
+##### Configuração Recomendada
 
 ```csharp
 public static class JsonConfig
@@ -381,7 +381,7 @@ public static class JsonConfig
 var result = JsonSerializer.Serialize(data, JsonConfig.DefaultOptions);
 ```
 
-### ❌ Evitar
+##### Evitar
 
 1. **Desserializar sem try-catch**: Sempre trate JsonException
 2. **Criar options repetidamente**: Cache configurações
@@ -389,7 +389,7 @@ var result = JsonSerializer.Serialize(data, JsonConfig.DefaultOptions);
 4. **Ignorar encoding**: UTF-8 é padrão e mais eficiente
 5. **Misturar bibliotecas**: Use apenas uma (System.Text.Json ou Newtonsoft)
 
-## 🔍 Comparação de Tipos de Data
+##### Comparação de Tipos de Data
 
 | Tipo | Formato JSON | Uso Recomendado |
 |------|-------------|-----------------|
@@ -398,7 +398,7 @@ var result = JsonSerializer.Serialize(data, JsonConfig.DefaultOptions);
 | **DateOnly** | "2024-01-15" | Apenas data |
 | **TimeOnly** | "10:30:00" | Apenas hora |
 
-## 📋 Exercícios Práticos
+##### Exercícios Práticos
 
 1. **Converter Newtonsoft**: Migre código existente para System.Text.Json
 2. **API Integration**: Consuma API externa com JSON
@@ -406,13 +406,11 @@ var result = JsonSerializer.Serialize(data, JsonConfig.DefaultOptions);
 4. **Streaming**: Processe arquivos JSON grandes com streaming
 5. **Validation**: Implemente validação customizada durante desserialização
 
-## 🔗 Recursos Adicionais
+## Referências
 
 - [System.Text.Json Overview](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview)
 - [JSON Serialization](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to)
 - [Migration from Newtonsoft.Json](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to)
 - [Performance Tips](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-performance)
-
----
 
 💡 **Dica**: System.Text.Json é o futuro da serialização JSON em .NET. Oferece melhor performance e menor uso de memória que Newtonsoft.Json, sendo a escolha padrão para novos projetos!

@@ -1,10 +1,10 @@
 # Strategy Pattern - Sistema de Pagamentos
 
-## 📖 Visão Geral
+## Visão geral
 
 Este projeto implementa o **Design Pattern Strategy** através de um sistema de processamento de pagamentos. O padrão Strategy define uma família de algoritmos, encapsula cada um deles e os torna intercambiáveis.
 
-## 🎯 Problema Resolvido
+## Conceitos abordados
 
 O padrão Strategy resolve os seguintes problemas:
 - **Condicionais complexas** - Elimina estruturas if/else ou switch extensas
@@ -12,9 +12,35 @@ O padrão Strategy resolve os seguintes problemas:
 - **Dificuldade de extensão** - Facilita adição de novos algoritmos
 - **Violação do princípio Aberto/Fechado** - Permite extensão sem modificação
 
-## 🔧 Implementação
+## Objetivos de aprendizagem
 
-### Estrutura Base
+- Entender como Strategy Pattern - Sistema de Pagamentos se aplica em um cenário prático de design patterns, modelagem OO e código limpo.
+- Executar o exemplo com comandos direcionados ao projeto correto.
+- Usar a pasta como referência rápida para estudo e revisão posterior.
+
+## Estrutura do projeto
+
+```text
+Strategy/
++-- Program.cs
+\-- Strategy.csproj
+```
+
+## Como executar
+
+```bash
+dotnet run --project 07-DesignPatterns/DesignPattern/Behavioral/Strategy/Strategy.csproj
+```
+
+## Boas práticas e pontos de atenção
+
+- Execute comandos direcionados ao arquivo .csproj mais próximo desta pasta.
+- Revise dependências externas, portas e serviços auxiliares antes de rodar integrações.
+- Use a documentação complementar da pasta quando o exemplo possuir cenários adicionais.
+
+## Conteúdo complementar
+
+##### Estrutura Base
 
 ```csharp
 // Interface da estratégia
@@ -45,9 +71,8 @@ public class ProcessadorPagamento
 }
 ```
 
-### Estratégias Implementadas
+##### 1. Cartão de Crédito
 
-#### 1. Cartão de Crédito
 ```csharp
 public class CartaoCreditoStrategy : IPagamentoStrategy
 {
@@ -58,7 +83,8 @@ public class CartaoCreditoStrategy : IPagamentoStrategy
 }
 ```
 
-#### 2. PIX
+##### 2. PIX
+
 ```csharp
 public class PixStrategy : IPagamentoStrategy
 {
@@ -69,7 +95,8 @@ public class PixStrategy : IPagamentoStrategy
 }
 ```
 
-#### 3. Boleto
+##### 3. Boleto
+
 ```csharp
 public class BoletoStrategy : IPagamentoStrategy
 {
@@ -80,16 +107,16 @@ public class BoletoStrategy : IPagamentoStrategy
 }
 ```
 
-## 🚀 Como Usar
+##### Uso Básico
 
-### Uso Básico
 ```csharp
 // Criando processador com estratégia inicial
 var processador = new ProcessadorPagamento(new CartaoCreditoStrategy());
 processador.ProcessarPagamento(150.00m);
 ```
 
-### Mudança de Estratégia em Runtime
+##### Mudança de Estratégia em Runtime
+
 ```csharp
 // Alterando estratégia dinamicamente
 processador.SetEstrategia(new PixStrategy());
@@ -99,7 +126,7 @@ processador.SetEstrategia(new BoletoStrategy());
 processador.ProcessarPagamento(200.00m);
 ```
 
-## ✅ Vantagens
+##### Vantagens
 
 1. **Flexibilidade**: Algoritmos podem ser trocados em tempo de execução
 2. **Extensibilidade**: Fácil adição de novas estratégias
@@ -107,9 +134,8 @@ processador.ProcessarPagamento(200.00m);
 4. **Princípios SOLID**: Segue SRP, OCP e DIP
 5. **Remoção de condicionais**: Elimina estruturas if/else complexas
 
-## 🔄 Extensões Avançadas
+##### Strategy com Configuração
 
-### Strategy com Configuração
 ```csharp
 public class CartaoCreditoStrategy : IPagamentoStrategy
 {
@@ -130,7 +156,8 @@ public class CartaoCreditoStrategy : IPagamentoStrategy
 }
 ```
 
-### Strategy com Retorno
+##### Strategy com Retorno
+
 ```csharp
 public interface IPagamentoStrategy
 {
@@ -145,7 +172,8 @@ public class PagamentoResult
 }
 ```
 
-### Factory para Estratégias
+##### Factory para Estratégias
+
 ```csharp
 public static class PagamentoStrategyFactory
 {
@@ -162,7 +190,7 @@ public static class PagamentoStrategyFactory
 }
 ```
 
-## 🎯 Casos de Uso Ideais
+##### Casos de Uso Ideais
 
 - **Sistemas de pagamento** com múltiplas formas de pagamento
 - **Algoritmos de ordenação** intercambiáveis
@@ -170,14 +198,14 @@ public static class PagamentoStrategyFactory
 - **Algoritmos de roteamento** em sistemas de navegação
 - **Diferentes formatos de relatório** (PDF, Excel, CSV)
 
-## ❌ Quando NÃO usar
+##### Quando NÃO usar
 
 - Quando há apenas um algoritmo
 - Algoritmos que nunca mudam
 - Quando o custo de abstração é maior que o benefício
 - Sistemas muito simples
 
-## 🧪 Exemplo de Teste
+##### Exemplo de Teste
 
 ```csharp
 [Test]
@@ -212,9 +240,8 @@ public void ProcessadorPagamento_DeveTrocarEstrategia()
 }
 ```
 
-## 🔄 Variações do Padrão
+##### 1. Strategy com Template Method
 
-### 1. Strategy com Template Method
 ```csharp
 public abstract class PagamentoStrategyBase : IPagamentoStrategy
 {
@@ -233,7 +260,8 @@ public abstract class PagamentoStrategyBase : IPagamentoStrategy
 }
 ```
 
-### 2. Strategy com Dependency Injection
+##### 2. Strategy com Dependency Injection
+
 ```csharp
 public class ProcessadorPagamento
 {
@@ -252,7 +280,7 @@ public class ProcessadorPagamento
 }
 ```
 
-## 📊 Comparação com Outros Padrões
+##### Comparação com Outros Padrões
 
 | Aspecto | Strategy | State | Command |
 |---------|----------|-------|---------|
@@ -260,7 +288,7 @@ public class ProcessadorPagamento
 | **Troca** | Runtime | Automática | Execução |
 | **Contexto** | Mantém referência | Muda estado | Encapsula comando |
 
-## 📚 Referências
+## Referências
 
 - [Strategy Pattern - Refactoring Guru](https://refactoring.guru/design-patterns/strategy)
 - [Design Patterns - Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)
