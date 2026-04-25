@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="01/03/2026 23:52:48" ReportInfo.Modified="01/03/2026 23:52:48" ReportInfo.CreatorVersion="2026.1.3.0">
+  <Dictionary>
+    <TableDataSource Name="MyData" ReferenceName="MyData" DataType="System.Int32" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="Name" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Watermark.Font="Arial, 60pt">
+    <!-- Header with column titles (use PageHeader so appears on every page) -->
+    <PageHeaderBand Height="28">
+      <TextObject Left="0" Top="2" Width="60" Height="24" Text="Id" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Left="64" Top="2" Width="436" Height="24" Text="Name" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+
+    <!-- Data band: increase Height and add padding to avoid overlapping rows -->
+    <DataBand DataSource="MyData" Height="28">
+      <TextObject Left="0" Top="4" Width="60" Height="20" Text="[MyData.Id]" Font="Arial, 10pt"/>
+      <TextObject Left="64" Top="4" Width="436" Height="20" Text="[MyData.Name]" Font="Arial, 10pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>

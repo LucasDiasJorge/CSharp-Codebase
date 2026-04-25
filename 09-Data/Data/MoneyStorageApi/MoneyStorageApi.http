@@ -1,0 +1,35 @@
+@host = http://localhost:5000
+
+### Criar conta
+POST {{host}}/accounts
+Content-Type: application/json
+
+{
+  "ownerName": "Maria Souza",
+  "initialBalance": 500.00
+}
+
+### Listar contas
+GET {{host}}/accounts
+
+### Detalhar conta
+# Substitua pelo Guid retornado na criação
+GET {{host}}/accounts/{{accountId}}
+
+### Depositar
+POST {{host}}/accounts/{{accountId}}/deposit
+Content-Type: application/json
+
+{
+  "amount": 125.75,
+  "description": "Pagamento freelancer"
+}
+
+### Sacar
+POST {{host}}/accounts/{{accountId}}/withdraw
+Content-Type: application/json
+
+{
+  "amount": 80.00,
+  "description": "Supermercado"
+}

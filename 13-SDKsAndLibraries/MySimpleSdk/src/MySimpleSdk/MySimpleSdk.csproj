@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>MySimpleSdk</AssemblyName>
+    <RootNamespace>MySimpleSdk</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>Your Name</Authors>
+    <Description>A simple SDK for interacting with the API.</Description>
+    <PackageId>MySimpleSdk</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageAuthors>Your Name</PackageAuthors>
+    <PackageDescription>A simple SDK for interacting with the API.</PackageDescription>
+    <PackageTags>sdk api</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+</Project>

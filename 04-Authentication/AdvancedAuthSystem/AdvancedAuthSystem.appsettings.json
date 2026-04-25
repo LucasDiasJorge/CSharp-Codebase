@@ -1,0 +1,14 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "Jwt": {
+    "SecretKey": "SuperSecretKeyForJWTTokenGeneration123456789!@#$%^&*()",
+    "Issuer": "AdvancedAuthSystem",
+    "Audience": "AdvancedAuthSystem"
+  }
+}

@@ -1,0 +1,35 @@
+@IdempotencyCacheApi_HostAddress = http://localhost:5065
+@IdempotencyKey = payment-001
+
+POST {{IdempotencyCacheApi_HostAddress}}/api/payments
+Idempotency-Key: {{IdempotencyKey}}
+Content-Type: application/json
+Accept: application/json
+
+{
+	"orderId": "ORDER-1001",
+	"amount": 199.90,
+	"currency": "BRL",
+	"description": "Payment for premium plan"
+}
+
+###
+
+POST {{IdempotencyCacheApi_HostAddress}}/api/payments
+Idempotency-Key: {{IdempotencyKey}}
+Content-Type: application/json
+Accept: application/json
+
+{
+	"orderId": "ORDER-1001",
+	"amount": 199.90,
+	"currency": "BRL",
+	"description": "Payment for premium plan"
+}
+
+###
+
+DELETE {{IdempotencyCacheApi_HostAddress}}/api/payments/cache/{{IdempotencyKey}}
+Accept: application/json
+
+###

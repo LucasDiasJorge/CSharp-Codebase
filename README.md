@@ -1,232 +1,122 @@
-# **📌 `dotnet new` → Criando Projetos e Arquivos**
-O comando `dotnet new` é usado para criar novos projetos, soluções e arquivos específicos.  
+# CSharp-101
 
-### **✅ Criar um Novo Projeto**
-```sh
-dotnet new <TEMPLATE> -n <NOME_DO_PROJETO> --use-program-main
-```
-🔹 **Exemplo:** Criar um projeto **Console** chamado `MinhaApp`  
-```sh
-dotnet new console -n MinhaApp --use-program-main
-```
+## Visão geral
 
-### **✅ Templates Disponíveis**
-| **Comando**                  | **Descrição**                     |
-|------------------------------|---------------------------------|
-| `dotnet new console`         | Projeto Console                 |
-| `dotnet new web`             | Aplicação Web API (ASP.NET Core) |
-| `dotnet new mvc`             | Projeto ASP.NET MVC             |
-| `dotnet new webapi`          | API REST ASP.NET Core           |
-| `dotnet new classlib`        | Biblioteca de Classes (.dll)    |
-| `dotnet new blazorserver`    | Aplicação Blazor Server         |
-| `dotnet new blazorwasm`      | Aplicação Blazor WebAssembly    |
-| `dotnet new razorclasslib`   | Biblioteca de Componentes Razor |
-| `dotnet new worker`          | Serviço Background (Worker)     |
-| `dotnet new grpc`            | Serviço gRPC                    |
-| `dotnet new xunit`           | Testes Unitários xUnit          |
-| `dotnet new mstest`          | Testes Unitários MSTest         |
-| `dotnet new nunit`           | Testes Unitários NUnit          |
+O CSharp-101 é um repositório educacional com exemplos práticos em C# e .NET organizados por trilhas temáticas. Cada pasta reúne projetos pequenos e focados, com documentação local padronizada para facilitar leitura, execução isolada e reaproveitamento como referência técnica.
 
----
+O catálogo cobre fundamentos da linguagem, APIs web, autenticação, mensageria, cache, padrões de projeto, padrões arquiteturais, persistência, algoritmos, utilitários, testes e SDKs. As convenções de documentação ficam em `docs/` e o padronizador de README em `tools/`.
 
-### **✅ Criar Arquivos Individuais**
-| **Comando**                    | **Descrição**                   |
-|--------------------------------|--------------------------------|
-| `dotnet new sln`               | Criar uma solução (.sln)      |
-| `dotnet new class`             | Criar uma classe              |
-| `dotnet new interface`         | Criar uma interface           |
-| `dotnet new enum`              | Criar uma enumeração          |
-| `dotnet new record`            | Criar um record (C# 9+)       |
-| `dotnet new page`              | Criar uma página Razor        |
+## Conceitos abordados
 
-🔹 **Exemplo:** Criar uma **interface** chamada `IMeuServico.cs`  
-```sh
-dotnet new interface -n IMeuServico
-```
+- Linguagem C#, orientação a objetos, LINQ, delegates, eventos e reflection.
+- ASP.NET Core, Minimal APIs, middleware, gRPC, autenticação, autorização e segurança.
+- Mensageria, Redis, design patterns, CQRS, Saga, persistência, algoritmos e utilitários de apoio.
+- Testes, benchmarks e construção de bibliotecas e SDKs reutilizáveis.
 
----
+## Objetivos de aprendizagem
 
-# **📌 Manipulação de Projetos .NET**
-## **✅ Criar, Restaurar e Executar Projetos**
-### **🔹 Criar uma solução e adicionar projetos**
-```sh
-dotnet new sln -n MinhaSolucao      # Criar uma solução
-dotnet new console -n MinhaApp      # Criar um projeto Console
-dotnet sln add MinhaApp/MinhaApp.csproj  # Adicionar o projeto à solução
+- Encontrar rapidamente um exemplo prático para um tema específico do ecossistema .NET.
+- Executar exemplos de forma isolada, com comandos direcionados por projeto.
+- Comparar abordagens diferentes para o mesmo problema técnico.
+- Usar os READMEs locais como índice curto de estudo e navegação.
+
+## Estrutura do projeto
+
+```text
+CSharp-101/
++-- 01-Fundamentals/
++-- 02-AsyncAndConcurrency/
++-- 03-WebAPIs/
++-- 04-Authentication/
++-- 05-Messaging/
++-- 06-Caching/
++-- 07-DesignPatterns/
++-- 08-ArchitecturalPatterns/
++-- 09-Data/
++-- 10-Algorithms/
++-- 11-Utilities/
++-- 12-Testing/
++-- 13-SDKsAndLibraries/
++-- docs/
++-- tools/
++-- CSharp-101.sln
++-- README.md
++\-- .github/
 ```
 
-### **🔹 Restaurar dependências do projeto**
-```sh
-dotnet restore
+## Como executar
+
+Prefira comandos direcionados ao arquivo `.csproj` do exemplo que deseja estudar.
+
+```bash
+# Build de um exemplo console
+dotnet build 01-Fundamentals/AggregationDepartmentManagement/AggregationDepartmentManagement.csproj
+
+# Execução de uma API
+dotnet run --project 03-WebAPIs/MinimalApiDemo/MinimalApiDemo.csproj
+
+# Execução de testes
+dotnet test 12-Testing/OrderRuleConsole/OrderRuleConsole.Tests/OrderRuleConsole.Tests.csproj
+
+# Reaplicar a padronização de documentação
+powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 ```
 
-### **🔹 Compilar um projeto**
-```sh
-dotnet build
+## Boas práticas e pontos de atenção
+
+- Use o README local de cada pasta antes de executar, alterar ou validar o projeto.
+- Prefira `build`, `run` e `test` por `.csproj`; a solução raiz funciona melhor como índice do workspace do que como ponto único de validação.
+- Exemplos com Kafka, RabbitMQ, Redis, MySQL, PostgreSQL ou MongoDB exigem serviços externos ativos.
+- As convenções oficiais de documentação deste repositório estão em `docs/CONVENCOES.md` e `docs/README_TEMPLATE.md`.
+
+## Conteúdo complementar
+
+### Trilhas temáticas
+
+| Pasta | Foco principal | Exemplos de referência |
+|------|----------------|------------------------|
+| `01-Fundamentals` | Fundamentos da linguagem e OO | `Course`, `Events`, `Linq`, `Reflection` |
+| `02-AsyncAndConcurrency` | Async/await, tasks, threads e coordenação | `Asynchronous`, `AsyncTasksDemo`, `JobQueueDemo` |
+| `03-WebAPIs` | APIs, middleware, gRPC e aplicações web | `MinimalApiDemo`, `GrpcSample`, `CustomMiddleware` |
+| `04-Authentication` | JWT, OAuth, sessão e segurança | `Auth`, `SessionManagement`, `AdvancedAuthSystem` |
+| `05-Messaging` | Filas, brokers e streaming | `Kafka`, `RabbitMQ`, `KafkaStreamApi` |
+| `06-Caching` | Estratégias de cache e Redis | `CacheAside`, `CachePatterns`, `FusionCache` |
+| `07-DesignPatterns` | GoF, SOLID e modelagem OO | `DesignPattern`, `SOLIDExamples`, `ObjectCalisthenics` |
+| `08-ArchitecturalPatterns` | Organização de casos de uso e padrões arquiteturais | `UseCases`, `CQRSDemo`, `SagaPattern` |
+| `09-Data` | Bancos de dados, ORMs e acesso a dados | `Dapper`, `MongoUserApi`, `MoneyStorageApi` |
+| `10-Algorithms` | Estruturas de dados e análise de cenários | `GraphTraversalDemo`, `PriorityQueueDemo`, `SlidingWindows` |
+| `11-Utilities` | Transformação de dados, serialização e observabilidade | `Serialization`, `NPOIDemo`, `SerilogExample` |
+| `12-Testing` | Benchmarks e validação de comportamento | `BenchmarkTool`, `OrderRuleConsole` |
+| `13-SDKsAndLibraries` | Bibliotecas e SDKs reutilizáveis | `MySimpleSdk` |
+
+### Serviços externos comuns
+
+```bash
+# RabbitMQ
+docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
+
+# Redis
+docker run -d --name redis -p 6379:6379 redis
+
+# Kafka (exemplo da pasta Kafka)
+cd 05-Messaging/Kafka
+docker compose up -d
 ```
 
-### **🔹 Executar um projeto**
-```sh
-dotnet run
-```
+### Ferramentas de documentação
 
----
+- `docs/CONVENCOES.md`: convenções de escrita e manutenção dos READMEs.
+- `docs/README_TEMPLATE.md`: template base para novos exemplos.
+- `tools/ReadmeStandardizer/`: utilitário em C# para padronização em lote.
 
-## **✅ Trabalhando com Dependências (NuGet)**
-### **🔹 Adicionar um pacote NuGet**
-```sh
-dotnet add package <NOME_DO_PACOTE>
-```
-🔹 **Exemplo:** Adicionar **Entity Framework Core**  
-```sh
-dotnet add package Microsoft.EntityFrameworkCore
-```
+## Referências
 
-### **🔹 Remover um pacote NuGet**
-```sh
-dotnet remove package <NOME_DO_PACOTE>
-```
+- [Documentação do .NET](https://learn.microsoft.com/dotnet/)
+- [ASP.NET Core](https://learn.microsoft.com/aspnet/core/)
+- [Entity Framework Core](https://learn.microsoft.com/ef/core/)
+- [Refactoring Guru](https://refactoring.guru/design-patterns)
 
-### **🔹 Listar pacotes instalados**
-```sh
-dotnet list package
-```
+## Documentação complementar
 
-### **🔹 Atualizar todos os pacotes**
-```sh
-dotnet nuget update source
-```
-
----
-
-## **✅ Gerenciar Projetos**
-### **🔹 Adicionar um Projeto à Solução**
-```sh
-dotnet sln add <CAMINHO_DO_PROJETO>
-```
-
-### **🔹 Remover um Projeto da Solução**
-```sh
-dotnet sln remove <CAMINHO_DO_PROJETO>
-```
-
-### **🔹 Listar Projetos em uma Solução**
-```sh
-dotnet sln list
-```
-
----
-
-## **✅ Trabalhando com Banco de Dados (Entity Framework Core)**
-### **🔹 Instalar Entity Framework Core**
-```sh
-dotnet add package Microsoft.EntityFrameworkCore
-dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer    # Se for usar SQL Server
-dotnet add package Microsoft.EntityFrameworkCore.Sqlite       # Se for usar SQLite
-dotnet add package Microsoft.EntityFrameworkCore.PostgreSQL   # Se for usar PostgreSQL
-```
-
-### **🔹 Criar uma Migration**
-```sh
-dotnet ef migrations add Inicial
-```
-
-### **🔹 Atualizar o Banco de Dados**
-```sh
-dotnet ef database update
-```
-
-### **🔹 Remover Última Migration**
-```sh
-dotnet ef migrations remove
-```
-
-### **🔹 Listar Migrations**
-```sh
-dotnet ef migrations list
-```
-
----
-
-## **✅ Testes Unitários**
-### **🔹 Criar um Projeto de Teste**
-```sh
-dotnet new xunit -n TestesMinhaApp
-dotnet new mstest -n TestesMinhaApp
-dotnet new nunit -n TestesMinhaApp
-```
-
-### **🔹 Rodar Testes**
-```sh
-dotnet test
-```
-
----
-
-## **✅ Publicação e Deploy**
-### **🔹 Publicar um Projeto**
-```sh
-dotnet publish -c Release -o ./publicado
-```
-
-### **🔹 Publicar para um Container Docker**
-```sh
-dotnet publish -c Release --runtime linux-x64 --self-contained true -o ./publicado
-```
-
----
-
-## **✅ Informação sobre o Ambiente**
-### **🔹 Versão do .NET instalada**
-```sh
-dotnet --version
-```
-
-### **🔹 Listar SDKs Instalados**
-```sh
-dotnet --list-sdks
-```
-
-### **🔹 Listar Runtimes Instaladas**
-```sh
-dotnet --list-runtimes
-```
-
----
-
-## **✅ Limpeza de Projetos**
-### **🔹 Limpar Build Temporário**
-```sh
-dotnet clean
-```
-
-### **🔹 Remover Dependências e Arquivos de Build**
-```sh
-dotnet nuget locals all --clear
-```
-
----
-
-# **🚀 Conclusão**
-Agora você tem um **guia completo** dos comandos essenciais do **.NET CLI**! 🎯  
-
-📌 **Se estiver iniciando um projeto:**  
-```sh
-dotnet new webapi -n MinhaApi
-cd MinhaApi
-dotnet run
-```
-
-📌 **Se quiser adicionar EF Core:**  
-```sh
-dotnet add package Microsoft.EntityFrameworkCore
-dotnet ef migrations add Inicial
-dotnet ef database update
-```
-
-📌 **Se quiser compilar e executar:**  
-```sh
-dotnet build
-dotnet run
-```
+- [docs/CONVENCOES.md](./docs/CONVENCOES.md) - Convenções de documentação do repositório.
+- [docs/README_TEMPLATE.md](./docs/README_TEMPLATE.md) - Template base para READMEs padronizados.

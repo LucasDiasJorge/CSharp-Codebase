@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+// Package groups related messages and services.
+package users.v1;
+
+option csharp_namespace = "GrpcSample.Contracts.Users.V1";
+
+// User entity used in requests and responses.
+message User {
+  // Unique identifier of the user.
+  string id = 1;
+  // Full name of the user.
+  string name = 2;
+  // E-mail address of the user.
+  string email = 3;
+}
+
+// Request for getting a single user.
+message GetUserRequest {
+  string id = 1; // Identifier to find the user
+}
+
+// Response containing a user.
+message GetUserResponse {
+  User user = 1; // The user data
+}
+
+// Request for creating a user.
+message CreateUserRequest {
+  string name = 1; // New user's name
+  string email = 2; // New user's email
+}
+
+// Response after creating a user.
+message CreateUserResponse {
+  User user = 1; // Created user with generated id
+}
+
+// Request for listing users; supports paging for realism.
+message ListUsersRequest {
+  int32 page_number = 1; // 1-based page number
+  int32 page_size = 2;   // items per page
+}
+
+// Server-streamed response: each item is a user.
+message ListUsersResponse {
+  User user = 1; // One user per streamed message
+}
+
+// Client-streaming request to import many users.
+message ImportUsersRequest {
+  User user = 1; // One user per streamed message
+}
+
+// Result of import operation.
+message ImportUsersResponse {
+  int32 imported_count = 1; // number of users imported
+}
+
+// Bidirectional chat-like stream for notifications or audits.
+message UserEvent {
+  string message = 1; // textual description
+  string user_id = 2; // relates to a user
+}
+
+// Service definition demonstrating all four gRPC patterns.
+service UserService {
+  // Unary RPC: simple request/response
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
+
+  // Unary RPC: create resource
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+
+  // Server streaming: server sends multiple users
+  rpc ListUsers (ListUsersRequest) returns (stream ListUsersResponse);
+
+  // Client streaming: client sends multiple users to import
+  rpc ImportUsers (stream ImportUsersRequest) returns (ImportUsersResponse);
+
+  // Bidirectional streaming: both sides can send messages
+  rpc UserEvents (stream UserEvent) returns (stream UserEvent);
+}

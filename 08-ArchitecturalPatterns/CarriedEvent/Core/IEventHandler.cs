@@ -1,0 +1,9 @@
+namespace CarriedEvent.Core;
+
+/// <summary>
+/// Interface para handlers de eventos
+/// </summary>
+public interface IEventHandler<in TEvent> where TEvent : IEvent
+{
+    Task HandleAsync(TEvent @event, CancellationToken ct = default);
+}

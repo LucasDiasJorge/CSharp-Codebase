@@ -1,0 +1,8 @@
+<Invoice>
+  <ID>123</ID>
+  <Amount>500</Amount>
+  <Customer>
+    <Name>Lucas</Name>
+    <Country>BR</Country>
+  </Customer>
+</Invoice>
