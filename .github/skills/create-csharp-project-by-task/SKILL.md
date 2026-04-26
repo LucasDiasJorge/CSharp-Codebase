@@ -56,7 +56,10 @@ Se houver ambiguidade, priorize a categoria que melhor representa o conceito pri
 5. Implementar codigo com tipos explicitos e sem uso indevido de var.
 6. Validar uso de var por busca textual e revisar excecoes inevitaveis.
 7. Criar/atualizar o README.md local do projeto usando o template oficial.
-8. Atualizar o README.md raiz, incluindo o projeto na tabela da categoria correta com descricao curta.
+8. Atualizar o README.md raiz em dois lugares:
+   - **Seção "Índice Completo de Projetos"**: adicionar o projeto na categoria NN correta (ex: #### NN-Categoria) com bullet point formatado (`- \`NomeProjeto\` - descrição curta`).
+   - **Seção "Trilhas temáticas"**: atualizar a tabela existente se necessario.
+   - Manter consistência alfabética ou de agrupamento (subprojetos indentados com "  - ").
 9. Executar build do projeto criado/alterado:
    - dotnet build <caminho-do-csproj>
    - Nao usar build completo da solucao como criterio de done.

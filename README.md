@@ -71,6 +71,163 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ## Conteúdo complementar
 
+### Índice Completo de Projetos
+
+#### 01-Fundamentals (9 projetos)
+- `AggregationDepartmentManagement` - Composição e agregação
+- `AssociationMedicalScheduling` - Associação entre objetos
+- `CompositionOrderFulfillment` - Composição de objetos
+- `Course` - Fundamentos da linguagem
+- `Events` - Sistema de eventos e delegates
+- `Linq` - Query com LINQ
+- `LogicalOperatorsDemo` - Operadores lógicos
+- `Reflection` - Introspecção de tipos
+- `SymbolicDelegates` - Delegates simbólicos
+
+#### 02-AsyncAndConcurrency (7 projetos)
+- `Asynchronous` - Async/await básico
+- `AsyncTasksDemo` - Demonstração de tasks
+- `AtomicOperationsDemo` - Operações atômicas
+- `BackgroudWorker` - Background workers
+- `JobQueueDemo` - Fila de trabalhos
+- `TaskManagement` - Gerenciamento de tasks
+- `Threads` - Manipulação de threads
+
+#### 03-WebAPIs (15 projetos)
+- `BlazorHelloWorld` - Aplicação Blazor
+- `CustomFilterApi` - Filtros customizados em API
+- `CustomMiddleware` - Middleware customizado
+- `FluentValidationUserApi` - Validação com Fluent Validation
+- `GrpcSample` (3 subprojetos)
+  - `GrpcSample.Client` - Cliente gRPC
+  - `GrpcSample.Contracts` - Contratos Protobuf
+  - `GrpcSample.Server` - Servidor gRPC
+- `IdempotencyCacheApi` - Idempotência com cache
+- `InvoiceThrottlingApi` - Throttling de requisições
+- `MinimalApiDemo` - Minimal APIs (ASP.NET Core)
+- `ShareableUser` - Recurso compartilhável
+- `SimpleWebAPI` - API básica
+- `SwaggerClientCode` - Geração de código via Swagger
+- `TransactionalOrderApi` - Transações em pedidos
+- `WebApplication` (1 subprojeto)
+  - `MyAPI` - Aplicação web
+
+#### 04-Authentication (7 projetos)
+- `AdvancedAuthSystem` - Sistema avançado de autenticação
+- `Authentication` (2 subprojetos)
+  - `Auth` - Autenticação básica
+  - `OAuthApplication` - OAuth 2.0
+- `Security` (3 subprojetos)
+  - `EncryptDecrypt` - Criptografia
+  - `SafeVault` - Armazenamento seguro
+  - `SecurityAndAuthentication` - Segurança integrada
+- `SessionManagement` - Gerenciamento de sessão
+
+#### 05-Messaging (6 projetos)
+- `Kafka` (2 subprojetos)
+  - `Send` - Produtor Kafka
+  - `Receive` - Consumidor Kafka
+- `KafkaStreamApi` - Streaming com Kafka
+- `QueueExample` - Exemplo de fila
+- `RabbitMQ` (2 subprojetos)
+  - `Send` - Produtor RabbitMQ
+  - `Receive` - Consumidor RabbitMQ
+
+#### 06-Caching (7 projetos)
+- `Caching` (6 subprojetos)
+  - `CacheAside` - Padrão Cache-Aside
+  - `CacheIncrement` - Incremento com cache
+  - `CachePatterns` - Padrões de cache
+  - `FusionCache` - Biblioteca FusionCache
+  - `RedisMySQLIntegration` - Redis + MySQL
+  - `RedisConsoleApp` - Redis (console)
+- `UnifiedCacheSdk` - SDK unificado de cache
+
+#### 07-DesignPatterns (17 projetos)
+- `SOLIDExamples` - Princípios SOLID
+- `StrategyIntegration` - Padrão Strategy
+- `ObjectCalisthenics` (2 subprojetos)
+  - `BadOrderApi` - Implementação inadequada
+  - `GoodOrderApi` - Implementação adequada
+- `RichVsAnemicDomain` (2 subprojetos)
+  - `AnemicDomain` - Domínio anêmico
+  - `RichDomain` - Domínio rico
+- `DesignPattern/Behavioral` (6 subprojetos)
+  - `ChainOfResponsibility` - Cadeia de responsabilidade
+  - `Mediator` - Mediador
+  - `State` - Estado
+  - `Strategy` - Estratégia
+  - `UnitOfWork` - Unidade de trabalho
+  - `Visitor` - Visitante
+- `DesignPattern/Creational` (2 subprojetos)
+  - `Builder` - Construtor
+  - `Factory` - Fábrica
+- `DesignPattern/Structural` (3 subprojetos)
+  - `Adapter` - Adaptador
+  - `Composite` - Composto
+  - `Decorator` - Decorador
+
+#### 08-ArchitecturalPatterns (9 projetos)
+- `CarriedEvent` - Eventos persistidos
+- `CircuitBreakerDemo` - Disjuntor
+- `CQRSDemo` - Command Query Responsibility Segregation
+- `PersistencePatterns` - Padrões de persistência
+- `SagaPattern` - Padrão Saga
+- `ServiceRegistration` - Registro de serviços
+- `TransactionPattern` - Padrão de transação
+- `TransactionScript` - Script de transação
+- `UseCases` - Casos de uso
+
+#### 09-Data (9 projetos)
+- `Data` (8 subprojetos)
+  - `Dapper` - Micro ORM Dapper
+  - `DapperExample` - Exemplo com Dapper
+  - `MoneyStorageApi` - API de armazenamento
+  - `MongoUserApi` - API com MongoDB
+  - `MysqlExample` - Exemplo com MySQL
+  - `Postgres` - Exemplo com PostgreSQL
+  - `ProcedureExample` - Procedimentos armazenados
+  - `sqlite-sample-api` - API com SQLite
+  - `sqlite-sample-api.Tests` - Testes
+
+#### 10-Algorithms (5 projetos)
+- `GraphTraversalDemo` - Travessia de grafos
+- `LoadBalancingAlgorithms` - Algoritmos de balanceamento
+- `PriorityQueueDemo` - Fila de prioridade
+- `RealWorldBubbleSort` - Bubble sort prático
+- `SlidingWindows` - Janela deslizante
+
+#### 11-Utilities (9 projetos)
+- `ClassToDTO` - Conversão classe para DTO
+- `ClassToXml` - Conversão classe para XML
+- `CompressDecompress` - Compressão/descompressão
+- `DictionaryMerge` - Fusão de dicionários
+- `NPOIDemo` - NPOI para Excel/Word
+- `PDFGenerator` - Geração de PDF
+- `Serialization` - Serialização
+- `SerilogExample` - Logging estruturado com Serilog
+- `XmlBasics` - Manipulação XML
+
+#### 12-Testing (3 projetos)
+- `BenchmarkTool` - Benchmark de performance
+- `OrderRuleConsole` (2 subprojetos)
+  - `OrderRuleConsole` - Aplicação
+  - `OrderRuleConsole.Tests` - Testes
+
+#### 13-SDKsAndLibraries (3 projetos)
+- `MySimpleSdk` (3 subprojetos)
+  - `MySimpleSdk` - Biblioteca principal
+  - `MySimpleSdk.Demo` - Demonstração
+  - `MySimpleSdk.Tests` - Testes
+- `BlockchainDemo` - Demonstração de blockchain (sem .csproj)
+
+#### Tools (1 projeto)
+- `ReadmeStandardizer` - Utilitário de padronização de READMEs
+
+---
+
+**Total: 107+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+
 ### Trilhas temáticas
 
 | Pasta | Foco principal | Exemplos de referência |
