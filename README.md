@@ -73,11 +73,12 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ### Índice Completo de Projetos
 
-#### 01-Fundamentals (9 projetos)
+#### 01-Fundamentals (10 projetos)
 - `AggregationDepartmentManagement` - Composição e agregação
 - `AssociationMedicalScheduling` - Associação entre objetos
 - `CompositionOrderFulfillment` - Composição de objetos
 - `Course` - Fundamentos da linguagem
+- `DictionaryMaster` - Estudo interativo de Dictionary<TKey, TValue>
 - `Events` - Sistema de eventos e delegates
 - `Linq` - Query com LINQ
 - `LogicalOperatorsDemo` - Operadores lógicos
@@ -226,13 +227,13 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 107+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 108+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
 | Pasta | Foco principal | Exemplos de referência |
 |------|----------------|------------------------|
-| `01-Fundamentals` | Fundamentos da linguagem e OO | `Course`, `Events`, `Linq`, `Reflection` |
+| `01-Fundamentals` | Fundamentos da linguagem e OO | `Course`, `DictionaryMaster`, `Events`, `Linq`, `Reflection` |
 | `02-AsyncAndConcurrency` | Async/await, tasks, threads e coordenação | `Asynchronous`, `AsyncTasksDemo`, `JobQueueDemo` |
 | `03-WebAPIs` | APIs, middleware, gRPC e aplicações web | `MinimalApiDemo`, `GrpcSample`, `CustomMiddleware` |
 | `04-Authentication` | JWT, OAuth, sessão e segurança | `Auth`, `SessionManagement`, `AdvancedAuthSystem` |
