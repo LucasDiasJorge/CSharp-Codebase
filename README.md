@@ -143,6 +143,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `RedisMySQLIntegration` - Redis + MySQL
   - `RedisConsoleApp` - Redis (console)
 - `UnifiedCacheSdk` - SDK unificado de cache
+- `Caching/RedisMetaData` - Metadados do Redis
 
 #### 07-DesignPatterns (17 projetos)
 - `SOLIDExamples` - Princípios SOLID
