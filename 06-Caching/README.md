@@ -2,7 +2,7 @@
 
 ## Visão geral
 
-Trilha do repositório dedicada a estratégias de cache em .NET, com exemplos que cobrem cache em memória, cache distribuído com Redis, integração com banco relacional, resiliência contra falhas e abstrações reutilizáveis para padronização de chaves.
+Trilha dedicada a estratégias de cache em .NET (ex.: .NET 10). O repositório contém exemplos práticos que cobrem cache em memória, cache distribuído com Redis, integração com banco relacional, resiliência contra falhas e uma pequena SDK para unificar provedores.
 
 Esta pasta está organizada em dois blocos principais: a coleção [Caching](./Caching/README.md), que reúne os exemplos executáveis de estudo, e o [UnifiedCacheSdk](./UnifiedCacheSdk/README.md), que demonstra uma abordagem reutilizável para uniformizar o acesso a provedores de cache.
 
@@ -20,7 +20,7 @@ Esta pasta está organizada em dois blocos principais: a coleção [Caching](./C
 - Comparar soluções simples, distribuídas e resilientes dentro da mesma trilha.
 - Reaproveitar a documentação local como mapa de estudo e referência prática.
 
-## Estrutura do projeto
+## Estrutura do repositório
 
 ```text
 06-Caching/
@@ -40,22 +40,24 @@ Esta pasta está organizada em dois blocos principais: a coleção [Caching](./C
 
 ## Como executar
 
-Coleção de exemplos executáveis:
+Executar a partir da raiz do repositório (`06-Caching`). Exemplos principais:
 
 ```bash
-dotnet run --project 06-Caching/Caching/CacheAside/CacheAside.csproj
-dotnet run --project 06-Caching/Caching/CacheIncrement/CacheIncrement.csproj
-dotnet run --project 06-Caching/Caching/CachePatterns/CachePatterns.csproj
-dotnet run --project 06-Caching/Caching/FusionCache/FusionCache.csproj
-dotnet run --project 06-Caching/Caching/RedisConsoleApp/RedisConsoleApp.csproj
-dotnet run --project 06-Caching/Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj
+dotnet run --project Caching/CacheAside/CacheAside.csproj
+dotnet run --project Caching/CacheIncrement/CacheIncrement.csproj
+dotnet run --project Caching/CachePatterns/CachePatterns.csproj
+dotnet run --project Caching/FusionCache/FusionCache.csproj
+dotnet run --project Caching/RedisConsoleApp/RedisConsoleApp.csproj
+dotnet run --project Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj
 ```
 
 SDK reutilizável:
 
 ```bash
-dotnet build 06-Caching/UnifiedCacheSdk/src/UnifiedCacheSdk/UnifiedCacheSdk.csproj
+dotnet build UnifiedCacheSdk/src/UnifiedCacheSdk/UnifiedCacheSdk.csproj
 ```
+
+> Observação: alguns exemplos exigem serviços externos (Redis, MySQL). Use Docker para facilitar a execução local.
 
 ## Boas práticas e pontos de atenção
 
@@ -64,7 +66,7 @@ dotnet build 06-Caching/UnifiedCacheSdk/src/UnifiedCacheSdk/UnifiedCacheSdk.cspr
 - Prefira invalidação seletiva em vez de limpar o cache inteiro sem necessidade.
 - Mantenha fallback para banco ou fonte original quando o cache falhar ou estiver indisponível.
 - Monitore latência, hit/miss ratio e custo de serialização antes de ampliar o uso de cache.
-- Alguns exemplos exigem Redis e MySQL ativos; valide dependências externas antes de executar.
+- Valide dependências externas antes de executar (Redis, MySQL quando aplicável).
 
 ## Conteúdo complementar
 
@@ -73,37 +75,28 @@ dotnet build 06-Caching/UnifiedCacheSdk/src/UnifiedCacheSdk/UnifiedCacheSdk.cspr
 | Projeto | Foco principal | Dependências | Comando principal |
 |---------|----------------|--------------|-------------------|
 | [Caching](./Caching/README.md) | Visão geral da coleção de exemplos | Varia por subprojeto | Consulte o README da pasta |
-| [CacheAside](./Caching/CacheAside/README.md) | Padrão Cache-Aside em API | Memória local | `dotnet run --project 06-Caching/Caching/CacheAside/CacheAside.csproj` |
-| [CacheIncrement](./Caching/CacheIncrement/README.md) | Contadores de alta performance | Redis + MySQL | `dotnet run --project 06-Caching/Caching/CacheIncrement/CacheIncrement.csproj` |
-| [CachePatterns](./Caching/CachePatterns/README.md) | Comparativo de estratégias | Console local | `dotnet run --project 06-Caching/Caching/CachePatterns/CachePatterns.csproj` |
-| [FusionCache](./Caching/FusionCache/README.md) | Resiliência e anti-stampede | Biblioteca FusionCache | `dotnet run --project 06-Caching/Caching/FusionCache/FusionCache.csproj` |
-| [RedisConsoleApp](./Caching/RedisConsoleApp/README.md) | Operações essenciais com Redis | Redis | `dotnet run --project 06-Caching/Caching/RedisConsoleApp/RedisConsoleApp.csproj` |
-| [RedisMySQLIntegration](./Caching/RedisMySQLIntegration/README.md) | Cache distribuído com persistência | Redis + MySQL | `dotnet run --project 06-Caching/Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj` |
-| [UnifiedCacheSdk](./UnifiedCacheSdk/README.md) | SDK para unificar acesso a cache | Memory ou Redis | `dotnet build 06-Caching/UnifiedCacheSdk/src/UnifiedCacheSdk/UnifiedCacheSdk.csproj` |
+| [CacheAside](./Caching/CacheAside/README.md) | Padrão Cache-Aside em API | Memória local | `dotnet run --project Caching/CacheAside/CacheAside.csproj` |
+| [CacheIncrement](./Caching/CacheIncrement/README.md) | Contadores de alta performance | Redis + MySQL | `dotnet run --project Caching/CacheIncrement/CacheIncrement.csproj` |
+| [CachePatterns](./Caching/CachePatterns/README.md) | Comparativo de estratégias | Console local | `dotnet run --project Caching/CachePatterns/CachePatterns.csproj` |
+| [FusionCache](./Caching/FusionCache/README.md) | Resiliência e anti-stampede | Biblioteca FusionCache | `dotnet run --project Caching/FusionCache/FusionCache.csproj` |
+| [RedisConsoleApp](./Caching/RedisConsoleApp/README.md) | Operações essenciais com Redis | Redis | `dotnet run --project Caching/RedisConsoleApp/RedisConsoleApp.csproj` |
+| [RedisMySQLIntegration](./Caching/RedisMySQLIntegration/README.md) | Cache distribuído com persistência | Redis + MySQL | `dotnet run --project Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj` |
+| [UnifiedCacheSdk](./UnifiedCacheSdk/README.md) | SDK para unificar acesso a cache | Memory ou Redis | `dotnet build UnifiedCacheSdk/src/UnifiedCacheSdk/UnifiedCacheSdk.csproj` |
 
 ### Ordem de estudo recomendada
 
-1. [CacheAside](./Caching/CacheAside/README.md) para entender o padrão mais comum.
-2. [CachePatterns](./Caching/CachePatterns/README.md) para comparar abordagens.
-3. [RedisConsoleApp](./Caching/RedisConsoleApp/README.md) para revisar operações básicas no Redis.
-4. [RedisMySQLIntegration](./Caching/RedisMySQLIntegration/README.md) para observar cache distribuído com persistência.
-5. [CacheIncrement](./Caching/CacheIncrement/README.md) para estudar escrita intensiva e sincronização.
-6. [FusionCache](./Caching/FusionCache/README.md) para cenários de resiliência e stampede protection.
-7. [UnifiedCacheSdk](./UnifiedCacheSdk/README.md) para padronização e reuso em soluções maiores.
-
-### Dependências externas por cenário
-
-| Cenário | Redis | MySQL |
-|---------|-------|-------|
-| Cache em memória local | Não | Não |
-| Cache distribuído simples | Sim | Não |
-| Cache distribuído com persistência | Sim | Sim |
-| SDK com provedor configurável | Opcional | Não |
+1. [CacheAside](./Caching/CacheAside/README.md) → Fundamentos e padrão mais comum
+2. [CachePatterns](./Caching/CachePatterns/README.md) → Visão comparativa de estratégias
+3. [RedisConsoleApp](./Caching/RedisConsoleApp/README.md) → Recursos do Redis
+4. [RedisMySQLIntegration](./Caching/RedisMySQLIntegration/README.md) → Cache distribuído com persistência
+5. [CacheIncrement](./Caching/CacheIncrement/README.md) → Escrita intensiva e sincronização
+6. [FusionCache](./Caching/FusionCache/README.md) → Resiliência e recursos avançados
+7. [UnifiedCacheSdk](./UnifiedCacheSdk/README.md) → Padronização e reuso em soluções maiores
 
 ## Referências e documentação complementar
 
 - [Microsoft Docs - Overview of caching in ASP.NET Core](https://learn.microsoft.com/aspnet/core/performance/caching/overview)
 - [Redis documentation](https://redis.io/docs/)
-- [FusionCache](https://github.com/ZiggyCreatures/FusionCache)
+- [FusionCache GitHub](https://github.com/ZiggyCreatures/FusionCache)
 - [Caching/README.md](./Caching/README.md)
 - [UnifiedCacheSdk/README.md](./UnifiedCacheSdk/README.md)
