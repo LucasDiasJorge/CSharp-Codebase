@@ -24,6 +24,10 @@ class Program
             // Set a key-value pair
             Console.WriteLine("Setting key-value pair...");
             bool isSet = db.StringSet("myKey", "Hello, Redis!");
+            db.StringSet("myKey:myKey", "Hello, Redis!", TimeSpan.FromMinutes(5)); // Set with expiration
+            db.StringSet("myKey:myKey2", "Hello, Redis!", TimeSpan.FromMinutes(15)); // Set with expiration
+
+            db.HashSet("myHash", new HashEntry[] { new HashEntry("field1", "value1"), new HashEntry("field2", "value2") }); // Set a hash
 
             if (isSet)
             {
