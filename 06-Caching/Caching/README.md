@@ -2,7 +2,7 @@
 
 ## Visão geral
 
-Coleção de exemplos práticos de estratégias de caching para .NET 9.
+Coleção de exemplos práticos de estratégias de caching para .NET (ex.: .NET 10). A pasta reúne implementações didáticas e comparativas para estudar trade-offs entre memória local, cache distribuído e abordagens resilientes.
 
 ## Conceitos abordados
 
@@ -18,7 +18,7 @@ Coleção de exemplos práticos de estratégias de caching para .NET 9.
 - Escolher o subprojeto mais adequado para aprofundar o estudo.
 - Reutilizar a navegação da pasta como índice prático de consulta.
 
-## Estrutura do projeto
+## Estrutura da pasta `Caching`
 
 ```text
 Caching/
@@ -62,91 +62,43 @@ Caching/
     \-- RedisMySQLIntegration.csproj
 ```
 
-## Como executar
+## Como executar (exemplos)
 
-Escolha um dos projetos abaixo para execução direcionada:
+Execute a partir da raiz do repositório (`06-Caching`):
 
-- `dotnet run --project 06-Caching/Caching/CacheAside/CacheAside.csproj`
-- `dotnet run --project 06-Caching/Caching/CacheIncrement/CacheIncrement.csproj`
-- `dotnet run --project 06-Caching/Caching/CachePatterns/CachePatterns.csproj`
-- `dotnet run --project 06-Caching/Caching/FusionCache/FusionCache.csproj`
-- `dotnet run --project 06-Caching/Caching/RedisConsoleApp/RedisConsoleApp.csproj`
-- `dotnet run --project 06-Caching/Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj`
+```bash
+dotnet run --project Caching/CacheAside/CacheAside.csproj
+dotnet run --project Caching/CacheIncrement/CacheIncrement.csproj
+dotnet run --project Caching/CachePatterns/CachePatterns.csproj
+dotnet run --project Caching/FusionCache/FusionCache.csproj
+dotnet run --project Caching/RedisConsoleApp/RedisConsoleApp.csproj
+dotnet run --project Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj
+```
 
 ## Boas práticas e pontos de atenção
 
-- **Chaves estruturadas**: Use prefixos (`product:123`, `user:session:abc`)
-- **TTL apropriado**: Dados estáticos (horas), dados dinâmicos (minutos)
-- **Invalidação seletiva**: Remova apenas chaves afetadas
-- **Monitoramento**: Acompanhe hit/miss ratio
-- **Fallback**: Sempre tenha plano B quando cache falhar
+- **Chaves estruturadas**: Use prefixos (`product:123`, `user:session:abc`).
+- **TTL apropriado**: Dados estáticos (horas), dados dinâmicos (minutos).
+- **Invalidação seletiva**: Remova apenas chaves afetadas.
+- **Monitoramento**: Acompanhe hit/miss ratio.
+- **Fallback**: Sempre tenha plano B quando cache falhar.
 
-## Conteúdo complementar
-
-##### Projetos Disponíveis
+## Projetos disponíveis
 
 | Projeto | Descrição | Tecnologias |
 |---------|-----------|-------------|
 | [CacheAside](./CacheAside) | Padrão Cache-Aside com IMemoryCache | ASP.NET Core |
 | [CacheIncrement](./CacheIncrement) | Contadores atômicos com sync para MySQL | Redis + MySQL |
-| [CachePatterns](./CachePatterns) | Comparativo de 8 estratégias | Console App |
+| [CachePatterns](./CachePatterns) | Comparativo de estratégias | Console App |
 | [FusionCache](./FusionCache) | Cache resiliente anti-stampede | FusionCache |
 | [RedisConsoleApp](./RedisConsoleApp) | Operações essenciais do Redis | StackExchange.Redis |
 | [RedisMySQLIntegration](./RedisMySQLIntegration) | Cache distribuído + persistência | Redis + MySQL |
 
-##### Quando Usar Cada Projeto
+## Pré-requisitos
 
-| Cenário | Projeto Recomendado |
-|---------|---------------------|
-| Aprender o básico de cache em APIs | **CacheAside** |
-| Contadores/métricas de alto tráfego | **CacheIncrement** |
-| Entender diferentes padrões e escolher | **CachePatterns** |
-| Necessita resiliência e anti-stampede | **FusionCache** |
-| Explorar recursos avançados do Redis | **RedisConsoleApp** |
-| Cache distribuído simples com banco | **RedisMySQLIntegration** |
-
-##### Pré-requisitos
-
-- .NET 9.0 SDK
+- .NET 10 SDK
 - Redis (para projetos com cache distribuído)
 - MySQL (para projetos com persistência)
-
-##### Instalação de Dependências (Docker)
-
-```bash
-# Redis
-docker run -d --name redis -p 6379:6379 redis
-
-# MySQL
-docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=senha123 -p 3306:3306 mysql:8
-```
-
-##### Cache-Aside (Lazy Loading)
-
-```
-App → Verifica Cache → Miss → Busca DB → Popula Cache → Retorna
-```
-
-##### Write-Through
-
-```
-App → Escreve Cache + DB (síncrono)
-```
-
-##### Write-Behind
-
-```
-App → Escreve Cache → Background Job → Persiste DB
-```
-
-##### Ordem de Estudo Recomendada
-
-1. **CacheAside** → Fundamentos e padrão mais comum
-2. **CachePatterns** → Visão comparativa de estratégias
-3. **RedisConsoleApp** → Recursos do Redis
-4. **RedisMySQLIntegration** → Cache distribuído básico
-5. **CacheIncrement** → Padrão de alta performance
-6. **FusionCache** → Resiliência e recursos avançados
 
 ## Referências
 
