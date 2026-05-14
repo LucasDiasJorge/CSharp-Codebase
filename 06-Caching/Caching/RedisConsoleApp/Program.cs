@@ -51,6 +51,15 @@ class Program
                 Console.WriteLine("Failed to retrieve value or value does not exist!");
             }
 
+            string key = "myNewHashKey";
+
+            db.HashSet(key, new HashEntry[] {
+                new HashEntry("field1", "value1"),
+                new HashEntry("field2", "value2")
+            });
+
+            db.HashFieldExpire(key, new RedisValue[] { "field1" }, TimeSpan.FromMinutes(10));
+
             // Close the connection
             Console.WriteLine("Closing Redis connection...");
             redis.Close();
