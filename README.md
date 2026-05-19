@@ -134,14 +134,15 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `Send` - Produtor RabbitMQ
   - `Receive` - Consumidor RabbitMQ
 
-#### 06-Caching (7 projetos)
-- `Caching` (6 subprojetos)
+#### 06-Caching (8 projetos)
+- `Caching` (7 subprojetos)
   - `CacheAside` - Padrão Cache-Aside
   - `CacheIncrement` - Incremento com cache
   - `CachePatterns` - Padrões de cache
   - `FusionCache` - Biblioteca FusionCache
   - `RedisMySQLIntegration` - Redis + MySQL
   - `RedisConsoleApp` - Redis (console)
+  - `RedisHashFieldExpire` - Expiração por campo em hash
 - `UnifiedCacheSdk` - SDK unificado de cache
 - `Caching/RedisMetaData` - Metadados do Redis
 
@@ -228,7 +229,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 108+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 109+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 

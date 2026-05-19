@@ -57,6 +57,9 @@ Caching/
 +-- RedisConsoleApp/
 |   +-- Program.cs
 |   \-- RedisConsoleApp.csproj
++-- RedisHashFieldExpire/
+|   +-- Program.cs
+|   \-- RedisHashFieldExpire.csproj
 \-- RedisMySQLIntegration/
     +-- Program.cs
     \-- RedisMySQLIntegration.csproj
@@ -72,6 +75,7 @@ dotnet run --project Caching/CacheIncrement/CacheIncrement.csproj
 dotnet run --project Caching/CachePatterns/CachePatterns.csproj
 dotnet run --project Caching/FusionCache/FusionCache.csproj
 dotnet run --project Caching/RedisConsoleApp/RedisConsoleApp.csproj
+dotnet run --project Caching/RedisHashFieldExpire/RedisHashFieldExpire.csproj
 dotnet run --project Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj
 ```
 
@@ -92,6 +96,7 @@ dotnet run --project Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj
 | [CachePatterns](./CachePatterns) | Comparativo de estratégias | Console App |
 | [FusionCache](./FusionCache) | Cache resiliente anti-stampede | FusionCache |
 | [RedisConsoleApp](./RedisConsoleApp) | Operações essenciais do Redis | StackExchange.Redis |
+| [RedisHashFieldExpire](./RedisHashFieldExpire) | Expiração por campo em hash (HEXPIRE) | StackExchange.Redis |
 | [RedisMySQLIntegration](./RedisMySQLIntegration) | Cache distribuído + persistência | Redis + MySQL |
 
 ## Pré-requisitos
