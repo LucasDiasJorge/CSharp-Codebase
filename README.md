@@ -95,7 +95,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `TaskManagement` - Gerenciamento de tasks
 - `Threads` - Manipulação de threads
 
-#### 03-WebAPIs (15 projetos)
+#### 03-WebAPIs (16 projetos)
 - `BlazorHelloWorld` - Aplicação Blazor
 - `CustomFilterApi` - Filtros customizados em API
 - `CustomMiddleware` - Middleware customizado
@@ -113,6 +113,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `TransactionalOrderApi` - Transações em pedidos
 - `WebApplication` (1 subprojeto)
   - `MyAPI` - Aplicação web
+- `MyAsp` - Exemplo TCP client/server e notas conceituais para "ASP.NET from scratch"
 
 #### 04-Authentication (7 projetos)
 - `AdvancedAuthSystem` - Sistema avançado de autenticação
