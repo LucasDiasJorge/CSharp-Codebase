@@ -84,7 +84,9 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `LogicalOperatorsDemo` - Operadores lógicos
 - `Reflection` - Introspecção de tipos
 - `SymbolicDelegates` - Delegates simbólicos
- - `Sockets` - Exemplo de cliente/servidor TCP (Client e Server)
+- `Sockets` - Exemplo de cliente/servidor TCP (Client e Server)
+  - `Sockets.Client` - Cliente TCP
+  - `Sockets.Server` - Servidor TCP
 
 #### 02-AsyncAndConcurrency (7 projetos)
 - `Asynchronous` - Async/await básico
