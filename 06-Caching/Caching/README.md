@@ -57,6 +57,11 @@ Caching/
 +-- RedisConsoleApp/
 |   +-- Program.cs
 |   \-- RedisConsoleApp.csproj
++-- RedisCacheKeyParams/
+|   +-- CacheKeys/
+|   +-- Contracts/
+|   +-- Program.cs
+|   \-- RedisCacheKeyParams.csproj
 +-- RedisHashFieldExpire/
 |   +-- Program.cs
 |   \-- RedisHashFieldExpire.csproj
@@ -75,6 +80,7 @@ dotnet run --project Caching/CacheIncrement/CacheIncrement.csproj
 dotnet run --project Caching/CachePatterns/CachePatterns.csproj
 dotnet run --project Caching/FusionCache/FusionCache.csproj
 dotnet run --project Caching/RedisConsoleApp/RedisConsoleApp.csproj
+dotnet run --project Caching/RedisCacheKeyParams/RedisCacheKeyParams.csproj
 dotnet run --project Caching/RedisHashFieldExpire/RedisHashFieldExpire.csproj
 dotnet run --project Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj
 ```
@@ -96,6 +102,7 @@ dotnet run --project Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj
 | [CachePatterns](./CachePatterns) | Comparativo de estratégias | Console App |
 | [FusionCache](./FusionCache) | Cache resiliente anti-stampede | FusionCache |
 | [RedisConsoleApp](./RedisConsoleApp) | Operações essenciais do Redis | StackExchange.Redis |
+| [RedisCacheKeyParams](./RedisCacheKeyParams) | Composição de chaves com params object[] | Console App |
 | [RedisHashFieldExpire](./RedisHashFieldExpire) | Expiração por campo em hash (HEXPIRE) | StackExchange.Redis |
 | [RedisMySQLIntegration](./RedisMySQLIntegration) | Cache distribuído + persistência | Redis + MySQL |
 

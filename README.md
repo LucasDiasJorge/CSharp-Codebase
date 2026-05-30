@@ -138,12 +138,13 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `Send` - Produtor RabbitMQ
   - `Receive` - Consumidor RabbitMQ
 
-#### 06-Caching (8 projetos)
-- `Caching` (7 subprojetos)
+#### 06-Caching (10 projetos)
+- `Caching` (8 subprojetos)
   - `CacheAside` - Padrão Cache-Aside
   - `CacheIncrement` - Incremento com cache
   - `CachePatterns` - Padrões de cache
   - `FusionCache` - Biblioteca FusionCache
+  - `RedisCacheKeyParams` - Composição de chaves com params object[]
   - `RedisMySQLIntegration` - Redis + MySQL
   - `RedisConsoleApp` - Redis (console)
   - `RedisHashFieldExpire` - Expiração por campo em hash
@@ -233,7 +234,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 109+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 110+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
@@ -244,7 +245,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 | `03-WebAPIs` | APIs, middleware, gRPC e aplicações web | `MinimalApiDemo`, `GrpcSample`, `CustomMiddleware` |
 | `04-Authentication` | JWT, OAuth, sessão e segurança | `Auth`, `SessionManagement`, `AdvancedAuthSystem` |
 | `05-Messaging` | Filas, brokers e streaming | `Kafka`, `RabbitMQ`, `KafkaStreamApi` |
-| `06-Caching` | Estratégias de cache e Redis | `CacheAside`, `CachePatterns`, `FusionCache` |
+| `06-Caching` | Estratégias de cache e Redis | `CacheAside`, `RedisCacheKeyParams`, `FusionCache` |
 | `07-DesignPatterns` | GoF, SOLID e modelagem OO | `DesignPattern`, `SOLIDExamples`, `ObjectCalisthenics` |
 | `08-ArchitecturalPatterns` | Organização de casos de uso e padrões arquiteturais | `UseCases`, `CQRSDemo`, `SagaPattern` |
 | `09-Data` | Bancos de dados, ORMs e acesso a dados | `Dapper`, `MongoUserApi`, `MoneyStorageApi` |

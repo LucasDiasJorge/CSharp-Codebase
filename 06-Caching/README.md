@@ -33,6 +33,7 @@ Esta pasta está organizada em dois blocos principais: a coleção [Caching](./C
 |   +-- CachePatterns/
 |   +-- FusionCache/
 |   +-- RedisConsoleApp/
+|   +-- RedisCacheKeyParams/
 |   +-- RedisHashFieldExpire/
 |   \-- RedisMySQLIntegration/
 +-- UnifiedCacheSdk/
@@ -51,6 +52,7 @@ dotnet run --project Caching/CacheIncrement/CacheIncrement.csproj
 dotnet run --project Caching/CachePatterns/CachePatterns.csproj
 dotnet run --project Caching/FusionCache/FusionCache.csproj
 dotnet run --project Caching/RedisConsoleApp/RedisConsoleApp.csproj
+dotnet run --project Caching/RedisCacheKeyParams/RedisCacheKeyParams.csproj
 dotnet run --project Caching/RedisHashFieldExpire/RedisHashFieldExpire.csproj
 dotnet run --project Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj
 ```
@@ -150,6 +152,7 @@ O conselho do senior significa: não desperdice cache com informações que enve
 | [CachePatterns](./Caching/CachePatterns/README.md) | Comparativo de estratégias | Console local | `dotnet run --project Caching/CachePatterns/CachePatterns.csproj` |
 | [FusionCache](./Caching/FusionCache/README.md) | Resiliência e anti-stampede | Biblioteca FusionCache | `dotnet run --project Caching/FusionCache/FusionCache.csproj` |
 | [RedisConsoleApp](./Caching/RedisConsoleApp/README.md) | Operações essenciais com Redis | Redis | `dotnet run --project Caching/RedisConsoleApp/RedisConsoleApp.csproj` |
+| [RedisCacheKeyParams](./Caching/RedisCacheKeyParams/README.md) | Composição de chaves com params object[] | Console local | `dotnet run --project Caching/RedisCacheKeyParams/RedisCacheKeyParams.csproj` |
 | [RedisHashFieldExpire](./Caching/RedisHashFieldExpire/README.md) | Expiração por campo em hash com HEXPIRE | Redis 7.4+ | `dotnet run --project Caching/RedisHashFieldExpire/RedisHashFieldExpire.csproj` |
 | [RedisMySQLIntegration](./Caching/RedisMySQLIntegration/README.md) | Cache distribuído com persistência | Redis + MySQL | `dotnet run --project Caching/RedisMySQLIntegration/RedisMySQLIntegration.csproj` |
 | [UnifiedCacheSdk](./UnifiedCacheSdk/README.md) | SDK para unificar acesso a cache | Memory ou Redis | `dotnet build UnifiedCacheSdk/src/UnifiedCacheSdk/UnifiedCacheSdk.csproj` |
@@ -159,11 +162,12 @@ O conselho do senior significa: não desperdice cache com informações que enve
 1. [CacheAside](./Caching/CacheAside/README.md) → Fundamentos e padrão mais comum
 2. [CachePatterns](./Caching/CachePatterns/README.md) → Visão comparativa de estratégias
 3. [RedisConsoleApp](./Caching/RedisConsoleApp/README.md) → Recursos do Redis
-4. [RedisHashFieldExpire](./Caching/RedisHashFieldExpire/README.md) → Expiração por campo em hashes
-5. [RedisMySQLIntegration](./Caching/RedisMySQLIntegration/README.md) → Cache distribuído com persistência
-6. [CacheIncrement](./Caching/CacheIncrement/README.md) → Escrita intensiva e sincronização
-7. [FusionCache](./Caching/FusionCache/README.md) → Resiliência e recursos avançados
-8. [UnifiedCacheSdk](./UnifiedCacheSdk/README.md) → Padronização e reuso em soluções maiores
+4. [RedisCacheKeyParams](./Caching/RedisCacheKeyParams/README.md) → Chaves de cache com params object[]
+5. [RedisHashFieldExpire](./Caching/RedisHashFieldExpire/README.md) → Expiração por campo em hashes
+6. [RedisMySQLIntegration](./Caching/RedisMySQLIntegration/README.md) → Cache distribuído com persistência
+7. [CacheIncrement](./Caching/CacheIncrement/README.md) → Escrita intensiva e sincronização
+8. [FusionCache](./Caching/FusionCache/README.md) → Resiliência e recursos avançados
+9. [UnifiedCacheSdk](./UnifiedCacheSdk/README.md) → Padronização e reuso em soluções maiores
 
 ## Referências e documentação complementar
 
