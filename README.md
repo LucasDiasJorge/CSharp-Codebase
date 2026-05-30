@@ -97,7 +97,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `TaskManagement` - Gerenciamento de tasks
 - `Threads` - Manipulação de threads
 
-#### 03-WebAPIs (16 projetos)
+#### 03-WebAPIs (17 projetos)
 - `BlazorHelloWorld` - Aplicação Blazor
 - `CustomFilterApi` - Filtros customizados em API
 - `CustomMiddleware` - Middleware customizado
@@ -113,6 +113,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `SimpleWebAPI` - API básica
 - `SwaggerClientCode` - Geração de código via Swagger
 - `TransactionalOrderApi` - Transações em pedidos
+- `VerticalSliceMinimalApi` - Minimal API com organizacao em vertical slice
 - `WebApplication` (1 subprojeto)
   - `MyAPI` - Aplicação web
 - `MyAsp` - Exemplo TCP client/server e notas conceituais para "ASP.NET from scratch"
@@ -242,7 +243,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 |------|----------------|------------------------|
 | `01-Fundamentals` | Fundamentos da linguagem e OO | `Course`, `DictionaryMaster`, `Events`, `Linq`, `Reflection` |
 | `02-AsyncAndConcurrency` | Async/await, tasks, threads e coordenação | `Asynchronous`, `AsyncTasksDemo`, `JobQueueDemo` |
-| `03-WebAPIs` | APIs, middleware, gRPC e aplicações web | `MinimalApiDemo`, `GrpcSample`, `CustomMiddleware` |
+| `03-WebAPIs` | APIs, middleware, gRPC e aplicações web | `MinimalApiDemo`, `VerticalSliceMinimalApi`, `GrpcSample` |
 | `04-Authentication` | JWT, OAuth, sessão e segurança | `Auth`, `SessionManagement`, `AdvancedAuthSystem` |
 | `05-Messaging` | Filas, brokers e streaming | `Kafka`, `RabbitMQ`, `KafkaStreamApi` |
 | `06-Caching` | Estratégias de cache e Redis | `CacheAside`, `RedisCacheKeyParams`, `FusionCache` |
