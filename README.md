@@ -73,7 +73,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ### Índice Completo de Projetos
 
-#### 01-Fundamentals (11 projetos)
+#### 01-Fundamentals (12 projetos)
 - `AggregationDepartmentManagement` - Composição e agregação
 - `AssociationMedicalScheduling` - Associação entre objetos
 - `CompositionOrderFulfillment` - Composição de objetos
@@ -82,6 +82,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `Events` - Sistema de eventos e delegates
 - `Linq` - Query com LINQ
 - `LogicalOperatorsDemo` - Operadores lógicos
+- `PredicateAggregationDemo` - Agregação dinâmica de predicados com LINQ e expression trees
 - `Reflection` - Introspecção de tipos
 - `SymbolicDelegates` - Delegates simbólicos
 - `Sockets` - Exemplo de cliente/servidor TCP (Client e Server)
