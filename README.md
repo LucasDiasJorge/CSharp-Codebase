@@ -82,7 +82,8 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ### Índice Completo de Projetos
 
-#### 01-Fundamentals (12 projetos)
+#### 01-Fundamentals (13 projetos)
+- `AbstractClassVsInterfaceDemo` - Diferença entre classe abstrata e interface
 - `AggregationDepartmentManagement` - Composição e agregação
 - `AssociationMedicalScheduling` - Associação entre objetos
 - `CompositionOrderFulfillment` - Composição de objetos
@@ -251,7 +252,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 | Pasta | Foco principal | Exemplos de referência |
 |------|----------------|------------------------|
-| `01-Fundamentals` | Fundamentos da linguagem e OO | `Course`, `DictionaryMaster`, `Events`, `Linq`, `Reflection` |
+| `01-Fundamentals` | Fundamentos da linguagem e OO | `Course`, `DictionaryMaster`, `LogicalOperatorsDemo`, `PredicateAggregationDemo`, `AbstractClassVsInterfaceDemo`, `Reflection` |
 | `02-AsyncAndConcurrency` | Async/await, tasks, threads e coordenação | `Asynchronous`, `AsyncTasksDemo`, `JobQueueDemo` |
 | `03-WebAPIs` | APIs, middleware, gRPC e aplicações web | `MinimalApiDemo`, `VerticalSliceMinimalApi`, `GrpcSample` |
 | `04-Authentication` | JWT, OAuth, sessão e segurança | `Auth`, `SessionManagement`, `AdvancedAuthSystem` |
