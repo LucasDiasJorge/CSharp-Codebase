@@ -4,7 +4,7 @@
 
 O CSharp-Codebase é um repositório educacional com exemplos práticos em C# e .NET organizados por trilhas temáticas. Cada pasta reúne projetos pequenos e focados, com documentação local padronizada para facilitar leitura, execução isolada e reaproveitamento como referência técnica.
 
-O catálogo cobre fundamentos da linguagem, APIs web, autenticação, mensageria, cache, padrões de projeto, padrões arquiteturais, persistência, algoritmos, utilitários, testes e SDKs. As convenções de documentação ficam em `docs/` e o padronizador de README em `tools/`.
+O catálogo cobre fundamentos da linguagem, APIs web, autenticação, mensageria, cache, padrões de projeto, padrões arquiteturais, persistência, algoritmos, utilitários, testes e SDKs. As convenções de documentação ficam em `docs/` e o padronizador de README em `tools/`. O objetivo é criar um recurso de estudo e consulta rápida para desenvolvedores de todos os níveis, com exemplos práticos e bem documentados para cada tema relevante do ecossistema .NET. 
 
 ## Conceitos abordados
 
@@ -43,6 +43,15 @@ CSharp-101/
 +-- README.md
 +\-- .github/
 ```
+
+## Skills
+
+- .github\skills\create-csharp-project-by-task
+  - **Nome:** create-csharp-project-by-task — Criar projeto C# no padrão do repositório CSharp-101.
+  - **Quando usar:** Solicitações como "crie um projeto C#", "novo sample" ou "adicionar projeto".
+  - **Entradas obrigatórias:** descrição do projeto; tipo (`console`, `webapi`, `classlib`, `worker`); objetivos didáticos.
+  - **Regras principais:** Não usar `var` (exceto em LINQ anônimo); atualizar o `README.md` local e o `README.md` raiz; validar com `dotnet build <caminho-do-csproj>`; considerar concluído apenas após build bem-sucedido.
+  - **Saída esperada:** projeto criado na categoria correta (01-13), arquivos criados/alterados listados e evidência do build.
 
 ## Como executar
 
