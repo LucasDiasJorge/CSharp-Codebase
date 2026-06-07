@@ -1,0 +1,16 @@
+@example_HostAddress = http://localhost:5114
+
+GET {{example_HostAddress}}/api/engine/available
+Accept: application/json
+
+###
+
+POST {{example_HostAddress}}/api/engine/execute
+Content-Type: application/json
+
+{
+	"engineName": "EngineBrazil",
+	"command": "process-order-123"
+}
+
+###
