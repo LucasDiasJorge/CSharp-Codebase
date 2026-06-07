@@ -3,7 +3,7 @@ using PortsAndAdapters.Domain;
 
 namespace PortsAndAdapters.app_core;
 
-public class EngineFactory(IEnumerable<IEngine> engines)
+public class EngineRegistry(IEnumerable<IEngine> engines)
 {
     private readonly Dictionary<string, IEngine> _engines = CreateEngineAdapter(engines);
 

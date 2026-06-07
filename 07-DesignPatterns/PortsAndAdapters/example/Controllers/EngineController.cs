@@ -7,9 +7,9 @@ namespace example.Controllers;
 [Route("api/[controller]")]
 public class EngineController : ControllerBase
 {
-    private readonly EngineFactory _engineFactory;
+    private readonly EngineRegistry _engineFactory;
 
-    public EngineController(EngineFactory engineFactory)
+    public EngineController(EngineRegistry engineFactory)
     {
         _engineFactory = engineFactory;
     }

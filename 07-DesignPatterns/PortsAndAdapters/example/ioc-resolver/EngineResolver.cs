@@ -13,7 +13,7 @@ public static class EngineResolver
         services.AddSingleton<IEngine, EngineBrazil>();
         services.AddSingleton<IEngine, EngineEurope>();
         services.AddSingleton<IEngine, EngineUsa>();
-        services.AddSingleton<EngineFactory>();
+        services.AddSingleton<EngineRegistry>();
         return services;
     }
 

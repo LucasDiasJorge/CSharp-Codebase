@@ -16,7 +16,6 @@ public class Program
 
         builder.Services.ConfigureEngines();
 
-
         WebApplication app = builder.Build();
 
         app.UseHttpsRedirection();
