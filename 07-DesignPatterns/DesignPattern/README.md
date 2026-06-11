@@ -478,3 +478,4 @@ Conhecido como **GoF (Gang of Four)**, este livro catalogou **23 padrões de pro
 - [SourceMaking - Design Patterns](https://sourcemaking.com/design_patterns) - Referência completa
 - [Microsoft Docs - Design Patterns](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures) - Contexto .NET
 - [DoFactory - Design Patterns](https://www.dofactory.com/net/design-patterns) - Implementações em C#
+- [NotebookLM](https://notebooklm.google.com/notebook/2eb769f9-4a87-41d3-993e-ebcec9bbdf1f) - Meu NotebookLM de estudos
