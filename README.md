@@ -12,6 +12,8 @@ O catálogo cobre fundamentos da linguagem, APIs web, autenticação, mensageria
 - ASP.NET Core, Minimal APIs, middleware, gRPC, autenticação, autorização e segurança.
 - Mensageria, Redis, design patterns, CQRS, Saga, persistência, algoritmos e utilitários de apoio.
 - Testes, benchmarks e construção de bibliotecas e SDKs reutilizáveis.
+- Padronização de documentação e boas práticas de organização de código e projetos.
+- Uso de serviços externos como Kafka, RabbitMQ, Redis, MySQL, PostgreSQL e MongoDB.
 
 ## Objetivos de aprendizagem
 
