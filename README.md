@@ -2,7 +2,7 @@
 
 ## Visão geral
 
-O CSharp-Codebase é um repositório educacional com exemplos práticos em C# e .NET organizados por trilhas temáticas. Cada pasta reúne projetos pequenos e focados, com documentação local padronizada para facilitar leitura, execução isolada e reaproveitamento como referência técnica.
+O CSharp-Codebase é um repositório educacional com exemplos práticos em C# e .NET organizados por trilhas temáticas. Cada pasta reúne projetos pequenos e focados, com documentação local padronizada para facilitar leitura, execução isolada e reaproveitamento como referência técnica. A ideia é criar um recurso de estudo e consulta rápida para desenvolvedores de todos os níveis, cobrindo uma ampla gama de tópicos relevantes do ecossistema .NET.
 
 O catálogo cobre fundamentos da linguagem, APIs web, autenticação, mensageria, cache, padrões de projeto, padrões arquiteturais, persistência, algoritmos, utilitários, testes e SDKs. As convenções de documentação ficam em `docs/` e o padronizador de README em `tools/`. O objetivo é criar um recurso de estudo e consulta rápida para desenvolvedores de todos os níveis, com exemplos práticos e bem documentados para cada tema relevante do ecossistema .NET. 
 
