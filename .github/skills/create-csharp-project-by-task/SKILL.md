@@ -1,6 +1,6 @@
 ---
 name: create-csharp-project-by-task
-description: 'Criar projeto C# no padrao do repositorio CSharp-101 a partir do input da tarefa. Use quando pedir novo projeto/sample, escolher sub-repo 01-13, atualizar README local e README raiz, proibir var e concluir somente apos build de sucesso do csproj criado.'
+description: 'Criar projeto C# no padrao do repositorio CSharp-Codebase a partir do input da tarefa. Use quando pedir novo projeto/sample, escolher sub-repo 01-13, atualizar README local e README raiz, proibir var e concluir somente apos build de sucesso do csproj criado.'
 argument-hint: 'Descreva a tarefa/projeto a implementar (tema, tipo de app e objetivo didatico).'
 user-invocable: true
 ---
@@ -8,7 +8,7 @@ user-invocable: true
 # Criar Projeto C# no Padrao do Repositorio
 
 ## Quando Usar
-- Solicitacoes como "crie um projeto C#", "novo sample" ou "adicionar projeto no CSharp-101".
+- Solicitacoes como "crie um projeto C#", "novo sample" ou "adicionar projeto no CSharp-Codebase".
 - Tarefas que exigem alocacao correta em sub-repo numerado (01 a 13).
 - Demandas com documentacao obrigatoria e criterio de done por build.
 
