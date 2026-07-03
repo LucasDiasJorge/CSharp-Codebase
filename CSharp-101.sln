@@ -331,6 +331,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PredicateAggregationDemo", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractClassVsInterfaceDemo", "01-Fundamentals\AbstractClassVsInterfaceDemo\AbstractClassVsInterfaceDemo.csproj", "{49226317-C490-49D8-8B1C-4E41B626D92A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParameterObject", "07-DesignPatterns\ParameterObject\ParameterObject.csproj", "{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1673,6 +1675,18 @@ Global
 		{49226317-C490-49D8-8B1C-4E41B626D92A}.Release|x64.Build.0 = Release|Any CPU
 		{49226317-C490-49D8-8B1C-4E41B626D92A}.Release|x86.ActiveCfg = Release|Any CPU
 		{49226317-C490-49D8-8B1C-4E41B626D92A}.Release|x86.Build.0 = Release|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Debug|x64.Build.0 = Debug|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Debug|x86.Build.0 = Debug|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Release|x64.ActiveCfg = Release|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Release|x64.Build.0 = Release|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Release|x86.ActiveCfg = Release|Any CPU
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1815,5 +1829,6 @@ Global
 		{7B06D955-36FB-494C-B96C-B5C6840CB3AE} = {34242CEC-519F-A554-9F8A-1EB111971097}
 		{2907640C-E426-4062-B4F0-A4DD71ED55B4} = {14F17D2D-2CAA-19F0-18F2-09E7B217756B}
 		{49226317-C490-49D8-8B1C-4E41B626D92A} = {14F17D2D-2CAA-19F0-18F2-09E7B217756B}
+		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
 	EndGlobalSection
 EndGlobal
