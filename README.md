@@ -41,7 +41,7 @@ CSharp-101/
 +-- 13-SDKsAndLibraries/
 +-- docs/
 +-- tools/
-+-- CSharp-101.sln
++-- CSharp-Codebase.sln
 +-- README.md
 +\-- .github/
 ```

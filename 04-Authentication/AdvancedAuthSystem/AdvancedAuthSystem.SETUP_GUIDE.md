@@ -179,9 +179,9 @@ Authorization: Bearer {accessToken}
 
 ## Adicionar ao Solution
 
-Para adicionar ao CSharp-101.sln (após organizar a estrutura):
+Para adicionar ao CSharp-Codebase.sln (após organizar a estrutura):
 ```bash
-dotnet sln CSharp-101.sln add AdvancedAuthSystem/AdvancedAuthSystem.csproj
+dotnet sln CSharp-Codebase.sln add AdvancedAuthSystem/AdvancedAuthSystem.csproj
 ```
 
 ## Troubleshooting
