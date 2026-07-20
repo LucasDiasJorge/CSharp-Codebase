@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+<title>Fatura {{ invoice_number }}</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 40px; color: #1f2937; }
+  h1 { font-size: 22px; margin-bottom: 4px; }
+  .meta { color: #6b7280; margin-bottom: 24px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 8px 12px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+  th { background: #f3f4f6; }
+  tfoot td { font-weight: bold; border-top: 2px solid #1f2937; }
+  .text-right { text-align: right; }
+</style>
+</head>
+<body>
+  <h1>Fatura {{ invoice_number }}</h1>
+  <p class="meta">Cliente: {{ customer_name }} &middot; Emitida em {{ issue_date }}</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th class="text-right">Quantidade</th>
+        <th class="text-right">Valor unitário</th>
+        <th class="text-right">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ for item in items }}
+      <tr>
+        <td>{{ item.description }}</td>
+        <td class="text-right">{{ item.quantity }}</td>
+        <td class="text-right">{{ item.unit_price }}</td>
+        <td class="text-right">{{ item.total }}</td>
+      </tr>
+      {{ end }}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="text-right">Total geral</td>
+        <td class="text-right">{{ total }}</td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+</html>

@@ -335,6 +335,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParameterObject", "07-Desig
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortCircuitEvaluationDemo", "01-Fundamentals\ShortCircuitEvaluationDemo\ShortCircuitEvaluationDemo.csproj", "{9D7FB1F2-DD21-4D29-9840-7015BFF94C0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlToPdfAndTemplateEngine", "11-Utilities\HtmlToPdfAndTemplateEngine\HtmlToPdfAndTemplateEngine.csproj", "{EEB5B2C8-67C3-4B17-92F9-9423580AE813}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1701,6 +1703,18 @@ Global
 		{9D7FB1F2-DD21-4D29-9840-7015BFF94C0C}.Release|x64.Build.0 = Release|Any CPU
 		{9D7FB1F2-DD21-4D29-9840-7015BFF94C0C}.Release|x86.ActiveCfg = Release|Any CPU
 		{9D7FB1F2-DD21-4D29-9840-7015BFF94C0C}.Release|x86.Build.0 = Release|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Debug|x64.Build.0 = Debug|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Debug|x86.Build.0 = Debug|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Release|x64.ActiveCfg = Release|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Release|x64.Build.0 = Release|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Release|x86.ActiveCfg = Release|Any CPU
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1845,5 +1859,6 @@ Global
 		{49226317-C490-49D8-8B1C-4E41B626D92A} = {14F17D2D-2CAA-19F0-18F2-09E7B217756B}
 		{4F07D4ED-07FB-4ED8-A20A-15AC9E679DA4} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
 		{9D7FB1F2-DD21-4D29-9840-7015BFF94C0C} = {14F17D2D-2CAA-19F0-18F2-09E7B217756B}
+		{EEB5B2C8-67C3-4B17-92F9-9423580AE813} = {D5A88400-B1DC-7FC2-6324-6C9232973D96}
 	EndGlobalSection
 EndGlobal

@@ -222,11 +222,12 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `RealWorldBubbleSort` - Bubble sort prático
 - `SlidingWindows` - Janela deslizante
 
-#### 11-Utilities (9 projetos)
+#### 11-Utilities (10 projetos)
 - `ClassToDTO` - Conversão classe para DTO
 - `ClassToXml` - Conversão classe para XML
 - `CompressDecompress` - Compressão/descompressão
 - `DictionaryMerge` - Fusão de dicionários
+- `HtmlToPdfAndTemplateEngine` - Geração de PDF a partir de template HTML com dados dinâmicos
 - `NPOIDemo` - NPOI para Excel/Word
 - `PDFGenerator` - Geração de PDF
 - `Serialization` - Serialização
