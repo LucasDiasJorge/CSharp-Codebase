@@ -40,3 +40,7 @@ Pull requests são bem-vindos. Prefira mudanças pequenas e explicativas; atuali
 **Licença**
 Use conforme o escopo do repositório principal. Se desejar, adicione uma licença explícita no diretório.
 
+
+**Documentação de Apoio**
+
+_[about-the-task-scheduler]([Doc](https://learn.microsoft.com/pt-br/windows/win32/taskschd/about-the-task-scheduler))_
