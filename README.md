@@ -102,12 +102,13 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `Sockets.Client` - Cliente TCP
   - `Sockets.Server` - Servidor TCP
 
-#### 02-AsyncAndConcurrency (7 projetos)
+#### 02-AsyncAndConcurrency (8 projetos)
 - `Asynchronous` - Async/await básico
 - `AsyncTasksDemo` - Demonstração de tasks
 - `AtomicOperationsDemo` - Operações atômicas
 - `BackgroudWorker` - Background workers
 - `JobQueueDemo` - Fila de trabalhos
+- `ReadDirectoryChangesWDemo` - Monitoramento de alteracoes de diretorio com ReadDirectoryChangesW
 - `TaskManagement` - Gerenciamento de tasks
 - `Threads` - Manipulação de threads
 
@@ -252,14 +253,14 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 110+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 111+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
 | Pasta | Foco principal | Exemplos de referência |
 |------|----------------|------------------------|
 | `01-Fundamentals` | Fundamentos da linguagem e OO | `Course`, `DictionaryMaster`, `LogicalOperatorsDemo`, `PredicateAggregationDemo`, `AbstractClassVsInterfaceDemo`, `Reflection` |
-| `02-AsyncAndConcurrency` | Async/await, tasks, threads e coordenação | `Asynchronous`, `AsyncTasksDemo`, `JobQueueDemo` |
+| `02-AsyncAndConcurrency` | Async/await, tasks, threads e coordenação | `Asynchronous`, `AsyncTasksDemo`, `JobQueueDemo`, `ReadDirectoryChangesWDemo` |
 | `03-WebAPIs` | APIs, middleware, gRPC e aplicações web | `MinimalApiDemo`, `VerticalSliceMinimalApi`, `GrpcSample` |
 | `04-Authentication` | JWT, OAuth, sessão e segurança | `Auth`, `SessionManagement`, `AdvancedAuthSystem` |
 | `05-Messaging` | Filas, brokers e streaming | `Kafka`, `RabbitMQ`, `KafkaStreamApi` |
