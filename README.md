@@ -84,7 +84,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ### Índice Completo de Projetos
 
-#### 01-Fundamentals (14 projetos)
+#### 01-Fundamentals (15 projetos)
 - `AbstractClassVsInterfaceDemo` - Diferença entre classe abstrata e interface
 - `AggregationDepartmentManagement` - Composição e agregação
 - `AssociationMedicalScheduling` - Associação entre objetos
@@ -101,6 +101,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `Sockets` - Exemplo de cliente/servidor TCP (Client e Server)
   - `Sockets.Client` - Cliente TCP
   - `Sockets.Server` - Servidor TCP
+- `YieldReturnDemo` - Iteradores com `yield return`, execução preguiçosa e armadilhas comuns
 
 #### 02-AsyncAndConcurrency (8 projetos)
 - `Asynchronous` - Async/await básico
