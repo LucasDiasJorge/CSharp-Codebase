@@ -8,6 +8,8 @@ Catálogo educacional com ~125 projetos `.csproj` independentes, organizados em 
 
 Documentação é parte do artefato: um sample sem README local e sem entrada no README raiz é considerado incompleto.
 
+Cada um dos 125 projetos tem um `CLAUDE.md` próprio ao lado do seu `.csproj`, carregado automaticamente ao trabalhar naquele diretório. Ele traz o comando exato, a arquitetura interna do exemplo e as armadilhas específicas (TFM, serviços externos, build quebrado). Consulte-o antes de editar um projeto; este arquivo raiz cobre apenas o que vale para o repositório inteiro.
+
 ## Comandos
 
 Sempre direcionar ao `.csproj` concreto — **nunca** usar build/test da solução inteira como critério de conclusão (muitos projetos exigem serviços externos ou frameworks fora de suporte, e alguns estão quebrados; ver "Armadilhas").
@@ -34,7 +36,18 @@ Não há CI, `.editorconfig` nem `global.json` — a validação é local, no es
 
 ## Armadilhas conhecidas
 
-- **`Directory.Build.props` não existe mais** (removido no commit `50763d5`), mas `.github/copilot-instructions.md` ainda o cita como fonte central de `TargetFramework`/`Nullable`/`ImplicitUsings`. Consequência real: 6 projetos que omitem `TargetFramework` confiando nessa herança **falham com `NETSDK1013`** — `01-Fundamentals/LogicalOperatorsDemo`, `06-Caching/Caching/{CacheAside,CacheIncrement,CachePatterns}`, `07-DesignPatterns/SOLIDExamples`, `09-Data/Data/MongoUserApi`. Ao criar projeto novo, declarar `TargetFramework`, `Nullable` e `ImplicitUsings` explicitamente no `.csproj`.
+- **`Directory.Build.props` não existe mais** (removido no commit `50763d5`), mas `.github/copilot-instructions.md` ainda o cita como fonte central de `TargetFramework`/`Nullable`/`ImplicitUsings`. Consequência real: **10 projetos** que omitem `TargetFramework` confiando nessa herança **falham com `NETSDK1013`**:
+
+  ```
+  01-Fundamentals/LogicalOperatorsDemo        07-DesignPatterns/SOLIDExamples
+  02-AsyncAndConcurrency/JobQueueDemo         09-Data/Data/MongoUserApi
+  04-Authentication/AdvancedAuthSystem        10-Algorithms/GraphTraversalDemo
+  04-Authentication/SessionManagement         06-Caching/Caching/CacheAside
+  06-Caching/Caching/CacheIncrement           06-Caching/Caching/CachePatterns
+  ```
+
+  Restaurar o `Directory.Build.props` na raiz conserta os 10 de uma vez; a alternativa é declarar `TargetFramework`, `Nullable` e `ImplicitUsings` em cada `.csproj` (os quatro projetos de `06-Caching` e `09-Data/Data/MongoUserApi` têm pacotes 8.0.x, logo `net8.0`; os demais, `net9.0`). Ao criar projeto novo, declare as três propriedades explicitamente.
+- **`13-SDKsAndLibraries/MySimpleSdk/src/MySimpleSdk.Tests` também não compila**, por causa diferente: falta o `ProjectReference` para `MySimpleSdk`, então `SdkClient` e `SdkService` não resolvem (`CS0246`).
 - **Target frameworks são heterogêneos**, não uniformes: net9.0 (maioria), net10.0, net8.0, net7.0, net6.0, net5.0, netstandard2.0 e net10.0-windows. O SDK instalado é 10.0.302. Preservar o TFM existente ao editar um projeto; não "modernizar" sem pedido.
 - **Layout varia**: alguns projetos usam `src/` (`GrpcSample`, `UnifiedCacheSdk`, `MySimpleSdk`, `AtomicOperationsDemo`, `ClassToDTO`, `DapperExample`, `MoneyStorageApi`, `MysqlExample`). Localizar o `.csproj` real antes de montar comandos.
 - **Serviços externos**: projetos de `05-Messaging`, `06-Caching` e `09-Data` exigem Kafka, RabbitMQ, Redis, MySQL, PostgreSQL ou MongoDB ativos. `docker-compose.yml` disponível em `05-Messaging/Kafka/` e `06-Caching/Caching/CacheIncrement/`.
