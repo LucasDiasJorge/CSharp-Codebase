@@ -1,22 +1,19 @@
 ---
 name: background-worker-scaffold
-description: "Use para criar a base de um worker de background (BackgroundService/IHostedService) em qualquer projeto .NET do workspace, SEM logica de fila (sem QueueService, ConsumeQueue ou consumer.Execute), pronta para plugar logica propria. Herda a classe base de worker do projeto (ex.: TaxWorker) quando existir, senao BackgroundService. Antes de gerar, a skill pergunta o modelo de paralelismo e a cadencia. Foca em DI correta (hosted service singleton + dependencias scoped via IServiceProvider.CreateScope), escalabilidade e cancelamento gracioso. Use ao criar um novo worker de processamento em segundo plano."
+description: "Use para criar a base de um worker de background (BackgroundService/IHostedService) em qualquer projeto .NET do workspace, SEM logica de fila (sem QueueService, ConsumeQueue ou consumer.Execute), pronta para plugar logica propria. Herda a classe base de worker do projeto quando existir, senao BackgroundService. Antes de gerar, a skill pergunta o modelo de paralelismo e a cadencia. Foca em DI correta (hosted service singleton + dependencias scoped via IServiceProvider.CreateScope), escalabilidade e cancelamento gracioso. Use ao criar um novo worker de processamento em segundo plano."
 argument-hint: "Informe o nome do worker, o projeto/namespace alvo, as dependencias a injetar (e se sao scoped) e o grau de paralelismo desejado."
 user-invocable: true
 ---
 
-<!-- Copyright (c) 2026, TD SYNNEX Corporation. All rights reserved. -->
-> Regra global: aplique o [gate SINE/YAGNI](../sine-yagni-concision-gate/SKILL.md) antes de concluir.
-
 # Background Worker Scaffold
 
 ## Objetivo
-Gerar a base de um worker de background que herda a classe base do projeto (ex.: `TaxWorker`) ou `BackgroundService`, pronta para receber logica propria, sem acoplar a consumo de fila. O esqueleto ja resolve os dois pontos criticos: injecao de dependencia correta para um hosted service e escalabilidade por paralelismo controlado com desligamento gracioso.
+Gerar a base de um worker de background que herda a classe base de worker do projeto ou `BackgroundService`, pronta para receber logica propria, sem acoplar a consumo de fila. O esqueleto ja resolve os dois pontos criticos: injecao de dependencia correta para um hosted service e escalabilidade por paralelismo controlado com desligamento gracioso.
 
 ## Quando usar
 - Criar um novo worker de processamento em segundo plano em qualquer projeto .NET do workspace.
 - Precisar de um `BackgroundService` para plugar logica de polling, agendamento ou processamento continuo.
-- Reaproveitar a classe base de worker do projeto (ex.: `TaxWorker`) sem a parte de fila (`QueueService.ConsumeQueue` / `consumer.Execute`).
+- Reaproveitar a classe base de worker do projeto sem a parte de fila (`QueueService.ConsumeQueue` / `consumer.Execute`).
 
 ## Nao usar quando
 - O worker for consumir uma fila existente: siga o padrao com `QueueService`/`IConsumer`, nao esta skill.
@@ -25,7 +22,7 @@ Gerar a base de um worker de background que herda a classe base do projeto (ex.:
 ## Entradas minimas
 - Nome do worker (ex.: `AssetReconciliationWorker`).
 - Projeto/namespace alvo.
-- Classe base de worker do projeto, se existir (ex.: `TaxWorker`); caso contrario o esqueleto herda `BackgroundService`.
+- Classe base de worker do projeto, se existir; caso contrario o esqueleto herda `BackgroundService`.
 - Dependencias que a logica vai usar e seus lifetimes (`scoped` vs `singleton`).
 - Grau de paralelismo e intervalo entre ciclos.
 
@@ -33,22 +30,22 @@ Gerar a base de um worker de background que herda a classe base do projeto (ex.:
 Nao assuma; pergunte ao usuario e so entao gere o esqueleto:
 1. Modelo de paralelismo: (a) N loops paralelos com `Task.WhenAll`; (b) loop unico; (c) lote por ciclo com `Parallel.ForEachAsync` e `MaxDegreeOfParallelism`.
 2. Cadencia: (a) polling continuo com `Task.Delay`; (b) intervalo fixo com `PeriodicTimer`; (c) rodar uma vez e encerrar.
-3. Classe base a herdar: base do projeto (ex.: `TaxWorker`) ou `BackgroundService`.
+3. Classe base a herdar: base de worker do projeto ou `BackgroundService`.
 4. Dependencias e lifetimes, para decidir o que injetar no construtor e o que resolver por escopo.
 
 Se o usuario nao decidir, use o default recomendado (N loops paralelos + polling continuo + base do projeto) e registre como premissa explicita.
 
-## Padrao de referencia (fatos verificados)
-- Base opcional `TaxWorker` e `abstract : BackgroundService` com construtor primario `(ILogger<TaxWorker>, SlackHelper)`, expondo `_logger`, `_slackHelper` e `ThrowException(ex, useSentry)`. Onde existir, herde-a; senao herde `BackgroundService` e injete `ILogger<T>` diretamente.
-- Workers concretos usam construtor primario encadeando a base. Ver `IntegrationManagerWorker.cs` e `InvoiceProcessingWorker.cs` no `notafiscal-api`.
+## Padrao de referencia
+- Se o projeto tiver uma classe base abstrata de worker (tipicamente `abstract : BackgroundService`, com logger e helper de erro ja expostos), herde-a e reaproveite o tratador de excecao dela; senao herde `BackgroundService` e injete `ILogger<T>` diretamente.
+- Workers concretos usam construtor primario encadeando a base.
 - Hosted services sao singleton, registrados com `services.AddHostedService<T>()` na configuracao de DI do projeto. Dependencia `scoped` nunca vai no construtor do worker.
-- Resolucao de `scoped` dentro de um singleton usa `IServiceProvider.CreateScope()` por unidade de trabalho, como em `EventEmissionImmobilizationConsumer.cs`.
+- Resolucao de `scoped` dentro de um singleton usa `IServiceProvider.CreateScope()` por unidade de trabalho.
 - Desligamento gracioso respeita o `CancellationToken` em cada `await`.
 
 ## Procedimento
 1. Coletar as entradas e responder as "Perguntas obrigatorias".
 2. Criar a classe em `Business/Workers/` (ou pasta equivalente) herdando a base escolhida, com construtor primario.
-3. Injetar apenas singletons no construtor: `ILogger<T>`, `IServiceProvider` (e `SlackHelper` quando herdar `TaxWorker`). Nunca injetar `scoped` direto.
+3. Injetar apenas singletons no construtor: `ILogger<T>`, `IServiceProvider` (e os singletons exigidos pela base do projeto, quando houver). Nunca injetar `scoped` direto.
 4. Definir a constante de paralelismo e/ou o intervalo conforme as escolhas.
 5. Implementar `ExecuteAsync` com a variante de paralelismo escolhida.
 6. Aplicar a variante de cadencia ao redor de `ProcessAsync`.
@@ -58,11 +55,9 @@ Se o usuario nao decidir, use o default recomendado (N loops paralelos + polling
 10. Rodar `dotnet build` e confirmar que o host sobe sem erro de captured dependency.
 
 ## Esqueleto canonico
-Ponto de extensao unico `ProcessAsync`; os blocos de paralelismo e cadencia sao trocados conforme as escolhas. Ao herdar `TaxWorker`, troque a base por `: TaxWorker(logger, slackHelper)`, injete `SlackHelper`, remova o campo `_logger` (herdado) e use `ThrowException(ex)` como `HandleFailure`.
+Ponto de extensao unico `ProcessAsync`; os blocos de paralelismo e cadencia sao trocados conforme as escolhas. Ao herdar a base de worker do projeto, troque `BackgroundService` por ela encadeando os parametros exigidos, remova o campo `_logger` se a base ja o expuser e use o tratador de erro da base como `HandleFailure`.
 
 ```csharp
-// Copyright (c) 2026, TD SYNNEX Corporation. All rights reserved
-
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -160,14 +155,14 @@ protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 }
 ```
 
-Registro na configuracao de DI do projeto (ex.: `WorkersConfig`):
+Registro na configuracao de DI do projeto:
 ```csharp
 services.AddHostedService<SampleBackgroundWorker>();
 // Registre as dependencias scoped usadas em ProcessAsync.
 ```
 
 ## DI e escalabilidade (regras obrigatorias)
-- O hosted service e singleton: no construtor apenas singletons (`ILogger<T>`, `IServiceProvider`/`IServiceScopeFactory`, e `SlackHelper` quando herdar `TaxWorker`).
+- O hosted service e singleton: no construtor apenas singletons (`ILogger<T>`, `IServiceProvider`/`IServiceScopeFactory` e os singletons exigidos pela base do projeto, quando houver).
 - Toda dependencia `scoped` (repositorio, service de dominio, `IDbConnection`) e resolvida dentro de `CreateScope()` por ciclo; nunca capturada em campo do worker.
 - Descarte o escopo ao fim de cada ciclo (`using`) para nao vazar conexoes.
 - Ajuste a escala por `NUMBER_OF_WORKERS` ou `MaxDegreeOfParallelism`; cada loop tem seu proprio escopo e nao compartilha estado mutavel com os demais.
@@ -176,7 +171,7 @@ services.AddHostedService<SampleBackgroundWorker>();
 - Nao registrar segredos, credenciais ou payload sensivel em log; use templates estruturados `[Worker:Nome]`.
 
 ## Checklist de conclusao
-- [ ] Worker herda a base escolhida (`TaxWorker` ou `BackgroundService`) com construtor primario.
+- [ ] Worker herda a base escolhida (base do projeto ou `BackgroundService`) com construtor primario.
 - [ ] Somente singletons no construtor; `scoped` via `CreateScope()`.
 - [ ] Variante de paralelismo e de cadencia aplicadas conforme decidido.
 - [ ] Cancelamento gracioso coberto.
