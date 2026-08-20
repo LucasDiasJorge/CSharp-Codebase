@@ -48,8 +48,8 @@ Não há CI, `.editorconfig` nem `global.json` — a validação é local, no es
 
   Restaurar o `Directory.Build.props` na raiz conserta os 10 de uma vez; a alternativa é declarar `TargetFramework`, `Nullable` e `ImplicitUsings` em cada `.csproj` (os quatro projetos de `06-Caching` e `09-Data/Data/MongoUserApi` têm pacotes 8.0.x, logo `net8.0`; os demais, `net9.0`). Ao criar projeto novo, declare as três propriedades explicitamente.
 - **`13-SDKsAndLibraries/MySimpleSdk/src/MySimpleSdk.Tests` também não compila**, por causa diferente: falta o `ProjectReference` para `MySimpleSdk`, então `SdkClient` e `SdkService` não resolvem (`CS0246`).
-- **Target frameworks são heterogêneos**, não uniformes: net9.0 (maioria), net10.0, net8.0, net7.0, net6.0, net5.0, netstandard2.0 e net10.0-windows. O SDK instalado é 10.0.302. Preservar o TFM existente ao editar um projeto; não "modernizar" sem pedido.
-- **Layout varia**: alguns projetos usam `src/` (`GrpcSample`, `UnifiedCacheSdk`, `MySimpleSdk`, `AtomicOperationsDemo`, `ClassToDTO`, `DapperExample`, `MoneyStorageApi`, `MysqlExample`). Localizar o `.csproj` real antes de montar comandos.
+- **Target frameworks são heterogêneos**, não uniformes: net9.0 (maioria), net10.0, net8.0, net7.0, net6.0, net5.0, netstandard2.0 e net10.0-windows. O SDK instalado é 10.0.400. Preservar o TFM existente ao editar um projeto; não "modernizar" sem pedido.
+- **Layout varia**: quatro projetos usam `src/` — `GrpcSample` (3 csproj), `MySimpleSdk` (3 csproj), `UnifiedCacheSdk` e `AtomicOperationsDemo`. Outros ficam sob pasta agrupadora (`05-Messaging/Kafka/{Send,Receive}`, `06-Caching/Caching/*`, `09-Data/Data/*`) ou têm `.csproj` com nome diferente da pasta. Localizar o `.csproj` real com `find` antes de montar comandos; lista completa em `.claude/reference/catalogo.md`.
 - **Serviços externos**: projetos de `05-Messaging`, `06-Caching` e `09-Data` exigem Kafka, RabbitMQ, Redis, MySQL, PostgreSQL ou MongoDB ativos. `docker-compose.yml` disponível em `05-Messaging/Kafka/` e `06-Caching/Caching/CacheIncrement/`.
 - Ignorar `bin/` e `obj/` ao revisar diffs e ao buscar ocorrências de `var`.
 
@@ -73,6 +73,18 @@ Fontes de verdade: `docs/CONVENCOES.md` e `docs/README_TEMPLATE.md`.
 - Árvore de estrutura curta, omitindo `bin/`, `obj/`, `.git/`, `.vs/`. Comandos sempre com o caminho real do `.csproj`, sem placeholders do template.
 - Ao adicionar projeto: incluir `- \`NomeProjeto\` - descrição curta` na categoria correta do **Índice Completo de Projetos** do README raiz, e atualizar o contador do título da categoria e o total geral.
 
-## Skill do repositório
+## Skills e agentes
 
-`.github/skills/create-csharp-project-by-task/SKILL.md` define o fluxo completo para criar um sample novo (escolha da categoria 01-13 pelo conceito principal ensinado — não pelo template —, criação, registro na `.sln`, README local, atualização do README raiz e validação). Seguir esse arquivo ao criar projetos, em vez de improvisar o processo.
+`.github/skills/create-csharp-project-by-task/SKILL.md` define o fluxo completo para criar um sample novo (escolha da categoria 01-13 pelo conceito principal ensinado — não pelo template —, criação, registro na `.sln`, README local, atualização do README raiz e validação). Seguir esse arquivo ao criar projetos, em vez de improvisar o processo. **Ressalva:** ele foi escrito quando `Directory.Build.props` existia; onde manda "não duplicar propriedades centralizadas", declare `TargetFramework`, `Nullable` e `ImplicitUsings` explicitamente.
+
+`.claude/` traz os procedimentos operacionais deste repositório — ver [`.claude/README.md`](.claude/README.md):
+
+- **Skills** (`/nome`): `novo-sample`, `revisar-sample`, `consertar-build`, `padronizar-readme`, `atualizar-claude-md`, `auditar-catalogo`, `subir-servicos`.
+- **Agentes**: `catalog-navigator`, `sample-reviewer` e `catalog-auditor` (só leitura); `build-doctor`, `docs-curator` e `sample-author` (editam).
+- **Dados**: [`.claude/reference/catalogo.md`](.claude/reference/catalogo.md) consolida TFMs reais, layouts irregulares, projetos quebrados, ausências na `.sln` e a matriz projeto → serviço externo. Consultar antes de sair procurando no disco.
+
+Auditoria mecânica do catálogo (índice, contadores, `.sln`, TFM, docs, `var`):
+
+```bash
+powershell -ExecutionPolicy Bypass -File .\.claude\skills\auditar-catalogo\scripts\Audit-Catalog.ps1
+```
