@@ -168,9 +168,10 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `UnifiedCacheSdk` - SDK unificado de cache
 - `Caching/RedisMetaData` - Metadados do Redis
 
-#### 07-DesignPatterns (19 projetos)
+#### 07-DesignPatterns (20 projetos)
 - `SOLIDExamples` - Princípios SOLID
 - `StrategyIntegration` - Padrão Strategy
+- `StrategyResolver` - Advanced Resolver Pattern: resolvers com AppliesTo substituindo o switch de selecao de estrategia
 - `ParameterObject` - Parameter Object Pattern (substitui lista longa de parâmetros por objeto único)
 - `PortsAndAdapters` - Ports and Adapters com selecao dinamica de engine via controller
 - `ObjectCalisthenics` (2 subprojetos)
@@ -254,7 +255,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 111+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 112+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
