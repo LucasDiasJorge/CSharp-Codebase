@@ -171,7 +171,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 #### 07-DesignPatterns (20 projetos)
 - `SOLIDExamples` - Princípios SOLID
 - `StrategyIntegration` - Padrão Strategy
-- `StrategyResolver` - Advanced Resolver Pattern: resolvers com AppliesTo substituindo o switch de selecao de estrategia
+- `StrategyResolver` - Advanced Resolver Pattern em processador de pagamentos: AppliesTo e Priority com auto-registro por assembly scanning
 - `ParameterObject` - Parameter Object Pattern (substitui lista longa de parâmetros por objeto único)
 - `PortsAndAdapters` - Ports and Adapters com selecao dinamica de engine via controller
 - `ObjectCalisthenics` (2 subprojetos)
