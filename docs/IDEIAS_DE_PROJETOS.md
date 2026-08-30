@@ -1,0 +1,125 @@
+# 50 ideias de projetos didáticos em C#
+
+Esta lista propõe novos samples alinhados às 13 trilhas temáticas do repositório. Os nomes são sugestões para as pastas dos projetos, e cada item explicita o principal aprendizado esperado sem repetir o foco central dos exemplos já catalogados.
+
+## 01-Fundamentals
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 1 | `RecordsAndPatternMatchingDemo` | Ensinar `record`, igualdade por valor, expressões `with` e pattern matching posicional, por propriedade e por lista na modelagem de dados imutáveis. |
+| 2 | `GenericConstraintsDemo` | Demonstrar classes e métodos genéricos, variance e constraints como `class`, `struct`, `new()` e interfaces para criar APIs reutilizáveis com segurança de tipos. |
+| 3 | `SpanAndMemoryDemo` | Comparar arrays, `Span<T>` e `Memory<T>` em operações de slicing e parsing, destacando tempo de vida, alocações e limites de uso de cada abstração. |
+| 4 | `NullableReferenceTypesDemo` | Explorar anotações nullable, análise de fluxo do compilador, operadores de null e guard clauses para prevenir `NullReferenceException`. |
+
+## 02-AsyncAndConcurrency
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 5 | `CancellationTokenPipeline` | Ensinar propagação de cancelamento entre etapas assíncronas, linked tokens, encerramento cooperativo e tratamento correto de `OperationCanceledException`. |
+| 6 | `ChannelProducerConsumer` | Implementar produtores e consumidores com `System.Threading.Channels`, mostrando backpressure, canais bounded e conclusão ordenada do processamento. |
+| 7 | `ParallelDataProcessingDemo` | Comparar processamento sequencial, `Task.WhenAll` e `Parallel.ForEachAsync`, controlando o grau de paralelismo e medindo o impacto em tarefas de I/O e CPU. |
+| 8 | `AsyncStreamsDemo` | Trabalhar com `IAsyncEnumerable<T>`, `yield return`, `await foreach` e cancelamento ao consumir dados que chegam progressivamente. |
+| 9 | `AsyncLockingDemo` | Reproduzir uma race condition e corrigi-la com `SemaphoreSlim`, ensinando exclusão mútua compatível com `async` e os riscos de bloquear threads com `lock`. |
+
+## 03-WebAPIs
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 10 | `ApiVersioningDemo` | Ensinar versionamento por URL, header e query string, além de depreciação gradual e documentação de contratos compatíveis. |
+| 11 | `ProblemDetailsApi` | Padronizar respostas de erro com `ProblemDetails`, exception handlers e mapeamento de falhas de validação e domínio para códigos HTTP apropriados. |
+| 12 | `ServerSentEventsDemo` | Criar um endpoint de Server-Sent Events para demonstrar streaming unidirecional, cancelamento da conexão e reconexão do cliente. |
+| 13 | `HealthChecksApi` | Diferenciar liveness e readiness, criar health checks para dependências e expor resultados adequados para orquestradores. |
+
+## 04-Authentication
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 14 | `RefreshTokenRotationDemo` | Implementar access tokens curtos e refresh tokens rotativos, abordando revogação, armazenamento seguro e detecção de reutilização. |
+| 15 | `PolicyBasedAuthorizationDemo` | Ensinar autorização baseada em policies, claims, requirements e handlers, incluindo autorização sobre um recurso específico. |
+| 16 | `PasskeyAuthenticationDemo` | Apresentar o fluxo WebAuthn/FIDO2, registro de credenciais e autenticação resistente a phishing sem armazenar senhas. |
+| 17 | `ApiKeyAuthenticationDemo` | Criar um authentication handler para API keys, explorando hash, rotação, escopos, revogação e comparação em tempo constante. |
+
+## 05-Messaging
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 18 | `TransactionalOutboxDemo` | Demonstrar como persistir dados e eventos na mesma transação e publicar mensagens posteriormente sem dual write. |
+| 19 | `DeadLetterQueueDemo` | Ensinar retries com limite, tratamento de poison messages, envio para dead-letter queue e reprocessamento controlado. |
+| 20 | `KafkaOrderingDemo` | Explicar como chaves, partições e consumer groups influenciam ordenação, distribuição de carga e paralelismo no Kafka. |
+| 21 | `RabbitMqRequestReplyDemo` | Implementar request/reply com `CorrelationId`, fila de resposta, timeout e limpeza de requisições pendentes. |
+
+## 06-Caching
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 22 | `CacheStampedeProtectionDemo` | Simular cache stampede e aplicar single-flight, TTL com jitter e stale-while-revalidate para proteger a fonte de dados. |
+| 23 | `DistributedCacheInvalidationDemo` | Sincronizar a invalidação de caches locais entre instâncias usando Redis Pub/Sub e discutir consistência eventual. |
+| 24 | `RedisDistributedLockDemo` | Ensinar aquisição, renovação e liberação de locks distribuídos com token de propriedade, incluindo falhas de lease e limitações do padrão. |
+
+## 07-DesignPatterns
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 25 | `CommandUndoRedoDemo` | Encapsular operações como comandos e implementar histórico, undo e redo, separando a solicitação de sua execução. |
+| 26 | `ObserverStockAlertsDemo` | Implementar o padrão Observer com inscrição e remoção de observadores, comparando-o com events nativos do C#. |
+| 27 | `MementoDocumentHistoryDemo` | Salvar e restaurar estados de um documento sem expor sua estrutura interna, discutindo memória e limites do histórico. |
+| 28 | `ProxyRemoteServiceDemo` | Usar Proxy para controlar acesso a um serviço remoto, adicionando lazy loading, autorização e telemetria sem alterar o cliente. |
+
+## 08-ArchitecturalPatterns
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 29 | `EventSourcingBankAccountDemo` | Modelar uma conta bancária por eventos, reconstruir estado, controlar versões concorrentes e introduzir snapshots. |
+| 30 | `ModularMonolithCommerceDemo` | Organizar catálogo, pedidos e pagamentos em módulos com contratos explícitos, bancos logicamente isolados e eventos de integração internos. |
+| 31 | `TransactionalInboxDemo` | Garantir consumo idempotente ao registrar mensagens recebidas e alterações de domínio na mesma transação. |
+| 32 | `ApiGatewayAggregationDemo` | Agregar respostas de serviços, propagar correlation IDs e lidar com timeout, falha parcial e composição de contratos. |
+
+## 09-Data
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 33 | `EfCoreRelationshipsDemo` | Mapear relacionamentos um-para-um, um-para-muitos e muitos-para-muitos, explorando tracking, owned types e carregamento de dados. |
+| 34 | `EfCoreOptimisticConcurrencyDemo` | Simular atualizações concorrentes com concurrency tokens e ensinar estratégias de detecção, resolução e retry de conflitos. |
+| 35 | `DatabaseMigrationsDemo` | Ensinar criação, aplicação e reversão de migrations, seed de dados e evolução compatível do schema. |
+| 36 | `MultiTenantDataIsolationDemo` | Implementar isolamento por tenant com query filters e índices compostos, destacando riscos de vazamento entre clientes. |
+
+## 10-Algorithms
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 37 | `BinarySearchBoundariesDemo` | Derivar busca binária por invariantes e implementar exact match, lower bound e upper bound evitando erros de índice. |
+| 38 | `TrieAutocompleteDemo` | Construir uma trie para autocomplete, analisar custo por comprimento da palavra e comparar memória e busca com um dicionário. |
+| 39 | `LruCacheDataStructureDemo` | Combinar dicionário e lista duplamente ligada para obter leitura, escrita e remoção em tempo constante. |
+| 40 | `DynamicProgrammingCoinChangeDemo` | Resolver coin change com recursão, memoization e tabulation, comparando subproblemas repetidos e complexidade. |
+
+## 11-Utilities
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 41 | `CsvStreamingProcessor` | Processar arquivos CSV grandes sem carregá-los por inteiro, tratando cultura, registros inválidos e escrita incremental. |
+| 42 | `FileChecksumDeduplicator` | Calcular hashes por stream, localizar arquivos duplicados e discutir colisões, buffers e custo de I/O. |
+| 43 | `ConfigurationOptionsDemo` | Combinar `appsettings`, variáveis de ambiente e user secrets com Options Pattern, validação no startup e reload de configuração. |
+
+## 12-Testing
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 44 | `TestDoublesDemo` | Diferenciar dummy, stub, spy, mock e fake por exemplos, escolhendo entre verificação de estado e de comportamento. |
+| 45 | `PropertyBasedTestingDemo` | Gerar entradas automaticamente, expressar invariantes e usar shrinking para encontrar o menor caso que viola uma regra. |
+| 46 | `WebApiIntegrationTestingDemo` | Testar uma API em memória com `WebApplicationFactory`, substituir dependências e validar o contrato HTTP de ponta a ponta. |
+| 47 | `MutationTestingDemo` | Usar mutation testing para avaliar a força da suíte e identificar testes que executam código sem verificar seu comportamento. |
+
+## 13-SDKsAndLibraries
+
+| # | Projeto sugerido | Finalidade didática |
+|---:|---|---|
+| 48 | `ResilientHttpSdk` | Projetar um SDK HTTP tipado com `HttpClientFactory`, configuração por options, cancelamento, retries e tradução consistente de erros. |
+| 49 | `NuGetPackageLifecycleDemo` | Ensinar metadados de pacote, SemVer, `dotnet pack`, símbolos, documentação XML, feed local e consumo por outro projeto. |
+| 50 | `IncrementalSourceGeneratorDemo` | Criar um source generator incremental com Roslyn, inspecionar o código gerado e testar entradas, diagnósticos e saídas. |
+
+## Critérios usados na seleção
+
+- Complementar os projetos existentes em vez de recriar seus exemplos centrais.
+- Manter cada sample focado em um conceito principal e executável de forma independente.
+- Misturar fundamentos, práticas de produção e tópicos avançados em uma progressão de aprendizado.
+- Priorizar lacunas nas trilhas com menor quantidade de projetos, especialmente Testing e SDKsAndLibraries.
