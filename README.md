@@ -207,12 +207,13 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `TransactionScript` - Script de transação
 - `UseCases` - Casos de uso
 
-#### 09-Data (9 projetos)
-- `Data` (8 subprojetos)
+#### 09-Data (10 projetos)
+- `Data` (10 subprojetos)
   - `Dapper` - Micro ORM Dapper
   - `DapperExample` - Exemplo com Dapper
   - `MoneyStorageApi` - API de armazenamento
   - `MongoUserApi` - API com MongoDB
+  - `MySqlNamedAdvisoryLockReservation` - Reserva atomica com advisory lock nomeado do MySQL
   - `MysqlExample` - Exemplo com MySQL
   - `Postgres` - Exemplo com PostgreSQL
   - `ProcedureExample` - Procedimentos armazenados

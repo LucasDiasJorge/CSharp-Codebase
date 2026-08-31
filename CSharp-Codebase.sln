@@ -345,6 +345,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrategyResolver", "07-Desi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordsAndPatternMatchingDemo", "01-Fundamentals\RecordsAndPatternMatchingDemo\RecordsAndPatternMatchingDemo.csproj", "{5E0A07C9-633A-4C23-8386-FF44651D9ABC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySqlNamedAdvisoryLockReservation", "09-Data\Data\MySqlNamedAdvisoryLockReservation\MySqlNamedAdvisoryLockReservation.csproj", "{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1771,6 +1773,18 @@ Global
 		{5E0A07C9-633A-4C23-8386-FF44651D9ABC}.Release|x64.Build.0 = Release|Any CPU
 		{5E0A07C9-633A-4C23-8386-FF44651D9ABC}.Release|x86.ActiveCfg = Release|Any CPU
 		{5E0A07C9-633A-4C23-8386-FF44651D9ABC}.Release|x86.Build.0 = Release|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Debug|x64.Build.0 = Debug|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Debug|x86.Build.0 = Debug|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Release|x64.ActiveCfg = Release|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Release|x64.Build.0 = Release|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Release|x86.ActiveCfg = Release|Any CPU
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1920,5 +1934,6 @@ Global
 		{8E705371-F8BD-482B-8D30-0F51A044259E} = {14F17D2D-2CAA-19F0-18F2-09E7B217756B}
 		{254BBB26-3B13-4202-99C7-73C18DFC9F7B} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
 		{5E0A07C9-633A-4C23-8386-FF44651D9ABC} = {14F17D2D-2CAA-19F0-18F2-09E7B217756B}
+		{6CE3F41B-E805-4A9B-AD72-56BD3C4DAB9C} = {C268584A-73FE-E4FC-7C46-6E6797FE10D3}
 	EndGlobalSection
 EndGlobal
