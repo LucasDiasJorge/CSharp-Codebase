@@ -84,7 +84,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ### Índice Completo de Projetos
 
-#### 01-Fundamentals (15 projetos)
+#### 01-Fundamentals (16 projetos)
 - `AbstractClassVsInterfaceDemo` - Diferença entre classe abstrata e interface
 - `AggregationDepartmentManagement` - Composição e agregação
 - `AssociationMedicalScheduling` - Associação entre objetos
@@ -95,6 +95,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `Linq` - Query com LINQ
 - `LogicalOperatorsDemo` - Operadores lógicos
 - `PredicateAggregationDemo` - Agregação dinâmica de predicados com LINQ e expression trees
+- `RecordsAndPatternMatchingDemo` - Records, igualdade por valor, expressoes `with` e pattern matching
 - `Reflection` - Introspecção de tipos
 - `ShortCircuitEvaluationDemo` - Short-circuit evaluation em `&&`/`||` vs `&`/`|`, guard clauses e `??`/`?.`
 - `SymbolicDelegates` - Delegates simbólicos
