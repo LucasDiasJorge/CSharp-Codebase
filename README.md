@@ -84,7 +84,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ### Índice Completo de Projetos
 
-#### 01-Fundamentals (17 projetos)
+#### 01-Fundamentals (18 projetos)
 - `AbstractClassVsInterfaceDemo` - Diferença entre classe abstrata e interface
 - `AggregationDepartmentManagement` - Composição e agregação
 - `AssociationMedicalScheduling` - Associação entre objetos
@@ -99,6 +99,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `RecordsAndPatternMatchingDemo` - Records, igualdade por valor, expressoes `with` e pattern matching
 - `Reflection` - Introspecção de tipos
 - `ShortCircuitEvaluationDemo` - Short-circuit evaluation em `&&`/`||` vs `&`/`|`, guard clauses e `??`/`?.`
+- `SpanAndMemoryDemo` - Arrays, `Span<T>` e `Memory<T>` em slicing e parsing com menos alocacoes
 - `SymbolicDelegates` - Delegates simbólicos
 - `Sockets` - Exemplo de cliente/servidor TCP (Client e Server)
   - `Sockets.Client` - Cliente TCP
