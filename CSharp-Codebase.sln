@@ -355,6 +355,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NullableReferenceTypesDemo"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CancellationTokenPipeline", "02-AsyncAndConcurrency\CancellationTokenPipeline\CancellationTokenPipeline.csproj", "{DC59582E-ED30-41DC-9CFD-B1AB9C6487A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelProducerConsumer", "02-AsyncAndConcurrency\ChannelProducerConsumer\ChannelProducerConsumer.csproj", "{E3C2AE21-7B98-40F9-8428-95D8F95788F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1841,6 +1843,18 @@ Global
 		{DC59582E-ED30-41DC-9CFD-B1AB9C6487A1}.Release|x64.Build.0 = Release|Any CPU
 		{DC59582E-ED30-41DC-9CFD-B1AB9C6487A1}.Release|x86.ActiveCfg = Release|Any CPU
 		{DC59582E-ED30-41DC-9CFD-B1AB9C6487A1}.Release|x86.Build.0 = Release|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Debug|x64.Build.0 = Debug|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Debug|x86.Build.0 = Debug|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Release|x64.ActiveCfg = Release|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Release|x64.Build.0 = Release|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Release|x86.ActiveCfg = Release|Any CPU
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1995,5 +2009,6 @@ Global
 		{FE90F936-4556-4A9F-93F8-0BB95C44FDD1} = {14F17D2D-2CAA-19F0-18F2-09E7B217756B}
 		{1B9E6B1A-FBDE-4597-B023-98559692CA45} = {14F17D2D-2CAA-19F0-18F2-09E7B217756B}
 		{DC59582E-ED30-41DC-9CFD-B1AB9C6487A1} = {B98D119A-3864-6EFC-33F8-E657DF4A61CB}
+		{E3C2AE21-7B98-40F9-8428-95D8F95788F8} = {B98D119A-3864-6EFC-33F8-E657DF4A61CB}
 	EndGlobalSection
 EndGlobal

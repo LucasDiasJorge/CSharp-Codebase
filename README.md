@@ -107,12 +107,13 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `Sockets.Server` - Servidor TCP
 - `YieldReturnDemo` - Iteradores com `yield return`, execução preguiçosa e armadilhas comuns
 
-#### 02-AsyncAndConcurrency (9 projetos)
+#### 02-AsyncAndConcurrency (10 projetos)
 - `Asynchronous` - Async/await básico
 - `AsyncTasksDemo` - Demonstração de tasks
 - `AtomicOperationsDemo` - Operações atômicas
 - `BackgroudWorker` - Background workers
 - `CancellationTokenPipeline` - Propagação de cancelamento entre etapas assíncronas, linked tokens e encerramento cooperativo
+- `ChannelProducerConsumer` - Produtores e consumidores com Channels, backpressure e canais bounded
 - `JobQueueDemo` - Fila de trabalhos
 - `ReadDirectoryChangesWDemo` - Monitoramento de alteracoes de diretorio com ReadDirectoryChangesW
 - `TaskManagement` - Gerenciamento de tasks
@@ -261,7 +262,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 113+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 114+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
