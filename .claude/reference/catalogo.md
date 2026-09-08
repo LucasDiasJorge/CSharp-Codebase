@@ -14,7 +14,7 @@ Em empate, prefira a mais específica.
 | Trilha | Conceito principal | Projetos |
 |---|---|---|
 | `01-Fundamentals` | Sintaxe, OOP, LINQ, delegates, eventos, reflection | 15 |
-| `02-AsyncAndConcurrency` | async/await, tasks, threads, sincronização | 11 |
+| `02-AsyncAndConcurrency` | async/await, tasks, threads, sincronização | 12 |
 | `03-WebAPIs` | REST, Minimal API, gRPC, middleware, filtros | 17 |
 | `04-Authentication` | Autenticação, autorização, JWT, OAuth, sessão | 5 |
 | `05-Messaging` | Kafka, RabbitMQ, filas e eventos | 4 |
