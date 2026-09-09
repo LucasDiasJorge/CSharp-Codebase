@@ -203,11 +203,13 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `Composite` - Composto
   - `Decorator` - Decorador
 
-#### 08-ArchitecturalPatterns (9 projetos)
+#### 08-ArchitecturalPatterns (11 projetos)
 - `CarriedEvent` - Eventos persistidos
 - `CircuitBreakerDemo` - Disjuntor
 - `CQRSDemo` - Command Query Responsibility Segregation
+- `CountryRulesTimeProviderDemo` - API com StrategyResolver para seleção de regras por timezone
 - `PersistencePatterns` - Padrões de persistência
+- `PortsAndAdaptersClock` - Ports and Adapters lendo as horas por adaptador de relógio
 - `SagaPattern` - Padrão Saga
 - `ServiceRegistration` - Registro de serviços
 - `TransactionPattern` - Padrão de transação
@@ -252,11 +254,12 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `OrderRuleConsole` - Aplicação
   - `OrderRuleConsole.Tests` - Testes
 
-#### 13-SDKsAndLibraries (3 projetos)
+#### 13-SDKsAndLibraries (4 projetos)
 - `MySimpleSdk` (3 subprojetos)
   - `MySimpleSdk` - Biblioteca principal
   - `MySimpleSdk.Demo` - Demonstração
   - `MySimpleSdk.Tests` - Testes
+- `ScalarDocumentationSdk` - SDK para padronizar OpenAPI e Scalar em APIs ASP.NET Core
 - `BlockchainDemo` - Demonstração de blockchain (sem .csproj)
 
 #### Tools (1 projeto)
@@ -264,7 +267,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 116+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 118+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
@@ -282,7 +285,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 | `10-Algorithms` | Estruturas de dados e análise de cenários | `GraphTraversalDemo`, `PriorityQueueDemo`, `SlidingWindows` |
 | `11-Utilities` | Transformação de dados, serialização e observabilidade | `Serialization`, `NPOIDemo`, `SerilogExample` |
 | `12-Testing` | Benchmarks e validação de comportamento | `BenchmarkTool`, `OrderRuleConsole` |
-| `13-SDKsAndLibraries` | Bibliotecas e SDKs reutilizáveis | `MySimpleSdk` |
+| `13-SDKsAndLibraries` | Bibliotecas e SDKs reutilizáveis | `MySimpleSdk`, `ScalarDocumentationSdk` |
 
 ### Serviços externos comuns
 

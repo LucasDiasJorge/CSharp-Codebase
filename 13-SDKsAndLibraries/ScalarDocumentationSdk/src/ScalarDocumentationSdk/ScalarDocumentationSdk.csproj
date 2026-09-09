@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ScalarDocumentationSdk</RootNamespace>
+    <AssemblyName>ScalarDocumentationSdk</AssemblyName>
+
+    <PackageId>ScalarDocumentationSdk</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>CSharp-Codebase</Authors>
+    <Description>SDK para padronizar a configuracao do Scalar em APIs ASP.NET Core com OpenAPI.</Description>
+    <PackageTags>scalar;openapi;aspnetcore;sdk;documentation</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.17.3" />
+  </ItemGroup>
+
+</Project>
