@@ -46,14 +46,65 @@ CSharp-101/
 +\-- .github/
 ```
 
-## Skills
+## Skills (Ferramentas, templates e automações)
 
-- .github\skills\create-csharp-project-by-task
-  - **Nome:** create-csharp-project-by-task — Criar projeto C# no padrão do repositório CSharp-101.
-  - **Quando usar:** Solicitações como "crie um projeto C#", "novo sample" ou "adicionar projeto".
-  - **Entradas obrigatórias:** descrição do projeto; tipo (`console`, `webapi`, `classlib`, `worker`); objetivos didáticos.
-  - **Regras principais:** Não usar `var` (exceto em LINQ anônimo); atualizar o `README.md` local e o `README.md` raiz; validar com `dotnet build <caminho-do-csproj>`; considerar concluído apenas após build bem-sucedido.
-  - **Saída esperada:** projeto criado na categoria correta (01-13), arquivos criados/alterados listados e evidência do build.
+Esta seção descreve as "skills" (scripts, templates e automações) mantidas no repositório para acelerar tarefas repetitivas (ex.: criação de um novo sample). Cada entry segue um formato estável para facilitar uso e revisão.
+
+Formato padrão de uma skill
+- Nome: identificador curto (ex.: create-csharp-project-by-task)
+- Propósito: descrição curta do que a skill faz
+- Quando usar: cenários que justificam a execução da skill
+- Entradas obrigatórias: parâmetros necessários para execução
+- Regras principais: decisões de estilo, restrições e verificações automáticas
+- Saída esperada: artefatos criados/atualizados e evidências (build/test)
+- Checklist de validação: passos mínimos para considerar a tarefa concluída
+
+Exemplo: create-csharp-project-by-task
+- Nome: create-csharp-project-by-task
+- Propósito: criar um novo sample C# seguindo a padronização do repositório (estrutura de pastas, csproj, README local com template, validação básica de build).
+- Quando usar: pedidos como "crie um projeto C#", "novo sample", ou ao adicionar um exemplo didático.
+- Entradas obrigatórias:
+  - descrição curta do objetivo didático (1–2 frases)
+  - tipo do projeto: `console`, `webapi`, `classlib`, `worker`
+  - trilha/categoria alvo (01-13) — sugerir se o usuário não informar
+  - nome do projeto (sem espaços; PascalCase preferível)
+- Regras principais:
+  - Não usar `var`, exceto em expressões LINQ anônimas
+  - Não duplicar TargetFramework / Nullable / ImplicitUsings (centralizados em Directory.Build.props)
+  - Sempre incluir README local em português se o contexto do repositório estiver em português
+  - Apontar comandos de execução e build explicitamente para o `.csproj`
+  - Ignorar `bin/` e `obj/` em commits e diffs de revisão
+- Saída esperada:
+  - pasta criada em `0X-Category/ProjectName/` com `ProjectName.csproj`
+  - `README.md` local preenchido a partir de `docs/README_TEMPLATE.md` e adaptado ao exemplo
+  - atualização do `README.md` raiz (índice) incluindo o novo projeto
+  - evidência de build: `dotnet build --project <path-to-csproj>` com saída sucinta (ou log)
+- Checklist de validação mínima:
+  1. `dotnet build --project <caminho-do-csproj>` — build sem erros
+  2. `dotnet test --project <caminho-dos-testes>` quando aplicável
+  3. README local com: objetivo, como executar (com comando `dotnet run --project`), pré-requisitos (serviços externos) e link para convenções (`docs/CONVENCOES.md`)
+  4. Atualizar README raiz indexando o novo sample
+  5. Verificar que não foram adicionados `bin/`/`obj/` ao commit
+
+Notas operacionais
+- Prefira alterações mínimas e comandos dirigidos por `.csproj` (não construir solução inteira por padrão).
+- Regras específicas e validações adicionais devem ser colocadas em arquivos `.instructions.md` com `applyTo` apontando para a skill relevante.
+- Se o sample exigir serviços externos (Redis, Kafka, etc.), documente cenários de execução local via docker-compose ou comandos docker no README local.
+
+Como ampliar ou adicionar novas skills
+- Ao propor uma nova skill, forneça:
+  - objetivos e motivação
+  - parâmetros de entrada esperados
+  - validações automáticas possíveis (ex.: `dotnet build`, checagem de README)
+  - exemplos de uso
+
+Exemplo conciso de uso (manual)
+```bash
+# Criar um novo projeto manualmente seguindo a skill
+dotnet new console -o 01-Fundamentals/MeuNovoSample
+# ajustar csproj e README conforme docs/README_TEMPLATE.md
+dotnet build 01-Fundamentals/MeuNovoSample/MeuNovoSample.csproj
+```
 
 ## Como executar
 
