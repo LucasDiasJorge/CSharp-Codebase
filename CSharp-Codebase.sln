@@ -335,6 +335,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CA347A5B-52A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScalarDocumentationSdk", "13-SDKsAndLibraries\ScalarDocumentationSdk\src\ScalarDocumentationSdk\ScalarDocumentationSdk.csproj", "{EB72BE93-AC6B-4324-AF46-9C87C366089B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncLockingDemo", "02-AsyncAndConcurrency\AsyncLockingDemo\AsyncLockingDemo.csproj", "{1D504D14-0079-470C-8561-32C9F21E042F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1881,6 +1883,18 @@ Global
 		{EB72BE93-AC6B-4324-AF46-9C87C366089B}.Release|x64.Build.0 = Release|Any CPU
 		{EB72BE93-AC6B-4324-AF46-9C87C366089B}.Release|x86.ActiveCfg = Release|Any CPU
 		{EB72BE93-AC6B-4324-AF46-9C87C366089B}.Release|x86.Build.0 = Release|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Debug|x64.Build.0 = Debug|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Debug|x86.Build.0 = Debug|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Release|x64.ActiveCfg = Release|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Release|x64.Build.0 = Release|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Release|x86.ActiveCfg = Release|Any CPU
+		{1D504D14-0079-470C-8561-32C9F21E042F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2039,5 +2053,6 @@ Global
 		{7A60AD99-BEC8-3BE1-8A6A-FEFD849E6204} = {BC677AB3-0229-E3EA-CA30-3FF98E15F2DA}
 		{CA347A5B-52AD-138D-D104-E539F5F55799} = {7A60AD99-BEC8-3BE1-8A6A-FEFD849E6204}
 		{EB72BE93-AC6B-4324-AF46-9C87C366089B} = {CA347A5B-52AD-138D-D104-E539F5F55799}
+		{1D504D14-0079-470C-8561-32C9F21E042F} = {B98D119A-3864-6EFC-33F8-E657DF4A61CB}
 	EndGlobalSection
 EndGlobal
