@@ -173,7 +173,8 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `TaskManagement` - Gerenciamento de tasks
 - `Threads` - Manipulação de threads
 
-#### 03-WebAPIs (17 projetos)
+#### 03-WebAPIs (18 projetos)
+- `ApiVersioningDemo` - Versionamento por URL, header e query string, com descontinuação gradual
 - `BlazorHelloWorld` - Aplicação Blazor
 - `CustomFilterApi` - Filtros customizados em API
 - `CustomMiddleware` - Middleware customizado
@@ -319,7 +320,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 119+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 120+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 

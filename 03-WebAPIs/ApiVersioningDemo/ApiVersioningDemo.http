@@ -1,0 +1,26 @@
+@host = http://localhost:5114
+
+### v1 por segmento de URL - repare nos headers Sunset e api-deprecated-versions
+GET {{host}}/api/v1/products
+
+### v2 por segmento de URL - price virou objeto e tags apareceu
+GET {{host}}/api/v2/products
+
+### Rota estavel sem versao informada - cai na DefaultApiVersion (1.0)
+GET {{host}}/api/orders
+
+### Mesma rota, versao pelo header
+GET {{host}}/api/orders
+X-Api-Version: 2.0
+
+### Mesma rota, versao pela query string
+GET {{host}}/api/orders?api-version=2.0
+
+### Versao inexistente - 400 com application/problem+json
+GET {{host}}/api/orders?api-version=3.0
+
+### Documento OpenAPI da v1 - a descricao traz a data de sunset e o link de migracao
+GET {{host}}/openapi/v1.json
+
+### Documento OpenAPI da v2
+GET {{host}}/openapi/v2.json
