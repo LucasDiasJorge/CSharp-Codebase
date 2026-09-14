@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ServerSentEventsDemo</title>
+    <style>
+        body { font-family: Consolas, "Courier New", monospace; margin: 2rem; max-width: 60rem; }
+        h1 { font-size: 1.2rem; }
+        p { line-height: 1.5; }
+        button { font-family: inherit; padding: 0.4rem 0.8rem; margin-right: 0.5rem; }
+        #status { padding: 0.4rem 0.6rem; display: inline-block; }
+        .aberto { background: #d8f3dc; }
+        .fechado { background: #ffe5e5; }
+        #eventos { border: 1px solid #ccc; padding: 0.6rem; height: 20rem; overflow-y: auto; white-space: pre; }
+    </style>
+</head>
+<body>
+    <h1>Server-Sent Events</h1>
+
+    <p>
+        Conecte e observe os ids. Depois clique em <strong>Simular queda</strong>: o
+        <code>EventSource</code> reconecta sozinho e manda o header
+        <code>Last-Event-ID</code>, e o servidor retoma do ponto exato.
+    </p>
+
+    <p>
+        <button id="conectar">Conectar</button>
+        <button id="cair">Simular queda</button>
+        <button id="fechar">Fechar de vez</button>
+        <span id="status" class="fechado">desconectado</span>
+    </p>
+
+    <div id="eventos"></div>
+
+    <script>
+        const eventos = document.getElementById('eventos');
+        const status = document.getElementById('status');
+        let fonte = null;
+        let ultimoId = null;
+
+        function registrar(texto) {
+            eventos.textContent += texto + '\n';
+            eventos.scrollTop = eventos.scrollHeight;
+        }
+
+        function definirStatus(texto, aberto) {
+            status.textContent = texto;
+            status.className = aberto ? 'aberto' : 'fechado';
+        }
+
+        function conectar() {
+            if (fonte !== null) {
+                return;
+            }
+
+            // O navegador reenvia Last-Event-ID sozinho ao reconectar esta mesma URL.
+            fonte = new EventSource('/stream/prices');
+
+            fonte.onopen = () => {
+                definirStatus('conectado', true);
+                registrar('-- conexao aberta' + (ultimoId === null ? '' : ' (retomando depois do id ' + ultimoId + ')'));
+            };
+
+            fonte.addEventListener('price', (evento) => {
+                ultimoId = evento.lastEventId;
+                const dados = JSON.parse(evento.data);
+                registrar('id=' + evento.lastEventId + '  ' + dados.symbol + '  ' + dados.price);
+            });
+
+            // O navegador tenta reconectar sozinho; o estado passa por CONNECTING.
+            fonte.onerror = () => {
+                definirStatus('reconectando...', false);
+                registrar('-- conexao caiu; o navegador vai tentar de novo');
+            };
+        }
+
+        function simularQueda() {
+            // Fechar e reabrir imita a queda de rede: o navegador reenvia o
+            // Last-Event-ID e o servidor entrega o que ficou para tras.
+            if (fonte === null) {
+                return;
+            }
+
+            fonte.close();
+            fonte = null;
+            definirStatus('caiu', false);
+            registrar('-- queda simulada');
+            setTimeout(conectar, 2000);
+        }
+
+        function fechar() {
+            if (fonte === null) {
+                return;
+            }
+
+            fonte.close();
+            fonte = null;
+            definirStatus('desconectado', false);
+            registrar('-- fechado pelo cliente (nao reconecta)');
+        }
+
+        document.getElementById('conectar').addEventListener('click', conectar);
+        document.getElementById('cair').addEventListener('click', simularQueda);
+        document.getElementById('fechar').addEventListener('click', fechar);
+    </script>
+</body>
+</html>

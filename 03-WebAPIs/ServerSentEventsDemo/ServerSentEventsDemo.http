@@ -1,0 +1,26 @@
+@host = http://localhost:5173
+
+### Fluxo continuo com o suporte nativo do ASP.NET Core 10
+# Nao termina sozinho: interrompa o cliente para ver o log de desconexao.
+GET {{host}}/stream/prices
+Accept: text/event-stream
+
+### Retomada: pede tudo depois do evento 2
+GET {{host}}/stream/prices
+Accept: text/event-stream
+Last-Event-ID: 2
+
+### Mesma retomada por query string, para testar sem mexer em header
+GET {{host}}/stream/prices?lastEventId=2
+Accept: text/event-stream
+
+### Fluxo escrito a mao - mostra o formato cru, com retry: na abertura
+GET {{host}}/stream/raw
+Accept: text/event-stream
+
+### Fluxo que termina: 3 eventos e um event: done combinado com o cliente
+GET {{host}}/stream/finite?count=3
+Accept: text/event-stream
+
+### Quantos clientes estao conectados agora
+GET {{host}}/connections
