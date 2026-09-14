@@ -1,0 +1,40 @@
+@host = http://localhost:5158
+
+### 200 - pedido existente
+GET {{host}}/api/orders/1
+
+### 404 - falha de dominio traduzida pelo DomainExceptionHandler
+GET {{host}}/api/orders/99
+
+### 400 - validacao de formato, gerada automaticamente pelo [ApiController]
+POST {{host}}/api/orders
+Content-Type: application/json
+
+{ "sku": "errado", "quantity": 0, "customerEmail": "nao-e-email" }
+
+### 422 - formato valido, regra de negocio violada
+POST {{host}}/api/orders
+Content-Type: application/json
+
+{ "sku": "XYZ-9999", "quantity": 5, "customerEmail": "ana@example.com" }
+
+### 201 - caminho feliz
+POST {{host}}/api/orders
+Content-Type: application/json
+
+{ "sku": "ABC-1234", "quantity": 2, "customerEmail": "ana@example.com" }
+
+### 409 - conflito com o estado atual do recurso
+POST {{host}}/api/orders/2/payments
+
+### 400 - ValidationProblem construido a mao no controller
+POST {{host}}/api/orders/quotes?quantity=0
+
+### 500 - falha nao prevista, tratada pelo handler de fallback
+GET {{host}}/api/orders/boom
+
+### 404 - rota inexistente ganha corpo por causa do UseStatusCodePages
+GET {{host}}/api/nao-existe
+
+### 405 - metodo nao permitido
+DELETE {{host}}/api/orders/1
