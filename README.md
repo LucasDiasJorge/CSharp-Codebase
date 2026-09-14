@@ -173,7 +173,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `TaskManagement` - Gerenciamento de tasks
 - `Threads` - Manipulação de threads
 
-#### 03-WebAPIs (20 projetos)
+#### 03-WebAPIs (21 projetos)
 - `ApiVersioningDemo` - Versionamento por URL, header e query string, com descontinuação gradual
 - `BlazorHelloWorld` - Aplicação Blazor
 - `CustomFilterApi` - Filtros customizados em API
@@ -183,6 +183,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `GrpcSample.Client` - Cliente gRPC
   - `GrpcSample.Contracts` - Contratos Protobuf
   - `GrpcSample.Server` - Servidor gRPC
+- `HealthChecksApi` - Liveness e readiness, health checks de dependências e saída para orquestradores
 - `IdempotencyCacheApi` - Idempotência com cache
 - `InvoiceThrottlingApi` - Throttling de requisições
 - `MinimalApiDemo` - Minimal APIs (ASP.NET Core)
@@ -322,7 +323,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 122+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 123+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 

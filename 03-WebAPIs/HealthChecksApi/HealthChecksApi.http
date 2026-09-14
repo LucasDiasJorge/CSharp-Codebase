@@ -1,0 +1,37 @@
+@host = http://localhost:5178
+
+### Estado atual das dependencias simuladas
+GET {{host}}/simulation
+
+### Liveness - so pergunta se o processo responde
+GET {{host}}/health/live
+
+### Readiness - pergunta se a instancia pode receber trafego
+GET {{host}}/health/ready
+
+### Visao completa, para humano e painel
+GET {{host}}/health
+
+### Derruba o banco: readiness vira 503, liveness continua 200
+POST {{host}}/simulation/database?state=Down
+
+### Banco lento alem do timeout de 2s: a checagem e cancelada
+POST {{host}}/simulation/database?state=Hanging
+
+### Cache fora do ar: dependencia nao critica, resultado Degraded e 200
+POST {{host}}/simulation/cache?state=Down
+
+### Cache lento (1s) acima do orcamento de 500ms: Degraded pela latencia
+POST {{host}}/simulation/cache?state=Slow
+
+### Broker fora do ar: dependencia critica, readiness vira 503
+POST {{host}}/simulation/broker?state=Down
+
+### Restaura tudo
+POST {{host}}/simulation/database?state=Healthy
+
+###
+POST {{host}}/simulation/broker?state=Healthy
+
+###
+POST {{host}}/simulation/cache?state=Healthy
