@@ -198,11 +198,12 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `MyAPI` - Aplicação web
 - `MyAsp` - Exemplo TCP client/server e notas conceituais para "ASP.NET from scratch"
 
-#### 04-Authentication (7 projetos)
+#### 04-Authentication (8 projetos)
 - `AdvancedAuthSystem` - Sistema avançado de autenticação
 - `Authentication` (2 subprojetos)
   - `Auth` - Autenticação básica
   - `OAuthApplication` - OAuth 2.0
+- `RefreshTokenRotationDemo` - Access token curto e refresh token rotativo, com detecção de reuso e revogação por família
 - `Security` (3 subprojetos)
   - `EncryptDecrypt` - Criptografia
   - `SafeVault` - Armazenamento seguro
@@ -323,7 +324,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 123+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 124+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 

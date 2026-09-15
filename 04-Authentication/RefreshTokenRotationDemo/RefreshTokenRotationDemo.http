@@ -1,0 +1,39 @@
+@host = http://localhost:5286
+
+### 1. Login - abre uma familia de tokens
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{ "username": "ana", "password": "senha123" }
+
+### 2. Endpoint protegido - use o accessToken do passo 1
+GET {{host}}/auth/me
+Authorization: Bearer COLE_O_ACCESS_TOKEN_AQUI
+
+### 3. Rotacao - troque o refreshToken do passo 1 por um par novo
+POST {{host}}/auth/refresh
+Content-Type: application/json
+
+{ "refreshToken": "COLE_O_REFRESH_TOKEN_AQUI" }
+
+### 4. Replay - reenvie o refreshToken JA USADO do passo 1
+# Responde 401 ReuseDetected e derruba a familia inteira.
+POST {{host}}/auth/refresh
+Content-Type: application/json
+
+{ "refreshToken": "COLE_O_MESMO_REFRESH_TOKEN_DO_PASSO_3" }
+
+### 5. O token mais recente tambem deixou de valer apos a deteccao
+POST {{host}}/auth/refresh
+Content-Type: application/json
+
+{ "refreshToken": "COLE_O_REFRESH_TOKEN_DO_PASSO_3" }
+
+### 6. Estado da cadeia de tokens - so existe para o exemplo
+GET {{host}}/auth/tokens
+
+### 7. Logout - revoga a familia toda
+POST {{host}}/auth/logout
+Content-Type: application/json
+
+{ "refreshToken": "COLE_O_REFRESH_TOKEN_ATUAL" }
