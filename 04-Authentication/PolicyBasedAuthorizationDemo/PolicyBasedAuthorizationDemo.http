@@ -1,0 +1,51 @@
+@host = http://localhost:5079
+
+### Token da ana - engenharia, clearance 5, admin
+POST {{host}}/dev/token
+Content-Type: application/json
+
+{ "user": "ana" }
+
+### Token do bruno - engenharia, clearance 3, member
+POST {{host}}/dev/token
+Content-Type: application/json
+
+{ "user": "bruno" }
+
+### Token da carla - financeiro, clearance 1, member
+POST {{host}}/dev/token
+Content-Type: application/json
+
+{ "user": "carla" }
+
+### Claims que chegaram no token
+GET {{host}}/whoami
+Authorization: Bearer COLE_O_TOKEN_AQUI
+
+### Por perfil - so admin (ana)
+GET {{host}}/documents/by-role
+Authorization: Bearer COLE_O_TOKEN_AQUI
+
+### Por policy - clearance >= 3 (ana e bruno)
+GET {{host}}/documents/by-policy
+Authorization: Bearer COLE_O_TOKEN_AQUI
+
+### Claim exata - departamento engenharia (ana e bruno)
+GET {{host}}/documents/engineering
+Authorization: Bearer COLE_O_TOKEN_AQUI
+
+### Duas exigencias na mesma policy (AND) - so ana
+GET {{host}}/documents/senior-engineering
+Authorization: Bearer COLE_O_TOKEN_AQUI
+
+### RequireAssertion inline - depende do dia da semana
+GET {{host}}/documents/weekday
+Authorization: Bearer COLE_O_TOKEN_AQUI
+
+### Por recurso - bruno edita o doc 2 (e dono), mas nao o 1
+PUT {{host}}/documents/2
+Authorization: Bearer COLE_O_TOKEN_DO_BRUNO
+
+### Por recurso - ana edita qualquer um (admin)
+PUT {{host}}/documents/3
+Authorization: Bearer COLE_O_TOKEN_DA_ANA
