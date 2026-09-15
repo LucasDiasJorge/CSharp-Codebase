@@ -351,6 +351,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolicyBasedAuthorizationDem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasskeyAuthenticationDemo", "04-Authentication\PasskeyAuthenticationDemo\PasskeyAuthenticationDemo.csproj", "{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiKeyAuthenticationDemo", "04-Authentication\ApiKeyAuthenticationDemo\ApiKeyAuthenticationDemo.csproj", "{80CA741E-5B20-4989-8221-C93E13C2BB37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1993,6 +1995,18 @@ Global
 		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Release|x64.Build.0 = Release|Any CPU
 		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Release|x86.ActiveCfg = Release|Any CPU
 		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Release|x86.Build.0 = Release|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Debug|x64.Build.0 = Debug|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Debug|x86.Build.0 = Debug|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Release|x64.ActiveCfg = Release|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Release|x64.Build.0 = Release|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Release|x86.ActiveCfg = Release|Any CPU
+		{80CA741E-5B20-4989-8221-C93E13C2BB37}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2159,5 +2173,6 @@ Global
 		{85A8BED7-FC3B-4EA4-B8E8-6B06CDC7D9B7} = {D75C769B-A633-6D7D-5B4E-1A951B1020DF}
 		{82F7CBF0-2891-41DD-9871-AC9061C4A451} = {D75C769B-A633-6D7D-5B4E-1A951B1020DF}
 		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23} = {D75C769B-A633-6D7D-5B4E-1A951B1020DF}
+		{80CA741E-5B20-4989-8221-C93E13C2BB37} = {D75C769B-A633-6D7D-5B4E-1A951B1020DF}
 	EndGlobalSection
 EndGlobal

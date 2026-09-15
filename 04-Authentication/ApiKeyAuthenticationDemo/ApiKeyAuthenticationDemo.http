@@ -1,0 +1,40 @@
+@host = http://localhost:5273
+
+### Emitir chave so de leitura - o valor em claro aparece uma unica vez
+POST {{host}}/admin/keys
+Content-Type: application/json
+
+{ "owner": "servico-relatorios", "scopes": ["data:read"] }
+
+### Emitir chave com leitura e escrita
+POST {{host}}/admin/keys
+Content-Type: application/json
+
+{ "owner": "servico-integracao", "scopes": ["data:read", "data:write"] }
+
+### Endpoint aberto - nao exige chave
+GET {{host}}/data/public
+
+### Leitura sem chave - 401 com WWW-Authenticate
+GET {{host}}/data/read
+
+### Leitura com chave valida - 200
+GET {{host}}/data/read
+X-Api-Key: COLE_A_CHAVE_AQUI
+
+### Escrita com chave so de leitura - 403 (autenticado, sem permissao)
+POST {{host}}/data/write
+X-Api-Key: COLE_A_CHAVE_SO_DE_LEITURA
+
+### Chave adulterada - 401
+GET {{host}}/data/read
+X-Api-Key: cbk_naoexiste_segredoerrado
+
+### Listar chaves - metadados, nunca o segredo
+GET {{host}}/admin/keys
+
+### Rotacionar - emite a sucessora; a antiga vale por mais 10 minutos
+POST {{host}}/admin/keys/COLE_O_KEY_ID/rotate
+
+### Revogar - efeito imediato
+DELETE {{host}}/admin/keys/COLE_O_KEY_ID
