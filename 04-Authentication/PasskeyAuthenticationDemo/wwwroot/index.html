@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PasskeyAuthenticationDemo</title>
+    <style>
+        body { font-family: Consolas, "Courier New", monospace; margin: 2rem; max-width: 60rem; line-height: 1.5; }
+        h1 { font-size: 1.2rem; }
+        input, button { font-family: inherit; font-size: 1rem; padding: 0.4rem 0.6rem; }
+        button { cursor: pointer; margin-right: 0.5rem; }
+        #log { border: 1px solid #ccc; padding: 0.6rem; height: 18rem; overflow-y: auto; white-space: pre-wrap; margin-top: 1rem; }
+        .aviso { background: #fff7e0; border-left: 4px solid #e0a800; padding: 0.6rem 0.8rem; }
+    </style>
+</head>
+<body>
+    <h1>Autenticação com passkey (WebAuthn)</h1>
+
+    <p class="aviso">
+        Precisa de um autenticador. Sem biometria na máquina, abra o DevTools do Chrome →
+        <strong>More tools → WebAuthn</strong> → <em>Enable virtual authenticator environment</em>
+        e adicione um autenticador virtual com <em>Supports resident keys</em> ligado.
+    </p>
+
+    <p>
+        <input id="usuario" value="ana" size="18" />
+        <button id="registrar">Registrar passkey</button>
+        <button id="entrar">Entrar (com usuário)</button>
+        <button id="entrarSemUsuario">Entrar sem usuário</button>
+    </p>
+
+    <div id="log"></div>
+
+    <script>
+        const log = document.getElementById('log');
+
+        function escrever(texto) {
+            log.textContent += texto + '\n';
+            log.scrollTop = log.scrollHeight;
+        }
+
+        // O servidor manda challenge, id de usuário e id de credencial em base64url.
+        // navigator.credentials exige ArrayBuffer, então tudo precisa ser convertido nos
+        // dois sentidos. É a fonte mais comum de erro em integração WebAuthn.
+        function base64UrlParaBytes(valor) {
+            const base64 = valor.replace(/-/g, '+').replace(/_/g, '/');
+            const preenchido = base64.padEnd(base64.length + (4 - base64.length % 4) % 4, '=');
+            const binario = atob(preenchido);
+            const bytes = new Uint8Array(binario.length);
+            for (let i = 0; i < binario.length; i++) {
+                bytes[i] = binario.charCodeAt(i);
+            }
+            return bytes;
+        }
+
+        function bytesParaBase64Url(buffer) {
+            const bytes = new Uint8Array(buffer);
+            let binario = '';
+            for (let i = 0; i < bytes.length; i++) {
+                binario += String.fromCharCode(bytes[i]);
+            }
+            return btoa(binario).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+        }
+
+        async function registrar() {
+            const username = document.getElementById('usuario').value;
+            escrever('-- registro: pedindo desafio para ' + username);
+
+            const inicio = await fetch('/passkey/register/begin', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username })
+            }).then(r => r.json());
+
+            const opcoes = inicio.options;
+            opcoes.challenge = base64UrlParaBytes(opcoes.challenge);
+            opcoes.user.id = base64UrlParaBytes(opcoes.user.id);
+            opcoes.excludeCredentials = (opcoes.excludeCredentials || []).map(c => ({
+                ...c, id: base64UrlParaBytes(c.id)
+            }));
+
+            escrever('   challenge recebido (' + opcoes.challenge.length + ' bytes); chamando o autenticador');
+
+            // Aqui o par de chaves nasce dentro do autenticador. A chave privada nunca
+            // sai dali — nem o navegador nem o servidor a veem.
+            const credencial = await navigator.credentials.create({ publicKey: opcoes });
+
+            const conclusao = await fetch('/passkey/register/complete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ceremonyId: inicio.ceremonyId,
+                    response: {
+                        id: credencial.id,
+                        rawId: bytesParaBase64Url(credencial.rawId),
+                        type: credencial.type,
+                        extensions: credencial.getClientExtensionResults(),
+                        response: {
+                            attestationObject: bytesParaBase64Url(credencial.response.attestationObject),
+                            clientDataJson: bytesParaBase64Url(credencial.response.clientDataJSON)
+                        }
+                    }
+                })
+            }).then(r => r.json());
+
+            escrever('   resposta: ' + JSON.stringify(conclusao));
+        }
+
+        async function entrar(comUsuario) {
+            const username = comUsuario ? document.getElementById('usuario').value : null;
+            escrever('-- login: ' + (comUsuario ? 'usuario ' + username : 'sem informar usuario'));
+
+            const inicio = await fetch('/passkey/login/begin', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username })
+            }).then(r => r.json());
+
+            if (inicio.error) {
+                escrever('   ' + inicio.error);
+                return;
+            }
+
+            const opcoes = inicio.options;
+            opcoes.challenge = base64UrlParaBytes(opcoes.challenge);
+            opcoes.allowCredentials = (opcoes.allowCredentials || []).map(c => ({
+                ...c, id: base64UrlParaBytes(c.id)
+            }));
+
+            // O autenticador assina o desafio com a chave privada. Se o domínio da página
+            // não bater com o RP ID da credencial, ele simplesmente recusa.
+            const credencial = await navigator.credentials.get({ publicKey: opcoes });
+
+            const conclusao = await fetch('/passkey/login/complete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ceremonyId: inicio.ceremonyId,
+                    response: {
+                        id: credencial.id,
+                        rawId: bytesParaBase64Url(credencial.rawId),
+                        type: credencial.type,
+                        extensions: credencial.getClientExtensionResults(),
+                        response: {
+                            authenticatorData: bytesParaBase64Url(credencial.response.authenticatorData),
+                            clientDataJson: bytesParaBase64Url(credencial.response.clientDataJSON),
+                            signature: bytesParaBase64Url(credencial.response.signature),
+                            userHandle: credencial.response.userHandle
+                                ? bytesParaBase64Url(credencial.response.userHandle)
+                                : null
+                        }
+                    }
+                })
+            });
+
+            escrever('   status ' + conclusao.status + ': ' + await conclusao.text());
+        }
+
+        document.getElementById('registrar').addEventListener('click',
+            () => registrar().catch(e => escrever('   erro: ' + e.message)));
+        document.getElementById('entrar').addEventListener('click',
+            () => entrar(true).catch(e => escrever('   erro: ' + e.message)));
+        document.getElementById('entrarSemUsuario').addEventListener('click',
+            () => entrar(false).catch(e => escrever('   erro: ' + e.message)));
+    </script>
+</body>
+</html>

@@ -349,6 +349,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefreshTokenRotationDemo", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolicyBasedAuthorizationDemo", "04-Authentication\PolicyBasedAuthorizationDemo\PolicyBasedAuthorizationDemo.csproj", "{82F7CBF0-2891-41DD-9871-AC9061C4A451}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasskeyAuthenticationDemo", "04-Authentication\PasskeyAuthenticationDemo\PasskeyAuthenticationDemo.csproj", "{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1979,6 +1981,18 @@ Global
 		{82F7CBF0-2891-41DD-9871-AC9061C4A451}.Release|x64.Build.0 = Release|Any CPU
 		{82F7CBF0-2891-41DD-9871-AC9061C4A451}.Release|x86.ActiveCfg = Release|Any CPU
 		{82F7CBF0-2891-41DD-9871-AC9061C4A451}.Release|x86.Build.0 = Release|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Debug|x64.Build.0 = Debug|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Debug|x86.Build.0 = Debug|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Release|x64.ActiveCfg = Release|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Release|x64.Build.0 = Release|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Release|x86.ActiveCfg = Release|Any CPU
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2144,5 +2158,6 @@ Global
 		{1AAD53E5-36A8-46DD-8FE4-D3C5C0F50BB7} = {34242CEC-519F-A554-9F8A-1EB111971097}
 		{85A8BED7-FC3B-4EA4-B8E8-6B06CDC7D9B7} = {D75C769B-A633-6D7D-5B4E-1A951B1020DF}
 		{82F7CBF0-2891-41DD-9871-AC9061C4A451} = {D75C769B-A633-6D7D-5B4E-1A951B1020DF}
+		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23} = {D75C769B-A633-6D7D-5B4E-1A951B1020DF}
 	EndGlobalSection
 EndGlobal
