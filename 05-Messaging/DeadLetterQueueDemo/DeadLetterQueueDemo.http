@@ -1,0 +1,49 @@
+@host = http://localhost:5054
+
+### Mensagem que processa de primeira
+POST {{host}}/orders
+Content-Type: application/json
+
+{ "orderId": "OK-1", "behavior": "ok" }
+
+### Falha transitoria: erra na 1a tentativa, passa na 2a (3s de espera entre elas)
+POST {{host}}/orders
+Content-Type: application/json
+
+{ "orderId": "TR-1", "behavior": "transient", "succeedOnAttempt": 2 }
+
+### Poison message: falha sempre. Esgota as 3 tentativas e vai para a DLQ
+POST {{host}}/orders
+Content-Type: application/json
+
+{ "orderId": "PO-1", "behavior": "poison" }
+
+### Falha permanente: vai DIRETO para a DLQ, sem gastar retentativa
+POST {{host}}/orders
+Content-Type: application/json
+
+{ "orderId": "IN-1", "behavior": "invalid" }
+
+### Payload malformado: tambem e falha permanente
+POST {{host}}/orders/raw
+Content-Type: application/json
+
+{ "payload": "isto nao e json" }
+
+### Profundidade das tres filas
+GET {{host}}/queues
+
+### Historico de tentativas do consumidor
+GET {{host}}/attempts
+
+### Espiar a DLQ sem consumir - traz o motivo de cada mensagem
+GET {{host}}/dlq
+
+### Reprocessamento controlado: devolve a DLQ para a fila principal
+POST {{host}}/dlq/replay
+
+### Descartar a DLQ
+DELETE {{host}}/dlq
+
+### Limpar o historico de tentativas
+DELETE {{host}}/attempts

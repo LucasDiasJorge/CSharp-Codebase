@@ -355,6 +355,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiKeyAuthenticationDemo", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransactionalOutboxDemo", "05-Messaging\TransactionalOutboxDemo\TransactionalOutboxDemo.csproj", "{C9640C7D-01EC-4F2B-8652-54975CF6DBE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeadLetterQueueDemo", "05-Messaging\DeadLetterQueueDemo\DeadLetterQueueDemo.csproj", "{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2021,6 +2023,18 @@ Global
 		{C9640C7D-01EC-4F2B-8652-54975CF6DBE4}.Release|x64.Build.0 = Release|Any CPU
 		{C9640C7D-01EC-4F2B-8652-54975CF6DBE4}.Release|x86.ActiveCfg = Release|Any CPU
 		{C9640C7D-01EC-4F2B-8652-54975CF6DBE4}.Release|x86.Build.0 = Release|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Debug|x64.Build.0 = Debug|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Debug|x86.Build.0 = Debug|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Release|x64.ActiveCfg = Release|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Release|x64.Build.0 = Release|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Release|x86.ActiveCfg = Release|Any CPU
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2189,5 +2203,6 @@ Global
 		{4C0F8283-DC14-4DA5-8BC8-D8C34A4B6E23} = {D75C769B-A633-6D7D-5B4E-1A951B1020DF}
 		{80CA741E-5B20-4989-8221-C93E13C2BB37} = {D75C769B-A633-6D7D-5B4E-1A951B1020DF}
 		{C9640C7D-01EC-4F2B-8652-54975CF6DBE4} = {F2DFA0E6-4726-939F-5D22-19E44D3AC945}
+		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1} = {F2DFA0E6-4726-939F-5D22-19E44D3AC945}
 	EndGlobalSection
 EndGlobal
