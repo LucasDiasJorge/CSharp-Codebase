@@ -213,11 +213,12 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `SecurityAndAuthentication` - Segurança integrada
 - `SessionManagement` - Gerenciamento de sessão
 
-#### 05-Messaging (8 projetos)
+#### 05-Messaging (9 projetos)
 - `DeadLetterQueueDemo` - Retentativa limitada, poison messages, dead-letter queue e reprocessamento
 - `Kafka` (2 subprojetos)
   - `Send` - Produtor Kafka
   - `Receive` - Consumidor Kafka
+- `KafkaOrderingDemo` - Chaves, partições e consumer groups: ordenação, distribuição e teto de paralelismo
 - `KafkaStreamApi` - Streaming com Kafka
 - `QueueExample` - Exemplo de fila
 - `RabbitMQ` (2 subprojetos)
@@ -329,7 +330,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 129+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 130+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 

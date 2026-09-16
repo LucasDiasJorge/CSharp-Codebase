@@ -1,0 +1,46 @@
+@host = http://localhost:5186
+
+### Metadados do topico - 3 particoes
+GET {{host}}/topic
+
+### COM chave: 5 eventos de cliente-A, todos na mesma particao
+POST {{host}}/produce/keyed
+Content-Type: application/json
+
+{ "key": "cliente-A", "count": 5 }
+
+### COM chave: 5 eventos de cliente-B, provavelmente em outra particao
+POST {{host}}/produce/keyed
+Content-Type: application/json
+
+{ "key": "cliente-B", "count": 5 }
+
+### SEM chave: espalha entre as particoes, sem ordem garantida
+POST {{host}}/produce/keyless
+Content-Type: application/json
+
+{ "count": 6 }
+
+### 1 consumidor - recebe as 3 particoes
+POST {{host}}/consume
+Content-Type: application/json
+
+{ "group": "g1", "consumers": 1, "seconds": 9 }
+
+### 3 consumidores - uma particao para cada
+POST {{host}}/consume
+Content-Type: application/json
+
+{ "group": "g3", "consumers": 3, "seconds": 9 }
+
+### 4 consumidores para 3 particoes - um fica OCIOSO
+POST {{host}}/consume
+Content-Type: application/json
+
+{ "group": "g4", "consumers": 4, "seconds": 9 }
+
+### Confere se a ordem por chave sobreviveu ao consumo paralelo
+POST {{host}}/consume/check-order
+Content-Type: application/json
+
+{ "group": "chk", "consumers": 3, "seconds": 9 }
