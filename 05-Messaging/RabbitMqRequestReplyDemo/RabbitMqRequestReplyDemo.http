@@ -1,0 +1,30 @@
+@host = http://localhost:5149
+
+### Requisicao simples - resposta em poucos milissegundos
+POST {{host}}/rpc/sum
+Content-Type: application/json
+
+{ "a": 20, "b": 22 }
+
+### Servidor lento (2s), mas dentro do timeout (3s) - responde
+POST {{host}}/rpc/sum
+Content-Type: application/json
+
+{ "a": 1, "b": 2, "delayMs": 2000, "timeoutMs": 3000 }
+
+### Servidor mais lento (3s) que o timeout (1s) - 504
+# O servidor ainda vai responder; a resposta chega tarde e e descartada.
+POST {{host}}/rpc/sum
+Content-Type: application/json
+
+{ "a": 9, "b": 9, "delayMs": 3000, "timeoutMs": 1000 }
+
+### 12 requisicoes simultaneas - cada resposta casa com o proprio pedido
+POST {{host}}/rpc/concurrent
+Content-Type: application/json
+
+{ "count": 12, "delayMs": 150, "timeoutMs": 5000 }
+
+### Pendentes e respostas tardias descartadas
+# pendentes deve ser sempre 0 quando nao ha requisicao em voo.
+GET {{host}}/pending
