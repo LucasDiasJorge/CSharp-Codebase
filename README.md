@@ -213,7 +213,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `SecurityAndAuthentication` - Segurança integrada
 - `SessionManagement` - Gerenciamento de sessão
 
-#### 05-Messaging (6 projetos)
+#### 05-Messaging (7 projetos)
 - `Kafka` (2 subprojetos)
   - `Send` - Produtor Kafka
   - `Receive` - Consumidor Kafka
@@ -222,6 +222,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `RabbitMQ` (2 subprojetos)
   - `Send` - Produtor RabbitMQ
   - `Receive` - Consumidor RabbitMQ
+- `TransactionalOutboxDemo` - Outbox transacional: dados e eventos na mesma transação, publicados por um relay
 
 #### 06-Caching (10 projetos)
 - `Caching` (8 subprojetos)
@@ -327,7 +328,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 127+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 128+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 

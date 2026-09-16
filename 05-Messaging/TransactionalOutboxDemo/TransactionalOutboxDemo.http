@@ -1,0 +1,43 @@
+@host = http://localhost:5260
+
+### 1. Pedido pelo caminho certo (outbox) - broker no ar
+POST {{host}}/orders
+Content-Type: application/json
+
+{ "customer": "ana", "total": 100 }
+
+### 2. Derrubar o broker
+POST {{host}}/simulation/broker
+Content-Type: application/json
+
+{ "down": true }
+
+### 3. Dual write com o broker fora - 500, pedido salvo e evento PERDIDO para sempre
+POST {{host}}/orders/dual-write
+Content-Type: application/json
+
+{ "customer": "bruno", "total": 200 }
+
+### 4. Outbox com o broker fora - 200, mensagem fica pendente
+POST {{host}}/orders
+Content-Type: application/json
+
+{ "customer": "diego", "total": 400 }
+
+### 5. Estado da outbox - a do passo 4 esta pendente
+GET {{host}}/outbox
+
+### 6. Pedidos no banco - inclui os do dual write, que nao geraram evento nenhum
+GET {{host}}/orders
+
+### 7. Religar o broker - o relay publica a pendente sozinho em ate 2s
+POST {{host}}/simulation/broker
+Content-Type: application/json
+
+{ "down": false }
+
+### 8. Outbox de novo - agora tudo publicado
+GET {{host}}/outbox
+
+### 9. O que realmente chegou ao broker
+GET {{host}}/published
