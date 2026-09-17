@@ -227,9 +227,10 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `Receive` - Consumidor RabbitMQ
 - `TransactionalOutboxDemo` - Outbox transacional: dados e eventos na mesma transação, publicados por um relay
 
-#### 06-Caching (10 projetos)
-- `Caching` (8 subprojetos)
+#### 06-Caching (11 projetos)
+- `Caching` (9 subprojetos)
   - `CacheAside` - Padrão Cache-Aside
+  - `CacheStampedeProtectionDemo` - Stampede, single-flight, jitter de TTL e stale-while-revalidate
   - `CacheIncrement` - Incremento com cache
   - `CachePatterns` - Padrões de cache
   - `FusionCache` - Biblioteca FusionCache
@@ -331,7 +332,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 131+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 132+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 

@@ -361,6 +361,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaOrderingDemo", "05-Mes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMqRequestReplyDemo", "05-Messaging\RabbitMqRequestReplyDemo\RabbitMqRequestReplyDemo.csproj", "{BA1FB7D7-0F52-4ABA-A431-486F846F603B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheStampedeProtectionDemo", "06-Caching\Caching\CacheStampedeProtectionDemo\CacheStampedeProtectionDemo.csproj", "{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2063,6 +2065,18 @@ Global
 		{BA1FB7D7-0F52-4ABA-A431-486F846F603B}.Release|x64.Build.0 = Release|Any CPU
 		{BA1FB7D7-0F52-4ABA-A431-486F846F603B}.Release|x86.ActiveCfg = Release|Any CPU
 		{BA1FB7D7-0F52-4ABA-A431-486F846F603B}.Release|x86.Build.0 = Release|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Debug|x64.Build.0 = Debug|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Debug|x86.Build.0 = Debug|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Release|x64.ActiveCfg = Release|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Release|x64.Build.0 = Release|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Release|x86.ActiveCfg = Release|Any CPU
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2234,5 +2248,6 @@ Global
 		{0F2E9551-77C5-4FB7-A1CC-1BA231193FC1} = {F2DFA0E6-4726-939F-5D22-19E44D3AC945}
 		{A8CC6928-8D27-47BB-924C-0E6FDC81545C} = {F2DFA0E6-4726-939F-5D22-19E44D3AC945}
 		{BA1FB7D7-0F52-4ABA-A431-486F846F603B} = {F2DFA0E6-4726-939F-5D22-19E44D3AC945}
+		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2} = {79EFE208-156D-28CC-33C6-D449A6B1666B}
 	EndGlobalSection
 EndGlobal
