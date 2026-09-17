@@ -365,6 +365,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheStampedeProtectionDemo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedCacheInvalidationDemo", "06-Caching\Caching\DistributedCacheInvalidationDemo\DistributedCacheInvalidationDemo.csproj", "{9BA9309F-80A4-4212-B6CD-A2F36404088D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisDistributedLockDemo", "06-Caching\Caching\RedisDistributedLockDemo\RedisDistributedLockDemo.csproj", "{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2091,6 +2093,18 @@ Global
 		{9BA9309F-80A4-4212-B6CD-A2F36404088D}.Release|x64.Build.0 = Release|Any CPU
 		{9BA9309F-80A4-4212-B6CD-A2F36404088D}.Release|x86.ActiveCfg = Release|Any CPU
 		{9BA9309F-80A4-4212-B6CD-A2F36404088D}.Release|x86.Build.0 = Release|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Debug|x64.Build.0 = Debug|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Debug|x86.Build.0 = Debug|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Release|x64.ActiveCfg = Release|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Release|x64.Build.0 = Release|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Release|x86.ActiveCfg = Release|Any CPU
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2264,5 +2278,6 @@ Global
 		{BA1FB7D7-0F52-4ABA-A431-486F846F603B} = {F2DFA0E6-4726-939F-5D22-19E44D3AC945}
 		{DDD0DDAF-603D-4E69-8512-3AFCB35540C2} = {79EFE208-156D-28CC-33C6-D449A6B1666B}
 		{9BA9309F-80A4-4212-B6CD-A2F36404088D} = {79EFE208-156D-28CC-33C6-D449A6B1666B}
+		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11} = {79EFE208-156D-28CC-33C6-D449A6B1666B}
 	EndGlobalSection
 EndGlobal

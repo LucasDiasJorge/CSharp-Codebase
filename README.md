@@ -227,8 +227,8 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `Receive` - Consumidor RabbitMQ
 - `TransactionalOutboxDemo` - Outbox transacional: dados e eventos na mesma transação, publicados por um relay
 
-#### 06-Caching (12 projetos)
-- `Caching` (10 subprojetos)
+#### 06-Caching (13 projetos)
+- `Caching` (11 subprojetos)
   - `CacheAside` - Padrão Cache-Aside
   - `CacheStampedeProtectionDemo` - Stampede, single-flight, jitter de TTL e stale-while-revalidate
   - `CacheIncrement` - Incremento com cache
@@ -238,6 +238,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `RedisCacheKeyParams` - Composição de chaves com params object[]
   - `RedisMySQLIntegration` - Redis + MySQL
   - `RedisConsoleApp` - Redis (console)
+  - `RedisDistributedLockDemo` - Lock distribuído com token de propriedade, renovação de lease e fencing token
   - `RedisHashFieldExpire` - Expiração por campo em hash
 - `UnifiedCacheSdk` - SDK unificado de cache
 - `Caching/RedisMetaData` - Metadados do Redis
@@ -333,7 +334,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 133+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 134+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
