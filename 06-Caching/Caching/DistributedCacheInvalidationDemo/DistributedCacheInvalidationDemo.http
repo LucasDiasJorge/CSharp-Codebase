@@ -1,0 +1,46 @@
+@host = http://localhost:5090
+
+### Zera tudo: L1 dos nos, Redis e contadores
+POST {{host}}/reset
+
+### Aquece o L1 dos tres nos com o produto 1
+POST {{host}}/warmup/1
+
+### Estado de cada no - os tres tem o mesmo valor em L1
+GET {{host}}/state
+
+### ERRADO: no A escreve sem publicar invalidacao
+PUT {{host}}/nodes/A/products/1/no-invalidation
+Content-Type: application/json
+
+{ "value": "Teclado mecanico - R$ 299,00 (PROMOCAO)" }
+
+### A ja devolve o novo valor...
+GET {{host}}/nodes/A/products/1
+
+### ...mas B continua servindo o antigo, do L1 dele
+GET {{host}}/nodes/B/products/1
+
+### ...e C tambem
+GET {{host}}/nodes/C/products/1
+
+### Zera e aquece de novo para o cenario correto
+POST {{host}}/reset
+
+###
+POST {{host}}/warmup/1
+
+### CERTO: no A escreve e publica a invalidacao
+PUT {{host}}/nodes/A/products/1
+Content-Type: application/json
+
+{ "value": "Teclado mecanico - R$ 279,00 (COM AVISO)" }
+
+### Agora os tres convergiram
+GET {{host}}/nodes/B/products/1
+
+###
+GET {{host}}/nodes/C/products/1
+
+### Contadores: B e C receberam a invalidacao, A ignorou a propria
+GET {{host}}/state
