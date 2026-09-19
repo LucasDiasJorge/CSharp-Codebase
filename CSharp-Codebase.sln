@@ -369,6 +369,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisDistributedLockDemo", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandUndoRedoDemo", "07-DesignPatterns\CommandUndoRedoDemo\CommandUndoRedoDemo.csproj", "{3552AEE1-A4A2-4A58-9BB9-44F36A989E00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObserverStockAlertsDemo", "07-DesignPatterns\ObserverStockAlertsDemo\ObserverStockAlertsDemo.csproj", "{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2119,6 +2121,18 @@ Global
 		{3552AEE1-A4A2-4A58-9BB9-44F36A989E00}.Release|x64.Build.0 = Release|Any CPU
 		{3552AEE1-A4A2-4A58-9BB9-44F36A989E00}.Release|x86.ActiveCfg = Release|Any CPU
 		{3552AEE1-A4A2-4A58-9BB9-44F36A989E00}.Release|x86.Build.0 = Release|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Debug|x64.Build.0 = Debug|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Debug|x86.Build.0 = Debug|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Release|x64.ActiveCfg = Release|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Release|x64.Build.0 = Release|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Release|x86.ActiveCfg = Release|Any CPU
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2294,5 +2308,6 @@ Global
 		{9BA9309F-80A4-4212-B6CD-A2F36404088D} = {79EFE208-156D-28CC-33C6-D449A6B1666B}
 		{F61307FD-72EC-4AD5-A43A-E673DFEF0D11} = {79EFE208-156D-28CC-33C6-D449A6B1666B}
 		{3552AEE1-A4A2-4A58-9BB9-44F36A989E00} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
+		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
 	EndGlobalSection
 EndGlobal
