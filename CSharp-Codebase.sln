@@ -373,6 +373,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObserverStockAlertsDemo", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MementoDocumentHistoryDemo", "07-DesignPatterns\MementoDocumentHistoryDemo\MementoDocumentHistoryDemo.csproj", "{AD9F5A6D-9614-4AB9-84D4-F929863F4B21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyRemoteServiceDemo", "07-DesignPatterns\ProxyRemoteServiceDemo\ProxyRemoteServiceDemo.csproj", "{2110FF25-7C12-4427-9F1C-859A5D3BECDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2147,6 +2149,18 @@ Global
 		{AD9F5A6D-9614-4AB9-84D4-F929863F4B21}.Release|x64.Build.0 = Release|Any CPU
 		{AD9F5A6D-9614-4AB9-84D4-F929863F4B21}.Release|x86.ActiveCfg = Release|Any CPU
 		{AD9F5A6D-9614-4AB9-84D4-F929863F4B21}.Release|x86.Build.0 = Release|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Debug|x64.Build.0 = Debug|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Debug|x86.Build.0 = Debug|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Release|x64.ActiveCfg = Release|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Release|x64.Build.0 = Release|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Release|x86.ActiveCfg = Release|Any CPU
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2324,5 +2338,6 @@ Global
 		{3552AEE1-A4A2-4A58-9BB9-44F36A989E00} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
 		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
 		{AD9F5A6D-9614-4AB9-84D4-F929863F4B21} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
+		{2110FF25-7C12-4427-9F1C-859A5D3BECDE} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
 	EndGlobalSection
 EndGlobal
