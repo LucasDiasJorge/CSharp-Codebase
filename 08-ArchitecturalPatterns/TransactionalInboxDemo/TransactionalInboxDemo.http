@@ -1,0 +1,25 @@
+@host = http://localhost:5012
+
+### 1. Publica um credito com MessageId novo - guarde o messageId da resposta
+POST {{host}}/messages/credit
+Content-Type: application/json
+
+{ "accountId": "conta-A", "amount": 100 }
+
+### 2. Saldos - as duas contas recebem o mesmo credito uma vez
+GET {{host}}/accounts
+
+### 3. Reentrega a MESMA mensagem 3 vezes (cole o messageId do passo 1)
+POST {{host}}/messages/redeliver
+Content-Type: application/json
+
+{ "messageId": "COLE_O_MESSAGE_ID", "accountId": "conta-A", "amount": 100, "times": 3 }
+
+### 4. Saldos de novo - com inbox continua 100; sem inbox vai a 400
+GET {{host}}/accounts
+
+### 5. Mensagens registradas na inbox
+GET {{host}}/inbox
+
+### 6. Contadores do consumidor
+GET {{host}}/stats

@@ -274,7 +274,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `Composite` - Composto
   - `Decorator` - Decorador
 
-#### 08-ArchitecturalPatterns (13 projetos)
+#### 08-ArchitecturalPatterns (14 projetos)
 - `CarriedEvent` - Eventos persistidos
 - `CircuitBreakerDemo` - Disjuntor
 - `CQRSDemo` - Command Query Responsibility Segregation
@@ -290,6 +290,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `PortsAndAdaptersClock` - Ports and Adapters lendo as horas por adaptador de relógio
 - `SagaPattern` - Padrão Saga
 - `ServiceRegistration` - Registro de serviços
+- `TransactionalInboxDemo` - Consumo idempotente: marca da mensagem e efeito de domínio na mesma transação
 - `TransactionPattern` - Padrão de transação
 - `TransactionScript` - Script de transação
 - `UseCases` - Casos de uso
@@ -345,7 +346,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 144+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 145+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
