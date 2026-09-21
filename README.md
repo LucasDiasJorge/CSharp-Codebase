@@ -274,7 +274,8 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `Composite` - Composto
   - `Decorator` - Decorador
 
-#### 08-ArchitecturalPatterns (14 projetos)
+#### 08-ArchitecturalPatterns (15 projetos)
+- `ApiGatewayAggregationDemo` - Agregação paralela, correlation ID, timeout por serviço e resposta parcial
 - `CarriedEvent` - Eventos persistidos
 - `CircuitBreakerDemo` - Disjuntor
 - `CQRSDemo` - Command Query Responsibility Segregation
@@ -346,7 +347,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 145+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 146+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 

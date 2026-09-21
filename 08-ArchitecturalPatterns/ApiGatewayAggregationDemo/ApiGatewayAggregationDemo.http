@@ -1,0 +1,44 @@
+@host = http://localhost:5298
+
+### Estado dos servicos e timeout configurado
+GET {{host}}/simulation
+
+### Agregacao em PARALELO - custa o do servico mais lento (~410ms)
+GET {{host}}/customers/c-1/dashboard
+
+### Agregacao SEQUENCIAL - custa a soma (~800ms)
+GET {{host}}/customers/c-1/dashboard?parallel=false
+
+### Com correlation id do cliente - ele atravessa ate os tres servicos
+GET {{host}}/customers/c-1/dashboard
+X-Correlation-Id: rastreio-abc
+
+### Prova de que o correlation id chegou em cada servico
+GET {{host}}/simulation/correlations
+
+### Recomendacoes FALHANDO
+POST {{host}}/simulation/recommendations
+Content-Type: application/json
+
+{ "behavior": "Failing" }
+
+### Resposta parcial: 200, completo=false, a parte que falhou marcada
+GET {{host}}/customers/c-1/dashboard
+
+### Pedidos LENTO (3s) contra timeout de 1200ms
+POST {{host}}/simulation/orders
+Content-Type: application/json
+
+{ "behavior": "Slow" }
+
+### O lento e cortado em 1200ms; os outros respondem normalmente
+GET {{host}}/customers/c-1/dashboard
+
+### Todos falhando -> o gateway responde 503
+POST {{host}}/simulation/profile
+Content-Type: application/json
+
+{ "behavior": "Failing" }
+
+### Restaura todos
+POST {{host}}/simulation/reset

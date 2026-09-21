@@ -393,6 +393,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Payments", "08-Arch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransactionalInboxDemo", "08-ArchitecturalPatterns\TransactionalInboxDemo\TransactionalInboxDemo.csproj", "{DF55281F-D0AA-4B05-807F-00C5D04ED83C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGatewayAggregationDemo", "08-ArchitecturalPatterns\ApiGatewayAggregationDemo\ApiGatewayAggregationDemo.csproj", "{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2263,6 +2265,18 @@ Global
 		{DF55281F-D0AA-4B05-807F-00C5D04ED83C}.Release|x64.Build.0 = Release|Any CPU
 		{DF55281F-D0AA-4B05-807F-00C5D04ED83C}.Release|x86.ActiveCfg = Release|Any CPU
 		{DF55281F-D0AA-4B05-807F-00C5D04ED83C}.Release|x86.Build.0 = Release|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Debug|x64.Build.0 = Debug|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Debug|x86.Build.0 = Debug|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Release|x64.ActiveCfg = Release|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Release|x64.Build.0 = Release|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Release|x86.ActiveCfg = Release|Any CPU
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2450,5 +2464,6 @@ Global
 		{890EAE19-C0DB-4B10-BB04-B527E232E827} = {F83639D1-AC2A-F99F-0CB3-EF0BA41DEA15}
 		{D6139F46-D3B8-4D37-8B6D-DDA1BB949513} = {F83639D1-AC2A-F99F-0CB3-EF0BA41DEA15}
 		{DF55281F-D0AA-4B05-807F-00C5D04ED83C} = {0A91E387-5773-1C2F-AAB7-D748203641C6}
+		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB} = {0A91E387-5773-1C2F-AAB7-D748203641C6}
 	EndGlobalSection
 EndGlobal
