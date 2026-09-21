@@ -274,10 +274,11 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `Composite` - Composto
   - `Decorator` - Decorador
 
-#### 08-ArchitecturalPatterns (11 projetos)
+#### 08-ArchitecturalPatterns (12 projetos)
 - `CarriedEvent` - Eventos persistidos
 - `CircuitBreakerDemo` - Disjuntor
 - `CQRSDemo` - Command Query Responsibility Segregation
+- `EventSourcingBankAccountDemo` - Estado derivado de eventos, concorrência otimista por versão e snapshots
 - `CountryRulesTimeProviderDemo` - API com StrategyResolver para seleção de regras por timezone
 - `PersistencePatterns` - Padrões de persistência
 - `PortsAndAdaptersClock` - Ports and Adapters lendo as horas por adaptador de relógio
@@ -338,7 +339,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 138+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 139+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 

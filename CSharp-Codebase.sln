@@ -375,6 +375,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MementoDocumentHistoryDemo"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyRemoteServiceDemo", "07-DesignPatterns\ProxyRemoteServiceDemo\ProxyRemoteServiceDemo.csproj", "{2110FF25-7C12-4427-9F1C-859A5D3BECDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSourcingBankAccountDemo", "08-ArchitecturalPatterns\EventSourcingBankAccountDemo\EventSourcingBankAccountDemo.csproj", "{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2161,6 +2163,18 @@ Global
 		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Release|x64.Build.0 = Release|Any CPU
 		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Release|x86.ActiveCfg = Release|Any CPU
 		{2110FF25-7C12-4427-9F1C-859A5D3BECDE}.Release|x86.Build.0 = Release|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Debug|x64.Build.0 = Debug|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Debug|x86.Build.0 = Debug|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Release|x64.ActiveCfg = Release|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Release|x64.Build.0 = Release|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Release|x86.ActiveCfg = Release|Any CPU
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2339,5 +2353,6 @@ Global
 		{5187369A-C6E4-4137-ACE3-70EDC4B7A6B6} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
 		{AD9F5A6D-9614-4AB9-84D4-F929863F4B21} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
 		{2110FF25-7C12-4427-9F1C-859A5D3BECDE} = {F86DDA76-A3DC-A4B1-8233-B76392052329}
+		{E0A0A221-7A3F-4338-8124-618CEEFA7BF4} = {0A91E387-5773-1C2F-AAB7-D748203641C6}
 	EndGlobalSection
 EndGlobal
