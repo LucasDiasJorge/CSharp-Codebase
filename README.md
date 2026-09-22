@@ -296,8 +296,8 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `TransactionScript` - Script de transação
 - `UseCases` - Casos de uso
 
-#### 09-Data (13 projetos)
-- `Data` (13 subprojetos)
+#### 09-Data (14 projetos)
+- `Data` (14 subprojetos)
   - `Dapper` - Micro ORM Dapper
   - `DapperExample` - Exemplo com Dapper
   - `DatabaseMigrationsDemo` - Migrations reais, seed, backfill e expand/contract
@@ -306,6 +306,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `MoneyStorageApi` - API de armazenamento
   - `MongoUserApi` - API com MongoDB
   - `MySqlNamedAdvisoryLockReservation` - Reserva atomica com advisory lock nomeado do MySQL
+  - `MultiTenantDataIsolationDemo` - Isolamento por tenant com query filters, índice composto e vetores de vazamento
   - `MysqlExample` - Exemplo com MySQL
   - `Postgres` - Exemplo com PostgreSQL
   - `ProcedureExample` - Procedimentos armazenados
@@ -350,7 +351,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 149+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 150+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
