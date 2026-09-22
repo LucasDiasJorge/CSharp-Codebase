@@ -5,7 +5,13 @@ namespace DatabaseMigrationsDemo.Data;
 
 public sealed class ShopDbContext : DbContext
 {
-    public const string ConnectionString = "Data Source=migrations-demo.db";
+    /// <summary>
+    /// Caminho ancorado no diretório do binário, e não relativo ao diretório atual:
+    /// com caminho relativo, <c>dotnet run --project ...</c> a partir da raiz do
+    /// repositório criaria o arquivo lá, e não junto do projeto.
+    /// </summary>
+    public static readonly string ConnectionString =
+        "Data Source=" + Path.Combine(AppContext.BaseDirectory, "migrations-demo.db");
 
     public ShopDbContext()
     {

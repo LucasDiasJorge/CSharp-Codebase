@@ -12,7 +12,10 @@ public sealed class ShopDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=concurrency-demo.db");
+        // Caminho ancorado no diretorio do binario, e nao relativo ao diretorio atual:
+        // com caminho relativo, `dotnet run --project ...` a partir da raiz do
+        // repositorio criaria o arquivo la, e nao junto do projeto.
+        optionsBuilder.UseSqlite("Data Source=" + Path.Combine(AppContext.BaseDirectory, "concurrency-demo.db"));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -5,6 +5,14 @@ namespace EfCoreRelationshipsDemo.Data;
 
 public sealed class BlogDbContext : DbContext
 {
+    /// <summary>
+    /// Caminho ancorado no diretorio do binario, e nao relativo ao diretorio atual.
+    /// Com caminho relativo, `dotnet run --project ...` a partir da raiz do repositorio
+    /// criaria o arquivo LA, e nao junto do projeto.
+    /// </summary>
+    private static readonly string DatabasePath =
+        "Data Source=" + Path.Combine(AppContext.BaseDirectory, "relationships-demo.db");
+
     private readonly QueryCounter _counter;
 
     public BlogDbContext(QueryCounter counter)
@@ -25,7 +33,7 @@ public sealed class BlogDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder
-            .UseSqlite("Data Source=relationships-demo.db")
+            .UseSqlite(DatabasePath)
             .AddInterceptors(_counter);
     }
 
