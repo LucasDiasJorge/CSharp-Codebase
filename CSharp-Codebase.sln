@@ -397,6 +397,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGatewayAggregationDemo",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfCoreRelationshipsDemo", "09-Data\Data\EfCoreRelationshipsDemo\EfCoreRelationshipsDemo.csproj", "{0C39D286-43D3-418D-88EE-5CA5905E6084}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfCoreOptimisticConcurrencyDemo", "09-Data\Data\EfCoreOptimisticConcurrencyDemo\EfCoreOptimisticConcurrencyDemo.csproj", "{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2291,6 +2293,18 @@ Global
 		{0C39D286-43D3-418D-88EE-5CA5905E6084}.Release|x64.Build.0 = Release|Any CPU
 		{0C39D286-43D3-418D-88EE-5CA5905E6084}.Release|x86.ActiveCfg = Release|Any CPU
 		{0C39D286-43D3-418D-88EE-5CA5905E6084}.Release|x86.Build.0 = Release|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Debug|x64.Build.0 = Debug|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Debug|x86.Build.0 = Debug|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Release|x64.ActiveCfg = Release|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Release|x64.Build.0 = Release|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Release|x86.ActiveCfg = Release|Any CPU
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2480,5 +2494,6 @@ Global
 		{DF55281F-D0AA-4B05-807F-00C5D04ED83C} = {0A91E387-5773-1C2F-AAB7-D748203641C6}
 		{FC7907C9-FFB0-4632-9ED6-CB069F4804AB} = {0A91E387-5773-1C2F-AAB7-D748203641C6}
 		{0C39D286-43D3-418D-88EE-5CA5905E6084} = {C268584A-73FE-E4FC-7C46-6E6797FE10D3}
+		{18DB3CC8-B688-4D62-8224-E6E7B93C00C0} = {C268584A-73FE-E4FC-7C46-6E6797FE10D3}
 	EndGlobalSection
 EndGlobal
