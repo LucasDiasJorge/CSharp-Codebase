@@ -1,0 +1,4 @@
+# Banco SQLite gerado em tempo de execucao.
+*.db
+*.db-shm
+*.db-wal

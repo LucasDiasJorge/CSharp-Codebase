@@ -296,10 +296,11 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `TransactionScript` - Script de transação
 - `UseCases` - Casos de uso
 
-#### 09-Data (12 projetos)
-- `Data` (12 subprojetos)
+#### 09-Data (13 projetos)
+- `Data` (13 subprojetos)
   - `Dapper` - Micro ORM Dapper
   - `DapperExample` - Exemplo com Dapper
+  - `DatabaseMigrationsDemo` - Migrations reais, seed, backfill e expand/contract
   - `EfCoreOptimisticConcurrencyDemo` - Concurrency token, detecção de conflito e estratégias de resolução
   - `EfCoreRelationshipsDemo` - Relacionamentos 1:1, 1:N, N:N, owned types, N+1 medido e tracking
   - `MoneyStorageApi` - API de armazenamento
@@ -349,7 +350,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 148+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 149+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
