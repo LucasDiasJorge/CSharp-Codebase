@@ -313,8 +313,9 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `sqlite-sample-api` - API com SQLite
   - `sqlite-sample-api.Tests` - Testes
 
-#### 10-Algorithms (8 projetos)
+#### 10-Algorithms (9 projetos)
 - `BinarySearchBoundariesDemo` - Busca exata, lower bound e upper bound derivados do invariante `[lo, hi)`
+- `DynamicProgrammingCoinChangeDemo` - Coin change com recursão, memoization e tabulation lado a lado
 - `GraphTraversalDemo` - Travessia de grafos
 - `LoadBalancingAlgorithms` - Algoritmos de balanceamento
 - `LruCacheDataStructureDemo` - Dicionário + lista duplamente ligada para LRU em O(1)
@@ -354,7 +355,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 153+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 154+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
