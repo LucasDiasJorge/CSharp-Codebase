@@ -407,6 +407,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearchBoundariesDemo"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrieAutocompleteDemo", "10-Algorithms\TrieAutocompleteDemo\TrieAutocompleteDemo.csproj", "{75288051-B74C-406C-9348-417ACF19795A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LruCacheDataStructureDemo", "10-Algorithms\LruCacheDataStructureDemo\LruCacheDataStructureDemo.csproj", "{9512747A-FDA6-48B5-8E47-345EB332F625}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2361,6 +2363,18 @@ Global
 		{75288051-B74C-406C-9348-417ACF19795A}.Release|x64.Build.0 = Release|Any CPU
 		{75288051-B74C-406C-9348-417ACF19795A}.Release|x86.ActiveCfg = Release|Any CPU
 		{75288051-B74C-406C-9348-417ACF19795A}.Release|x86.Build.0 = Release|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Debug|x64.Build.0 = Debug|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Debug|x86.Build.0 = Debug|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Release|x64.ActiveCfg = Release|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Release|x64.Build.0 = Release|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Release|x86.ActiveCfg = Release|Any CPU
+		{9512747A-FDA6-48B5-8E47-345EB332F625}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2555,5 +2569,6 @@ Global
 		{BD9E6161-91F7-4144-BB95-1A8CC8E40C07} = {C268584A-73FE-E4FC-7C46-6E6797FE10D3}
 		{C7F60141-335C-478F-8ADE-4164A8C69502} = {E26B71A0-E15E-DFFA-8713-787E85EFC9A6}
 		{75288051-B74C-406C-9348-417ACF19795A} = {E26B71A0-E15E-DFFA-8713-787E85EFC9A6}
+		{9512747A-FDA6-48B5-8E47-345EB332F625} = {E26B71A0-E15E-DFFA-8713-787E85EFC9A6}
 	EndGlobalSection
 EndGlobal
