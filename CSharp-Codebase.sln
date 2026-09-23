@@ -405,6 +405,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTenantDataIsolationDem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearchBoundariesDemo", "10-Algorithms\BinarySearchBoundariesDemo\BinarySearchBoundariesDemo.csproj", "{C7F60141-335C-478F-8ADE-4164A8C69502}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrieAutocompleteDemo", "10-Algorithms\TrieAutocompleteDemo\TrieAutocompleteDemo.csproj", "{75288051-B74C-406C-9348-417ACF19795A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2347,6 +2349,18 @@ Global
 		{C7F60141-335C-478F-8ADE-4164A8C69502}.Release|x64.Build.0 = Release|Any CPU
 		{C7F60141-335C-478F-8ADE-4164A8C69502}.Release|x86.ActiveCfg = Release|Any CPU
 		{C7F60141-335C-478F-8ADE-4164A8C69502}.Release|x86.Build.0 = Release|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Debug|x64.Build.0 = Debug|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Debug|x86.Build.0 = Debug|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Release|x64.ActiveCfg = Release|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Release|x64.Build.0 = Release|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Release|x86.ActiveCfg = Release|Any CPU
+		{75288051-B74C-406C-9348-417ACF19795A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2540,5 +2554,6 @@ Global
 		{07404AEC-D1C5-4E53-9E16-E8E6D4380347} = {C268584A-73FE-E4FC-7C46-6E6797FE10D3}
 		{BD9E6161-91F7-4144-BB95-1A8CC8E40C07} = {C268584A-73FE-E4FC-7C46-6E6797FE10D3}
 		{C7F60141-335C-478F-8ADE-4164A8C69502} = {E26B71A0-E15E-DFFA-8713-787E85EFC9A6}
+		{75288051-B74C-406C-9348-417ACF19795A} = {E26B71A0-E15E-DFFA-8713-787E85EFC9A6}
 	EndGlobalSection
 EndGlobal
