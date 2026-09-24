@@ -324,12 +324,13 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `SlidingWindows` - Janela deslizante
 - `TrieAutocompleteDemo` - Árvore de prefixos para autocomplete, custo por comprimento e preço em memória
 
-#### 11-Utilities (11 projetos)
+#### 11-Utilities (12 projetos)
 - `ClassToDTO` - Conversão classe para DTO
 - `ClassToXml` - Conversão classe para XML
 - `CompressDecompress` - Compressão/descompressão
 - `CsvStreamingProcessor` - Leitura de CSV grande por stream, cultura, linhas inválidas e escrita incremental
 - `DictionaryMerge` - Fusão de dicionários
+- `FileChecksumDeduplicator` - Hash por stream, duplicatas por tamanho antes de conteúdo, colisões e buffers
 - `HtmlToPdfAndTemplateEngine` - Geração de PDF a partir de template HTML com dados dinâmicos
 - `NPOIDemo` - NPOI para Excel/Word
 - `PDFGenerator` - Geração de PDF
@@ -356,7 +357,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 155+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 156+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
