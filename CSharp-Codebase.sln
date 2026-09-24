@@ -415,6 +415,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvStreamingProcessor", "11
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileChecksumDeduplicator", "11-Utilities\FileChecksumDeduplicator\FileChecksumDeduplicator.csproj", "{BB591B61-9C27-470A-9CC7-478CFCB8206D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationOptionsDemo", "11-Utilities\ConfigurationOptionsDemo\ConfigurationOptionsDemo.csproj", "{E1AE0AED-4128-4879-AD27-0BF562139F63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2417,6 +2419,18 @@ Global
 		{BB591B61-9C27-470A-9CC7-478CFCB8206D}.Release|x64.Build.0 = Release|Any CPU
 		{BB591B61-9C27-470A-9CC7-478CFCB8206D}.Release|x86.ActiveCfg = Release|Any CPU
 		{BB591B61-9C27-470A-9CC7-478CFCB8206D}.Release|x86.Build.0 = Release|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Debug|x64.Build.0 = Debug|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Debug|x86.Build.0 = Debug|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Release|x64.ActiveCfg = Release|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Release|x64.Build.0 = Release|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Release|x86.ActiveCfg = Release|Any CPU
+		{E1AE0AED-4128-4879-AD27-0BF562139F63}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2615,5 +2629,6 @@ Global
 		{DD25EC46-E941-4F17-B4B2-2754A94F0915} = {E26B71A0-E15E-DFFA-8713-787E85EFC9A6}
 		{650D0561-0750-4F38-972C-17C43D0A1D24} = {D5A88400-B1DC-7FC2-6324-6C9232973D96}
 		{BB591B61-9C27-470A-9CC7-478CFCB8206D} = {D5A88400-B1DC-7FC2-6324-6C9232973D96}
+		{E1AE0AED-4128-4879-AD27-0BF562139F63} = {D5A88400-B1DC-7FC2-6324-6C9232973D96}
 	EndGlobalSection
 EndGlobal
