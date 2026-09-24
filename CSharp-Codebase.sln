@@ -411,6 +411,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LruCacheDataStructureDemo",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicProgrammingCoinChangeDemo", "10-Algorithms\DynamicProgrammingCoinChangeDemo\DynamicProgrammingCoinChangeDemo.csproj", "{DD25EC46-E941-4F17-B4B2-2754A94F0915}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvStreamingProcessor", "11-Utilities\CsvStreamingProcessor\CsvStreamingProcessor.csproj", "{650D0561-0750-4F38-972C-17C43D0A1D24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2389,6 +2391,18 @@ Global
 		{DD25EC46-E941-4F17-B4B2-2754A94F0915}.Release|x64.Build.0 = Release|Any CPU
 		{DD25EC46-E941-4F17-B4B2-2754A94F0915}.Release|x86.ActiveCfg = Release|Any CPU
 		{DD25EC46-E941-4F17-B4B2-2754A94F0915}.Release|x86.Build.0 = Release|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Debug|x64.Build.0 = Debug|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Debug|x86.Build.0 = Debug|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Release|x64.ActiveCfg = Release|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Release|x64.Build.0 = Release|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Release|x86.ActiveCfg = Release|Any CPU
+		{650D0561-0750-4F38-972C-17C43D0A1D24}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2585,5 +2599,6 @@ Global
 		{75288051-B74C-406C-9348-417ACF19795A} = {E26B71A0-E15E-DFFA-8713-787E85EFC9A6}
 		{9512747A-FDA6-48B5-8E47-345EB332F625} = {E26B71A0-E15E-DFFA-8713-787E85EFC9A6}
 		{DD25EC46-E941-4F17-B4B2-2754A94F0915} = {E26B71A0-E15E-DFFA-8713-787E85EFC9A6}
+		{650D0561-0750-4F38-972C-17C43D0A1D24} = {D5A88400-B1DC-7FC2-6324-6C9232973D96}
 	EndGlobalSection
 EndGlobal
