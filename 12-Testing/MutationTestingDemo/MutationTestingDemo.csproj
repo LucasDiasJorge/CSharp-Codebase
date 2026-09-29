@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- O projeto de testes fica aninhado nesta pasta (convencao do 12-Testing), entao
+       precisa ser excluido do glob deste projeto. -->
+  <ItemGroup>
+    <Compile Remove="MutationTestingDemo.Tests\**\*.cs" />
+    <EmbeddedResource Remove="MutationTestingDemo.Tests\**\*" />
+    <None Remove="MutationTestingDemo.Tests\**\*" />
+  </ItemGroup>
+
+</Project>
