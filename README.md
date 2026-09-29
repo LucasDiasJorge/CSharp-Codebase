@@ -357,7 +357,11 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `WebApiIntegrationTestingDemo` - Minimal API de cotações
   - `WebApiIntegrationTestingDemo.Tests` - WebApplicationFactory, substituição de dependência e contrato HTTP
 
-#### 13-SDKsAndLibraries (6 projetos)
+#### 13-SDKsAndLibraries (7 projetos)
+- `IncrementalSourceGeneratorDemo` (3 subprojetos)
+  - `Acme.EnumExtensions.Generator` - Gerador incremental Roslyn (netstandard2.0)
+  - `Acme.EnumExtensions.Consumer` - Consome o gerador como analisador e mede o ganho
+  - `Acme.EnumExtensions.Generator.Tests` - Saída, diagnósticos e cache incremental
 - `MySimpleSdk` (3 subprojetos)
   - `MySimpleSdk` - Biblioteca principal
   - `MySimpleSdk.Demo` - Demonstração
@@ -376,7 +380,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 169+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 172+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!-- Grava em disco o que o gerador produziu, para dar para LER o codigo gerado.
+         Sem isto, o codigo so existe em memoria durante a compilacao. -->
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)generated</CompilerGeneratedFilesOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Referencia de ANALISADOR, nao de biblioteca:
+         OutputItemType="Analyzer" faz o compilador carregar o gerador;
+         ReferenceOutputAssembly="false" evita que o assembly do gerador va para o bin. -->
+    <ProjectReference Include="..\Acme.EnumExtensions.Generator\Acme.EnumExtensions.Generator.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+</Project>
