@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- Metadados do pacote. O que nao estiver aqui fica faltando na pagina do NuGet,
+       e alguns campos nao podem ser corrigidos depois de publicar. -->
+  <PropertyGroup>
+    <PackageId>Acme.TextKit</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Equipe Acme</Authors>
+    <Company>Acme</Company>
+    <Description>Utilitarios de texto para slug, truncamento e contagem de palavras. Projeto didatico do CSharp-Codebase.</Description>
+    <PackageTags>texto;slug;string;didatico</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/LucasDiasJorge/CSharp-Codebase</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>Versao inicial: Slugify, Truncate e CountWords.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <!-- Documentacao XML no pacote: e o que alimenta o IntelliSense de quem consome.
+       Sem GenerateDocumentationFile, o consumidor ve assinaturas sem explicacao. -->
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- Simbolos em pacote separado (.snupkg) + SourceLink: permite depurar dentro da
+       biblioteca a partir do projeto que a consome. -->
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <!-- Build deterministico: o mesmo codigo produz o mesmo binario, o que torna o
+       pacote verificavel. -->
+  <PropertyGroup>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="PACKAGE-README.md" Pack="true" PackagePath="README.md" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,2 @@
+Este arquivo mantem a pasta do feed local no repositorio. Os pacotes .nupkg/.snupkg
+sao gerados por Invoke-PackageLifecycle.ps1 e ficam fora do controle de versao.

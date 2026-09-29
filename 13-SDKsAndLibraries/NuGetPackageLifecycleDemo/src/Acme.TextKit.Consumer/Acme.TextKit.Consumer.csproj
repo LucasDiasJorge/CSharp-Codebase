@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- O ponto do exemplo: PackageReference, nao ProjectReference.
+       ProjectReference compila contra o codigo-fonte e nao prova NADA sobre o pacote;
+       este projeto so compila se o .nupkg existir no feed local e estiver correto.
+
+       A versao e fixa de proposito. Trocar por "1.*" faz o NuGet resolver a maior
+       versao 1.x disponivel no feed — ver o cenario 4 do script. -->
+  <ItemGroup>
+    <PackageReference Include="Acme.TextKit" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>

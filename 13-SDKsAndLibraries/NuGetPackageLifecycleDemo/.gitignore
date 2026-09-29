@@ -1,0 +1,5 @@
+# Conteudo do feed local: gerado pelo script de ciclo de vida, nao versionado.
+# A PASTA e mantida (via .gitkeep) para que o erro de um clone novo seja
+# NU1101 "pacote nao encontrado" em vez de NU1301 "a fonte local nao existe".
+local-feed/*
+!local-feed/.gitkeep
