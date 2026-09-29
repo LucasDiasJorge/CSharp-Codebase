@@ -357,11 +357,14 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
   - `WebApiIntegrationTestingDemo` - Minimal API de cotações
   - `WebApiIntegrationTestingDemo.Tests` - WebApplicationFactory, substituição de dependência e contrato HTTP
 
-#### 13-SDKsAndLibraries (4 projetos)
+#### 13-SDKsAndLibraries (5 projetos)
 - `MySimpleSdk` (3 subprojetos)
   - `MySimpleSdk` - Biblioteca principal
   - `MySimpleSdk.Demo` - Demonstração
   - `MySimpleSdk.Tests` - Testes
+- `ResilientHttpSdk` (2 subprojetos)
+  - `ResilientHttpSdk` - SDK HTTP tipado com retry seletivo e tradução de erro
+  - `ResilientHttpSdk.Tests` - Tradução, retry, cancelamento e validação de options
 - `ScalarDocumentationSdk` - SDK para padronizar OpenAPI e Scalar em APIs ASP.NET Core
 - `BlockchainDemo` - Demonstração de blockchain (sem .csproj)
 
@@ -370,7 +373,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 165+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 167+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
