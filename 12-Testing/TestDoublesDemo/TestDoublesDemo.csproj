@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- O projeto de testes fica aninhado nesta pasta (convencao do 12-Testing), entao
+       precisa ser excluido do glob deste projeto — senao a biblioteca tenta compilar
+       os testes e falha por falta do xunit. -->
+  <ItemGroup>
+    <Compile Remove="TestDoublesDemo.Tests\**\*.cs" />
+    <EmbeddedResource Remove="TestDoublesDemo.Tests\**\*" />
+    <None Remove="TestDoublesDemo.Tests\**\*" />
+  </ItemGroup>
+
+</Project>

@@ -339,11 +339,14 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 - `SerilogExample` - Logging estruturado com Serilog
 - `XmlBasics` - Manipulação XML
 
-#### 12-Testing (3 projetos)
+#### 12-Testing (4 projetos)
 - `BenchmarkTool` - Benchmark de performance
 - `OrderRuleConsole` (2 subprojetos)
   - `OrderRuleConsole` - Aplicação
   - `OrderRuleConsole.Tests` - Testes
+- `TestDoublesDemo` (2 subprojetos)
+  - `TestDoublesDemo` - Domínio de checkout usado pelos testes
+  - `TestDoublesDemo.Tests` - Os cinco dublês e estado contra comportamento
 
 #### 13-SDKsAndLibraries (4 projetos)
 - `MySimpleSdk` (3 subprojetos)
@@ -358,7 +361,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\Standardize-Readmes.ps1
 
 ---
 
-**Total: 157+ subprojetos distribuídos em 13 trilhas temáticas + tools**
+**Total: 159+ subprojetos distribuídos em 13 trilhas temáticas + tools**
 
 ### Trilhas temáticas
 
