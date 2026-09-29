@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <!-- O projeto de testes fica aninhado nesta pasta (convencao do 12-Testing), entao
+       precisa ser excluido do glob deste projeto. -->
+  <ItemGroup>
+    <Compile Remove="WebApiIntegrationTestingDemo.Tests\**\*.cs" />
+    <!-- O SDK Web ainda inclui **/*.json como Content: sem esta linha, o build tenta
+         copiar os .json de bin/ e obj/ do projeto de testes e falha com MSB3030. -->
+    <Content Remove="WebApiIntegrationTestingDemo.Tests\**" />
+    <EmbeddedResource Remove="WebApiIntegrationTestingDemo.Tests\**\*" />
+    <None Remove="WebApiIntegrationTestingDemo.Tests\**\*" />
+  </ItemGroup>
+
+</Project>
